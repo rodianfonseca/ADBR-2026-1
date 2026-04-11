@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Proyecto de Investigación con R – Análisis de Datos Biológicos en R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./assets/favicon.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Sin resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="Proyecto de Investigación con R – Análisis de Datos Biológicos en R">
+<meta property="og:description" content="Curso 20953 · Análisis de Datos Biológicos en R · Período 2026-1">
+<meta property="og:site_name" content="Análisis de Datos Biológicos en R">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./assets/logo.png" alt="ADBR" class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Buscar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Navegación de palanca" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Inicio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./cronograma.html"> 
+<span class="menu-text">Cronograma</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./material.html"> 
+<span class="menu-text">Material</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./proyecto.html" aria-current="page"> 
+<span class="menu-text">Proyecto</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-semanas" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Semanas</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-semanas">    
+        <li>
+    <a class="dropdown-item" href="./semanas/semana-1.html">
+ <span class="dropdown-text">Semana 1 — Clase</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./semanas/semana-1-taller.html">
+ <span class="dropdown-text">Semana 1 — Taller</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contenido</h2>
+   
+  <ul>
+  <li><a href="#descripción-general" id="toc-descripción-general" class="nav-link active" data-scroll-target="#descripción-general">Descripción general</a></li>
+  <li><a href="#elección-del-conjunto-de-datos" id="toc-elección-del-conjunto-de-datos" class="nav-link" data-scroll-target="#elección-del-conjunto-de-datos">Elección del conjunto de datos</a></li>
+  <li><a href="#estructura-del-informe" id="toc-estructura-del-informe" class="nav-link" data-scroll-target="#estructura-del-informe">Estructura del informe</a>
+  <ul class="collapse">
+  <li><a href="#portada-y-metadatos" id="toc-portada-y-metadatos" class="nav-link" data-scroll-target="#portada-y-metadatos">Portada y metadatos</a></li>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link" data-scroll-target="#introducción">1. Introducción</a></li>
+  <li><a href="#métodos" id="toc-métodos" class="nav-link" data-scroll-target="#métodos">2. Métodos</a></li>
+  <li><a href="#resultados" id="toc-resultados" class="nav-link" data-scroll-target="#resultados">3. Resultados</a></li>
+  <li><a href="#discusión" id="toc-discusión" class="nav-link" data-scroll-target="#discusión">4. Discusión</a></li>
+  <li><a href="#conclusión" id="toc-conclusión" class="nav-link" data-scroll-target="#conclusión">5. Conclusión</a></li>
+  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias">6. Referencias</a></li>
+  </ul></li>
+  <li><a href="#requisitos-técnicos" id="toc-requisitos-técnicos" class="nav-link" data-scroll-target="#requisitos-técnicos">Requisitos técnicos</a></li>
+  <li><a href="#rúbrica-de-evaluación" id="toc-rúbrica-de-evaluación" class="nav-link" data-scroll-target="#rúbrica-de-evaluación">Rúbrica de evaluación</a>
+  <ul class="collapse">
+  <li><a href="#proyecto-análisis-exploratorio-de-datos-20" id="toc-proyecto-análisis-exploratorio-de-datos-20" class="nav-link" data-scroll-target="#proyecto-análisis-exploratorio-de-datos-20">Proyecto: Análisis Exploratorio de Datos (20%)</a></li>
+  <li><a href="#proyecto-final-30" id="toc-proyecto-final-30" class="nav-link" data-scroll-target="#proyecto-final-30">Proyecto Final (30%)</a></li>
+  </ul></li>
+  <li><a href="#plantilla-de-inicio" id="toc-plantilla-de-inicio" class="nav-link" data-scroll-target="#plantilla-de-inicio">Plantilla de inicio</a></li>
+  <li><a href="#preguntas-frecuentes" id="toc-preguntas-frecuentes" class="nav-link" data-scroll-target="#preguntas-frecuentes">Preguntas frecuentes</a></li>
+  <li><a href="#cronograma-del-proyecto" id="toc-cronograma-del-proyecto" class="nav-link" data-scroll-target="#cronograma-del-proyecto">Cronograma del proyecto</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Proyecto de Investigación con R</h1>
+<p class="subtitle lead">Curso 20953 · Análisis de Datos Biológicos en R · Período 2026-1</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Peso en la nota final:</strong> 50 % del total &nbsp;·&nbsp; <strong>Análisis Exploratorio de Datos (20%):</strong> 20 de mayo de 2026 &nbsp;·&nbsp; <strong>Informe Final (30%):</strong> 15 de julio de 2026</p>
+</div>
+</div>
+</div>
+<hr>
+<section id="descripción-general" class="level2">
+<h2 class="anchored" data-anchor-id="descripción-general">Descripción general</h2>
+<p>El proyecto de aula es la evidencia principal de aprendizaje del curso. Su objetivo es demostrar que puedes aplicar de manera integrada las herramientas y los conceptos estadísticos trabajados durante el semestre para responder una pregunta biológica real a partir de datos propios o tomados de fuentes abiertas.</p>
+<p>El proyecto se desarrolla en <strong>dos entregas</strong>:</p>
+<div class="columns">
+<div class="column" style="width:48%;">
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Entrega parcial
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>📊 <strong>Análisis Exploratorio de Datos</strong></p>
+<p>Informe de análisis exploratorio de datos (EDA). Demuestra que puedes importar, limpiar, explorar y visualizar un conjunto de datos.</p>
+<div class="small text-muted">
+<p><strong>Peso:</strong> 20 % &nbsp;·&nbsp; <strong>Fecha:</strong> 20 may 2026 (Semana 7)</p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:48%;">
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Entrega final
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>🎯 <strong>Informe Final y Sustentación</strong></p>
+<p>Reporte completo en formato Quarto + sustentación oral. Incluye modelado estadístico y conclusiones ecológicas o biológicas fundamentadas.</p>
+<div class="small text-muted">
+<p><strong>Peso:</strong> 30 % &nbsp;·&nbsp; <strong>Fecha:</strong> 15 jul 2026 (Semana 15)</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- end columns -->
+<p>El informe final <strong>es una versión ampliada y mejorada del Análisis Exploratorio de Datos</strong>, no un trabajo diferente. Elige bien tu conjunto de datos desde el inicio.</p>
+<hr>
+</section>
+<section id="elección-del-conjunto-de-datos" class="level2">
+<h2 class="anchored" data-anchor-id="elección-del-conjunto-de-datos">Elección del conjunto de datos</h2>
+<p>Los datos deben ser <strong>reales</strong>, con al menos <strong>50 observaciones</strong> y al menos <strong>4 variables</strong>, mínimo una cualitativa y una cuantitativa.</p>
+<div class="list-group my-3">
+<p><a href="https://www.gbif.org/" class="list-group-item list-group-item-action" target="_blank">🌍 <strong>GBIF — Global Biodiversity Information Facility</strong> <br> <span class="small text-muted">Registros de ocurrencia de especies. Filtra por Colombia o el Caribe para mayor relevancia.</span></a></p>
+<p><a href="https://biodiversidad.co/" class="list-group-item list-group-item-action" target="_blank">🇨🇴 <strong>SiB Colombia</strong> <br> <span class="small text-muted">Sistema de Información sobre Biodiversidad de Colombia. Ideal para datos nacionales y regionales.</span></a></p>
+<p><a href="https://obis.org/" class="list-group-item list-group-item-action" target="_blank">🐠 <strong>OBIS — Ocean Biodiversity Information System</strong> <br> <span class="small text-muted">Datos de organismos marinos. Excelente para biodiversidad del Caribe colombiano.</span></a></p>
+<p><a href="https://www.ideam.gov.co/" class="list-group-item list-group-item-action" target="_blank">🌦️ <strong>IDEAM</strong> <br> <span class="small text-muted">Series de tiempo climatológicas e hidrológicas. Útil para análisis de asociación con biodiversidad.</span></a></p>
+<p><a href="https://datadryad.org/" class="list-group-item list-group-item-action" target="_blank">🔬 <strong>Dryad Data Repository</strong> <br> <span class="small text-muted">Datos asociados a artículos científicos publicados. Alta calidad y documentación.</span></a></p>
+<div class="list-group-item">
+<p>📁 <strong>Datos propios o de campo</strong> <br> <span class="small text-muted">Puedes usar datos de proyectos de semillero, trabajos de campo o investigaciones en curso. Consulta al docente si tienes dudas sobre si son adecuados.</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Recomendación
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Elige un conjunto de datos que te genere una pregunta biológica genuina. Los mejores proyectos son los que surgen de curiosidad real, no los que solo buscan cumplir el requisito.</p>
+</div>
+</div>
+<hr>
+</section>
+<section id="estructura-del-informe" class="level2">
+<h2 class="anchored" data-anchor-id="estructura-del-informe">Estructura del informe</h2>
+<p>El informe debe seguir la estructura de un artículo científico breve. <strong>Cada sección debe tener entre 2 y 3 párrafos.</strong> No es un trabajo extenso: la claridad y la precisión importan más que el volumen.</p>
+<section id="portada-y-metadatos" class="level3">
+<h3 class="anchored" data-anchor-id="portada-y-metadatos">Portada y metadatos</h3>
+<p>El documento Quarto debe incluir en el YAML:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Título descriptivo del análisis"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">"Nombre completo · C.C. xxxxxxxxxx"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> </span><span class="st">"Fecha de entrega"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">code-fold</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">self-contained</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="introducción" class="level3">
+<h3 class="anchored" data-anchor-id="introducción">1. Introducción</h3>
+<p>Presenta el contexto biológico o ecológico del problema. Describe de forma breve el sistema de estudio (especie, ecosistema, región) y justifica por qué es relevante analizarlo. Termina con una <strong>pregunta de investigación o hipótesis</strong> clara y explícita.</p>
+<blockquote class="blockquote">
+<p>Ejemplo: <em>¿Existe una relación entre la precipitación mensual en el Atlántico y la riqueza de especies de aves registradas en GBIF entre 2010 y 2023?</em></p>
+</blockquote>
+</section>
+<section id="métodos" class="level3">
+<h3 class="anchored" data-anchor-id="métodos">2. Métodos</h3>
+<p>Describe el origen de los datos (fuente, fecha de descarga, filtros aplicados), las variables utilizadas y el proceso de limpieza. Documenta las técnicas estadísticas aplicadas y justifica brevemente por qué son adecuadas para tu pregunta. Todo el código debe estar incluido en el documento con <code>code-fold: true</code>.</p>
+</section>
+<section id="resultados" class="level3">
+<h3 class="anchored" data-anchor-id="resultados">3. Resultados</h3>
+<p>Presenta los hallazgos con apoyo de <strong>al menos tres figuras de alta calidad</strong> producidas con <code>ggplot2</code>. Cada figura debe tener título, etiquetas de ejes y leyenda. Describe los patrones observados en texto, pero sin interpretarlos aún. Incluye al menos una tabla resumen producida con <code>knitr::kable()</code> o <code>gt</code>.</p>
+</section>
+<section id="discusión" class="level3">
+<h3 class="anchored" data-anchor-id="discusión">4. Discusión</h3>
+<p>Interpreta los resultados en el contexto biológico establecido en la introducción. Señala si la pregunta o hipótesis fue respondida y en qué sentido. Discute las limitaciones del análisis y sugiere pasos futuros o preguntas que surgen de los resultados.</p>
+</section>
+<section id="conclusión" class="level3">
+<h3 class="anchored" data-anchor-id="conclusión">5. Conclusión</h3>
+<p>Un párrafo conciso que sintetiza el hallazgo principal y su relevancia para la biología o la conservación del Caribe colombiano.</p>
+</section>
+<section id="referencias" class="level3">
+<h3 class="anchored" data-anchor-id="referencias">6. Referencias</h3>
+<p>Lista las fuentes de datos y los artículos o libros citados en formato APA o Vancouver. Incluye la versión de R y los paquetes principales usando <code>sessionInfo()</code> o <code>citation()</code>.</p>
+<hr>
+</section>
+</section>
+<section id="requisitos-técnicos" class="level2">
+<h2 class="anchored" data-anchor-id="requisitos-técnicos">Requisitos técnicos</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 84%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Requisito</th>
+<th>Detalle</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Formato de entrega</td>
+<td>Archivo <code>qmd</code> + HTML renderizado (<code>self-contained: true</code>) subidos a SICVI 567</td>
+</tr>
+<tr class="even">
+<td>Reproducibilidad</td>
+<td>El documento debe renderizarse sin errores ejecutando <code>quarto render</code> desde cero</td>
+</tr>
+<tr class="odd">
+<td>Código</td>
+<td>Todo el código R debe estar en el documento con <code>code-fold: true</code>. No se aceptan capturas de pantalla de código.</td>
+</tr>
+<tr class="even">
+<td>Datos</td>
+<td>El archivo de datos (<code>.csv</code> o similar) debe entregarse junto con el <code>.qmd</code> en una carpeta comprimida (<code>.zip</code>)</td>
+</tr>
+<tr class="odd">
+<td>Tablas y figuras</td>
+<td>Mínimo una tabla resumen producida con <code>knitr::kable()</code> o <code>gt</code>. Mínimo 3 figuras con <code>ggplot2</code>. Deben tener título, ejes etiquetados y leyenda cuando aplique.</td>
+</tr>
+<tr class="even">
+<td>Idioma</td>
+<td>Español. Términos técnicos en inglés son aceptables cuando no tienen equivalente en español.</td>
+</tr>
+<tr class="odd">
+<td>Extensión</td>
+<td>2–3 párrafos por sección. Sin límite de código ni figuras.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="rúbrica-de-evaluación" class="level2">
+<h2 class="anchored" data-anchor-id="rúbrica-de-evaluación">Rúbrica de evaluación</h2>
+<section id="proyecto-análisis-exploratorio-de-datos-20" class="level3">
+<h3 class="anchored" data-anchor-id="proyecto-análisis-exploratorio-de-datos-20">Proyecto: Análisis Exploratorio de Datos (20%)</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 26%">
+<col style="width: 31%">
+<col style="width: 22%">
+<col style="width: 2%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Criterio</th>
+<th>Excelente (4.5–5.0)</th>
+<th>Satisfactorio (3.0–4.4)</th>
+<th>Insuficiente (&lt; 3.0)</th>
+<th>Peso</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Pregunta de investigación</td>
+<td>Clara, específica y biológicamente relevante</td>
+<td>Presente pero vaga o poco contextualizada</td>
+<td>Ausente o no tiene sentido biológico</td>
+<td>15%</td>
+</tr>
+<tr class="even">
+<td>Importación y limpieza de datos</td>
+<td>Pipeline reproducible, bien documentado, sin errores</td>
+<td>Funciona pero con pasos no explicados</td>
+<td>Código con errores o datos no procesados</td>
+<td>20%</td>
+</tr>
+<tr class="odd">
+<td>Análisis exploratorio</td>
+<td>Estadísticas descriptivas completas y pertinentes</td>
+<td>EDA básico, faltan variables relevantes</td>
+<td>Solo se listan datos crudos sin exploración</td>
+<td>25%</td>
+</tr>
+<tr class="even">
+<td>Visualizaciones</td>
+<td>≥ 3 figuras claras con ggplot2, bien etiquetadas</td>
+<td>Figuras presentes pero con problemas estéticos o de legibilidad</td>
+<td>Menos de 3 figuras o figuras no informativas</td>
+<td>25%</td>
+</tr>
+<tr class="odd">
+<td>Reproducibilidad del documento</td>
+<td>Renderiza sin errores, código limpio y organizado</td>
+<td>Renderiza con advertencias menores</td>
+<td>No renderiza o requiere intervención manual</td>
+<td>15%</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="proyecto-final-30" class="level3">
+<h3 class="anchored" data-anchor-id="proyecto-final-30">Proyecto Final (30%)</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 30%">
+<col style="width: 25%">
+<col style="width: 24%">
+<col style="width: 2%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Criterio</th>
+<th>Excelente (4.5–5.0)</th>
+<th>Satisfactorio (3.0–4.4)</th>
+<th>Insuficiente (&lt; 3.0)</th>
+<th>Peso</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Estructura y escritura científica</td>
+<td>Secciones completas, redacción precisa, flujo lógico</td>
+<td>Estructura presente pero con secciones débiles</td>
+<td>Sin estructura o redacción confusa</td>
+<td>15%</td>
+</tr>
+<tr class="even">
+<td>Análisis estadístico</td>
+<td>Método apropiado a la pregunta, bien aplicado e interpretado</td>
+<td>Método adecuado pero interpretación superficial</td>
+<td>Método inapropiado o resultados mal interpretados</td>
+<td>25%</td>
+</tr>
+<tr class="odd">
+<td>Visualizaciones</td>
+<td>Figuras publicables: informativas, estéticas, bien etiquetadas</td>
+<td>Figuras correctas pero con detalles mejorables</td>
+<td>Figuras ausentes, incorrectas o sin etiquetar</td>
+<td>20%</td>
+</tr>
+<tr class="even">
+<td>Discusión y conclusión</td>
+<td>Interpreta resultados con contexto biológico claro</td>
+<td>Discusión presente pero sin profundidad</td>
+<td>Solo describe resultados sin interpretar</td>
+<td>20%</td>
+</tr>
+<tr class="odd">
+<td>Reproducibilidad</td>
+<td>Renderiza desde cero, código comentado, datos incluidos</td>
+<td>Reproducible con pasos adicionales menores</td>
+<td>No reproducible sin intervención del autor</td>
+<td>10%</td>
+</tr>
+<tr class="even">
+<td>Sustentación oral</td>
+<td>Domina el análisis, responde preguntas con fundamento</td>
+<td>Presenta bien pero con dificultades ante preguntas</td>
+<td>No puede explicar sus propios resultados</td>
+<td>10%</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="plantilla-de-inicio" class="level2">
+<h2 class="anchored" data-anchor-id="plantilla-de-inicio">Plantilla de inicio</h2>
+<p>Descarga esta plantilla para comenzar tu proyecto. Reemplaza el contenido de ejemplo con tu análisis real.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+📄 Estructura de la plantilla Quarto
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La plantilla incluye el YAML configurado, las secciones con instrucciones comentadas, y ejemplos de código para carga de datos, tablas y figuras.</p>
+<p><a href="../cursos/20953/material/semana-1/script-clase-semana1.R" class="btn btn-outline-success btn-sm mt-2" role="button">⬇️ Descargar plantilla</a></p>
+</div>
+</div>
+<hr>
+</section>
+<section id="preguntas-frecuentes" class="level2">
+<h2 class="anchored" data-anchor-id="preguntas-frecuentes">Preguntas frecuentes</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+¿Puedo trabajar en pareja o grupo?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>No.&nbsp;El proyecto es <strong>individual</strong>. Cada estudiante debe trabajar con su propio conjunto de datos y desarrollar su propio análisis. Se aceptan consultas entre compañeros, pero los documentos entregados deben ser originales.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+¿Qué pasa si no encuentro datos con suficientes observaciones?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Consulta al docente <strong>antes de la semana 4</strong>. En SICVI 567 hay un listado de conjuntos de datos preaprobados que puedes usar si tienes dificultades para encontrar uno adecuado.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+¿Puedo cambiar mi conjunto de datos después de la primera entrega?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>No se recomienda. El proyecto final es una extensión del de mitad. Cambiar los datos implicaría reiniciar el análisis, lo que no es viable a mitad de semestre.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+¿Qué técnicas estadísticas debo usar en el proyecto final?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Al menos una técnica de modelado estadístico (regresión, GLM, modelo mixto, PCA u NMDS), además del EDA del Proyecto: Análisis Exploratorio de Datos. La elección debe estar justificada por la naturaleza de los datos y la pregunta de investigación.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+¿Cómo sé si mi análisis estadístico está bien aplicado?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Usa el siguiente criterio: si puedes explicar <strong>por qué</strong> elegiste ese modelo, <strong>qué supuestos</strong> cumple con tus datos, y <strong>qué significan</strong> los coeficientes o estadísticos obtenidos, vas bien. Si solo corriste el código y pegaste el output, no está bien aplicado.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+¿Se descuenta por entregas tardías?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Sí. Se descuenta <strong>0.5 puntos por cada día hábil de retraso</strong>, hasta un máximo de 5 días. Después de 5 días hábiles sin entrega, la nota es 0.0.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="cronograma-del-proyecto" class="level2">
+<h2 class="anchored" data-anchor-id="cronograma-del-proyecto">Cronograma del proyecto</h2>
+<div class="small">
+<div class="mb-3 callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Semana 3 · 22 abr 2026
+</div>
+</div>
+<section id="definición-del-tema-y-datos" class="level4 callout-body-container callout-body">
+<h4 class="anchored" data-anchor-id="definición-del-tema-y-datos">Definición del tema y datos</h4>
+<p>Elige tu conjunto de datos y formula una pregunta de investigación. Descarga los datos y verifica que sean adecuados. Consulta al docente si tienes dudas.</p>
+</section>
+</div>
+<div class="mb-3 callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Semana 5 · 6 may 2026
+</div>
+</div>
+<section id="avance-importación-y-exploración-inicial" class="level4 callout-body-container callout-body">
+<h4 class="anchored" data-anchor-id="avance-importación-y-exploración-inicial">Avance: importación y exploración inicial</h4>
+<p>Debes tener los datos importados y limpios en R, con al menos una figura exploratoria. No se califica, pero es una fecha de revisión informal.</p>
+</section>
+</div>
+<div class="mb-3 callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Semana 7 · 20 may 2026 · ⭐ ENTREGA
+</div>
+</div>
+<section id="proyecto-análisis-exploratorio-de-datos-eda-20" class="level4 callout-body-container callout-body">
+<h4 class="anchored" data-anchor-id="proyecto-análisis-exploratorio-de-datos-eda-20">Proyecto: Análisis Exploratorio de Datos — EDA (20%)</h4>
+<p>Entrega el documento Quarto con el informe de análisis exploratorio completo. Subir a SICVI antes de las 11:59 PM.</p>
+</section>
+</div>
+<div class="mb-3 callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Semanas 8–11
+</div>
+</div>
+<section id="desarrollo-del-análisis-estadístico" class="level4 callout-body-container callout-body">
+<h4 class="anchored" data-anchor-id="desarrollo-del-análisis-estadístico">Desarrollo del análisis estadístico</h4>
+<p>Aplica las técnicas de inferencia, regresión y análisis multivariado vistas en clase a tu conjunto de datos.</p>
+</section>
+</div>
+<div class="mb-3 callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Semana 13 · 1 jul 2026
+</div>
+</div>
+<section id="avance-análisis-estadístico-completo" class="level4 callout-body-container callout-body">
+<h4 class="anchored" data-anchor-id="avance-análisis-estadístico-completo">Avance: análisis estadístico completo</h4>
+<p>Fecha de revisión informal. Debes tener el análisis estadístico principal terminado y las figuras listas.</p>
+</section>
+</div>
+<div class="mb-3 callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Semana 15 · 15 jul 2026 · 🎯 ENTREGA FINAL
+</div>
+</div>
+<section id="proyecto-final-reporte-quarto-sustentación-30" class="level4 callout-body-container callout-body">
+<h4 class="anchored" data-anchor-id="proyecto-final-reporte-quarto-sustentación-30">Proyecto Final — Reporte Quarto + Sustentación (30%)</h4>
+<p>Entrega el documento Quarto final a SICVI 567 antes de las 11:59 PM. La sustentación oral se realiza durante la clase de la semana 15.</p>
+</section>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/rodianfonseca\.github\.io\/ADBR-2026-1");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Curso 20953 · Análisis de Datos Biológicos bajo Paquete Estadístico R</p>
+</div>   
+    <div class="nav-footer-center">
+<p>Universidad del Atlántico · Facultad de Ciencias Básicas · Programa de Biología</p>
+</div>
+    <div class="nav-footer-right">
+<p>Período 2026-1</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
