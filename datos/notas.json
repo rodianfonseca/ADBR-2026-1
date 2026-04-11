@@ -1,0 +1,241 @@
+{
+  "curso": "20953",
+  "nombre_curso": "Análisis de Datos Biológicos bajo Paquete Estadístico R",
+  "periodo": "2026-1",
+  "actualizado": "2026-04-01",
+  "semana_actual": 1,
+  "evaluaciones": {
+    "S1": "Taller introducción a R",
+    "S2": "Quiz lógica de programación",
+    "S3": "Taller Git y Quarto",
+    "S4": "Taller manipulación de datos",
+    "S5": "Taller datos ordenados",
+    "S6": "Taller visualización básica",
+    "PM": "Proyecto Mitad de Semestre",
+    "S8": "Taller inferencia estadística",
+    "S9": "Taller regresión",
+    "S10": "Taller modelos múltiples",
+    "S11": "Taller análisis multivariado",
+    "S12": "Taller GLM Poisson",
+    "S13": "Taller GLM Binomial",
+    "S14": "Taller modelos mixtos",
+    "PF": "Proyecto Final"
+  },
+  "ponderacion": {
+    "talleres": 0.50,
+    "proyecto_mitad": 0.20,
+    "proyecto_final": 0.30
+  },
+  "estudiantes": [
+    {
+      "documento": "1010124907",
+      "nombre": "Josué Jesús Garizábalo Flórez",
+      "notas": {
+        "S1": null, "S2": null, "S3": null, "S4": null, "S5": null, "S6": null,
+        "PM": null, "S8": null, "S9": null, "S10": null, "S11": null,
+        "S12": null, "S13": null, "S14": null, "PF": null
+      },
+      "retroalimentacion": {
+        "S1": "", "S2": "", "S3": "", "S4": "", "S5": "", "S6": "",
+        "PM": "", "S8": "", "S9": "", "S10": "", "S11": "",
+        "S12": "", "S13": "", "S14": "", "PF": ""
+      }
+    },
+    {
+      "documento": "1101875113",
+      "nombre": "Martha Luz Frias Torres",
+      "notas": {
+        "S1": null, "S2": null, "S3": null, "S4": null, "S5": null, "S6": null,
+        "PM": null, "S8": null, "S9": null, "S10": null, "S11": null,
+        "S12": null, "S13": null, "S14": null, "PF": null
+      },
+      "retroalimentacion": {
+        "S1": "", "S2": "", "S3": "", "S4": "", "S5": "", "S6": "",
+        "PM": "", "S8": "", "S9": "", "S10": "", "S11": "",
+        "S12": "", "S13": "", "S14": "", "PF": ""
+      }
+    },
+    {
+      "documento": "1137189030",
+      "nombre": "Gabriela Guzman Canedo",
+      "notas": {
+        "S1": null, "S2": null, "S3": null, "S4": null, "S5": null, "S6": null,
+        "PM": null, "S8": null, "S9": null, "S10": null, "S11": null,
+        "S12": null, "S13": null, "S14": null, "PF": null
+      },
+      "retroalimentacion": {
+        "S1": "", "S2": "", "S3": "", "S4": "", "S5": "", "S6": "",
+        "PM": "", "S8": "", "S9": "", "S10": "", "S11": "",
+        "S12": "", "S13": "", "S14": "", "PF": ""
+      }
+    },
+    {
+      "documento": "1044612938",
+      "nombre": "Angie Paola Martinez de Avila",
+      "notas": {
+        "S1": null, "S2": null, "S3": null, "S4": null, "S5": null, "S6": null,
+        "PM": null, "S8": null, "S9": null, "S10": null, "S11": null,
+        "S12": null, "S13": null, "S14": null, "PF": null
+      },
+      "retroalimentacion": {
+        "S1": "", "S2": "", "S3": "", "S4": "", "S5": "", "S6": "",
+        "PM": "", "S8": "", "S9": "", "S10": "", "S11": "",
+        "S12": "", "S13": "", "S14": "", "PF": ""
+      }
+    },
+    {
+      "documento": "1002468519",
+      "nombre": "Esteban Andres Torres Herrera",
+      "notas": {
+        "S1": null, "S2": null, "S3": null, "S4": null, "S5": null, "S6": null,
+        "PM": null, "S8": null, "S9": null, "S10": null, "S11": null,
+        "S12": null, "S13": null, "S14": null, "PF": null
+      },
+      "retroalimentacion": {
+        "S1": "", "S2": "", "S3": "", "S4": "", "S5": "", "S6": "",
+        "PM": "", "S8": "", "S9": "", "S10": "", "S11": "",
+        "S12": "", "S13": "", "S14": "", "PF": ""
+      }
+    },
+    {
+      "documento": "1151469665",
+      "nombre": "Juan Enrique Guerrero Guerrero",
+      "notas": {
+        "S1": null, "S2": null, "S3": null, "S4": null, "S5": null, "S6": null,
+        "PM": null, "S8": null, "S9": null, "S10": null, "S11": null,
+        "S12": null, "S13": null, "S14": null, "PF": null
+      },
+      "retroalimentacion": {
+        "S1": "", "S2": "", "S3": "", "S4": "", "S5": "", "S6": "",
+        "PM": "", "S8": "", "S9": "", "S10": "", "S11": "",
+        "S12": "", "S13": "", "S14": "", "PF": ""
+      }
+    },
+    {
+      "documento": "1048404115",
+      "nombre": "Giannina Luz Dominguez Gonzalez",
+      "notas": {
+        "S1": null, "S2": null, "S3": null, "S4": null, "S5": null, "S6": null,
+        "PM": null, "S8": null, "S9": null, "S10": null, "S11": null,
+        "S12": null, "S13": null, "S14": null, "PF": null
+      },
+      "retroalimentacion": {
+        "S1": "", "S2": "", "S3": "", "S4": "", "S5": "", "S6": "",
+        "PM": "", "S8": "", "S9": "", "S10": "", "S11": "",
+        "S12": "", "S13": "", "S14": "", "PF": ""
+      }
+    },
+    {
+      "documento": "1076501221",
+      "nombre": "Juan Felipe Serrato Buitrago",
+      "notas": {
+        "S1": null, "S2": null, "S3": null, "S4": null, "S5": null, "S6": null,
+        "PM": null, "S8": null, "S9": null, "S10": null, "S11": null,
+        "S12": null, "S13": null, "S14": null, "PF": null
+      },
+      "retroalimentacion": {
+        "S1": "", "S2": "", "S3": "", "S4": "", "S5": "", "S6": "",
+        "PM": "", "S8": "", "S9": "", "S10": "", "S11": "",
+        "S12": "", "S13": "", "S14": "", "PF": ""
+      }
+    },
+    {
+      "documento": "1002162663",
+      "nombre": "Luisa Maria Perez Badel",
+      "notas": {
+        "S1": null, "S2": null, "S3": null, "S4": null, "S5": null, "S6": null,
+        "PM": null, "S8": null, "S9": null, "S10": null, "S11": null,
+        "S12": null, "S13": null, "S14": null, "PF": null
+      },
+      "retroalimentacion": {
+        "S1": "", "S2": "", "S3": "", "S4": "", "S5": "", "S6": "",
+        "PM": "", "S8": "", "S9": "", "S10": "", "S11": "",
+        "S12": "", "S13": "", "S14": "", "PF": ""
+      }
+    },
+    {
+      "documento": "1010130092",
+      "nombre": "Lorena Isabel Ortiz Orozco",
+      "notas": {
+        "S1": null, "S2": null, "S3": null, "S4": null, "S5": null, "S6": null,
+        "PM": null, "S8": null, "S9": null, "S10": null, "S11": null,
+        "S12": null, "S13": null, "S14": null, "PF": null
+      },
+      "retroalimentacion": {
+        "S1": "", "S2": "", "S3": "", "S4": "", "S5": "", "S6": "",
+        "PM": "", "S8": "", "S9": "", "S10": "", "S11": "",
+        "S12": "", "S13": "", "S14": "", "PF": ""
+      }
+    },
+    {
+      "documento": "1001887118",
+      "nombre": "Jostyn Rafael Ramos Barros",
+      "notas": {
+        "S1": null, "S2": null, "S3": null, "S4": null, "S5": null, "S6": null,
+        "PM": null, "S8": null, "S9": null, "S10": null, "S11": null,
+        "S12": null, "S13": null, "S14": null, "PF": null
+      },
+      "retroalimentacion": {
+        "S1": "", "S2": "", "S3": "", "S4": "", "S5": "", "S6": "",
+        "PM": "", "S8": "", "S9": "", "S10": "", "S11": "",
+        "S12": "", "S13": "", "S14": "", "PF": ""
+      }
+    },
+    {
+      "documento": "1234888076",
+      "nombre": "Laura Vanessa Bernal Lugo",
+      "notas": {
+        "S1": null, "S2": null, "S3": null, "S4": null, "S5": null, "S6": null,
+        "PM": null, "S8": null, "S9": null, "S10": null, "S11": null,
+        "S12": null, "S13": null, "S14": null, "PF": null
+      },
+      "retroalimentacion": {
+        "S1": "", "S2": "", "S3": "", "S4": "", "S5": "", "S6": "",
+        "PM": "", "S8": "", "S9": "", "S10": "", "S11": "",
+        "S12": "", "S13": "", "S14": "", "PF": ""
+      }
+    },
+    {
+      "documento": "1065565497",
+      "nombre": "Jair David Barrera Liñan",
+      "notas": {
+        "S1": null, "S2": null, "S3": null, "S4": null, "S5": null, "S6": null,
+        "PM": null, "S8": null, "S9": null, "S10": null, "S11": null,
+        "S12": null, "S13": null, "S14": null, "PF": null
+      },
+      "retroalimentacion": {
+        "S1": "", "S2": "", "S3": "", "S4": "", "S5": "", "S6": "",
+        "PM": "", "S8": "", "S9": "", "S10": "", "S11": "",
+        "S12": "", "S13": "", "S14": "", "PF": ""
+      }
+    },
+    {
+      "documento": "1046697794",
+      "nombre": "Camilo Andres Loaiza Rua",
+      "notas": {
+        "S1": null, "S2": null, "S3": null, "S4": null, "S5": null, "S6": null,
+        "PM": null, "S8": null, "S9": null, "S10": null, "S11": null,
+        "S12": null, "S13": null, "S14": null, "PF": null
+      },
+      "retroalimentacion": {
+        "S1": "", "S2": "", "S3": "", "S4": "", "S5": "", "S6": "",
+        "PM": "", "S8": "", "S9": "", "S10": "", "S11": "",
+        "S12": "", "S13": "", "S14": "", "PF": ""
+      }
+    },
+    {
+      "documento": "1193522624",
+      "nombre": "Juan Camilo Mendoza Blanquecet",
+      "notas": {
+        "S1": null, "S2": null, "S3": null, "S4": null, "S5": null, "S6": null,
+        "PM": null, "S8": null, "S9": null, "S10": null, "S11": null,
+        "S12": null, "S13": null, "S14": null, "PF": null
+      },
+      "retroalimentacion": {
+        "S1": "", "S2": "", "S3": "", "S4": "", "S5": "", "S6": "",
+        "PM": "", "S8": "", "S9": "", "S10": "", "S11": "",
+        "S12": "", "S13": "", "S14": "", "PF": ""
+      }
+    }
+  ]
+}

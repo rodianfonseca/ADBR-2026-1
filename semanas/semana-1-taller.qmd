@@ -1,0 +1,188 @@
+---
+title: "Taller Semana 1 — Tipos de datos y vectores en R"
+subtitle: "Datos climatológicos de municipios del departamento del Atlántico"
+date: "2026-04-08"
+author: "Curso 20953 · Análisis de Datos Biológicos bajo R"
+toc: true
+toc-depth: 3
+code-fold: false
+code-tools: false
+---
+
+:::{.callout-note icon="false" appearance="simple"}
+**Tipo de evidencia:** Desempeño · **Entregable:** `taller1_apellido_nombre.R` · **Plataforma:** SICVI 567 — actividad "Taller 1"
+:::
+
+## Objetivos del taller
+
+1. Aplicar los cinco tipos de datos fundamentales de R (`numeric`, `integer`, `character`, `logical`, `factor`) en un contexto climático real del Atlántico.
+2. Construir vectores con datos de temperatura y precipitación, asignarles nombres y acceder a elementos por posición y nombre.
+3. Usar operaciones vectorizadas para responder preguntas ambientales concretas.
+4. Producir gráficas exploratorias con R base e interpretarlas en clave biológica.
+
+---
+
+## Contexto biológico
+
+El departamento del Atlántico presenta uno de los regímenes climáticos más particulares de Colombia: una marcada estacionalidad con dos periodos de lluvia (abril–mayo y agosto–noviembre) separados por el llamado "veranillo de San Juan" en julio, consecuencia de la migración de la Zona de Convergencia Intertropical (ZCIT). Esta variabilidad estacional controla directamente la disponibilidad de agua, la floración de plantas nativas y los ciclos reproductivos de aves acuáticas en ciénagas como las del Canal del Dique y la Ciénaga Grande de Santa Marta.
+
+Comprender ese patrón climático desde datos históricos es el primer paso para conectar el clima con la biología de las especies de la región. En este taller trabajarás con registros de la estación **Repelón** (sur del Atlántico, municipio lacustre sobre el embalse del Guájaro), un ambiente diferente al costero de Barranquilla visto en clase.
+
+---
+
+## Dataset
+
+El dataset ya está incluido en el script descargable. Ejecútalo completo para cargar los objetos en tu entorno antes de comenzar las actividades.
+
+```{r}
+#| label: dataset-repelón
+#| code-fold: false
+
+set.seed(42)
+
+meses <- c("ene", "feb", "mar", "abr", "may", "jun",
+           "jul", "ago", "sep", "oct", "nov", "dic")
+
+# Temperatura máxima mensual en Repelón (°C) — IDEAM
+temp_max_repelón <- c(35.2, 35.8, 36.4, 34.7, 33.1, 34.0,
+                      35.5, 33.8, 32.6, 32.1, 32.9, 34.6)
+
+# Precipitación mensual promedio en Repelón (mm) — IDEAM
+precip_repelón <- c(4.2, 1.5, 2.8, 45.6, 112.3, 98.7,
+                    60.4, 125.1, 198.6, 165.3, 72.1, 11.4)
+
+names(temp_max_repelón) <- meses
+names(precip_repelón)   <- meses
+```
+
+---
+
+## Parte 1: Tipos de datos y exploración inicial (estimado: 25 minutos)
+
+Trabaja en tu script `.R` descargable. Esta guía describe qué hacer en cada paso; el script tiene los espacios (`___`) donde escribir tu código.
+
+### 1.1 Verifica los tipos de datos
+
+Usa `class()`, `is.numeric()` e `is.character()` para explorar los vectores del dataset. Luego crea tres objetos adicionales que ilustren los tipos `integer`, `logical` y `factor`:
+
+- Un entero con el número de años de registro de la estación (usa la letra `L` al final del número).
+- Un lógico que indique si el embalse del Guájaro tiene influencia sobre el microclima local.
+- Un factor con tipos de cobertura vegetal observados alrededor de la estación: `"herbazal"`, `"matorral"`, `"bosque seco"`. Define también el nivel `"manglar"` aunque no aparezca en los datos.
+
+::: {.callout-tip}
+## Pista — `factor()`
+```r
+mi_factor <- factor(
+  c("valor1", "valor2", "valor1"),
+  levels = c("valor1", "valor2", "valor3")  # incluye niveles posibles aunque estén vacíos
+)
+```
+:::
+
+**Preguntas de reflexión 1.1** — responde en tu script con comentarios `#`:
+
+1. ¿Por qué es importante declarar el conteo de años como `integer` y no como `numeric`? ¿Tiene consecuencias prácticas en R?
+2. El objeto `cobertura` tiene el nivel `"manglar"` aunque no aparece en los datos ingresados. ¿Por qué puede ser útil incluir niveles que aún no tienen observaciones en un estudio de vegetación?
+
+---
+
+### 1.2 Estadísticas de resumen
+
+Usa `cat()` junto con `min()`, `max()`, `mean()`, `sum()`, `range()`, `which.min()` y `which.max()` para imprimir un resumen de temperatura y precipitación con el formato:
+
+```
+=== TEMPERATURA MÁXIMA — Repelón (IDEAM) ===
+Mínima mensual : X °C — mes
+Máxima mensual : X °C — mes
+Media anual    : X °C
+Rango          : X °C
+```
+
+**Preguntas de reflexión 1.2** — responde en tu script:
+
+1. La temperatura máxima de Repelón en los meses secos supera los 35°C. ¿Qué consecuencias fisiológicas puede tener esto para anfibios o reptiles de la región?
+2. El total de precipitación anual de Repelón ¿es mayor o menor que el de Barranquilla (922 mm)? ¿A qué factores lo atribuyes?
+
+---
+
+## Parte 2: Indexación y operaciones vectorizadas (estimado: 30 minutos)
+
+### 2.1 Acceso por posición y nombre
+
+Extrae los siguientes valores de los vectores (un resultado por línea de código):
+
+- Temperatura de marzo (por posición).
+- Precipitación de septiembre (por nombre).
+- Temperaturas del segundo semestre (posiciones 7 a 12).
+- Precipitaciones de los meses de transición: abril, mayo, agosto y septiembre (por nombre).
+
+### 2.2 Filtros lógicos vectorizados
+
+Usa vectores lógicos para responder:
+
+- ¿Qué meses tienen temperatura máxima mayor a 34°C?
+- ¿Cuántos meses tienen precipitación mayor a 80 mm?
+- ¿Qué meses combinan temperatura mayor a 34°C **y** precipitación menor a 20 mm? (usa el operador `&`)
+
+**Preguntas de reflexión 2:**
+
+1. El filtro de "estrés hídrico" combina alta temperatura y baja precipitación. ¿Qué especie vegetal o animal del Atlántico crees que es más vulnerable durante esos meses y por qué?
+2. ¿En qué semestre se concentran las lluvias en Repelón? Compara con Barranquilla (clase). ¿El patrón es el mismo?
+3. Cambia el umbral de temperatura de `> 34` a `> 35`. ¿Cuántos meses quedan? ¿Cómo cambia la interpretación biológica?
+
+### 2.3 Operaciones vectorizadas
+
+Calcula y muestra:
+
+- La anomalía de temperatura de cada mes respecto a la media anual (resta la media al vector completo).
+- La precipitación acumulada del primer y segundo semestre.
+- La precipitación convertida de mm a cm para los primeros 6 meses.
+
+---
+
+## Parte 3: Visualización con R base (estimado: 35 minutos)
+
+### 3.1 Gráfico de barras — precipitación mensual
+
+Construye un `barplot()` de la precipitación mensual en Repelón. Colorea en azul oscuro (`"#1d4ed8"`) los meses que superan la media mensual de la estación y en azul claro (`"#bfdbfe"`) los que no. Añade una línea punteada en la media y una leyenda.
+
+::: {.callout-tip}
+## Pista — umbral dinámico
+Calcula el umbral como `umbral <- mean(precip_repelón)` y úsalo dentro de `ifelse()` para los colores y en `abline()` para la línea.
+:::
+
+### 3.2 Gráfico de línea — temperatura máxima mensual
+
+Construye un `plot()` de tipo `"b"` con los 12 valores de temperatura. Añade el eje x con los nombres de los meses (`axis()`), una línea horizontal en la media anual y una etiqueta con el valor de la media (`text()`).
+
+### 3.3 Climograma simplificado *(desafío)*
+
+Superpón precipitación (barras) y temperatura (línea) en un mismo gráfico usando un segundo eje vertical (`axis(side = 4, ...)`). Para escalar la temperatura al rango de la precipitación usa un factor de escala:
+
+```r
+factor_escala <- max(temp_max_repelón) / max(precip_repelón)
+```
+
+Modifica el gráfico final para que las barras del primer semestre (ene–jun) sean de un color y las del segundo (jul–dic) de otro. Actualiza la leyenda.
+
+**Preguntas de reflexión 3:**
+
+1. En el climograma, identifica los periodos con baja precipitación y alta temperatura. ¿Cómo afecta esa combinación a los recursos hídricos para anfibios y plantas del sur del Atlántico?
+2. Compara la amplitud de variación de temperatura en Repelón (~4°C) con la de Barranquilla (~2°C). ¿Qué diferencia esperas en la diversidad de ectotérmicos entre ambos sitios?
+
+---
+
+::: {.callout-important}
+## Detalles de entrega
+
+- **Archivo:** `taller1_apellido_nombre.R` (ejemplo: `taller1_fonseca_rodian.R`)
+- **Formato:** El script `.R` debe ejecutarse sin errores de principio a fin.
+- **Plataforma:** SICVI 567 — sección "Taller 1: Tipos de datos y vectores en R"
+- **Fecha límite:** 14 de abril de 2026 — 11:59 p.m.
+
+**Requisitos mínimos:**
+
+1. Todos los `___` del script completados con código funcional.
+2. Los tres gráficos generados (barplot, lineplot, climograma).
+3. Respuestas a todas las preguntas de reflexión como comentarios `#` en el script.
+:::

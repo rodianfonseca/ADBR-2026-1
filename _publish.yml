@@ -1,0 +1,4 @@
+- source: project
+  gh-pages:
+    - id: "ADBR 2026-1"
+      url: "https://rodianfonseca.github.io/ADBR-2026-1"

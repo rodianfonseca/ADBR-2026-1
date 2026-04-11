@@ -1,0 +1,255 @@
+---
+title: "Material del curso"
+subtitle: "Scripts, guías de taller y datasets organizados por semana"
+toc: true
+toc-depth: 2
+---
+
+::: callout-note
+El material se publica cada semana antes de la clase del miércoles. Los archivos descargables corresponden a los scripts y guías oficiales del curso. La entrega de talleres se realiza exclusivamente por la plataforma [SICVI](https://sicvi567.uniatlantico.edu.co/).
+:::
+
+------------------------------------------------------------------------
+
+## Software general del curso
+
+::::::: {.text-center .mb-4 layout-ncol="4"}
+::: {.callout-note icon="false" appearance="simple"}
+### 
+
+[![](https://www.r-project.org/logo/Rlogo.svg){fig-alt="R project link" fig-align="center" width="62"}](https://www.r-project.org/)
+:::
+
+::: {.callout-note icon="false" appearance="simple"}
+[![](https://cloud.rstudio.com/wp-content/uploads/2018/10/RStudio-Logo-flat.svg){fig-alt="RStudio link" fig-align="center" width="135" height="48"}](https://posit.co/download/rstudio-desktop/)
+:::
+
+::: {.callout-note icon="false" appearance="simple"}
+[![](https://quarto.org/quarto.png){fig-alt="Quarto link" fig-align="center" width="199"}](https://quarto.org)
+:::
+
+::: {.callout-note icon="false" appearance="simple"}
+[![](https://positron.posit.co/assets/images/positron-logo_fullcolor-TM.png){fig-alt="Positron link" fig-align="center" width="239"}](https://positron.posit.co/)
+:::
+:::::::
+
+------------------------------------------------------------------------
+
+## Unidad 1 — Introducción a la Ciencia de Datos en Biología
+
+### Semana 1 · 8 de abril de 2026 {#semana-1}
+
+**Tema:** Introducción a la Ciencia de Datos. Instalación de R/RStudio. Sintaxis básica y tipos de datos.
+
+::::: {.callout-tip icon="false"}
+## Primeros pasos con R — Clima del Atlántico colombiano
+
+Introducción al lenguaje R usando datos climatológicos de estaciones IDEAM del departamento del Atlántico. Se trabajan tipos de datos, vectores, operaciones vectorizadas y visualización básica con R base.
+
+::: {.d-flex .gap-2 .flex-wrap .mt-3}
+[🌐 Ver clase en línea](semanas/semana-1.html){.btn .btn-success .btn-sm} [🌐 Ver guía del taller](semanas/semana-1-taller.html){.btn .btn-primary .btn-sm} [⬇️ Script del taller (.R)](semanas/semana-1-taller.R){.btn .btn-outline-primary .btn-sm} [⬇️ Dataset climatológico (.csv)](datos/semana-1/clima_atlantico_listo.csv){.btn .btn-outline-secondary .btn-sm}
+:::
+
+::: {.mt-3 .pt-2 .border-top .small .text-muted}
+**Evaluación:** Taller de introducción a R (desempeño) · Entrega por SICVI 567: nombre del archivo `taller1_apellido_nombre.R`
+:::
+:::::
+
+### Semana 2 · 15 de abril de 2026 {#semana-2}
+
+**Tema:** Estructuras de datos (Data Frames, Listas) y Estructuras de control (bucles, condicionales).
+
+:::: {.callout-tip icon="false" appearance="simple" style="opacity: 0.6;"}
+## Estructuras de datos y control de flujo en R
+
+[Material disponible próximamente.]{.text-muted .small}
+
+::: {.d-flex .gap-2 .flex-wrap .mt-3}
+[🌐 Ver clase en línea](#){.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"} [🌐 Ver taller en línea](#){.btn .btn-primary .btn-sm .disabled role="button" aria-disabled="true"}
+:::
+::::
+
+### Semana 3 · 22 de abril de 2026 {#semana-3}
+
+**Tema:** Control de versiones con Git y GitHub. Investigación reproducible con Quarto.
+
+:::: {.callout-tip icon="false" appearance="simple" style="opacity: 0.6;"}
+## Git, GitHub y tu primer documento Quarto
+
+[Material disponible próximamente.]{.text-muted .small}
+
+::: {.d-flex .gap-2 .flex-wrap .mt-3}
+[🌐 Ver clase en línea](#){.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"} [🌐 Ver taller en línea](#){.btn .btn-primary .btn-sm .disabled role="button" aria-disabled="true"}
+:::
+::::
+
+------------------------------------------------------------------------
+
+## Unidad 2 — Manejo y Visualización de Datos
+
+### Semana 4 · 29 de abril de 2026 {#semana-4}
+
+:::: {.callout-note icon="false" appearance="simple" style="opacity: 0.6;"}
+## Importación de datos con readr y manipulación con dplyr
+
+[Material disponible próximamente.]{.text-muted .small}
+
+::: {.d-flex .gap-2 .flex-wrap .mt-3}
+[🌐 Ver clase en línea](#){.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"} [🌐 Ver taller en línea](#){.btn .btn-primary .btn-sm .disabled role="button" aria-disabled="true"}
+:::
+::::
+
+### Semana 5 · 6 de mayo de 2026 {#semana-5}
+
+:::: {.callout-note icon="false" appearance="simple" style="opacity: 0.6;"}
+## Datos ordenados con tidyr
+
+[Material disponible próximamente.]{.text-muted .small}
+
+::: {.d-flex .gap-2 .flex-wrap .mt-3}
+[🌐 Ver clase en línea](#){.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"} [🌐 Ver taller en línea](#){.btn .btn-primary .btn-sm .disabled role="button" aria-disabled="true"}
+:::
+::::
+
+### Semana 6 · 13 de mayo de 2026 {#semana-6}
+
+:::: {.callout-note icon="false" appearance="simple" style="opacity: 0.6;"}
+## Gramática de gráficos con ggplot2
+
+[Material disponible próximamente.]{.text-muted .small}
+
+::: {.d-flex .gap-2 .flex-wrap .mt-3}
+[🌐 Ver clase en línea](#){.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"} [🌐 Ver taller en línea](#){.btn .btn-primary .btn-sm .disabled role="button" aria-disabled="true"}
+:::
+::::
+
+### Semana 7 · 20 de mayo de 2026 — ⭐ Proyecto: EDA {#semana-7}
+
+:::: {.callout-warning icon="false" appearance="simple" style="opacity: 0.6;"}
+## Visualización avanzada + Proyecto: Análisis Exploratorio de Datos
+
+[Material disponible próximamente.]{.text-muted .small}
+
+::: {.d-flex .gap-2 .flex-wrap .mt-3}
+[🌐 Ver clase en línea](#){.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"} [🌐 Ver taller en línea](#){.btn .btn-primary .btn-sm .disabled role="button" aria-disabled="true"}
+:::
+::::
+
+------------------------------------------------------------------------
+
+## Unidad 3 — Análisis Estadístico y Modelado
+
+### Semana 8 · 27 de mayo de 2026 {#semana-8}
+
+:::: {.callout-caution icon="false" appearance="simple" style="opacity: 0.6;"}
+## Inferencia estadística en R: Pruebas T, ANOVA, Chi-cuadrado
+
+[Material disponible a partir de mayo 2026.]{.text-muted .small}
+
+::: {.d-flex .gap-2 .flex-wrap .mt-3}
+[🌐 Ver clase en línea](#){.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"} [🌐 Ver taller en línea](#){.btn .btn-primary .btn-sm .disabled role="button" aria-disabled="true"}
+:::
+::::
+
+### Semana 9 · 3 de junio de 2026 {#semana-9}
+
+:::: {.callout-caution icon="false" appearance="simple" style="opacity: 0.6;"}
+## Modelos lineales y regresión simple
+
+[Material disponible a partir de mayo 2026.]{.text-muted .small}
+
+::: {.d-flex .gap-2 .flex-wrap .mt-3}
+[🌐 Ver clase en línea](#){.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"} [🌐 Ver taller en línea](#){.btn .btn-primary .btn-sm .disabled role="button" aria-disabled="true"}
+:::
+::::
+
+### Semana 10 · 10 de junio de 2026 {#semana-10}
+
+:::: {.callout-caution icon="false" appearance="simple" style="opacity: 0.6;"}
+## Regresión múltiple y selección de modelos
+
+[Material disponible a partir de mayo 2026.]{.text-muted .small}
+
+::: {.d-flex .gap-2 .flex-wrap .mt-3}
+[🌐 Ver clase en línea](#){.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"} [🌐 Ver taller en línea](#){.btn .btn-primary .btn-sm .disabled role="button" aria-disabled="true"}
+:::
+::::
+
+### Semana 11 · 17 de junio de 2026 {#semana-11}
+
+:::: {.callout-caution icon="false" appearance="simple" style="opacity: 0.6;"}
+## Análisis Multivariado: PCA y NMDS para datos ecológicos
+
+[Material disponible a partir de junio 2026.]{.text-muted .small}
+
+::: {.d-flex .gap-2 .flex-wrap .mt-3}
+[🌐 Ver clase en línea](#){.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"} [🌐 Ver taller en línea](#){.btn .btn-primary .btn-sm .disabled role="button" aria-disabled="true"}
+:::
+::::
+
+------------------------------------------------------------------------
+
+## Unidad 4 — Análisis de Datos Biológicos Avanzado
+
+### Semana 12 · 24 de junio de 2026 {#semana-12}
+
+:::: {.callout-important icon="false" appearance="simple" style="opacity: 0.6;"}
+## Modelos Lineales Generalizados: GLM Poisson
+
+[Material disponible a partir de junio 2026.]{.text-muted .small}
+
+::: {.d-flex .gap-2 .flex-wrap .mt-3}
+[🌐 Ver clase en línea](#){.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"} [🌐 Ver taller en línea](#){.btn .btn-primary .btn-sm .disabled role="button" aria-disabled="true"}
+:::
+::::
+
+### Semana 13 · 1 de julio de 2026 {#semana-13}
+
+:::: {.callout-important icon="false" appearance="simple" style="opacity: 0.6;"}
+## Modelos Lineales Generalizados: GLM Binomial
+
+[Material disponible a partir de junio 2026.]{.text-muted .small}
+
+::: {.d-flex .gap-2 .flex-wrap .mt-3}
+[🌐 Ver clase en línea](#){.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"} [🌐 Ver taller en línea](#){.btn .btn-primary .btn-sm .disabled role="button" aria-disabled="true"}
+:::
+::::
+
+### Semana 14 · 8 de julio de 2026 {#semana-14}
+
+:::: {.callout-important icon="false" appearance="simple" style="opacity: 0.6;"}
+## Introducción a Modelos Mixtos (LMM/GLMM)
+
+[Material disponible a partir de julio 2026.]{.text-muted .small}
+
+::: {.d-flex .gap-2 .flex-wrap .mt-3}
+[🌐 Ver clase en línea](#){.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"} [🌐 Ver taller en línea](#){.btn .btn-primary .btn-sm .disabled role="button" aria-disabled="true"}
+:::
+::::
+
+### Semana 15 · 15 de julio de 2026 — 🎯 Proyecto Final {#semana-15}
+
+:::: {.callout-important icon="false" appearance="simple" style="opacity: 0.6;"}
+## Casos de estudio y sustentación de proyectos finales
+
+[Material disponible a partir de julio 2026.]{.text-muted .small}
+
+::: {.d-flex .gap-2 .flex-wrap .mt-3}
+[🌐 Ver clase en línea](#){.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"}
+:::
+::::
+
+------------------------------------------------------------------------
+
+## Bibliografía y recursos de consulta
+
+| Recurso | Tipo | Enlace |
+|----|----|----|
+| R for Data Science (2ª ed.) | Libro principal | [r4ds.hadley.nz](https://r4ds.hadley.nz/) |
+| ggplot2: Elegant Graphics | Visualización | [ggplot2-book.org](https://ggplot2-book.org/) |
+| R Graphics Cookbook | Recetas gráficas | [r-graphics.org](https://r-graphics.org/) |
+| Modern Statistics for Modern Biology | Estadística biológica | [huber.embl.de/msmb](https://www.huber.embl.de/msmb/) |
+| Documentación Quarto | Reportes reproducibles | [quarto.org](https://quarto.org/) |
+| GBIF Colombia | Datos de biodiversidad | [gbif.org](https://www.gbif.org/) |
+| SiB Colombia | Biodiversidad nacional | [biodiversidad.co](https://biodiversidad.co/) |
+| Paquetes de R (CRAN) | Referencia de funciones | [rdocumentation.org](https://www.rdocumentation.org/) |

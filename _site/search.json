@@ -1,0 +1,394 @@
+[
+  {
+    "objectID": "calificaciones.html",
+    "href": "calificaciones.html",
+    "title": "Consulta de calificaciones",
+    "section": "",
+    "text": "Privacidad: Ingresa tu número de cédula para consultar únicamente tus calificaciones.\n  Las notas se actualizan después de cada evaluación.\n  Para aclaraciones, contacta al docente a través de SICVI 567.\n\n\n\n\n  🔍 Buscar mis notas\n  \n    Número de documento (cédula):\n  \n  \n  \n    Consultar calificaciones\n  \n  \n\n\n\n\n\n\n\n  📋 Escala de calificación\n  \n\n\n\nComponente\nPeso\nEvaluaciones incluidas\n\n\n\n\nTalleres semanales\n50%\nS1–S6, S8–S14 (14 talleres)\n\n\nProyecto - Análisis Exploratorio de Datos\n20%\nPM (semana 7)\n\n\nProyecto - Final\n30%\nPF (semana 15)\n\n\n\n\n\n  🚦 Alertas académicas\n  \n    \n      ✅ Aprobado: ≥ 3.0\n    \n    \n      ⚠️ En riesgo: 2.5 – 2.9\n    \n    \n      ❌ Reprobado: &lt; 2.5\n    \n  \n\n  \n    NE = No Entregado (equivale a 0.0 en el cálculo).\n    Las notas se muestran en escala 0.0–5.0. Aprobación: nota final ≥ 3.0."
+  },
+  {
+    "objectID": "PUBLICAR.html",
+    "href": "PUBLICAR.html",
+    "title": "",
+    "section": "",
+    "text": "Código"
+  },
+  {
+    "objectID": "PUBLICAR.html#requisitos-previos",
+    "href": "PUBLICAR.html#requisitos-previos",
+    "title": "",
+    "section": "Requisitos previos",
+    "text": "Requisitos previos\n# Instalar Quarto CLI (si no está instalado)\n# https://quarto.org/docs/get-started/\n\nquarto --version  # verificar instalación (se requiere ≥ 1.4)"
+  },
+  {
+    "objectID": "PUBLICAR.html#construir-el-sitio-localmente",
+    "href": "PUBLICAR.html#construir-el-sitio-localmente",
+    "title": "",
+    "section": "Construir el sitio localmente",
+    "text": "Construir el sitio localmente\n# Desde la carpeta sitio-web/\ncd \"sitio-web\"\n\n# Vista previa (servidor local en http://localhost:4848)\nquarto preview\n\n# Construir el sitio estático (genera la carpeta _site/)\nquarto render"
+  },
+  {
+    "objectID": "PUBLICAR.html#actualizar-calificaciones",
+    "href": "PUBLICAR.html#actualizar-calificaciones",
+    "title": "",
+    "section": "Actualizar calificaciones",
+    "text": "Actualizar calificaciones\n\nAbrir datos/notas.json\nLocalizar al estudiante por \"documento\" (número de cédula)\nCambiar null por la nota correspondiente (número entre 0.0 y 5.0)\nAgregar retroalimentación textual en el campo \"retroalimentacion\" correspondiente\nActualizar el campo \"actualizado\" con la fecha actual (formato YYYY-MM-DD)\nEjecutar quarto render para reconstruir el sitio\nSubir la carpeta _site/ al servidor\n\nEjemplo:\n{\n  \"documento\": \"1010124907\",\n  \"nombre\": \"Josué Jesús Garizábalo Flórez\",\n  \"notas\": {\n    \"S1\": 4.2,\n    \"S2\": null,\n    ...\n  },\n  \"retroalimentacion\": {\n    \"S1\": \"Excelente manejo de vectores. Mejorar los comentarios en el código.\",\n    ...\n  }\n}"
+  },
+  {
+    "objectID": "PUBLICAR.html#agregar-material-de-una-nueva-semana",
+    "href": "PUBLICAR.html#agregar-material-de-una-nueva-semana",
+    "title": "",
+    "section": "Agregar material de una nueva semana",
+    "text": "Agregar material de una nueva semana\n\nCrear semanas/semana-N.qmd con el script de la semana convertido a formato Quarto\nActualizar material.qmd para publicar la semana (quitar opacity:0.6 y el badge “Pendiente”)\nActualizar _quarto.yml → sección menu del navbar para incluir el enlace"
+  },
+  {
+    "objectID": "PUBLICAR.html#publicación-en-servidor",
+    "href": "PUBLICAR.html#publicación-en-servidor",
+    "title": "",
+    "section": "Publicación en servidor",
+    "text": "Publicación en servidor\n\nOpción A: Servidor web estático (Apache / Nginx)\n# Construir el sitio\nquarto render\n\n# Copiar la carpeta _site/ al servidor\nrsync -avz _site/ usuario@servidor:/var/www/html/biologia-r/\n\n\nOpción B: GitHub Pages\n# Configurar en _quarto.yml:\n# project:\n#   output-dir: docs\n\nquarto render\n\n# Subir la carpeta docs/ a GitHub\ngit add docs/\ngit commit -m \"Actualización del sitio\"\ngit push\n\n# En GitHub: Settings → Pages → Source: docs/\n\n\nOpción C: Netlify (drag & drop)\n\nEjecutar quarto render\nIr a netlify.com → “Deploy manually”\nArrastrar la carpeta _site/ al área de despliegue\n\n\n\nOpción D: Quarto Pub (gratuito)\n# Publicar directamente desde la terminal\nquarto publish quarto-pub"
+  },
+  {
+    "objectID": "PUBLICAR.html#estructura-del-sitio-generado",
+    "href": "PUBLICAR.html#estructura-del-sitio-generado",
+    "title": "",
+    "section": "Estructura del sitio generado",
+    "text": "Estructura del sitio generado\n_site/\n├── index.html          ← Página de inicio\n├── cronograma.html     ← Cronograma completo\n├── material.html       ← Material descargable por semana\n├── calificaciones.html ← Formulario de consulta de notas\n├── semanas/\n│   └── semana-1.html   ← Script semana 1 renderizado\n└── datos/\n    └── notas.json      ← Base de datos de calificaciones"
+  },
+  {
+    "objectID": "PUBLICAR.html#notas-importantes",
+    "href": "PUBLICAR.html#notas-importantes",
+    "title": "",
+    "section": "Notas importantes",
+    "text": "Notas importantes\n\nEl formulario de calificaciones requiere que el sitio esté servido por un servidor HTTP (no funciona con file://). En vista previa local (quarto preview) sí funciona.\nLos datos de notas.json son accesibles públicamente si el servidor no requiere autenticación. Esto es apropiado para calificaciones universitarias colombianas bajo la ley de protección de datos, ya que solo son accesibles con el número de documento del estudiante.\nPara mayor seguridad, considerar proteger el sitio con autenticación HTTP básica en el servidor."
+  },
+  {
+    "objectID": "cronograma.html",
+    "href": "cronograma.html",
+    "title": "Cronograma del curso",
+    "section": "",
+    "text": "Período: 6 de abril – 15 de julio de 2026 · Día de clase: Miércoles, 12:30 PM · Total: 15 semanas"
+  },
+  {
+    "objectID": "cronograma.html#unidad-1",
+    "href": "cronograma.html#unidad-1",
+    "title": "Cronograma del curso",
+    "section": "Unidad 1 — Introducción a la Ciencia de Datos en Biología",
+    "text": "Unidad 1 — Introducción a la Ciencia de Datos en Biología\n\n\n\n\n\n\nResultado de Aprendizaje\n\n\n\nUtiliza herramientas computacionales (R, RStudio, Git) y flujos de trabajo reproducibles para la gestión inicial de proyectos de ciencia de datos.\n\n\n\n\n\n\n\n\n\n\n\n\n\nSem.\nFecha\nContenido\nEstrategia\nTrabajo independiente\nEvaluación\n\n\n\n\n1\n8 abr 2026\nIntroducción a la Ciencia de Datos. Instalación de R/RStudio. Sintaxis básica y tipos de datos.\nMagistral · 🖥️ Live coding\nInstalación de software, ejercicios de sintaxis\nTaller de introducción a R\n\n\n2\n15 abr 2026\nEstructuras de datos (Data Frames, Listas) y Estructuras de control (bucles, condicionales).\nMagistral · Aprendizaje activo\nTareas autodirigidas, lecturas independientes\nTaller de lógica de programación\n\n\n3\n22 abr 2026\nControl de versiones con Git y GitHub. Investigación reproducible con Quarto.\nMagistral · 🖥️ Live coding\nCreación de repositorio, estudio dirigido\nTaller de Git y Quarto"
+  },
+  {
+    "objectID": "cronograma.html#unidad-2",
+    "href": "cronograma.html#unidad-2",
+    "title": "Cronograma del curso",
+    "section": "Unidad 2 — Manejo y Visualización de Datos",
+    "text": "Unidad 2 — Manejo y Visualización de Datos\n\n\n\n\n\n\nResultado de Aprendizaje\n\n\n\nTransforma y visualiza datos biológicos complejos utilizando el ecosistema Tidyverse para revelar patrones y tendencias.\n\n\n\n\n\n\n\n\n\n\n\n\n\nSem.\nFecha\nContenido\nEstrategia\nTrabajo independiente\nEvaluación\n\n\n\n\n4\n29 abr 2026\nImportación de datos (readr, readxl). El ecosistema Tidyverse: dplyr.\nMagistral · ABP\nLecturas independientes, ejercicios con dplyr\nTaller de manipulación de datos\n\n\n5\n6 may 2026\nManipulación de datos con tidyr. Limpieza y transformación de datos biológicos.\nMagistral · 🖥️ Live coding\nTareas autodirigidas\nTaller de datos ordenados\n\n\n6\n13 may 2026\nGramática de gráficos con ggplot2.\nMagistral · 🖥️ Live coding\nEstudio dirigido, creación de gráficos\nTaller de visualización básica\n\n\n7 ⭐\n20 may 2026\nVisualización avanzada: gráficos interactivos y mapas básicos. Tablas con gt.\nMagistral · Aprendizaje activo\nPropuestas de solución\nTaller de visualización avanzada. Proyecto: Análisis Exploratorio de Datos"
+  },
+  {
+    "objectID": "cronograma.html#unidad-3",
+    "href": "cronograma.html#unidad-3",
+    "title": "Cronograma del curso",
+    "section": "Unidad 3 — Análisis Estadístico y Modelado",
+    "text": "Unidad 3 — Análisis Estadístico y Modelado\n\n\n\n\n\n\nResultado de Aprendizaje\n\n\n\nAplica modelos estadísticos inferenciales y multivariados para probar hipótesis en contextos biológicos.\n\n\n\n\n\n\n\n\n\n\n\n\n\nSem.\nFecha\nContenido\nEstrategia\nTrabajo independiente\nEvaluación\n\n\n\n\n8\n27 may 2026\nRepaso de inferencia estadística en R (Pruebas T, ANOVA, Chi-cuadrado).\nMagistral · Estudios de Casos\nLecturas independientes\nTaller de inferencia estadística\n\n\n9\n3 jun 2026\nModelos lineales y regresión simple.\nMagistral · 🖥️ Live coding\nTareas autodirigidas\nTaller de regresión\n\n\n10\n10 jun 2026\nRegresión múltiple y selección de modelos.\nMagistral · ABP\nInvestigación de campo (análisis de datos)\nTaller de modelos múltiples\n\n\n11\n17 jun 2026\nAnálisis Multivariado (PCA, NMDS) para datos ecológicos.\nSeminarios · 🖥️ Live coding\nLecturas independientes\nTaller de análisis multivariado"
+  },
+  {
+    "objectID": "cronograma.html#unidad-4",
+    "href": "cronograma.html#unidad-4",
+    "title": "Cronograma del curso",
+    "section": "Unidad 4 — Análisis de Datos Biológicos Avanzado",
+    "text": "Unidad 4 — Análisis de Datos Biológicos Avanzado\n\n\n\n\n\n\nResultado de Aprendizaje\n\n\n\nEvalúa modelos estadísticos avanzados y comunica hallazgos científicos mediante reportes dinámicos y reproducibles.\n\n\n\n\n\n\n\n\n\n\n\n\n\nSem.\nFecha\nContenido\nEstrategia\nTrabajo independiente\nEvaluación\n\n\n\n\n12\n24 jun 2026\nModelos Lineales Generalizados (GLM): Poisson.\nMagistral · Estudios de Casos\nLecturas independientes\nTaller de GLM Poisson\n\n\n13\n1 jul 2026\nModelos Lineales Generalizados (GLM): Binomial.\nMagistral · 🖥️ Live coding\nTareas autodirigidas\nTaller de GLM Binomial\n\n\n14\n8 jul 2026\nIntroducción a Modelos Mixtos (LMM/GLMM).\nMagistral · Aprendizaje activo\nConsulta de referencias\nTaller de modelos mixtos\n\n\n15 🎯\n15 jul 2026\nCasos de estudio y presentación de proyectos finales.\nABP · Socialización\nTrabajo en el proyecto final\nProyecto Final: Reporte Quarto + Sustentación"
+  },
+  {
+    "objectID": "cronograma.html#resumen-de-evaluaciones",
+    "href": "cronograma.html#resumen-de-evaluaciones",
+    "title": "Cronograma del curso",
+    "section": "Resumen de evaluaciones",
+    "text": "Resumen de evaluaciones\n\n\n\n\n\n\n\n\nSemana\nFecha\nEvaluación\n\n\n\n\n1\n8 abr 2026\nTaller de introducción a R\n\n\n2\n15 abr 2026\nTaller de lógica de programación\n\n\n3\n22 abr 2026\nTaller de Git y Quarto\n\n\n4\n29 abr 2026\nTaller de manipulación de datos\n\n\n5\n6 may 2026\nTaller de datos ordenados\n\n\n6\n13 may 2026\nTaller de visualización básica\n\n\n7\n20 may 2026\nTaller de visualización avanzada. Proyecto: Análisis Exploratorio de Datos\n\n\n8\n27 may 2026\nTaller de inferencia estadística\n\n\n9\n3 jun 2026\nTaller de regresión\n\n\n10\n10 jun 2026\nTaller de modelos múltiples\n\n\n11\n17 jun 2026\nTaller de análisis multivariado\n\n\n12\n24 jun 2026\nTaller de GLM Poisson\n\n\n13\n1 jul 2026\nTaller de GLM Binomial\n\n\n14\n8 jul 2026\nTaller de modelos mixtos\n\n\n15\n15 jul 2026\n🎯 Proyecto Final: Reporte Quarto + Sustentación"
+  },
+  {
+    "objectID": "cronograma.html#fórmula-de-calificación",
+    "href": "cronograma.html#fórmula-de-calificación",
+    "title": "Cronograma del curso",
+    "section": "Fórmula de calificación",
+    "text": "Fórmula de calificación\n\\[\n\\text{Nota Final} = (\\overline{Talleres} \\times 0.50) + (PM \\times 0.20) + (PF \\times 0.30)\n\\]\nDonde:\n\n\\(\\overline{Talleres}\\) = promedio de los 14 talleres semanales (S1–S14)\n\\(PM\\) = Proyecto: Análisis Exploratorio de Datos (Semana 7)\n\\(PF\\) = Proyecto: Informe Final (Semana 15)\nLas actividades No Entregadas (NE) equivalen a 0.0\nLa nota mínima de aprobación es 3.0"
+  },
+  {
+    "objectID": "semanas/semana-1.html",
+    "href": "semanas/semana-1.html",
+    "title": "Semana 1 — Introducción a la Ciencia de Datos en R",
+    "section": "",
+    "text": "Unidad 1: Introducción a la Ciencia de Datos en Biología · Estrategia: Clase magistral + Live coding · Duración estimada: 90 minutos"
+  },
+  {
+    "objectID": "semanas/semana-1.html#resultado-de-aprendizaje",
+    "href": "semanas/semana-1.html#resultado-de-aprendizaje",
+    "title": "Semana 1 — Introducción a la Ciencia de Datos en R",
+    "section": "Resultado de aprendizaje",
+    "text": "Resultado de aprendizaje\nAl finalizar esta sesión, el estudiante será capaz de:\n\nVerificar su instalación de R y RStudio\nCrear y manipular los cinco tipos de datos fundamentales de R\nConstruir vectores con datos climáticos reales e indexarlos por posición y nombre\nUsar operaciones vectorizadas para responder preguntas ambientales\nProducir gráficas básicas de exploración con R base"
+  },
+  {
+    "objectID": "semanas/semana-1.html#configuración-inicial",
+    "href": "semanas/semana-1.html#configuración-inicial",
+    "title": "Semana 1 — Introducción a la Ciencia de Datos en R",
+    "section": "0. Configuración inicial",
+    "text": "0. Configuración inicial\nEsta semana trabajamos exclusivamente con R base — sin paquetes externos — para construir una base sólida antes de incorporar el ecosistema Tidyverse.\n\n# Verificamos la versión de R — necesitamos 4.1 o superior para el pipe nativo |&gt;\nR.version.string\n\n[1] \"R version 4.5.3 (2026-03-11)\"\n\n\n\n¿Por qué R ≥ 4.1? A partir de esa versión está disponible el operador pipe nativo |&gt;, que usaremos a partir de la Semana 4."
+  },
+  {
+    "objectID": "semanas/semana-1.html#qué-es-r-y-por-qué-lo-usamos-en-biología",
+    "href": "semanas/semana-1.html#qué-es-r-y-por-qué-lo-usamos-en-biología",
+    "title": "Semana 1 — Introducción a la Ciencia de Datos en R",
+    "section": "1. ¿Qué es R y por qué lo usamos en biología?",
+    "text": "1. ¿Qué es R y por qué lo usamos en biología?\nR es un lenguaje de programación estadístico de código abierto que nació en los años 90 como implementación libre del lenguaje S (Bell Labs). Hoy es el estándar en:\n\nEcología — comunidades, diversidad, modelado de distribución de especies\nBioinformática — análisis de secuencias, expresión génica (Bioconductor)\nEpidemiología — vigilancia, modelos de transmisión\nCiencias ambientales — cambio climático, series de tiempo, SIG\n\nLa consola de R funciona como una calculadora muy poderosa:\n\n2 + 2          # suma básica\n\n[1] 4\n\n10 / 3         # división — R muestra decimales por defecto\n\n[1] 3.333333\n\n10 %/% 3       # división entera (cociente)\n\n[1] 3\n\n10 %% 3        # módulo (residuo de la división)\n\n[1] 1\n\n2^8            # potenciación — útil para diluciones en series 2x\n\n[1] 256\n\n\n\nPregunta para el grupo: ¿En qué situación de laboratorio o campo usaría una potencia de 2 o un logaritmo? (Pista: abundancias, pH, decibeles)"
+  },
+  {
+    "objectID": "semanas/semana-1.html#objetos-y-asignación-de-valores",
+    "href": "semanas/semana-1.html#objetos-y-asignación-de-valores",
+    "title": "Semana 1 — Introducción a la Ciencia de Datos en R",
+    "section": "2. Objetos y asignación de valores",
+    "text": "2. Objetos y asignación de valores\nEn R casi todo es un objeto. Se crean con el operador &lt;- (también funciona =, pero &lt;- es la convención):\n\ntemperatura_media    &lt;- 28.4   # temp. media anual en Barranquilla (°C) — IDEAM\nprecipitacion_anual  &lt;- 922    # precip. media anual en Barranquilla (mm) — IDEAM\nnombre_estacion      &lt;- \"Ernesto Cortissoz\"  # nombre de la estación meteorológica\nes_costera           &lt;- TRUE   # la estación está en zona costera\n\n# Imprimimos los objetos escribiendo su nombre:\ntemperatura_media\n\n[1] 28.4\n\nprecipitacion_anual\n\n[1] 922\n\nnombre_estacion\n\n[1] \"Ernesto Cortissoz\"\n\nes_costera\n\n[1] TRUE\n\n\n\n# Ver todos los objetos en el entorno de trabajo actual:\nls()\n\n[1] \"es_costera\"          \"nombre_estacion\"     \"precipitacion_anual\"\n[4] \"temperatura_media\"  \n\n\n\n¿Qué diferencia hay entre los cuatro objetos? Uno es decimal, otro entero, uno texto entre comillas, otro una palabra sin comillas. Esa diferencia define el tipo de dato."
+  },
+  {
+    "objectID": "semanas/semana-1.html#tipos-de-datos-fundamentales",
+    "href": "semanas/semana-1.html#tipos-de-datos-fundamentales",
+    "title": "Semana 1 — Introducción a la Ciencia de Datos en R",
+    "section": "3. Tipos de datos fundamentales",
+    "text": "3. Tipos de datos fundamentales\nR tiene cinco tipos atómicos. Los más usados en biología:\n\n3.1 Numeric — el más común en datos cuantitativos\n\ntemp &lt;- 27.6\nclass(temp)       # \"numeric\"\n\n[1] \"numeric\"\n\nis.numeric(temp)  # TRUE\n\n[1] TRUE\n\n\n\n\n3.2 Integer — para conteos de individuos, parcelas, muestras\n\nn_individuos &lt;- 145L   # la L final le dice a R que es entero\nclass(n_individuos)    # \"integer\"\n\n[1] \"integer\"\n\n# En biología los conteos deben ser enteros: no podemos tener 2.5 aves\n\n\n\n3.3 Character — especies, sitios, fechas como texto\n\nespecie &lt;- \"Pelecanus occidentalis\"  # pelícano pardo — especie icónica del Caribe\nsitio   &lt;- \"Bocas de Ceniza\"         # localidad en la desembocadura del río Magdalena\nclass(especie)  # \"character\"\n\n[1] \"character\"\n\n\n\n\n3.4 Logical — resultado de comparaciones y filtros\n\nllueve_hoy &lt;- FALSE\nclass(llueve_hoy)\n\n[1] \"logical\"\n\n# Los lógicos son el resultado de cualquier comparación:\ntemperatura_media &gt; 25    # ¿supera los 25°C?\n\n[1] TRUE\n\ntemperatura_media == 28.4 # ¿es exactamente 28.4?\n\n[1] TRUE\n\ntemperatura_media != 30   # ¿es distinta de 30?\n\n[1] TRUE\n\n\n\n\n3.5 Factor — variables categóricas con niveles definidos\n\ntemporada &lt;- factor(c(\"seca\", \"lluviosa\", \"seca\", \"lluviosa\"),\n                    levels = c(\"seca\", \"lluviosa\"))\n# Los factores son cruciales para modelos estadísticos y gráficos\nclass(temporada)\n\n[1] \"factor\"\n\nlevels(temporada)\n\n[1] \"seca\"     \"lluviosa\"\n\n\n\n\n\n\n\n\nError frecuente: mezcla de tipos\n\n\n\nSi intentamos sumar un número con texto, R genera un error:\n# temperatura_media + nombre_estacion\n# Error: non-numeric argument to binary operator\nEsto ocurre cuando una columna que debería ser numérica se importó como character (por ejemplo, si el CSV usaba coma como separador decimal en lugar de punto)."
+  },
+  {
+    "objectID": "semanas/semana-1.html#vectores-la-estructura-fundamental-de-r",
+    "href": "semanas/semana-1.html#vectores-la-estructura-fundamental-de-r",
+    "title": "Semana 1 — Introducción a la Ciencia de Datos en R",
+    "section": "4. Vectores — la estructura fundamental de R",
+    "text": "4. Vectores — la estructura fundamental de R\nUn vector es una secuencia de elementos del mismo tipo. c() significa “combinar” — es la función más usada en R base.\n\n# Temperaturas máximas mensuales en Barranquilla (°C) — IDEAM\n# Orden: ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic\ntemp_max_mensual &lt;- c(32.1, 32.8, 33.4, 33.0, 32.5, 32.9, 33.1, 33.3, 32.7, 31.8, 31.5, 31.9)\n\n# Precipitación mensual promedio en Barranquilla (mm) — IDEAM\nprecip_mensual &lt;- c(2.1, 0.8, 1.5, 33.2, 98.4, 112.3, 96.5, 115.7, 186.3, 151.2, 62.4, 9.8)\n\n# Nombres de los meses\nmeses &lt;- c(\"ene\", \"feb\", \"mar\", \"abr\", \"may\", \"jun\",\n           \"jul\", \"ago\", \"sep\", \"oct\", \"nov\", \"dic\")\n\n\nlength(temp_max_mensual)   # 12 elementos — uno por mes\n\n[1] 12\n\nsum(precip_mensual)        # precipitación anual total (mm)\n\n[1] 870.2\n\nmean(temp_max_mensual)     # temperatura máxima media anual\n\n[1] 32.58333\n\nmax(precip_mensual)        # mes más lluvioso\n\n[1] 186.3\n\nmin(precip_mensual)        # mes más seco\n\n[1] 0.8\n\n\n\nAcceso por posición e índices\n\nR empieza a contar desde 1, no desde 0 (a diferencia de Python o C).\n\n\ntemp_max_mensual[1]    # temperatura de enero\n\n[1] 32.1\n\ntemp_max_mensual[9]    # temperatura de septiembre (inicio de lluvias)\n\n[1] 32.7\n\nprecip_mensual[6:9]    # precipitaciones de jun a sep (meses de lluvias)\n\n[1] 112.3  96.5 115.7 186.3\n\n\n\n\nAcceso por nombre\n\nnames(precip_mensual) &lt;- meses\nprecip_mensual[\"sep\"]   # precipitación en septiembre por nombre\n\n  sep \n186.3 \n\n\n\nPregunta: ¿En qué meses se concentran las lluvias en el Atlántico? ¿Cómo relacionamos ese patrón con la fenología de plantas o aves?"
+  },
+  {
+    "objectID": "semanas/semana-1.html#operaciones-vectorizadas",
+    "href": "semanas/semana-1.html#operaciones-vectorizadas",
+    "title": "Semana 1 — Introducción a la Ciencia de Datos en R",
+    "section": "5. Operaciones vectorizadas",
+    "text": "5. Operaciones vectorizadas\nUna de las mayores ventajas de R: las operaciones se aplican a todos los elementos simultáneamente, sin necesidad de bucles.\n\n# Convertimos precipitación de mm a cm:\nprecip_cm &lt;- precip_mensual / 10\nprecip_cm\n\n  ene   feb   mar   abr   may   jun   jul   ago   sep   oct   nov   dic \n 0.21  0.08  0.15  3.32  9.84 11.23  9.65 11.57 18.63 15.12  6.24  0.98 \n\n# ¿Qué meses tuvieron más de 100 mm? — resultado: vector lógico\nprecip_mensual &gt; 100\n\n  ene   feb   mar   abr   may   jun   jul   ago   sep   oct   nov   dic \nFALSE FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE  TRUE  TRUE FALSE FALSE \n\n# Filtramos los meses lluviosos:\nmeses[precip_mensual &gt; 100]\n\n[1] \"jun\" \"ago\" \"sep\" \"oct\"\n\n# Anomalía de temperatura respecto al promedio anual:\nanomalia_temp &lt;- temp_max_mensual - mean(temp_max_mensual)\nround(anomalia_temp, 2)\n\n [1] -0.48  0.22  0.82  0.42 -0.08  0.32  0.52  0.72  0.12 -0.78 -1.08 -0.68"
+  },
+  {
+    "objectID": "semanas/semana-1.html#aplicación-estaciones-ideam-del-atlántico",
+    "href": "semanas/semana-1.html#aplicación-estaciones-ideam-del-atlántico",
+    "title": "Semana 1 — Introducción a la Ciencia de Datos en R",
+    "section": "6. Aplicación: estaciones IDEAM del Atlántico",
+    "text": "6. Aplicación: estaciones IDEAM del Atlántico\n\nset.seed(2025)  # fijamos semilla para reproducibilidad\n\nestaciones &lt;- c(\"Barranquilla Ernesto Cortissoz\", \"Puerto Colombia\",\n                \"Sabanalarga\", \"Palmar de Varela\", \"Malambo\")\n\n# Temperatura media anual por estación (°C)\ntemp_media_estaciones &lt;- c(27.8, 27.2, 26.9, 28.1, 28.4)\nnames(temp_media_estaciones) &lt;- estaciones\n\n# Precipitación anual total por estación (mm)\nprecip_total_estaciones &lt;- c(922, 875, 1050, 980, 895)\nnames(precip_total_estaciones) &lt;- estaciones\n\n# Resumen climático:\ncat(\"=== RESUMEN CLIMÁTICO — ESTACIONES IDEAM, ATLÁNTICO ===\\n\")\n\n=== RESUMEN CLIMÁTICO — ESTACIONES IDEAM, ATLÁNTICO ===\n\ncat(\"Temperatura media más alta:\", max(temp_media_estaciones), \"°C —\",\n    names(which.max(temp_media_estaciones)), \"\\n\")\n\nTemperatura media más alta: 28.4 °C — Malambo \n\ncat(\"Temperatura media más baja:\", min(temp_media_estaciones), \"°C —\",\n    names(which.min(temp_media_estaciones)), \"\\n\")\n\nTemperatura media más baja: 26.9 °C — Sabanalarga \n\ncat(\"Estación más lluviosa:\", names(which.max(precip_total_estaciones)),\n    \"con\", max(precip_total_estaciones), \"mm/año\\n\")\n\nEstación más lluviosa: Sabanalarga con 1050 mm/año\n\ncat(\"Rango de precipitación:\", max(precip_total_estaciones) - min(precip_total_estaciones),\n    \"mm entre la más y la menos lluviosa\\n\")\n\nRango de precipitación: 175 mm entre la más y la menos lluviosa\n\n\n\n¿Por qué Sabanalarga recibe más lluvia que las estaciones costeras? ¿Qué factores geográficos explican esa diferencia?"
+  },
+  {
+    "objectID": "semanas/semana-1.html#visualización-básica-con-r-base",
+    "href": "semanas/semana-1.html#visualización-básica-con-r-base",
+    "title": "Semana 1 — Introducción a la Ciencia de Datos en R",
+    "section": "7. Visualización básica con R base",
+    "text": "7. Visualización básica con R base\nR base tiene funciones gráficas simples, útiles para exploración rápida. En la Semana 6 usaremos ggplot2 para gráficos publicables.\n\nGráfico de barras: precipitación mensual\n\nbarplot(\n  precip_mensual,\n  names.arg = meses,\n  main = \"Precipitación mensual promedio — Barranquilla (IDEAM)\",\n  xlab = \"Mes\",\n  ylab = \"Precipitación (mm)\",\n  col  = ifelse(precip_mensual &gt; 50, \"steelblue\", \"lightblue\"),\n  las  = 1   # etiquetas del eje x horizontales\n)\n# Línea de referencia en 50 mm:\nabline(h = 50, lty = 2, col = \"red\")\nlegend(\"topleft\",\n       legend = c(\"Mes lluvioso (&gt; 50 mm)\", \"Mes seco (≤ 50 mm)\", \"Umbral 50 mm\"),\n       fill   = c(\"steelblue\", \"lightblue\", NA),\n       lty    = c(NA, NA, 2),\n       col    = c(NA, NA, \"red\"),\n       border = c(\"black\", \"black\", NA),\n       bty    = \"n\", cex = 0.85)\n\n\n\n\nPrecipitación mensual promedio en Barranquilla (IDEAM). Los meses con más de 50 mm aparecen en azul oscuro.\n\n\n\n\n\n\nGráfico de línea: temperatura máxima mensual\n\nplot(\n  1:12, temp_max_mensual,\n  type = \"b\",\n  pch  = 16,\n  col  = \"firebrick\",\n  main = \"Temperatura máxima mensual — Barranquilla (IDEAM)\",\n  xlab = \"Mes\",\n  ylab = \"Temperatura (°C)\",\n  xaxt = \"n\",\n  ylim = c(30, 35)\n)\naxis(1, at = 1:12, labels = meses)\nabline(h = mean(temp_max_mensual), lty = 2, col = \"gray50\")\ntext(0.5, mean(temp_max_mensual) + 0.15,\n     paste(\"Media:\", round(mean(temp_max_mensual), 1), \"°C\"),\n     cex = 0.8, col = \"gray40\", adj = 0)\n\n\n\n\nTemperatura máxima mensual en Barranquilla (IDEAM). Nótese la variación relativamente pequeña (~2°C) a lo largo del año, característica del clima tropical."
+  },
+  {
+    "objectID": "semanas/semana-1.html#ejercicio-en-clase",
+    "href": "semanas/semana-1.html#ejercicio-en-clase",
+    "title": "Semana 1 — Introducción a la Ciencia de Datos en R",
+    "section": "8. Ejercicio en clase",
+    "text": "8. Ejercicio en clase\nTiempo: 10 minutos de trabajo independiente\nUsando los vectores precip_mensual y temp_max_mensual:\na) Calcula la precipitación total del primer semestre (meses 1–6) y del segundo (meses 7–12). ¿En cuál semestre llueve más?\nb) Crea un vector lógico que indique qué meses tienen temperatura máxima por encima del promedio anual. ¿Cuántos meses cumplen esa condición?\nc) Usando cat(), imprime una frase como: \"En sep cayeron 186.3 mm — el mes más lluvioso del año.\"\n\n\n\n\n\n\nPistas\n\n\n\n\n\n# a) Primer y segundo semestre:\nsum(precip_mensual[1:6])\nsum(precip_mensual[7:12])\n\n# b) Meses sobre el promedio:\ntemp_max_mensual &gt; mean(temp_max_mensual)\nsum(temp_max_mensual &gt; mean(temp_max_mensual))  # conteo de TRUEs\n\n# c) Mes más lluvioso:\nmes_max   &lt;- meses[which.max(precip_mensual)]\nvalor_max &lt;- max(precip_mensual)\ncat(\"En\", mes_max, \"cayeron\", valor_max, \"mm — el mes más lluvioso del año.\\n\")"
+  },
+  {
+    "objectID": "semanas/semana-1.html#cierre-de-sesión",
+    "href": "semanas/semana-1.html#cierre-de-sesión",
+    "title": "Semana 1 — Introducción a la Ciencia de Datos en R",
+    "section": "Cierre de sesión",
+    "text": "Cierre de sesión\n\n# Información del entorno de trabajo (reproducibilidad):\nsessionInfo()\n\nR version 4.5.3 (2026-03-11)\nPlatform: x86_64-pc-linux-gnu\nRunning under: Pop!_OS 22.04 LTS\n\nMatrix products: default\nBLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0 \nLAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0  LAPACK version 3.10.0\n\nlocale:\n [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              \n [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    \n [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   \n [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 \n [9] LC_ADDRESS=C               LC_TELEPHONE=C            \n[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       \n\ntime zone: America/Bogota\ntzcode source: system (glibc)\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nloaded via a namespace (and not attached):\n [1] htmlwidgets_1.6.4 compiler_4.5.3    fastmap_1.2.0     cli_3.6.5        \n [5] tools_4.5.3       htmltools_0.5.8.1 yaml_2.3.10       rmarkdown_2.29   \n [9] knitr_1.50        jsonlite_2.0.0    xfun_0.52         digest_0.6.37    \n[13] rlang_1.1.7       evaluate_1.0.4   \n\n\n\n\n\n\n\n\n\nPara la próxima clase (Semana 2)\n\n\n\n\nTema: Estructuras de datos — Data Frames y Listas. Bucles y condicionales.\nPreparación: Lee el Capítulo 10 de R Para Ciencia de Datos.\nEvaluación: Taller de lógica de programación (conocimiento)."
+  },
+  {
+    "objectID": "semanas/semana-1-taller.html",
+    "href": "semanas/semana-1-taller.html",
+    "title": "Taller Semana 1 — Tipos de datos y vectores en R",
+    "section": "",
+    "text": "Tipo de evidencia: Desempeño · Entregable: taller1_apellido_nombre.R · Plataforma: SICVI 567 — actividad “Taller 1”"
+  },
+  {
+    "objectID": "semanas/semana-1-taller.html#objetivos-del-taller",
+    "href": "semanas/semana-1-taller.html#objetivos-del-taller",
+    "title": "Taller Semana 1 — Tipos de datos y vectores en R",
+    "section": "Objetivos del taller",
+    "text": "Objetivos del taller\n\nAplicar los cinco tipos de datos fundamentales de R (numeric, integer, character, logical, factor) en un contexto climático real del Atlántico.\nConstruir vectores con datos de temperatura y precipitación, asignarles nombres y acceder a elementos por posición y nombre.\nUsar operaciones vectorizadas para responder preguntas ambientales concretas.\nProducir gráficas exploratorias con R base e interpretarlas en clave biológica."
+  },
+  {
+    "objectID": "semanas/semana-1-taller.html#contexto-biológico",
+    "href": "semanas/semana-1-taller.html#contexto-biológico",
+    "title": "Taller Semana 1 — Tipos de datos y vectores en R",
+    "section": "Contexto biológico",
+    "text": "Contexto biológico\nEl departamento del Atlántico presenta uno de los regímenes climáticos más particulares de Colombia: una marcada estacionalidad con dos periodos de lluvia (abril–mayo y agosto–noviembre) separados por el llamado “veranillo de San Juan” en julio, consecuencia de la migración de la Zona de Convergencia Intertropical (ZCIT). Esta variabilidad estacional controla directamente la disponibilidad de agua, la floración de plantas nativas y los ciclos reproductivos de aves acuáticas en ciénagas como las del Canal del Dique y la Ciénaga Grande de Santa Marta.\nComprender ese patrón climático desde datos históricos es el primer paso para conectar el clima con la biología de las especies de la región. En este taller trabajarás con registros de la estación Repelón (sur del Atlántico, municipio lacustre sobre el embalse del Guájaro), un ambiente diferente al costero de Barranquilla visto en clase."
+  },
+  {
+    "objectID": "semanas/semana-1-taller.html#dataset",
+    "href": "semanas/semana-1-taller.html#dataset",
+    "title": "Taller Semana 1 — Tipos de datos y vectores en R",
+    "section": "Dataset",
+    "text": "Dataset\nEl dataset ya está incluido en el script descargable. Ejecútalo completo para cargar los objetos en tu entorno antes de comenzar las actividades.\n\nset.seed(42)\n\nmeses &lt;- c(\"ene\", \"feb\", \"mar\", \"abr\", \"may\", \"jun\",\n           \"jul\", \"ago\", \"sep\", \"oct\", \"nov\", \"dic\")\n\n# Temperatura máxima mensual en Repelón (°C) — IDEAM\ntemp_max_repelón &lt;- c(35.2, 35.8, 36.4, 34.7, 33.1, 34.0,\n                      35.5, 33.8, 32.6, 32.1, 32.9, 34.6)\n\n# Precipitación mensual promedio en Repelón (mm) — IDEAM\nprecip_repelón &lt;- c(4.2, 1.5, 2.8, 45.6, 112.3, 98.7,\n                    60.4, 125.1, 198.6, 165.3, 72.1, 11.4)\n\nnames(temp_max_repelón) &lt;- meses\nnames(precip_repelón)   &lt;- meses"
+  },
+  {
+    "objectID": "semanas/semana-1-taller.html#parte-1-tipos-de-datos-y-exploración-inicial-estimado-25-minutos",
+    "href": "semanas/semana-1-taller.html#parte-1-tipos-de-datos-y-exploración-inicial-estimado-25-minutos",
+    "title": "Taller Semana 1 — Tipos de datos y vectores en R",
+    "section": "Parte 1: Tipos de datos y exploración inicial (estimado: 25 minutos)",
+    "text": "Parte 1: Tipos de datos y exploración inicial (estimado: 25 minutos)\nTrabaja en tu script .R descargable. Esta guía describe qué hacer en cada paso; el script tiene los espacios (___) donde escribir tu código.\n\n1.1 Verifica los tipos de datos\nUsa class(), is.numeric() e is.character() para explorar los vectores del dataset. Luego crea tres objetos adicionales que ilustren los tipos integer, logical y factor:\n\nUn entero con el número de años de registro de la estación (usa la letra L al final del número).\nUn lógico que indique si el embalse del Guájaro tiene influencia sobre el microclima local.\nUn factor con tipos de cobertura vegetal observados alrededor de la estación: \"herbazal\", \"matorral\", \"bosque seco\". Define también el nivel \"manglar\" aunque no aparezca en los datos.\n\n\n\n\n\n\n\nPista — factor()\n\n\n\nmi_factor &lt;- factor(\n  c(\"valor1\", \"valor2\", \"valor1\"),\n  levels = c(\"valor1\", \"valor2\", \"valor3\")  # incluye niveles posibles aunque estén vacíos\n)\n\n\nPreguntas de reflexión 1.1 — responde en tu script con comentarios #:\n\n¿Por qué es importante declarar el conteo de años como integer y no como numeric? ¿Tiene consecuencias prácticas en R?\nEl objeto cobertura tiene el nivel \"manglar\" aunque no aparece en los datos ingresados. ¿Por qué puede ser útil incluir niveles que aún no tienen observaciones en un estudio de vegetación?\n\n\n\n\n1.2 Estadísticas de resumen\nUsa cat() junto con min(), max(), mean(), sum(), range(), which.min() y which.max() para imprimir un resumen de temperatura y precipitación con el formato:\n=== TEMPERATURA MÁXIMA — Repelón (IDEAM) ===\nMínima mensual : X °C — mes\nMáxima mensual : X °C — mes\nMedia anual    : X °C\nRango          : X °C\nPreguntas de reflexión 1.2 — responde en tu script:\n\nLa temperatura máxima de Repelón en los meses secos supera los 35°C. ¿Qué consecuencias fisiológicas puede tener esto para anfibios o reptiles de la región?\nEl total de precipitación anual de Repelón ¿es mayor o menor que el de Barranquilla (922 mm)? ¿A qué factores lo atribuyes?"
+  },
+  {
+    "objectID": "semanas/semana-1-taller.html#parte-2-indexación-y-operaciones-vectorizadas-estimado-30-minutos",
+    "href": "semanas/semana-1-taller.html#parte-2-indexación-y-operaciones-vectorizadas-estimado-30-minutos",
+    "title": "Taller Semana 1 — Tipos de datos y vectores en R",
+    "section": "Parte 2: Indexación y operaciones vectorizadas (estimado: 30 minutos)",
+    "text": "Parte 2: Indexación y operaciones vectorizadas (estimado: 30 minutos)\n\n2.1 Acceso por posición y nombre\nExtrae los siguientes valores de los vectores (un resultado por línea de código):\n\nTemperatura de marzo (por posición).\nPrecipitación de septiembre (por nombre).\nTemperaturas del segundo semestre (posiciones 7 a 12).\nPrecipitaciones de los meses de transición: abril, mayo, agosto y septiembre (por nombre).\n\n\n\n2.2 Filtros lógicos vectorizados\nUsa vectores lógicos para responder:\n\n¿Qué meses tienen temperatura máxima mayor a 34°C?\n¿Cuántos meses tienen precipitación mayor a 80 mm?\n¿Qué meses combinan temperatura mayor a 34°C y precipitación menor a 20 mm? (usa el operador &)\n\nPreguntas de reflexión 2:\n\nEl filtro de “estrés hídrico” combina alta temperatura y baja precipitación. ¿Qué especie vegetal o animal del Atlántico crees que es más vulnerable durante esos meses y por qué?\n¿En qué semestre se concentran las lluvias en Repelón? Compara con Barranquilla (clase). ¿El patrón es el mismo?\nCambia el umbral de temperatura de &gt; 34 a &gt; 35. ¿Cuántos meses quedan? ¿Cómo cambia la interpretación biológica?\n\n\n\n2.3 Operaciones vectorizadas\nCalcula y muestra:\n\nLa anomalía de temperatura de cada mes respecto a la media anual (resta la media al vector completo).\nLa precipitación acumulada del primer y segundo semestre.\nLa precipitación convertida de mm a cm para los primeros 6 meses."
+  },
+  {
+    "objectID": "semanas/semana-1-taller.html#parte-3-visualización-con-r-base-estimado-35-minutos",
+    "href": "semanas/semana-1-taller.html#parte-3-visualización-con-r-base-estimado-35-minutos",
+    "title": "Taller Semana 1 — Tipos de datos y vectores en R",
+    "section": "Parte 3: Visualización con R base (estimado: 35 minutos)",
+    "text": "Parte 3: Visualización con R base (estimado: 35 minutos)\n\n3.1 Gráfico de barras — precipitación mensual\nConstruye un barplot() de la precipitación mensual en Repelón. Colorea en azul oscuro (\"#1d4ed8\") los meses que superan la media mensual de la estación y en azul claro (\"#bfdbfe\") los que no. Añade una línea punteada en la media y una leyenda.\n\n\n\n\n\n\nPista — umbral dinámico\n\n\n\nCalcula el umbral como umbral &lt;- mean(precip_repelón) y úsalo dentro de ifelse() para los colores y en abline() para la línea.\n\n\n\n\n3.2 Gráfico de línea — temperatura máxima mensual\nConstruye un plot() de tipo \"b\" con los 12 valores de temperatura. Añade el eje x con los nombres de los meses (axis()), una línea horizontal en la media anual y una etiqueta con el valor de la media (text()).\n\n\n3.3 Climograma simplificado (desafío)\nSuperpón precipitación (barras) y temperatura (línea) en un mismo gráfico usando un segundo eje vertical (axis(side = 4, ...)). Para escalar la temperatura al rango de la precipitación usa un factor de escala:\nfactor_escala &lt;- max(temp_max_repelón) / max(precip_repelón)\nModifica el gráfico final para que las barras del primer semestre (ene–jun) sean de un color y las del segundo (jul–dic) de otro. Actualiza la leyenda.\nPreguntas de reflexión 3:\n\nEn el climograma, identifica los periodos con baja precipitación y alta temperatura. ¿Cómo afecta esa combinación a los recursos hídricos para anfibios y plantas del sur del Atlántico?\nCompara la amplitud de variación de temperatura en Repelón (~4°C) con la de Barranquilla (~2°C). ¿Qué diferencia esperas en la diversidad de ectotérmicos entre ambos sitios?\n\n\n\n\n\n\n\n\nDetalles de entrega\n\n\n\n\nArchivo: taller1_apellido_nombre.R (ejemplo: taller1_fonseca_rodian.R)\nFormato: El script .R debe ejecutarse sin errores de principio a fin.\nPlataforma: SICVI 567 — sección “Taller 1: Tipos de datos y vectores en R”\nFecha límite: 14 de abril de 2026 — 11:59 p.m.\n\nRequisitos mínimos:\n\nTodos los ___ del script completados con código funcional.\nLos tres gráficos generados (barplot, lineplot, climograma).\nRespuestas a todas las preguntas de reflexión como comentarios # en el script."
+  },
+  {
+    "objectID": "proyecto.html",
+    "href": "proyecto.html",
+    "title": "Proyecto de Investigación con R",
+    "section": "",
+    "text": "Peso en la nota final: 50 % del total  ·  Análisis Exploratorio de Datos (20%): 20 de mayo de 2026  ·  Informe Final (30%): 15 de julio de 2026"
+  },
+  {
+    "objectID": "proyecto.html#descripción-general",
+    "href": "proyecto.html#descripción-general",
+    "title": "Proyecto de Investigación con R",
+    "section": "Descripción general",
+    "text": "Descripción general\nEl proyecto de aula es la evidencia principal de aprendizaje del curso. Su objetivo es demostrar que puedes aplicar de manera integrada las herramientas y los conceptos estadísticos trabajados durante el semestre para responder una pregunta biológica real a partir de datos propios o tomados de fuentes abiertas.\nEl proyecto se desarrolla en dos entregas:\n\n\n\n\n\n\n\n\nEntrega parcial\n\n\n\n📊 Análisis Exploratorio de Datos\nInforme de análisis exploratorio de datos (EDA). Demuestra que puedes importar, limpiar, explorar y visualizar un conjunto de datos.\n\nPeso: 20 %  ·  Fecha: 20 may 2026 (Semana 7)\n\n\n\n\n\n\n\n\n\n\n\n\nEntrega final\n\n\n\n🎯 Informe Final y Sustentación\nReporte completo en formato Quarto + sustentación oral. Incluye modelado estadístico y conclusiones ecológicas o biológicas fundamentadas.\n\nPeso: 30 %  ·  Fecha: 15 jul 2026 (Semana 15)\n\n\n\n\n\n\nEl informe final es una versión ampliada y mejorada del Análisis Exploratorio de Datos, no un trabajo diferente. Elige bien tu conjunto de datos desde el inicio."
+  },
+  {
+    "objectID": "proyecto.html#elección-del-conjunto-de-datos",
+    "href": "proyecto.html#elección-del-conjunto-de-datos",
+    "title": "Proyecto de Investigación con R",
+    "section": "Elección del conjunto de datos",
+    "text": "Elección del conjunto de datos\nLos datos deben ser reales, con al menos 50 observaciones y al menos 4 variables, mínimo una cualitativa y una cuantitativa.\n\n🌍 GBIF — Global Biodiversity Information Facility  Registros de ocurrencia de especies. Filtra por Colombia o el Caribe para mayor relevancia.\n🇨🇴 SiB Colombia  Sistema de Información sobre Biodiversidad de Colombia. Ideal para datos nacionales y regionales.\n🐠 OBIS — Ocean Biodiversity Information System  Datos de organismos marinos. Excelente para biodiversidad del Caribe colombiano.\n🌦️ IDEAM  Series de tiempo climatológicas e hidrológicas. Útil para análisis de asociación con biodiversidad.\n🔬 Dryad Data Repository  Datos asociados a artículos científicos publicados. Alta calidad y documentación.\n\n📁 Datos propios o de campo  Puedes usar datos de proyectos de semillero, trabajos de campo o investigaciones en curso. Consulta al docente si tienes dudas sobre si son adecuados.\n\n\n\n\n\n\n\n\nRecomendación\n\n\n\nElige un conjunto de datos que te genere una pregunta biológica genuina. Los mejores proyectos son los que surgen de curiosidad real, no los que solo buscan cumplir el requisito."
+  },
+  {
+    "objectID": "proyecto.html#estructura-del-informe",
+    "href": "proyecto.html#estructura-del-informe",
+    "title": "Proyecto de Investigación con R",
+    "section": "Estructura del informe",
+    "text": "Estructura del informe\nEl informe debe seguir la estructura de un artículo científico breve. Cada sección debe tener entre 2 y 3 párrafos. No es un trabajo extenso: la claridad y la precisión importan más que el volumen.\n\nPortada y metadatos\nEl documento Quarto debe incluir en el YAML:\n---\ntitle: \"Título descriptivo del análisis\"\nauthor: \"Nombre completo · C.C. xxxxxxxxxx\"\ndate: \"Fecha de entrega\"\nformat:\n  html:\n    toc: true\n    code-fold: true\n    self-contained: true\n---\n\n\n1. Introducción\nPresenta el contexto biológico o ecológico del problema. Describe de forma breve el sistema de estudio (especie, ecosistema, región) y justifica por qué es relevante analizarlo. Termina con una pregunta de investigación o hipótesis clara y explícita.\n\nEjemplo: ¿Existe una relación entre la precipitación mensual en el Atlántico y la riqueza de especies de aves registradas en GBIF entre 2010 y 2023?\n\n\n\n2. Métodos\nDescribe el origen de los datos (fuente, fecha de descarga, filtros aplicados), las variables utilizadas y el proceso de limpieza. Documenta las técnicas estadísticas aplicadas y justifica brevemente por qué son adecuadas para tu pregunta. Todo el código debe estar incluido en el documento con code-fold: true.\n\n\n3. Resultados\nPresenta los hallazgos con apoyo de al menos tres figuras de alta calidad producidas con ggplot2. Cada figura debe tener título, etiquetas de ejes y leyenda. Describe los patrones observados en texto, pero sin interpretarlos aún. Incluye al menos una tabla resumen producida con knitr::kable() o gt.\n\n\n4. Discusión\nInterpreta los resultados en el contexto biológico establecido en la introducción. Señala si la pregunta o hipótesis fue respondida y en qué sentido. Discute las limitaciones del análisis y sugiere pasos futuros o preguntas que surgen de los resultados.\n\n\n5. Conclusión\nUn párrafo conciso que sintetiza el hallazgo principal y su relevancia para la biología o la conservación del Caribe colombiano.\n\n\n6. Referencias\nLista las fuentes de datos y los artículos o libros citados en formato APA o Vancouver. Incluye la versión de R y los paquetes principales usando sessionInfo() o citation()."
+  },
+  {
+    "objectID": "proyecto.html#requisitos-técnicos",
+    "href": "proyecto.html#requisitos-técnicos",
+    "title": "Proyecto de Investigación con R",
+    "section": "Requisitos técnicos",
+    "text": "Requisitos técnicos\n\n\n\n\n\n\n\nRequisito\nDetalle\n\n\n\n\nFormato de entrega\nArchivo qmd + HTML renderizado (self-contained: true) subidos a SICVI 567\n\n\nReproducibilidad\nEl documento debe renderizarse sin errores ejecutando quarto render desde cero\n\n\nCódigo\nTodo el código R debe estar en el documento con code-fold: true. No se aceptan capturas de pantalla de código.\n\n\nDatos\nEl archivo de datos (.csv o similar) debe entregarse junto con el .qmd en una carpeta comprimida (.zip)\n\n\nTablas y figuras\nMínimo una tabla resumen producida con knitr::kable() o gt. Mínimo 3 figuras con ggplot2. Deben tener título, ejes etiquetados y leyenda cuando aplique.\n\n\nIdioma\nEspañol. Términos técnicos en inglés son aceptables cuando no tienen equivalente en español.\n\n\nExtensión\n2–3 párrafos por sección. Sin límite de código ni figuras."
+  },
+  {
+    "objectID": "proyecto.html#rúbrica-de-evaluación",
+    "href": "proyecto.html#rúbrica-de-evaluación",
+    "title": "Proyecto de Investigación con R",
+    "section": "Rúbrica de evaluación",
+    "text": "Rúbrica de evaluación\n\nProyecto: Análisis Exploratorio de Datos (20%)\n\n\n\n\n\n\n\n\n\n\nCriterio\nExcelente (4.5–5.0)\nSatisfactorio (3.0–4.4)\nInsuficiente (&lt; 3.0)\nPeso\n\n\n\n\nPregunta de investigación\nClara, específica y biológicamente relevante\nPresente pero vaga o poco contextualizada\nAusente o no tiene sentido biológico\n15%\n\n\nImportación y limpieza de datos\nPipeline reproducible, bien documentado, sin errores\nFunciona pero con pasos no explicados\nCódigo con errores o datos no procesados\n20%\n\n\nAnálisis exploratorio\nEstadísticas descriptivas completas y pertinentes\nEDA básico, faltan variables relevantes\nSolo se listan datos crudos sin exploración\n25%\n\n\nVisualizaciones\n≥ 3 figuras claras con ggplot2, bien etiquetadas\nFiguras presentes pero con problemas estéticos o de legibilidad\nMenos de 3 figuras o figuras no informativas\n25%\n\n\nReproducibilidad del documento\nRenderiza sin errores, código limpio y organizado\nRenderiza con advertencias menores\nNo renderiza o requiere intervención manual\n15%\n\n\n\n\n\nProyecto Final (30%)\n\n\n\n\n\n\n\n\n\n\nCriterio\nExcelente (4.5–5.0)\nSatisfactorio (3.0–4.4)\nInsuficiente (&lt; 3.0)\nPeso\n\n\n\n\nEstructura y escritura científica\nSecciones completas, redacción precisa, flujo lógico\nEstructura presente pero con secciones débiles\nSin estructura o redacción confusa\n15%\n\n\nAnálisis estadístico\nMétodo apropiado a la pregunta, bien aplicado e interpretado\nMétodo adecuado pero interpretación superficial\nMétodo inapropiado o resultados mal interpretados\n25%\n\n\nVisualizaciones\nFiguras publicables: informativas, estéticas, bien etiquetadas\nFiguras correctas pero con detalles mejorables\nFiguras ausentes, incorrectas o sin etiquetar\n20%\n\n\nDiscusión y conclusión\nInterpreta resultados con contexto biológico claro\nDiscusión presente pero sin profundidad\nSolo describe resultados sin interpretar\n20%\n\n\nReproducibilidad\nRenderiza desde cero, código comentado, datos incluidos\nReproducible con pasos adicionales menores\nNo reproducible sin intervención del autor\n10%\n\n\nSustentación oral\nDomina el análisis, responde preguntas con fundamento\nPresenta bien pero con dificultades ante preguntas\nNo puede explicar sus propios resultados\n10%"
+  },
+  {
+    "objectID": "proyecto.html#plantilla-de-inicio",
+    "href": "proyecto.html#plantilla-de-inicio",
+    "title": "Proyecto de Investigación con R",
+    "section": "Plantilla de inicio",
+    "text": "Plantilla de inicio\nDescarga esta plantilla para comenzar tu proyecto. Reemplaza el contenido de ejemplo con tu análisis real.\n\n\n\n\n\n\n📄 Estructura de la plantilla Quarto\n\n\n\nLa plantilla incluye el YAML configurado, las secciones con instrucciones comentadas, y ejemplos de código para carga de datos, tablas y figuras.\n⬇️ Descargar plantilla"
+  },
+  {
+    "objectID": "proyecto.html#preguntas-frecuentes",
+    "href": "proyecto.html#preguntas-frecuentes",
+    "title": "Proyecto de Investigación con R",
+    "section": "Preguntas frecuentes",
+    "text": "Preguntas frecuentes\n\n\n\n\n\n\n¿Puedo trabajar en pareja o grupo?\n\n\n\n\n\nNo. El proyecto es individual. Cada estudiante debe trabajar con su propio conjunto de datos y desarrollar su propio análisis. Se aceptan consultas entre compañeros, pero los documentos entregados deben ser originales.\n\n\n\n\n\n\n\n\n\n¿Qué pasa si no encuentro datos con suficientes observaciones?\n\n\n\n\n\nConsulta al docente antes de la semana 4. En SICVI 567 hay un listado de conjuntos de datos preaprobados que puedes usar si tienes dificultades para encontrar uno adecuado.\n\n\n\n\n\n\n\n\n\n¿Puedo cambiar mi conjunto de datos después de la primera entrega?\n\n\n\n\n\nNo se recomienda. El proyecto final es una extensión del de mitad. Cambiar los datos implicaría reiniciar el análisis, lo que no es viable a mitad de semestre.\n\n\n\n\n\n\n\n\n\n¿Qué técnicas estadísticas debo usar en el proyecto final?\n\n\n\n\n\nAl menos una técnica de modelado estadístico (regresión, GLM, modelo mixto, PCA u NMDS), además del EDA del Proyecto: Análisis Exploratorio de Datos. La elección debe estar justificada por la naturaleza de los datos y la pregunta de investigación.\n\n\n\n\n\n\n\n\n\n¿Cómo sé si mi análisis estadístico está bien aplicado?\n\n\n\n\n\nUsa el siguiente criterio: si puedes explicar por qué elegiste ese modelo, qué supuestos cumple con tus datos, y qué significan los coeficientes o estadísticos obtenidos, vas bien. Si solo corriste el código y pegaste el output, no está bien aplicado.\n\n\n\n\n\n\n\n\n\n¿Se descuenta por entregas tardías?\n\n\n\n\n\nSí. Se descuenta 0.5 puntos por cada día hábil de retraso, hasta un máximo de 5 días. Después de 5 días hábiles sin entrega, la nota es 0.0."
+  },
+  {
+    "objectID": "proyecto.html#cronograma-del-proyecto",
+    "href": "proyecto.html#cronograma-del-proyecto",
+    "title": "Proyecto de Investigación con R",
+    "section": "Cronograma del proyecto",
+    "text": "Cronograma del proyecto\n\n\n\n\n\n\n\nSemana 3 · 22 abr 2026\n\n\n\nDefinición del tema y datos\nElige tu conjunto de datos y formula una pregunta de investigación. Descarga los datos y verifica que sean adecuados. Consulta al docente si tienes dudas.\n\n\n\n\n\n\n\n\nSemana 5 · 6 may 2026\n\n\n\nAvance: importación y exploración inicial\nDebes tener los datos importados y limpios en R, con al menos una figura exploratoria. No se califica, pero es una fecha de revisión informal.\n\n\n\n\n\n\n\n\nSemana 7 · 20 may 2026 · ⭐ ENTREGA\n\n\n\nProyecto: Análisis Exploratorio de Datos — EDA (20%)\nEntrega el documento Quarto con el informe de análisis exploratorio completo. Subir a SICVI antes de las 11:59 PM.\n\n\n\n\n\n\n\n\nSemanas 8–11\n\n\n\nDesarrollo del análisis estadístico\nAplica las técnicas de inferencia, regresión y análisis multivariado vistas en clase a tu conjunto de datos.\n\n\n\n\n\n\n\n\nSemana 13 · 1 jul 2026\n\n\n\nAvance: análisis estadístico completo\nFecha de revisión informal. Debes tener el análisis estadístico principal terminado y las figuras listas.\n\n\n\n\n\n\n\n\nSemana 15 · 15 jul 2026 · 🎯 ENTREGA FINAL\n\n\n\nProyecto Final — Reporte Quarto + Sustentación (30%)\nEntrega el documento Quarto final a SICVI 567 antes de las 11:59 PM. La sustentación oral se realiza durante la clase de la semana 15."
+  },
+  {
+    "objectID": "material.html",
+    "href": "material.html",
+    "title": "Material del curso",
+    "section": "",
+    "text": "Nota\n\n\n\nEl material se publica cada semana antes de la clase del miércoles. Los archivos descargables corresponden a los scripts y guías oficiales del curso. La entrega de talleres se realiza exclusivamente por la plataforma SICVI."
+  },
+  {
+    "objectID": "material.html#recursos-generales-del-curso",
+    "href": "material.html#recursos-generales-del-curso",
+    "title": "Material del curso",
+    "section": "Recursos generales del curso",
+    "text": "Recursos generales del curso"
+  },
+  {
+    "objectID": "material.html#unidad-1-introducción-a-la-ciencia-de-datos-en-biología",
+    "href": "material.html#unidad-1-introducción-a-la-ciencia-de-datos-en-biología",
+    "title": "Material del curso",
+    "section": "Unidad 1 — Introducción a la Ciencia de Datos en Biología",
+    "text": "Unidad 1 — Introducción a la Ciencia de Datos en Biología\n\nSemana 1 · 8 de abril de 2026\nTema: Introducción a la Ciencia de Datos. Instalación de R/RStudio. Sintaxis básica y tipos de datos.\n\n\n\n\n\n\nPrimeros pasos con R — Clima del Atlántico colombiano\n\n\n\nIntroducción al lenguaje R usando datos climatológicos de estaciones IDEAM del departamento del Atlántico. Se trabajan tipos de datos, vectores, operaciones vectorizadas y visualización básica con R base.\n\n🌐 Ver clase en línea 🌐 Ver guía del taller ⬇️ Script del taller (.R) ⬇️ Dataset climatológico (.csv)\n\n\nEvaluación: Taller de introducción a R (desempeño) · Entrega por SICVI 567: nombre del archivo taller1_apellido_nombre.R\n\n\n\n\n\nSemana 2 · 15 de abril de 2026\nTema: Estructuras de datos (Data Frames, Listas) y Estructuras de control (bucles, condicionales).\n\n\n\n\n\n\nEstructuras de datos y control de flujo en R\n\n\n\nMaterial disponible próximamente.\n\n🌐 Ver clase en línea 🌐 Ver taller en línea\n\n\n\n\n\nSemana 3 · 22 de abril de 2026\nTema: Control de versiones con Git y GitHub. Investigación reproducible con Quarto.\n\n\n\n\n\n\nGit, GitHub y tu primer documento Quarto\n\n\n\nMaterial disponible próximamente.\n\n🌐 Ver clase en línea 🌐 Ver taller en línea"
+  },
+  {
+    "objectID": "material.html#unidad-2-manejo-y-visualización-de-datos",
+    "href": "material.html#unidad-2-manejo-y-visualización-de-datos",
+    "title": "Material del curso",
+    "section": "Unidad 2 — Manejo y Visualización de Datos",
+    "text": "Unidad 2 — Manejo y Visualización de Datos\n\nSemana 4 · 29 de abril de 2026\n\n\n\n\n\n\nImportación de datos con readr y manipulación con dplyr\n\n\n\nMaterial disponible próximamente.\n\n🌐 Ver clase en línea 🌐 Ver taller en línea\n\n\n\n\n\nSemana 5 · 6 de mayo de 2026\n\n\n\n\n\n\nDatos ordenados con tidyr\n\n\n\nMaterial disponible próximamente.\n\n🌐 Ver clase en línea 🌐 Ver taller en línea\n\n\n\n\n\nSemana 6 · 13 de mayo de 2026\n\n\n\n\n\n\nGramática de gráficos con ggplot2\n\n\n\nMaterial disponible próximamente.\n\n🌐 Ver clase en línea 🌐 Ver taller en línea\n\n\n\n\n\nSemana 7 · 20 de mayo de 2026 — ⭐ Proyecto: EDA\n\n\n\n\n\n\nVisualización avanzada + Proyecto: Análisis Exploratorio de Datos\n\n\n\nMaterial disponible próximamente.\n\n🌐 Ver clase en línea 🌐 Ver taller en línea"
+  },
+  {
+    "objectID": "material.html#unidad-3-análisis-estadístico-y-modelado",
+    "href": "material.html#unidad-3-análisis-estadístico-y-modelado",
+    "title": "Material del curso",
+    "section": "Unidad 3 — Análisis Estadístico y Modelado",
+    "text": "Unidad 3 — Análisis Estadístico y Modelado\n\nSemana 8 · 27 de mayo de 2026\n\n\n\n\n\n\nInferencia estadística en R: Pruebas T, ANOVA, Chi-cuadrado\n\n\n\nMaterial disponible a partir de mayo 2026.\n\n🌐 Ver clase en línea 🌐 Ver taller en línea\n\n\n\n\n\nSemana 9 · 3 de junio de 2026\n\n\n\n\n\n\nModelos lineales y regresión simple\n\n\n\nMaterial disponible a partir de mayo 2026.\n\n🌐 Ver clase en línea 🌐 Ver taller en línea\n\n\n\n\n\nSemana 10 · 10 de junio de 2026\n\n\n\n\n\n\nRegresión múltiple y selección de modelos\n\n\n\nMaterial disponible a partir de mayo 2026.\n\n🌐 Ver clase en línea 🌐 Ver taller en línea\n\n\n\n\n\nSemana 11 · 17 de junio de 2026\n\n\n\n\n\n\nAnálisis Multivariado: PCA y NMDS para datos ecológicos\n\n\n\nMaterial disponible a partir de junio 2026.\n\n🌐 Ver clase en línea 🌐 Ver taller en línea"
+  },
+  {
+    "objectID": "material.html#unidad-4-análisis-de-datos-biológicos-avanzado",
+    "href": "material.html#unidad-4-análisis-de-datos-biológicos-avanzado",
+    "title": "Material del curso",
+    "section": "Unidad 4 — Análisis de Datos Biológicos Avanzado",
+    "text": "Unidad 4 — Análisis de Datos Biológicos Avanzado\n\nSemana 12 · 24 de junio de 2026\n\n\n\n\n\n\nModelos Lineales Generalizados: GLM Poisson\n\n\n\nMaterial disponible a partir de junio 2026.\n\n🌐 Ver clase en línea 🌐 Ver taller en línea\n\n\n\n\n\nSemana 13 · 1 de julio de 2026\n\n\n\n\n\n\nModelos Lineales Generalizados: GLM Binomial\n\n\n\nMaterial disponible a partir de junio 2026.\n\n🌐 Ver clase en línea 🌐 Ver taller en línea\n\n\n\n\n\nSemana 14 · 8 de julio de 2026\n\n\n\n\n\n\nIntroducción a Modelos Mixtos (LMM/GLMM)\n\n\n\nMaterial disponible a partir de julio 2026.\n\n🌐 Ver clase en línea 🌐 Ver taller en línea\n\n\n\n\n\nSemana 15 · 15 de julio de 2026 — 🎯 Proyecto Final\n\n\n\n\n\n\nCasos de estudio y sustentación de proyectos finales\n\n\n\nMaterial disponible a partir de julio 2026.\n\n🌐 Ver clase en línea"
+  },
+  {
+    "objectID": "material.html#bibliografía-y-recursos-de-consulta",
+    "href": "material.html#bibliografía-y-recursos-de-consulta",
+    "title": "Material del curso",
+    "section": "Bibliografía y recursos de consulta",
+    "text": "Bibliografía y recursos de consulta\n\n\n\nRecurso\nTipo\nEnlace\n\n\n\n\nR for Data Science (2ª ed.)\nLibro principal\nr4ds.hadley.nz\n\n\nggplot2: Elegant Graphics\nVisualización\nggplot2-book.org\n\n\nR Graphics Cookbook\nRecetas gráficas\nr-graphics.org\n\n\nModern Statistics for Modern Biology\nEstadística biológica\nhuber.embl.de/msmb\n\n\nDocumentación Quarto\nReportes reproducibles\nquarto.org\n\n\nGBIF Colombia\nDatos de biodiversidad\ngbif.org\n\n\nSiB Colombia\nBiodiversidad nacional\nbiodiversidad.co\n\n\nPaquetes de R (CRAN)\nReferencia de funciones\nrdocumentation.org"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "ADBR - 20953",
+    "section": "",
+    "text": "Código 20953 · Período 2026-1\n\n\n\nFacultad de Ciencias Básicas · Programa de Biología\nUniversidad del Atlántico · Barranquilla, Colombia\n\n📅 Ver cronograma 📂 Material del curso"
+  },
+  {
+    "objectID": "index.html#descripción-del-curso",
+    "href": "index.html#descripción-del-curso",
+    "title": "ADBR - 20953",
+    "section": "Descripción del curso",
+    "text": "Descripción del curso\nEl curso Análisis de Datos Biológicos bajo Paquete Estadístico R es una asignatura teórico-práctica que introduce a los estudiantes de Biología en el manejo, análisis e interpretación de datos biológicos. A través del lenguaje de programación R y sus ecosistemas de paquetes, los estudiantes desarrollarán competencias en:\n\nGestión del ciclo de vida de los datos (importación, limpieza, transformación, análisis)\nVisualización efectiva de datos biológicos con ggplot2\nModelado estadístico (inferencia, regresión, GLM, modelos mixtos)\nAnálisis multivariado aplicado a la ecología (PCA, NMDS)\nReproducibilidad científica con Quarto y control de versiones con Git/GitHub\nUso responsable de datos regionales de biodiversidad del Caribe colombiano\n\nEl curso enfatiza el análisis de datos de la región Caribe colombiana, usando fuentes como IDEAM, SiB Colombia, GBIF y OBIS para conectar los métodos estadísticos con preguntas reales de biodiversidad, ecología y conservación del Atlántico."
+  },
+  {
+    "objectID": "index.html#información-del-curso",
+    "href": "index.html#información-del-curso",
+    "title": "ADBR - 20953",
+    "section": "Información del curso",
+    "text": "Información del curso\n\n\n\nCódigo\n20953\n\n\nFacultad\nCiencias Básicas\n\n\nPrograma\nBiología\n\n\nTipo\nTeórico-práctico · Presencial\n\n\nHoras semanales\n3h docente + 6h trabajo independiente\n\n\nDuración\n15 semanas (6 abr – 15 jul 2026)\n\n\nDía y hora de clase\nMiércoles, 12:30 PM\n\n\nPlataforma\nSICVI 567\n\n\nEscala de notas\n0.0 – 5.0 (aprobación: ≥ 3.0)"
+  },
+  {
+    "objectID": "index.html#evaluaciones",
+    "href": "index.html#evaluaciones",
+    "title": "ADBR - 20953",
+    "section": "Evaluaciones",
+    "text": "Evaluaciones\n\n\n\n\n\n\n\n\nComponente\nPeso\nDescripción\n\n\n\n\nTalleres semanales\n50%\nTalleres a lo largo del semestre\n\n\nProyecto: Análisis exploratorio de datos\n20%\nReporte de análisis exploratorio de datos\n\n\nProyecto: Informe final y presentación\n30%\nReporte final Quarto reproducible + Sustentación"
+  },
+  {
+    "objectID": "index.html#enlaces-de-interés",
+    "href": "index.html#enlaces-de-interés",
+    "title": "ADBR - 20953",
+    "section": "Enlaces de interés",
+    "text": "Enlaces de interés\n\n\n\nBibliografía principal\n\n📗 R for Data Science (2ª ed.) Wickham, Çetinkaya-Rundel & Grolemund · O’Reilly (gratis en línea)\n📙 ggplot2: Elegant Graphics for Data Analysis Wickham, Navarro & Pedersen · Springer (gratis en línea)\n📘 R Graphics Cookbook Chang · O’Reilly (gratis en línea)\n📕 Modern Statistics for Modern Biology Holmes & Huber · Cambridge (gratis en línea)\n📓 Documentación oficial de Quarto Posit · quarto.org\n\n\n\n\nDatos en biología\n\n🌍 GBIF — Global Biodiversity Information Facility  Registros de ocurrencia de especies a nivel mundial\n🇨🇴 SiB Colombia  Sistema de Información sobre Biodiversidad de Colombia\n🐠 OBIS — Ocean Biodiversity Information System  Datos marinos del Caribe colombiano y el mundo\n🌦️ IDEAM  Datos climatológicos e hidrológicos de Colombia\n🔬 Dryad Data Repository  Datos de artículos científicos publicados\n\n\n\n\n\n\n\nComunidades y ayuda en R\n\n💬 Stack Overflow [r]  Preguntas y respuestas de programación en R\n🤝 Posit Community  Foro oficial de RStudio y el ecosistema tidyverse\n📚 RDocumentation  Documentación de paquetes de R en línea\n\n\n\n\nPlataforma del curso\n\n📋 SICVI 567  Entrega de talleres y material del curso (enlace interno)\n📅 Cronograma completo  Las 15 semanas del semestre con fechas y evaluaciones"
+  }
+]

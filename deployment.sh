@@ -1,0 +1,1 @@
+rsync -avz _site/ rodian@162.243.90.210:/var/www/docencia/biologia/adbr

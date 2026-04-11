@@ -1,0 +1,75 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "Análisis de Datos Biológicos en R"
+  description: "Curso 20953 · Programa de Biología · Universidad del Atlántico"
+  favicon: "assets/favicon.png"
+
+  navbar:
+    logo: "assets/logo.png"
+    logo-alt: "ADBR"
+    title: false
+    background: primary
+    foreground: light
+    left:
+      - href: index.qmd
+        text: Inicio
+      - href: cronograma.qmd
+        text: Cronograma
+      - href: material.qmd
+        text: Material
+      - href: proyecto.qmd
+        text: Proyecto
+      - text: "Semanas"
+        menu:
+          - href: semanas/semana-1.qmd
+            text: "Semana 1 — Clase"
+          - href: semanas/semana-1-taller.qmd
+            text: "Semana 1 — Taller"
+      # - href: calificaciones.qmd
+      #   text: Calificaciones
+    # right:
+    #   - href: https://sicvi567.uniatlantico.edu.co/
+    #     text: SICVI
+        
+
+  sidebar: false
+
+  page-footer:
+    left: |
+      Curso 20953 · Análisis de Datos Biológicos bajo Paquete Estadístico R
+    center: |
+      Universidad del Atlántico · Facultad de Ciencias Básicas · Programa de Biología
+    right: |
+      Período 2026-1
+
+  open-graph: true
+
+format:
+  html:
+    theme:
+      - cosmo
+      - styles.scss
+    css: styles.css
+    toc: true
+    toc-depth: 3
+    toc-title: "En esta página"
+    number-sections: false
+    code-fold: true
+    code-tools: true
+    code-copy: true
+    highlight-style: a11y
+    link-external-newwindow: true
+    lang: es
+    grid:
+      sidebar-width: 0px
+      body-width: 900px
+      margin-width: 300px
+
+execute:
+  echo: true
+  warning: false
+  message: false
+  cache: false

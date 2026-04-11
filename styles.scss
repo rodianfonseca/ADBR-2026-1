@@ -1,0 +1,75 @@
+/*-- scss:defaults --*/
+
+// Colores institucionales — Universidad del Atlántico
+$primary:    #1a6e3c;
+$secondary:  #003f88;
+$success:    #2e9e5f;
+$warning:    #f5c542;
+$danger:     #dc3545;
+$info:       #1565c0;
+$light:      #f4f6f8;
+$dark:       #1a1a2e;
+
+// Tipografía
+$font-family-sans-serif: "Inter", system-ui, -apple-system, sans-serif;
+$font-size-root: 16px;
+$headings-font-weight: 700;
+
+// Navbar
+$navbar-bg: $primary;
+$navbar-fg: white;
+
+// Links
+$link-color: #1565c0;
+$link-hover-color: #0d47a1;
+
+// Código
+$code-bg: #f1f5f9;
+$code-color: #1a1a2e;
+
+/*-- scss:rules --*/
+
+// Importar fuente Inter desde sistema (disponible en navegadores modernos)
+// Si no está disponible usa el sistema
+
+.navbar-brand {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+// Encabezados con acento verde
+h2 {
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 0.4rem;
+  margin-top: 2rem;
+}
+
+// Callouts con estilo personalizado
+.callout {
+  border-radius: 8px;
+}
+
+// Tabla de contenidos
+#TOC {
+  border-left: 3px solid $primary;
+  padding-left: 1rem;
+
+  .active {
+    color: $primary;
+    font-weight: 600;
+  }
+}
+
+// Code output — menor prominencia
+pre.sourceCode {
+  border-radius: 6px;
+  font-size: 0.84rem;
+}
+
+// Footer
+.nav-footer {
+  border-top: 1px solid #e2e8f0;
+  padding: 1.2rem 0;
+  font-size: 0.82rem;
+  color: #6b7280;
+}

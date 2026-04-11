@@ -1,0 +1,278 @@
+---
+title: "Proyecto de Investigación con R"
+subtitle: "Curso 20953 · Análisis de Datos Biológicos en R · Período 2026-1"
+toc: true
+toc-depth: 3
+toc-title: "Contenido"
+code-fold: false
+code-tools: false
+---
+
+
+::: {.callout-tip icon=false appearance="simple"}
+**Peso en la nota final:** 50 % del total &nbsp;·&nbsp; **Análisis Exploratorio de Datos (20%):** 20 de mayo de 2026 &nbsp;·&nbsp; **Informe Final (30%):** 15 de julio de 2026
+:::
+
+---
+
+## Descripción general
+
+El proyecto de aula es la evidencia principal de aprendizaje del curso. Su objetivo es demostrar que puedes aplicar de manera integrada las herramientas y los conceptos estadísticos trabajados durante el semestre para responder una pregunta biológica real a partir de datos propios o tomados de fuentes abiertas.
+
+El proyecto se desarrolla en **dos entregas**:
+
+::: {.columns}
+::: {.column width="48%"}
+
+::::: {.callout-warning icon=false}
+## Entrega parcial
+
+📊 **Análisis Exploratorio de Datos**
+
+Informe de análisis exploratorio de datos (EDA). Demuestra que puedes importar, limpiar, explorar y visualizar un conjunto de datos.
+
+::: {.small .text-muted}
+**Peso:** 20 % &nbsp;·&nbsp; **Fecha:** 20 may 2026 (Semana 7)
+:::
+:::::
+
+:::
+::: {.column width="4%"}
+
+:::
+::: {.column width="48%"}
+
+::::: {.callout-tip icon=false}
+## Entrega final
+
+🎯 **Informe Final y Sustentación**
+
+Reporte completo en formato Quarto + sustentación oral. Incluye modelado estadístico y conclusiones ecológicas o biológicas fundamentadas.
+
+::: {.small .text-muted}
+**Peso:** 30 % &nbsp;·&nbsp; **Fecha:** 15 jul 2026 (Semana 15)
+:::
+:::::
+
+:::
+:::
+<!-- end columns -->
+
+
+El informe final **es una versión ampliada y mejorada del Análisis Exploratorio de Datos**, no un trabajo diferente. Elige bien tu conjunto de datos desde el inicio.
+
+---
+
+## Elección del conjunto de datos
+
+Los datos deben ser **reales**, con al menos **50 observaciones** y al menos **4 variables**, mínimo una cualitativa y una cuantitativa.
+
+::: {.list-group .my-3}
+
+[🌍 **GBIF — Global Biodiversity Information Facility** <br> [Registros de ocurrencia de especies. Filtra por Colombia o el Caribe para mayor relevancia.]{.small .text-muted}](https://www.gbif.org/){target="_blank" .list-group-item .list-group-item-action}
+
+[🇨🇴 **SiB Colombia** <br> [Sistema de Información sobre Biodiversidad de Colombia. Ideal para datos nacionales y regionales.]{.small .text-muted}](https://biodiversidad.co/){target="_blank" .list-group-item .list-group-item-action}
+
+[🐠 **OBIS — Ocean Biodiversity Information System** <br> [Datos de organismos marinos. Excelente para biodiversidad del Caribe colombiano.]{.small .text-muted}](https://obis.org/){target="_blank" .list-group-item .list-group-item-action}
+
+[🌦️ **IDEAM** <br> [Series de tiempo climatológicas e hidrológicas. Útil para análisis de asociación con biodiversidad.]{.small .text-muted}](https://www.ideam.gov.co/){target="_blank" .list-group-item .list-group-item-action}
+
+[🔬 **Dryad Data Repository** <br> [Datos asociados a artículos científicos publicados. Alta calidad y documentación.]{.small .text-muted}](https://datadryad.org/){target="_blank" .list-group-item .list-group-item-action}
+
+::: {.list-group-item}
+📁 **Datos propios o de campo** <br> [Puedes usar datos de proyectos de semillero, trabajos de campo o investigaciones en curso. Consulta al docente si tienes dudas sobre si son adecuados.]{.small .text-muted}
+:::
+
+:::
+
+::: {.callout-tip}
+## Recomendación
+Elige un conjunto de datos que te genere una pregunta biológica genuina. Los mejores proyectos son los que surgen de curiosidad real, no los que solo buscan cumplir el requisito.
+:::
+
+
+---
+
+## Estructura del informe
+
+El informe debe seguir la estructura de un artículo científico breve. **Cada sección debe tener entre 2 y 3 párrafos.** No es un trabajo extenso: la claridad y la precisión importan más que el volumen.
+
+### Portada y metadatos
+
+El documento Quarto debe incluir en el YAML:
+
+```yaml
+---
+title: "Título descriptivo del análisis"
+author: "Nombre completo · C.C. xxxxxxxxxx"
+date: "Fecha de entrega"
+format:
+  html:
+    toc: true
+    code-fold: true
+    self-contained: true
+---
+```
+
+### 1. Introducción
+
+Presenta el contexto biológico o ecológico del problema. Describe de forma breve el sistema de estudio (especie, ecosistema, región) y justifica por qué es relevante analizarlo. Termina con una **pregunta de investigación o hipótesis** clara y explícita.
+
+> Ejemplo: *¿Existe una relación entre la precipitación mensual en el Atlántico y la riqueza de especies de aves registradas en GBIF entre 2010 y 2023?*
+
+### 2. Métodos
+
+Describe el origen de los datos (fuente, fecha de descarga, filtros aplicados), las variables utilizadas y el proceso de limpieza. Documenta las técnicas estadísticas aplicadas y justifica brevemente por qué son adecuadas para tu pregunta. Todo el código debe estar incluido en el documento con `code-fold: true`.
+
+### 3. Resultados
+
+Presenta los hallazgos con apoyo de **al menos tres figuras de alta calidad** producidas con `ggplot2`. Cada figura debe tener título, etiquetas de ejes y leyenda. Describe los patrones observados en texto, pero sin interpretarlos aún. Incluye al menos una tabla resumen producida con `knitr::kable()` o `gt`.
+
+### 4. Discusión
+
+Interpreta los resultados en el contexto biológico establecido en la introducción. Señala si la pregunta o hipótesis fue respondida y en qué sentido. Discute las limitaciones del análisis y sugiere pasos futuros o preguntas que surgen de los resultados.
+
+### 5. Conclusión
+
+Un párrafo conciso que sintetiza el hallazgo principal y su relevancia para la biología o la conservación del Caribe colombiano.
+
+### 6. Referencias
+
+Lista las fuentes de datos y los artículos o libros citados en formato APA o Vancouver. Incluye la versión de R y los paquetes principales usando `sessionInfo()` o `citation()`.
+
+---
+
+## Requisitos técnicos
+
+| Requisito          | Detalle                                                                                                        |
+|--------------------|----------------------------------------------------------------------------------------------------------------|
+| Formato de entrega | Archivo `qmd` + HTML renderizado (`self-contained: true`) subidos a SICVI 567                                        |
+| Reproducibilidad   | El documento debe renderizarse sin errores ejecutando `quarto render` desde cero                                 |
+| Código             | Todo el código R debe estar en el documento con `code-fold: true`. No se aceptan capturas de pantalla de código. |
+| Datos              | El archivo de datos (`.csv` o similar) debe entregarse junto con el `.qmd` en una carpeta comprimida (`.zip`)        |
+| Tablas y figuras   | Mínimo una tabla resumen producida con `knitr::kable()` o `gt`. Mínimo 3 figuras con `ggplot2`. Deben tener título, ejes etiquetados y leyenda cuando aplique.                   |
+| Idioma             | Español. Términos técnicos en inglés son aceptables cuando no tienen equivalente en español.                   |
+| Extensión          | 2–3 párrafos por sección. Sin límite de código ni figuras.                                                     |
+
+---
+
+## Rúbrica de evaluación
+
+### Proyecto: Análisis Exploratorio de Datos (20%)
+
+| Criterio                        | Excelente (4.5–5.0)                                  | Satisfactorio (3.0–4.4)                                         | Insuficiente (< 3.0)                         | Peso |
+|---------------------------------|------------------------------------------------------|-----------------------------------------------------------------|----------------------------------------------|------|
+| Pregunta de investigación       | Clara, específica y biológicamente relevante         | Presente pero vaga o poco contextualizada                       | Ausente o no tiene sentido biológico         | 15%  |
+| Importación y limpieza de datos | Pipeline reproducible, bien documentado, sin errores | Funciona pero con pasos no explicados                           | Código con errores o datos no procesados     | 20%  |
+| Análisis exploratorio           | Estadísticas descriptivas completas y pertinentes    | EDA básico, faltan variables relevantes                         | Solo se listan datos crudos sin exploración  | 25%  |
+| Visualizaciones                 | ≥ 3 figuras claras con ggplot2, bien etiquetadas     | Figuras presentes pero con problemas estéticos o de legibilidad | Menos de 3 figuras o figuras no informativas | 25%  |
+| Reproducibilidad del documento  | Renderiza sin errores, código limpio y organizado    | Renderiza con advertencias menores                              | No renderiza o requiere intervención manual  | 15%  |
+
+### Proyecto Final (30%)
+
+| Criterio                          | Excelente (4.5–5.0)                                            | Satisfactorio (3.0–4.4)                            | Insuficiente (< 3.0)                              | Peso |
+|-----------------------------------|----------------------------------------------------------------|----------------------------------------------------|---------------------------------------------------|------|
+| Estructura y escritura científica | Secciones completas, redacción precisa, flujo lógico           | Estructura presente pero con secciones débiles     | Sin estructura o redacción confusa                | 15%  |
+| Análisis estadístico              | Método apropiado a la pregunta, bien aplicado e interpretado   | Método adecuado pero interpretación superficial    | Método inapropiado o resultados mal interpretados | 25%  |
+| Visualizaciones                   | Figuras publicables: informativas, estéticas, bien etiquetadas | Figuras correctas pero con detalles mejorables     | Figuras ausentes, incorrectas o sin etiquetar     | 20%  |
+| Discusión y conclusión            | Interpreta resultados con contexto biológico claro             | Discusión presente pero sin profundidad            | Solo describe resultados sin interpretar          | 20%  |
+| Reproducibilidad                  | Renderiza desde cero, código comentado, datos incluidos        | Reproducible con pasos adicionales menores         | No reproducible sin intervención del autor        | 10%  |
+| Sustentación oral                 | Domina el análisis, responde preguntas con fundamento          | Presenta bien pero con dificultades ante preguntas | No puede explicar sus propios resultados          | 10%  |
+
+---
+
+## Plantilla de inicio
+
+Descarga esta plantilla para comenzar tu proyecto. Reemplaza el contenido de ejemplo con tu análisis real.
+
+::: {.callout-tip icon=false}
+## 📄 Estructura de la plantilla Quarto
+
+La plantilla incluye el YAML configurado, las secciones con instrucciones comentadas, y ejemplos de código para carga de datos, tablas y figuras.
+
+[⬇️ Descargar plantilla](../cursos/20953/material/semana-1/script-clase-semana1.R){.btn .btn-outline-success .btn-sm .mt-2 role="button"}
+:::
+
+---
+
+## Preguntas frecuentes
+
+::: {.callout-note collapse="true"}
+### ¿Puedo trabajar en pareja o grupo?
+
+No. El proyecto es **individual**. Cada estudiante debe trabajar con su propio conjunto de datos y desarrollar su propio análisis. Se aceptan consultas entre compañeros, pero los documentos entregados deben ser originales.
+:::
+
+::: {.callout-note collapse="true"}
+### ¿Qué pasa si no encuentro datos con suficientes observaciones?
+
+Consulta al docente **antes de la semana 4**. En SICVI 567 hay un listado de conjuntos de datos preaprobados que puedes usar si tienes dificultades para encontrar uno adecuado.
+:::
+
+::: {.callout-note collapse="true"}
+### ¿Puedo cambiar mi conjunto de datos después de la primera entrega?
+
+No se recomienda. El proyecto final es una extensión del de mitad. Cambiar los datos implicaría reiniciar el análisis, lo que no es viable a mitad de semestre.
+:::
+
+::: {.callout-note collapse="true"}
+### ¿Qué técnicas estadísticas debo usar en el proyecto final?
+
+Al menos una técnica de modelado estadístico (regresión, GLM, modelo mixto, PCA u NMDS), además del EDA del Proyecto: Análisis Exploratorio de Datos. La elección debe estar justificada por la naturaleza de los datos y la pregunta de investigación.
+:::
+
+::: {.callout-note collapse="true"}
+### ¿Cómo sé si mi análisis estadístico está bien aplicado?
+
+Usa el siguiente criterio: si puedes explicar **por qué** elegiste ese modelo, **qué supuestos** cumple con tus datos, y **qué significan** los coeficientes o estadísticos obtenidos, vas bien. Si solo corriste el código y pegaste el output, no está bien aplicado.
+:::
+
+::: {.callout-note collapse="true"}
+### ¿Se descuenta por entregas tardías?
+
+Sí. Se descuenta **0.5 puntos por cada día hábil de retraso**, hasta un máximo de 5 días. Después de 5 días hábiles sin entrega, la nota es 0.0.
+:::
+
+---
+
+## Cronograma del proyecto
+
+::: {.small}
+
+::: {.callout-tip icon=false .mb-3}
+## Semana 3 · 22 abr 2026
+#### Definición del tema y datos
+Elige tu conjunto de datos y formula una pregunta de investigación. Descarga los datos y verifica que sean adecuados. Consulta al docente si tienes dudas.
+:::
+
+::: {.callout-tip icon=false .mb-3}
+## Semana 5 · 6 may 2026
+#### Avance: importación y exploración inicial
+Debes tener los datos importados y limpios en R, con al menos una figura exploratoria. No se califica, pero es una fecha de revisión informal.
+:::
+
+::: {.callout-warning icon=false .mb-3}
+## Semana 7 · 20 may 2026 · ⭐ ENTREGA
+#### Proyecto: Análisis Exploratorio de Datos — EDA (20%)
+Entrega el documento Quarto con el informe de análisis exploratorio completo. Subir a SICVI antes de las 11:59 PM.
+:::
+
+::: {.callout-tip icon=false .mb-3}
+## Semanas 8–11
+#### Desarrollo del análisis estadístico
+Aplica las técnicas de inferencia, regresión y análisis multivariado vistas en clase a tu conjunto de datos.
+:::
+
+::: {.callout-tip icon=false .mb-3}
+## Semana 13 · 1 jul 2026
+#### Avance: análisis estadístico completo
+Fecha de revisión informal. Debes tener el análisis estadístico principal terminado y las figuras listas.
+:::
+
+::: {.callout-important icon=false .mb-3}
+## Semana 15 · 15 jul 2026 · 🎯 ENTREGA FINAL
+#### Proyecto Final — Reporte Quarto + Sustentación (30%)
+Entrega el documento Quarto final a SICVI 567 antes de las 11:59 PM. La sustentación oral se realiza durante la clase de la semana 15.
+:::
+
+:::

@@ -1,0 +1,314 @@
+---
+title: "Consulta de calificaciones"
+subtitle: "Curso 20953 · Análisis de Datos Biológicos en R · Período 2026-1"
+toc: false
+code-tools: false
+code-fold: false
+format:
+  html:
+    include-after-body:
+      text: |
+        <script>
+        // ============================================================
+        // Sistema de consulta de calificaciones — Curso 20953
+        // ============================================================
+
+        const NOTAS_URL = "datos/notas.json";
+
+        const COLS_TALLERES = ["S1","S2","S3","S4","S5","S6","S8","S9","S10","S11","S12","S13","S14"];
+        const COL_PM = "PM";
+        const COL_PF = "PF";
+
+        let datosNotas = null;
+
+        window.addEventListener("load", function() {
+          fetch(NOTAS_URL)
+            .then(resp => {
+              if (!resp.ok) throw new Error("No se pudo cargar el archivo de notas.");
+              return resp.json();
+            })
+            .then(data => {
+              datosNotas = data;
+            })
+            .catch(err => {
+              console.error("Error al cargar notas:", err);
+            });
+
+          document.getElementById("input-cedula").addEventListener("keypress", function(e) {
+            if (e.key === "Enter") buscarNotas();
+          });
+        });
+
+        function buscarNotas() {
+          const cedula = document.getElementById("input-cedula").value.trim();
+          const errorDiv = document.getElementById("mensaje-error");
+          const resultadoDiv = document.getElementById("resultado-notas");
+
+          if (!cedula || cedula.length < 7) {
+            mostrarError("Por favor ingresa un número de documento válido (mínimo 7 dígitos).");
+            resultadoDiv.style.display = "none";
+            return;
+          }
+
+          errorDiv.style.display = "none";
+
+          if (!datosNotas) {
+            mostrarError("Los datos de calificaciones no están disponibles. Intenta recargar la página.");
+            return;
+          }
+
+          const estudiante = datosNotas.estudiantes.find(e => e.documento === cedula);
+
+          if (!estudiante) {
+            mostrarError("No se encontró un estudiante con ese número de documento. Verifica que hayas ingresado el número correctamente (sin puntos ni espacios).");
+            resultadoDiv.style.display = "none";
+            return;
+          }
+
+          renderizarResultado(estudiante, datosNotas);
+        }
+
+        function mostrarError(msg) {
+          const errorDiv = document.getElementById("mensaje-error");
+          errorDiv.textContent = msg;
+          errorDiv.style.display = "block";
+        }
+
+        function formatearNota(valor) {
+          if (valor === null || valor === undefined) {
+            return '<span class="nota-pendiente">Pendiente</span>';
+          }
+          const n = parseFloat(valor);
+          if (isNaN(n)) return '<span class="nota-pendiente">\u2014</span>';
+          let clase = "nota-verde";
+          if (n < 2.5) clase = "nota-rojo";
+          else if (n < 3.0) clase = "nota-amarillo";
+          return '<span class="' + clase + '">' + n.toFixed(1) + '</span>';
+        }
+
+        function calcularPromedioTalleres(notas) {
+          const vals = COLS_TALLERES.map(col => notas[col] !== null ? parseFloat(notas[col]) : 0.0);
+          const suma = vals.reduce((a, b) => a + b, 0);
+          return suma / vals.length;
+        }
+
+        function calcularNotaFinal(notas) {
+          const promT = calcularPromedioTalleres(notas);
+          const pm = notas[COL_PM] !== null ? parseFloat(notas[COL_PM]) : null;
+          const pf = notas[COL_PF] !== null ? parseFloat(notas[COL_PF]) : null;
+
+          const hayNotas = COLS_TALLERES.concat([COL_PM, COL_PF]).some(function(c) { return notas[c] !== null; });
+          if (!hayNotas) return null;
+
+          const pmVal = pm !== null ? pm : 0.0;
+          const pfVal = pf !== null ? pf : 0.0;
+          return (promT * 0.50) + (pmVal * 0.20) + (pfVal * 0.30);
+        }
+
+        function claseAlerta(nota) {
+          if (nota === null) return "";
+          if (nota >= 3.0) return "alerta-verde";
+          if (nota >= 2.5) return "alerta-amarillo";
+          return "alerta-rojo";
+        }
+
+        function iconoAlerta(nota) {
+          if (nota === null) return "\uD83D\uDCCA";
+          if (nota >= 3.0) return "\u2705";
+          if (nota >= 2.5) return "\u26A0\uFE0F";
+          return "\u274C";
+        }
+
+        function renderizarResultado(estudiante, datos) {
+          var resultadoDiv = document.getElementById("resultado-notas");
+          var notas = estudiante.notas;
+          var retro = estudiante.retroalimentacion;
+          var evNames = datos.evaluaciones;
+
+          var promTalleres = calcularPromedioTalleres(notas);
+          var notaFinal = calcularNotaFinal(notas);
+          var alerta = claseAlerta(notaFinal);
+
+          var filasT = "";
+          COLS_TALLERES.forEach(function(col) {
+            var r = (retro && retro[col]) ? retro[col] : "";
+            var retroHTML = r ? '<div class="retroalimentacion-box">\uD83D\uDCAC ' + r + '</div>' : "";
+            filasT += '<tr>' +
+              '<td style="text-align:left;"><strong>' + col + '</strong> \u2014 <span style="color:#6b7280;font-size:0.85rem;">' + (evNames[col] || col) + '</span></td>' +
+              '<td style="text-align:center;">' + formatearNota(notas[col]) + '</td>' +
+              '</tr>';
+            if (r) {
+              filasT += '<tr><td colspan="2" style="padding:0.3rem 0.8rem 0.8rem 2rem;">' + retroHTML + '</td></tr>';
+            }
+          });
+
+          var retroPM = (retro && retro[COL_PM]) ? '<div class="retroalimentacion-box">\uD83D\uDCAC ' + retro[COL_PM] + '</div>' : "";
+          var retroPF = (retro && retro[COL_PF]) ? '<div class="retroalimentacion-box">\uD83D\uDCAC ' + retro[COL_PF] + '</div>' : "";
+
+          var notaFinalDisplay = notaFinal !== null
+            ? '<span class="' + claseAlerta(notaFinal) + '" style="font-size:1.8rem;font-weight:800;">' + notaFinal.toFixed(2) + '</span>'
+            : '<span style="color:#9ca3af;font-size:1.3rem;font-style:italic;">Pendiente</span>';
+
+          var estadoMsg;
+          if (notaFinal !== null) {
+            if (notaFinal >= 3.0) {
+              estadoMsg = '<span style="color:#065f46;">Aprobando \u2014 nota proyectada con evaluaciones actuales</span>';
+            } else if (notaFinal >= 2.5) {
+              estadoMsg = '<span style="color:#92400e;">En riesgo de reprobar \u2014 consulta al docente</span>';
+            } else {
+              estadoMsg = '<span style="color:#991b1b;">Reprobando actualmente \u2014 se requiere mejora</span>';
+            }
+          } else {
+            estadoMsg = '<span style="color:#6b7280;">Sin evaluaciones registradas a\xFAn</span>';
+          }
+
+          var html = '<div class="resultado-header ' + alerta + '" style="margin-top:2rem;">' +
+            '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;">' +
+              '<div>' +
+                '<div style="font-size:0.78rem;opacity:0.8;text-transform:uppercase;letter-spacing:0.08em;">Estudiante</div>' +
+                '<div style="font-size:1.1rem;font-weight:700;">' + estudiante.nombre + '</div>' +
+                '<div style="font-size:0.82rem;opacity:0.85;">C.C. ' + estudiante.documento + '</div>' +
+              '</div>' +
+              '<div style="text-align:right;">' +
+                '<div style="font-size:0.78rem;opacity:0.8;text-transform:uppercase;letter-spacing:0.08em;">Nota proyectada</div>' +
+                notaFinalDisplay +
+                '<div style="font-size:0.8rem;margin-top:0.2rem;">' + iconoAlerta(notaFinal) + ' ' + estadoMsg + '</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+
+          '<div class="resultado-body">' +
+
+            '<div style="padding:1rem 1.5rem;background:#f8fafc;border-bottom:1px solid #e2e8f0;display:flex;gap:2rem;flex-wrap:wrap;">' +
+              '<div style="text-align:center;">' +
+                '<div style="font-size:0.75rem;color:#6b7280;text-transform:uppercase;letter-spacing:0.06em;">Promedio talleres</div>' +
+                '<div style="font-size:1.4rem;font-weight:700;">' + formatearNota(promTalleres) + '</div>' +
+                '<div style="font-size:0.7rem;color:#9ca3af;">Peso: 50%</div>' +
+              '</div>' +
+              '<div style="text-align:center;">' +
+                '<div style="font-size:0.75rem;color:#6b7280;text-transform:uppercase;letter-spacing:0.06em;">Proyecto mitad</div>' +
+                '<div style="font-size:1.4rem;font-weight:700;">' + formatearNota(notas[COL_PM]) + '</div>' +
+                '<div style="font-size:0.7rem;color:#9ca3af;">Peso: 20%</div>' +
+              '</div>' +
+              '<div style="text-align:center;">' +
+                '<div style="font-size:0.75rem;color:#6b7280;text-transform:uppercase;letter-spacing:0.06em;">Proyecto final</div>' +
+                '<div style="font-size:1.4rem;font-weight:700;">' + formatearNota(notas[COL_PF]) + '</div>' +
+                '<div style="font-size:0.7rem;color:#9ca3af;">Peso: 30%</div>' +
+              '</div>' +
+            '</div>' +
+
+            '<div style="padding:1.2rem 1.5rem;">' +
+              '<h5 style="color:#1a6e3c;margin-bottom:0.8rem;">Talleres semanales (50%)</h5>' +
+              '<table style="width:100%;border-collapse:collapse;font-size:0.9rem;">' +
+                '<thead><tr>' +
+                  '<th style="text-align:left;padding:0.5rem 0.7rem;background:#f1f5f9;border-bottom:2px solid #e2e8f0;">Evaluaci\xF3n</th>' +
+                  '<th style="text-align:center;padding:0.5rem 0.7rem;background:#f1f5f9;border-bottom:2px solid #e2e8f0;width:90px;">Nota</th>' +
+                '</tr></thead>' +
+                '<tbody>' +
+                  filasT +
+                  '<tr style="border-top:2px solid #e2e8f0;background:#f8fafc;">' +
+                    '<td style="text-align:left;padding:0.6rem 0.7rem;font-weight:700;">Promedio talleres</td>' +
+                    '<td style="text-align:center;font-weight:700;">' + formatearNota(promTalleres) + '</td>' +
+                  '</tr>' +
+                '</tbody>' +
+              '</table>' +
+            '</div>' +
+
+            '<div style="padding:0 1.5rem 1.2rem 1.5rem;border-top:1px solid #e2e8f0;">' +
+              '<h5 style="color:#1a6e3c;margin:1rem 0 0.8rem 0;">Proyecto: Análisis Exploratorio de Datos de Semestre (20%) \u2014 Semana 7</h5>' +
+              '<table style="width:100%;border-collapse:collapse;font-size:0.9rem;"><tbody>' +
+                '<tr>' +
+                  '<td style="padding:0.5rem 0.7rem;text-align:left;"><strong>PM</strong> \u2014 An\xE1lisis Exploratorio de Datos</td>' +
+                  '<td style="padding:0.5rem 0.7rem;text-align:center;width:90px;">' + formatearNota(notas[COL_PM]) + '</td>' +
+                '</tr>' +
+                (retroPM ? '<tr><td colspan="2" style="padding:0.3rem 0.8rem 0.8rem 2rem;">' + retroPM + '</td></tr>' : '') +
+              '</tbody></table>' +
+            '</div>' +
+
+            '<div style="padding:0 1.5rem 1.5rem 1.5rem;border-top:1px solid #e2e8f0;">' +
+              '<h5 style="color:#1a6e3c;margin:1rem 0 0.8rem 0;">Proyecto Final (30%) \u2014 Semana 15</h5>' +
+              '<table style="width:100%;border-collapse:collapse;font-size:0.9rem;"><tbody>' +
+                '<tr>' +
+                  '<td style="padding:0.5rem 0.7rem;text-align:left;"><strong>PF</strong> \u2014 Reporte Quarto + Sustentaci\xF3n</td>' +
+                  '<td style="padding:0.5rem 0.7rem;text-align:center;width:90px;">' + formatearNota(notas[COL_PF]) + '</td>' +
+                '</tr>' +
+                (retroPF ? '<tr><td colspan="2" style="padding:0.3rem 0.8rem 0.8rem 2rem;">' + retroPF + '</td></tr>' : '') +
+              '</tbody></table>' +
+            '</div>' +
+
+            '<div style="padding:1rem 1.5rem;background:#f0fdf4;border-top:1px solid #a7f3d0;font-size:0.85rem;">' +
+              '<strong>F\xF3rmula:</strong> ' +
+              'Nota Final = (Prom. Talleres \xD7 0.50) + (PM \xD7 0.20) + (PF \xD7 0.30)' +
+              '<span style="color:#6b7280;margin-left:1rem;">\u00DAltima actualizaci\xF3n: ' + datos.actualizado + '</span>' +
+            '</div>' +
+
+          '</div>';
+
+          resultadoDiv.innerHTML = html;
+          resultadoDiv.style.display = "block";
+          resultadoDiv.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+        </script>
+---
+
+```{=html}
+<div style="background:#eff6ff; border-left:4px solid #3b82f6; border-radius:0 8px 8px 0; padding:0.9rem 1.3rem; margin-bottom:1.5rem; font-size:0.92rem;">
+  <strong>Privacidad:</strong> Ingresa tu número de cédula para consultar únicamente tus calificaciones.
+  Las notas se actualizan después de cada evaluación.
+  Para aclaraciones, contacta al docente a través de SICVI 567.
+</div>
+
+<!-- Formulario de búsqueda -->
+<div class="form-busqueda">
+  <h3>🔍 Buscar mis notas</h3>
+  <label for="input-cedula" style="font-size:0.9rem; font-weight:600; color:#374151;">
+    Número de documento (cédula):
+  </label>
+  <input type="text"
+         id="input-cedula"
+         placeholder="Ej: 1010124907"
+         maxlength="12"
+         inputmode="numeric"
+         autocomplete="off">
+  <button class="btn-buscar" onclick="buscarNotas()">
+    Consultar calificaciones
+  </button>
+  <div id="mensaje-error" style="display:none; color:#dc2626; font-size:0.88rem; margin-top:0.6rem; padding:0.5rem; background:#fef2f2; border-radius:4px;"></div>
+</div>
+
+<!-- Resultado -->
+<div id="resultado-notas" style="display:none;"></div>
+
+<!-- Sección de fórmula y leyenda -->
+<div style="max-width:700px; margin:3rem auto 0 auto;">
+  <h3>📋 Escala de calificación</h3>
+  <table class="table table-sm table-bordered">
+    <thead class="table-secondary">
+      <tr><th>Componente</th><th>Peso</th><th>Evaluaciones incluidas</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Talleres semanales</td><td><strong>50%</strong></td><td>S1–S6, S8–S14 (14 talleres)</td></tr>
+      <tr><td>Proyecto - Análisis Exploratorio de Datos</td><td><strong>20%</strong></td><td>PM (semana 7)</td></tr>
+      <tr><td>Proyecto - Final</td><td><strong>30%</strong></td><td>PF (semana 15)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>🚦 Alertas académicas</h3>
+  <div style="display:flex; gap:0.8rem; flex-wrap:wrap;">
+    <div style="background:#d1fae5; border-radius:6px; padding:0.6rem 1rem; font-size:0.88rem; font-weight:600; color:#065f46;">
+      ✅ Aprobado: ≥ 3.0
+    </div>
+    <div style="background:#fef3c7; border-radius:6px; padding:0.6rem 1rem; font-size:0.88rem; font-weight:600; color:#92400e;">
+      ⚠️ En riesgo: 2.5 – 2.9
+    </div>
+    <div style="background:#fee2e2; border-radius:6px; padding:0.6rem 1rem; font-size:0.88rem; font-weight:600; color:#991b1b;">
+      ❌ Reprobado: &lt; 2.5
+    </div>
+  </div>
+
+  <p style="font-size:0.82rem; color:#6b7280; margin-top:1rem;">
+    <strong>NE</strong> = No Entregado (equivale a 0.0 en el cálculo).
+    Las notas se muestran en escala 0.0–5.0. Aprobación: nota final ≥ 3.0.
+  </p>
+</div>
+```

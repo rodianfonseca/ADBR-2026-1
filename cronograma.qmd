@@ -1,0 +1,113 @@
+---
+title: "Cronograma del curso"
+subtitle: "20953 · Análisis de Datos Biológicos en R · Período 2026-1"
+toc: true
+toc-depth: 2
+---
+
+::: {.callout-tip icon=false appearance="minimal"}
+**Período:** 6 de abril – 15 de julio de 2026 · **Día de clase:** Miércoles, 12:30 PM · **Total:** 15 semanas
+:::
+
+------------------------------------------------------------------------
+
+## Unidad 1 — Introducción a la Ciencia de Datos en Biología {#unidad-1}
+
+::: {.callout-note}
+## Resultado de Aprendizaje
+Utiliza herramientas computacionales (R, RStudio, Git) y flujos de trabajo reproducibles para la gestión inicial de proyectos de ciencia de datos.
+:::
+
+| Sem. | Fecha | Contenido | Estrategia | Trabajo independiente | Evaluación |
+|------|-------|-----------|------------|-----------------------|------------|
+| **1** | 8 abr 2026 | Introducción a la Ciencia de Datos. Instalación de R/RStudio. Sintaxis básica y tipos de datos. | Magistral · 🖥️ Live coding | Instalación de software, ejercicios de sintaxis | Taller de introducción a R |
+| **2** | 15 abr 2026 | Estructuras de datos (Data Frames, Listas) y Estructuras de control (bucles, condicionales). | Magistral · Aprendizaje activo | Tareas autodirigidas, lecturas independientes | Taller de lógica de programación |
+| **3** | 22 abr 2026 | Control de versiones con Git y GitHub. Investigación reproducible con Quarto. | Magistral · 🖥️ Live coding | Creación de repositorio, estudio dirigido | Taller de Git y Quarto |
+
+------------------------------------------------------------------------
+
+## Unidad 2 — Manejo y Visualización de Datos {#unidad-2}
+
+::: {.callout-note}
+## Resultado de Aprendizaje
+Transforma y visualiza datos biológicos complejos utilizando el ecosistema Tidyverse para revelar patrones y tendencias.
+:::
+
+
+| Sem. | Fecha | Contenido | Estrategia | Trabajo independiente | Evaluación |
+|------|-------|-----------|------------|-----------------------|------------|
+| **4** | 29 abr 2026 | Importación de datos (readr, readxl). El ecosistema Tidyverse: dplyr. | Magistral · ABP | Lecturas independientes, ejercicios con dplyr | Taller de manipulación de datos |
+| **5** | 6 may 2026 | Manipulación de datos con tidyr. Limpieza y transformación de datos biológicos. | Magistral · 🖥️ Live coding | Tareas autodirigidas | Taller de datos ordenados |
+| **6** | 13 may 2026 | Gramática de gráficos con ggplot2. | Magistral · 🖥️ Live coding | Estudio dirigido, creación de gráficos | Taller de visualización básica |
+| **7 ⭐** | **20 may 2026** | Visualización avanzada: gráficos interactivos y mapas básicos. Tablas con gt. | Magistral · Aprendizaje activo | Propuestas de solución | Taller de visualización avanzada. **Proyecto: Análisis Exploratorio de Datos** |
+
+------------------------------------------------------------------------
+
+## Unidad 3 — Análisis Estadístico y Modelado {#unidad-3}
+
+::: {.callout-note}
+## Resultado de Aprendizaje
+Aplica modelos estadísticos inferenciales y multivariados para probar hipótesis en contextos biológicos.
+:::
+
+
+| Sem. | Fecha | Contenido | Estrategia | Trabajo independiente | Evaluación |
+|------|-------|-----------|------------|-----------------------|------------|
+| **8** | 27 may 2026 | Repaso de inferencia estadística en R (Pruebas T, ANOVA, Chi-cuadrado). | Magistral · Estudios de Casos | Lecturas independientes | Taller de inferencia estadística |
+| **9** | 3 jun 2026 | Modelos lineales y regresión simple. | Magistral · 🖥️ Live coding | Tareas autodirigidas | Taller de regresión |
+| **10** | 10 jun 2026 | Regresión múltiple y selección de modelos. | Magistral · ABP | Investigación de campo (análisis de datos) | Taller de modelos múltiples |
+| **11** | 17 jun 2026 | Análisis Multivariado (PCA, NMDS) para datos ecológicos. | Seminarios · 🖥️ Live coding | Lecturas independientes | Taller de análisis multivariado |
+
+------------------------------------------------------------------------
+
+## Unidad 4 — Análisis de Datos Biológicos Avanzado {#unidad-4}
+
+::: {.callout-note}
+## Resultado de Aprendizaje
+Evalúa modelos estadísticos avanzados y comunica hallazgos científicos mediante reportes dinámicos y reproducibles.
+:::
+
+| Sem. | Fecha | Contenido | Estrategia | Trabajo independiente | Evaluación |
+|------|-------|-----------|------------|-----------------------|------------|
+| **12** | 24 jun 2026 | Modelos Lineales Generalizados (GLM): Poisson. | Magistral · Estudios de Casos | Lecturas independientes | Taller de GLM Poisson |
+| **13** | 1 jul 2026 | Modelos Lineales Generalizados (GLM): Binomial. | Magistral · 🖥️ Live coding | Tareas autodirigidas | Taller de GLM Binomial |
+| **14** | 8 jul 2026 | Introducción a Modelos Mixtos (LMM/GLMM). | Magistral · Aprendizaje activo | Consulta de referencias | Taller de modelos mixtos |
+| **15 🎯** | **15 jul 2026** | Casos de estudio y presentación de proyectos finales. | ABP · Socialización | Trabajo en el proyecto final | **Proyecto Final: Reporte Quarto + Sustentación** |
+
+------------------------------------------------------------------------
+
+## Resumen de evaluaciones
+
+| Semana | Fecha       | Evaluación                                      |
+|--------|-------------|-------------------------------------------------|
+| 1      | 8 abr 2026  | Taller de introducción a R                      |
+| 2      | 15 abr 2026 | Taller de lógica de programación                |
+| 3      | 22 abr 2026 | Taller de Git y Quarto                          |
+| 4      | 29 abr 2026 | Taller de manipulación de datos                 |
+| 5      | 6 may 2026  | Taller de datos ordenados                       |
+| 6      | 13 may 2026 | Taller de visualización básica                  |
+| 7      | 20 may 2026 | Taller de visualización avanzada. Proyecto: Análisis Exploratorio de Datos                |
+| 8      | 27 may 2026 | Taller de inferencia estadística                |
+| 9      | 3 jun 2026  | Taller de regresión                             |
+| 10     | 10 jun 2026 | Taller de modelos múltiples                     |
+| 11     | 17 jun 2026 | Taller de análisis multivariado                 |
+| 12     | 24 jun 2026 | Taller de GLM Poisson                           |
+| 13     | 1 jul 2026  | Taller de GLM Binomial                          |
+| 14     | 8 jul 2026  | Taller de modelos mixtos                        |
+| 15     | 15 jul 2026 | 🎯 Proyecto Final: Reporte Quarto + Sustentación |
+
+------------------------------------------------------------------------
+
+## Fórmula de calificación
+
+$$
+\text{Nota Final} = (\overline{Talleres} \times 0.50) + (PM \times 0.20) + (PF \times 0.30)
+$$
+
+Donde:
+
+-   $\overline{Talleres}$ = promedio de los 14 talleres semanales (S1–S14)
+-   $PM$ = Proyecto: Análisis Exploratorio de Datos (Semana 7)
+-   $PF$ = Proyecto: Informe Final (Semana 15)
+-   Las actividades **No Entregadas (NE)** equivalen a **0.0**
+-   La nota mínima de aprobación es **3.0**

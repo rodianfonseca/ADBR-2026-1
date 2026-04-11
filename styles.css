@@ -1,0 +1,314 @@
+/* ============================================================
+   Curso 20953 — Análisis de Datos Biológicos en R
+   Estilos personalizados · Universidad del Atlántico
+   ============================================================ */
+
+/* --- Variables de color institucional --- */
+:root {
+  --ua-verde: #1a6e3c;
+  --ua-verde-claro: #2e9e5f;
+  --ua-amarillo: #f5c542;
+  --ua-azul: #003f88;
+  --ua-azul-claro: #1565c0;
+  --ua-gris: #f4f6f8;
+  --ua-texto: #1a1a2e;
+  --borde-radio: 8px;
+}
+
+/* --- Navbar --- */
+.navbar {
+  background: linear-gradient(135deg, var(--ua-verde) 0%, var(--ua-azul) 100%) !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+/* --- Hero / Landing page --- */
+.hero-banner {
+  background: linear-gradient(160deg, var(--ua-azul) 0%, var(--ua-verde) 100%);
+  color: white;
+  padding: 4rem 2rem;
+  border-radius: var(--borde-radio);
+  margin-bottom: 2.5rem;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+}
+
+.hero-banner h1 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.hero-banner .subtitulo {
+  font-size: 1.15rem;
+  opacity: 0.88;
+  margin-bottom: 1.8rem;
+}
+
+.hero-banner .badge-curso {
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 50px;
+  display: inline-block;
+  padding: 0.35rem 1.1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+/* --- Tarjetas de información --- */
+.info-card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--borde-radio);
+  padding: 1.4rem 1.6rem;
+  margin-bottom: 1.2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  transition: box-shadow 0.2s ease;
+}
+
+.info-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+.info-card .card-titulo {
+  color: var(--ua-verde);
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.info-card .card-titulo .icono {
+  font-size: 1.2rem;
+}
+
+/* --- Cards de semanas en material --- */
+.semana-card {
+  border-left: 4px solid var(--ua-verde);
+  background: var(--ua-gris);
+  border-radius: 0 var(--borde-radio) var(--borde-radio) 0;
+  padding: 1rem 1.4rem;
+  margin-bottom: 1rem;
+  transition: border-color 0.2s;
+}
+
+.semana-card:hover {
+  border-left-color: var(--ua-azul-claro);
+}
+
+.semana-card .semana-num {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ua-verde);
+}
+
+.semana-card h4 {
+  margin: 0.25rem 0 0.5rem 0;
+  font-size: 1rem;
+}
+
+/* --- Badges de tipo de evidencia --- */
+.badge-desempeno   { background: #d1fae5; color: #065f46; }
+.badge-conocimiento { background: #dbeafe; color: #1e3a8a; }
+.badge-producto    { background: #fef3c7; color: #92400e; }
+.badge-mayor       { background: #fee2e2; color: #991b1b; }
+
+.badge-tipo {
+  border-radius: 50px;
+  padding: 0.2rem 0.7rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+/* --- Cronograma --- */
+.unidad-header {
+  background: linear-gradient(90deg, var(--ua-verde) 0%, var(--ua-azul) 100%);
+  color: white;
+  padding: 0.8rem 1.4rem;
+  border-radius: var(--borde-radio);
+  margin: 2rem 0 1rem 0;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.unidad-ra {
+  background: var(--ua-gris);
+  border-left: 3px solid var(--ua-amarillo);
+  padding: 0.7rem 1.1rem;
+  border-radius: 0 var(--borde-radio) var(--borde-radio) 0;
+  margin-bottom: 1.2rem;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #4a5568;
+}
+
+/* --- Tabla de calificaciones --- */
+#tabla-notas {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#tabla-notas th {
+  background: var(--ua-verde);
+  color: white;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+#tabla-notas td {
+  padding: 0.5rem 0.7rem;
+  text-align: center;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 0.9rem;
+}
+
+#tabla-notas tr:nth-child(even) td {
+  background: #f8fafc;
+}
+
+.nota-verde  { color: #065f46; font-weight: 700; }
+.nota-amarillo { color: #92400e; font-weight: 700; }
+.nota-rojo   { color: #991b1b; font-weight: 700; }
+.nota-pendiente { color: #9ca3af; font-style: italic; }
+
+/* --- Formulario de calificaciones --- */
+.form-busqueda {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--borde-radio);
+  padding: 2rem;
+  max-width: 500px;
+  margin: 2rem auto;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.form-busqueda h3 {
+  color: var(--ua-verde);
+  margin-bottom: 1rem;
+}
+
+.form-busqueda input[type="text"] {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.form-busqueda input[type="text"]:focus {
+  border-color: var(--ua-verde);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(26,110,60,0.1);
+}
+
+.btn-buscar {
+  width: 100%;
+  background: var(--ua-verde);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.8rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-buscar:hover {
+  background: var(--ua-verde-claro);
+}
+
+#resultado-notas {
+  margin-top: 2rem;
+}
+
+.resultado-header {
+  background: linear-gradient(90deg, var(--ua-verde) 0%, var(--ua-azul) 100%);
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: var(--borde-radio) var(--borde-radio) 0 0;
+}
+
+.resultado-body {
+  border: 1px solid #e2e8f0;
+  border-top: none;
+  border-radius: 0 0 var(--borde-radio) var(--borde-radio);
+  overflow: hidden;
+}
+
+.alerta-verde    { border-left: 6px solid #10b981; }
+.alerta-amarillo { border-left: 6px solid #f59e0b; }
+.alerta-rojo     { border-left: 6px solid #ef4444; }
+
+.retroalimentacion-box {
+  background: #f0fdf4;
+  border: 1px solid #a7f3d0;
+  border-radius: 6px;
+  padding: 0.8rem 1.1rem;
+  margin-top: 0.5rem;
+  font-size: 0.88rem;
+}
+
+/* --- Links de interés --- */
+.enlace-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--ua-texto);
+  transition: background 0.15s;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.enlace-item:hover {
+  background: var(--ua-gris);
+  text-decoration: none;
+  color: var(--ua-azul-claro);
+}
+
+.enlace-item .enlace-icono {
+  font-size: 1.5rem;
+  min-width: 2rem;
+  text-align: center;
+}
+
+.enlace-item .enlace-texto strong {
+  display: block;
+  font-size: 0.95rem;
+}
+
+.enlace-item .enlace-texto small {
+  color: #6b7280;
+  font-size: 0.8rem;
+}
+
+/* --- Código R en el sitio --- */
+.sourceCode pre {
+  font-size: 0.85rem;
+}
+
+/* --- Footer --- */
+.nav-footer {
+  background: #1a1a2e;
+  color: #a0aec0;
+  font-size: 0.82rem;
+  padding: 1rem 0;
+}
+
+/* --- Responsive tweaks --- */
+@media (max-width: 768px) {
+  .hero-banner h1 { font-size: 1.7rem; }
+  .hero-banner { padding: 2.5rem 1.2rem; }
+  .form-busqueda { margin: 1rem; padding: 1.2rem; }
+}
