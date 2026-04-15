@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Curso 20953 · Análisis de Datos Biológicos bajo R">
+
+<title>Quiz Semana 2 — Lógica de programación en R – Análisis de Datos Biológicos en R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../assets/favicon.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Sin resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+<meta property="og:title" content="Quiz Semana 2 — Lógica de programación en R – Análisis de Datos Biológicos en R">
+<meta property="og:description" content="Herpetofauna del Caribe colombiano · Vía Parque Isla de Salamanca y Ciénaga de Mallorquín">
+<meta property="og:site_name" content="Análisis de Datos Biológicos en R">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../assets/logo.png" alt="ADBR" class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Buscar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Navegación de palanca" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Inicio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../cronograma.html"> 
+<span class="menu-text">Cronograma</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../material.html"> 
+<span class="menu-text">Material</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../proyecto.html"> 
+<span class="menu-text">Proyecto</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-semanas" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Semanas</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-semanas">    
+        <li>
+    <a class="dropdown-item" href="../semanas/semana-1.html">
+ <span class="dropdown-text">Semana 1 — Clase</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../semanas/semana-1-taller.html">
+ <span class="dropdown-text">Semana 1 — Taller</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li>
+    <a class="dropdown-item" href="../semanas/semana-2.html">
+ <span class="dropdown-text">Semana 2 — Clase</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../semanas/semana-2-taller.html">
+ <span class="dropdown-text">Semana 2 — Quiz</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta página</h2>
+   
+  <ul>
+  <li><a href="#objetivos-del-quiz" id="toc-objetivos-del-quiz" class="nav-link active" data-scroll-target="#objetivos-del-quiz">Objetivos del quiz</a></li>
+  <li><a href="#contexto-biológico" id="toc-contexto-biológico" class="nav-link" data-scroll-target="#contexto-biológico">Contexto biológico</a></li>
+  <li><a href="#dataset" id="toc-dataset" class="nav-link" data-scroll-target="#dataset">Dataset</a></li>
+  <li><a href="#parte-1-exploración-y-comprensión-del-data-frame" id="toc-parte-1-exploración-y-comprensión-del-data-frame" class="nav-link" data-scroll-target="#parte-1-exploración-y-comprensión-del-data-frame">Parte 1 — Exploración y comprensión del data frame</a></li>
+  <li><a href="#parte-2-indexación-y-modificación-del-data-frame" id="toc-parte-2-indexación-y-modificación-del-data-frame" class="nav-link" data-scroll-target="#parte-2-indexación-y-modificación-del-data-frame">Parte 2 — Indexación y modificación del data frame</a></li>
+  <li><a href="#parte-3-listas" id="toc-parte-3-listas" class="nav-link" data-scroll-target="#parte-3-listas">Parte 3 — Listas</a></li>
+  <li><a href="#parte-4-condicionales" id="toc-parte-4-condicionales" class="nav-link" data-scroll-target="#parte-4-condicionales">Parte 4 — Condicionales</a></li>
+  <li><a href="#parte-5-bucles" id="toc-parte-5-bucles" class="nav-link" data-scroll-target="#parte-5-bucles">Parte 5 — Bucles</a></li>
+  <li><a href="#parte-6-reporte-automatizado-integrado" id="toc-parte-6-reporte-automatizado-integrado" class="nav-link" data-scroll-target="#parte-6-reporte-automatizado-integrado">Parte 6 — Reporte automatizado integrado</a></li>
+  <li><a href="#criterios-de-evaluación" id="toc-criterios-de-evaluación" class="nav-link" data-scroll-target="#criterios-de-evaluación">Criterios de evaluación</a></li>
+  <li><a href="#estructura-esperada-del-script" id="toc-estructura-esperada-del-script" class="nav-link" data-scroll-target="#estructura-esperada-del-script">Estructura esperada del script</a></li>
+  <li><a href="#recursos-de-apoyo" id="toc-recursos-de-apoyo" class="nav-link" data-scroll-target="#recursos-de-apoyo">Recursos de apoyo</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Quiz Semana 2 — Lógica de programación en R</h1>
+<p class="subtitle lead">Herpetofauna del Caribe colombiano · Vía Parque Isla de Salamanca y Ciénaga de Mallorquín</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor/a</div>
+    <div class="quarto-title-meta-contents">
+             <p>Curso 20953 · Análisis de Datos Biológicos bajo R </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Fecha de publicación</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">15 de abril de 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Tipo de evidencia:</strong> Conocimiento · <strong>Entregable:</strong> <code>quiz2_apellido_nombre.R</code> · <strong>Plataforma:</strong> SICVI 567 — actividad “Quiz Semana 2”</p>
+</div>
+</div>
+</div>
+<section id="objetivos-del-quiz" class="level2">
+<h2 class="anchored" data-anchor-id="objetivos-del-quiz">Objetivos del quiz</h2>
+<p>Al completar este quiz el estudiante será capaz de:</p>
+<ol type="1">
+<li>Crear y manipular data frames con datos biológicos (indexación, filtrado, modificación de columnas).</li>
+<li>Organizar información heterogénea en listas jerárquicas.</li>
+<li>Aplicar condicionales (<code>if/else</code>, <code>ifelse()</code>) para clasificar observaciones biológicas.</li>
+<li>Construir bucles <code>for</code> y <code>while</code> para iterar sobre estructuras de datos.</li>
+<li>Usar <code>next</code> y <code>break</code> para controlar el flujo dentro de un bucle.</li>
+<li>Explicar en lenguaje propio la diferencia entre las estructuras de datos de R base.</li>
+</ol>
+<hr>
+</section>
+<section id="contexto-biológico" class="level2">
+<h2 class="anchored" data-anchor-id="contexto-biológico">Contexto biológico</h2>
+<p>El Sistema de Información sobre Biodiversidad de Colombia (SiB Colombia) consolida registros de presencia de especies provenientes de instituciones académicas, autoridades ambientales y ciudadanos. El departamento del Atlántico cuenta con registros históricos de reptiles, anfibios, aves y flora vascular en ecosistemas como manglares, bosques secos tropicales y humedales costeros.</p>
+<p>En este quiz trabajarás con un dataset simulado — pero biológicamente realista — de registros de <strong>herpetofauna</strong> (reptiles y anfibios) del Atlántico, basado en monitoreos comunitarios en la <strong>Vía Parque Isla de Salamanca</strong> y la <strong>Ciénaga de Mallorquín</strong>. El objetivo biológico es construir un sistema básico de clasificación de registros para apoyar el reporte semestral del programa de monitoreo.</p>
+<hr>
+</section>
+<section id="dataset" class="level2">
+<h2 class="anchored" data-anchor-id="dataset">Dataset</h2>
+<p>Copia el siguiente bloque completo al <strong>inicio</strong> de tu script <code>quiz2_apellido_nombre.R</code>. Ejecútalo antes de comenzar cualquier ejercicio.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ===========================================================</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># DATASET — Quiz Semana 2 — Herpetofauna del Atlántico</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Fuente: dataset simulado con especies reales del Caribe colombiano</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Ejecuta este bloque antes de comenzar</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ===========================================================</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20953</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>herp_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">especie     =</span> <span class="fu">c</span>(<span class="st">"Iguana iguana"</span>, <span class="st">"Boa constrictor"</span>, <span class="st">"Caiman crocodilus"</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Trachemys callirostris"</span>, <span class="st">"Cnemidophorus lemniscatus"</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Lepidoblepharis sanctaemartae"</span>, <span class="st">"Hemidactylus frenatus"</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Anolis auratus"</span>, <span class="st">"Kinosternon scorpioides"</span>),</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">orden       =</span> <span class="fu">c</span>(<span class="st">"Squamata"</span>, <span class="st">"Squamata"</span>, <span class="st">"Crocodylia"</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Testudines"</span>, <span class="st">"Squamata"</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Squamata"</span>, <span class="st">"Squamata"</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Squamata"</span>, <span class="st">"Testudines"</span>),</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_registros =</span> <span class="fu">c</span>(<span class="dv">45</span>L, <span class="dv">3</span>L, <span class="dv">8</span>L, <span class="dv">12</span>L, <span class="dv">67</span>L, <span class="dv">4</span>L, <span class="dv">89</span>L, <span class="dv">156</span>L, <span class="dv">6</span>L),</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">longitud_cm =</span> <span class="fu">c</span>(<span class="fl">145.0</span>, <span class="fl">280.0</span>, <span class="fl">195.0</span>, <span class="fl">38.5</span>, <span class="fl">22.0</span>, <span class="fl">5.8</span>, <span class="fl">14.5</span>, <span class="fl">18.2</span>, <span class="fl">20.0</span>),</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">amenazada   =</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>),</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">sitio       =</span> <span class="fu">c</span>(<span class="st">"Salamanca"</span>, <span class="st">"Salamanca"</span>, <span class="st">"Mallorquin"</span>, <span class="st">"Mallorquin"</span>,</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Salamanca"</span>, <span class="st">"Mallorquin"</span>, <span class="st">"Mallorquin"</span>, <span class="st">"Salamanca"</span>, <span class="st">"Mallorquin"</span>),</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Convierte columnas a factor con niveles explícitos</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>herp_df<span class="sc">$</span>sitio <span class="ot">&lt;-</span> <span class="fu">factor</span>(herp_df<span class="sc">$</span>sitio, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Mallorquin"</span>, <span class="st">"Salamanca"</span>))</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>herp_df<span class="sc">$</span>orden <span class="ot">&lt;-</span> <span class="fu">factor</span>(herp_df<span class="sc">$</span>orden,</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>                        <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Squamata"</span>, <span class="st">"Crocodylia"</span>, <span class="st">"Testudines"</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+</section>
+<section id="parte-1-exploración-y-comprensión-del-data-frame" class="level2">
+<h2 class="anchored" data-anchor-id="parte-1-exploración-y-comprensión-del-data-frame">Parte 1 — Exploración y comprensión del data frame</h2>
+<p><strong>Estimado: 15 minutos</strong></p>
+<p>Antes de analizar datos, siempre debemos entender su estructura. Responde usando funciones de R — no “a ojo”.</p>
+<p><strong>1.1.</strong> Usa tres funciones distintas para explorar <code>herp_df</code>. Explica con un comentario qué información aporta cada una que las otras no dan.</p>
+<p><strong>1.2.</strong> ¿Cuántas filas y columnas tiene el data frame? ¿Cuántos registros en total (suma de <code>n_registros</code>) hay en el dataset?</p>
+<p><strong>1.3.</strong> ¿Cuántas especies están clasificadas como amenazadas (<code>amenazada == TRUE</code>)? Usa código para obtener ese número, no lo cuentes manualmente.</p>
+<p><strong>1.4.</strong> Crea un subconjunto llamado <code>herp_salamanca</code> con solo los registros del sitio “Salamanca”. ¿Cuántas especies fueron registradas en ese sitio?</p>
+<p><strong>Preguntas de reflexión</strong> — responde como comentarios <code># R:</code> en tu script:</p>
+<ul>
+<li>¿Por qué es importante ejecutar <code>str()</code> antes de cualquier análisis? ¿Qué problema podría surgir si no verificamos los tipos de cada columna?</li>
+<li>La columna <code>sitio</code> es un factor, pero podría haberse dejado como character. ¿En qué situación de análisis importa esa diferencia?</li>
+</ul>
+<hr>
+</section>
+<section id="parte-2-indexación-y-modificación-del-data-frame" class="level2">
+<h2 class="anchored" data-anchor-id="parte-2-indexación-y-modificación-del-data-frame">Parte 2 — Indexación y modificación del data frame</h2>
+<p><strong>Estimado: 20 minutos</strong></p>
+<p><strong>2.1.</strong> Extrae la columna <code>especie</code> como un vector de character. Luego extrae solo el nombre de la especie en la fila 3 usando indexación numérica.</p>
+<p><strong>2.2.</strong> Selecciona todas las especies con más de 50 registros (<code>n_registros &gt; 50</code>). Muestra solo las columnas <code>especie</code>, <code>n_registros</code> y <code>sitio</code> del subconjunto resultante.</p>
+<p><strong>2.3.</strong> Agrega una nueva columna <code>categoria_tamano</code> usando <code>ifelse()</code>:</p>
+<ul>
+<li><code>"grande"</code> si <code>longitud_cm &gt;= 100</code></li>
+<li><code>"pequeno"</code> si <code>longitud_cm &lt; 100</code></li>
+</ul>
+<p>Muestra las columnas <code>especie</code>, <code>longitud_cm</code> y <code>categoria_tamano</code>.</p>
+<p><strong>2.4.</strong> Agrega la siguiente especie con <code>rbind()</code> y verifica con <code>tail()</code>:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Campo</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>especie</td>
+<td><code>"Mabuya mabouya"</code></td>
+</tr>
+<tr class="even">
+<td>orden</td>
+<td><code>"Squamata"</code></td>
+</tr>
+<tr class="odd">
+<td>n_registros</td>
+<td><code>31L</code></td>
+</tr>
+<tr class="even">
+<td>longitud_cm</td>
+<td><code>19.5</code></td>
+</tr>
+<tr class="odd">
+<td>amenazada</td>
+<td><code>FALSE</code></td>
+</tr>
+<tr class="even">
+<td>sitio</td>
+<td><code>"Salamanca"</code></td>
+</tr>
+<tr class="odd">
+<td>categoria_tamano</td>
+<td><code>"pequeno"</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Preguntas de reflexión:</strong></p>
+<ul>
+<li>¿Por qué al crear el nuevo registro con <code>rbind()</code> debes incluir la columna <code>categoria_tamano</code>? ¿Qué error daría R si no la incluyes?</li>
+<li>Explica con tus palabras la diferencia entre <code>herp_df[2]</code> y <code>herp_df[[2]]</code>.</li>
+</ul>
+<hr>
+</section>
+<section id="parte-3-listas" class="level2">
+<h2 class="anchored" data-anchor-id="parte-3-listas">Parte 3 — Listas</h2>
+<p><strong>Estimado: 15 minutos</strong></p>
+<p><strong>3.1.</strong> Crea una lista <code>ficha_salamanca</code> con los siguientes componentes:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 52%">
+<col style="width: 47%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Componente</th>
+<th>Contenido</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>nombre</code></td>
+<td><code>"Vía Parque Isla de Salamanca"</code></td>
+</tr>
+<tr class="even">
+<td><code>departamento</code></td>
+<td><code>"Magdalena / Atlántico"</code></td>
+</tr>
+<tr class="odd">
+<td><code>area_ha</code></td>
+<td><code>56200</code></td>
+</tr>
+<tr class="even">
+<td><code>ecosistema</code></td>
+<td>factor <code>"manglar"</code> con niveles <code>c("manglar", "bosque_seco", "humedal")</code></td>
+</tr>
+<tr class="odd">
+<td><code>registros</code></td>
+<td>el data frame <code>herp_salamanca</code> de la Parte 1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>3.2.</strong> Accede a los siguientes elementos usando <strong>al menos dos formas distintas</strong> de indexación (<code>$</code>, <code>[[]]</code>, posición numérica):</p>
+<ul>
+<li>El área en hectáreas</li>
+<li>El nombre de la primera especie registrada en Salamanca (acceso anidado: lista → data frame → columna → elemento)</li>
+</ul>
+<p><strong>3.3.</strong> Agrega un componente <code>fecha_monitoreo &lt;- as.Date("2025-10-05")</code> a la lista. ¿Cuántos componentes tiene ahora?</p>
+<p><strong>Preguntas de reflexión:</strong></p>
+<ul>
+<li>¿En qué situación del trabajo de campo sería más conveniente una lista en lugar de un data frame?</li>
+<li>Si tuvieras datos de 10 sitios de monitoreo, ¿cómo los organizarías en R? Describe la estructura en palabras antes de escribir el código.</li>
+</ul>
+<hr>
+</section>
+<section id="parte-4-condicionales" class="level2">
+<h2 class="anchored" data-anchor-id="parte-4-condicionales">Parte 4 — Condicionales</h2>
+<p><strong>Estimado: 15 minutos</strong></p>
+<p><strong>4.1.</strong> Escribe un bloque <code>if/else if/else</code> que evalúe el total de registros de <em>Hemidactylus frenatus</em> (extrae el valor con código) e imprima el mensaje correspondiente:</p>
+<ul>
+<li>Más de 100 registros: <code>"Especie común — posible indicador de perturbación antrópica"</code></li>
+<li>Entre 30 y 100 (inclusive): <code>"Especie con presencia moderada — monitoreo rutinario"</code></li>
+<li>Menos de 30: <code>"Especie poco registrada — ampliar cobertura de muestreo"</code></li>
+</ul>
+<p><strong>4.2.</strong> Usando <code>ifelse()</code> (vectorizado), crea un vector <code>prioridad_conservacion</code>:</p>
+<ul>
+<li><code>"PRIORITARIA"</code> si la especie está amenazada</li>
+<li><code>"NO_PRIORITARIA"</code> si no lo está</li>
+</ul>
+<p>Asigna los nombres de las especies como nombres del vector.</p>
+<p><strong>4.3.</strong> Escribe una función <code>clasificar_orden()</code> que reciba el nombre de un orden y use <code>switch()</code> para devolver:</p>
+<ul>
+<li><code>"Squamata"</code> → <code>"Lagartijas y serpientes — el orden más diverso del dataset"</code></li>
+<li><code>"Crocodylia"</code> → <code>"Caimanes y cocodrilos — protegidos por CITES Apéndice II"</code></li>
+<li><code>"Testudines"</code> → <code>"Tortugas — varias especies en peligro crítico en el Caribe"</code></li>
+<li>Cualquier otro → <code>"Orden no presente en el dataset de monitoreo"</code></li>
+</ul>
+<p>Prueba la función con los tres órdenes y con un valor inexistente.</p>
+<p><strong>Preguntas de reflexión:</strong></p>
+<ul>
+<li>¿Cuál es la diferencia práctica entre <code>if()</code> e <code>ifelse()</code>? Da un ejemplo de cuándo usar cada uno.</li>
+<li>¿Por qué <code>switch()</code> puede ser preferible a una cadena larga de <code>if/else if</code>?</li>
+</ul>
+<hr>
+</section>
+<section id="parte-5-bucles" class="level2">
+<h2 class="anchored" data-anchor-id="parte-5-bucles">Parte 5 — Bucles</h2>
+<p><strong>Estimado: 25 minutos</strong></p>
+<p><strong>5.1. Bucle <code>for</code> — reporte por especie:</strong></p>
+<p>Itera sobre todas las filas de <code>herp_df</code> e imprime con <code>sprintf()</code>:</p>
+<pre><code>[especie] | N = [n_registros] | [sitio] | Estado: [AMENAZADA / no amenazada]</code></pre>
+<p>“AMENAZADA” en mayúsculas solo cuando <code>amenazada == TRUE</code>; de lo contrario “no amenazada” en minúsculas.</p>
+<p>Pista de formato: <code>sprintf("%-35s | N = %3d | %-12s | Estado: %s\n", ...)</code></p>
+<p><strong>5.2. Bucle <code>for</code> con <code>next</code> — filtro de registros raros:</strong></p>
+<p>Recorre <code>herp_df</code> e imprime solo las especies con <code>n_registros &gt;= 10</code>. Usa <code>next</code> para saltar las demás. Al finalizar el bucle, imprime cuántas especies cumplieron la condición.</p>
+<p><strong>5.3. Bucle <code>while</code> — esfuerzo de muestreo acumulado:</strong></p>
+<p>Simula jornadas de campo donde se registran entre 5 y 20 individuos por jornada (<code>sample(5:20, 1)</code>). Acumula hasta alcanzar o superar 200 individuos. Al terminar, imprime cuántas jornadas fueron necesarias y el total acumulado.</p>
+<p>Usa <code>set.seed(20953)</code> antes del bucle para reproducibilidad.</p>
+<p><strong>5.4. Bucle <code>for</code> con <code>break</code> — búsqueda del primer cocodrilo:</strong></p>
+<p>Recorre <code>herp_df</code> buscando la primera especie del orden <code>"Crocodylia"</code>. Al encontrarla, imprime su nombre y número de registros, y sale del bucle con <code>break</code>.</p>
+<p><strong>Preguntas de reflexión:</strong></p>
+<ul>
+<li>En los ejercicios anteriores, ¿en cuál situación usaste <code>next</code> y en cuál <code>break</code>? Explica la diferencia.</li>
+<li>Muchas operaciones de bucles <code>for</code> pueden reemplazarse con funciones vectorizadas. ¿Por qué entonces es importante aprender bucles?</li>
+</ul>
+<hr>
+</section>
+<section id="parte-6-reporte-automatizado-integrado" class="level2">
+<h2 class="anchored" data-anchor-id="parte-6-reporte-automatizado-integrado">Parte 6 — Reporte automatizado integrado</h2>
+<p><strong>Estimado: 20 minutos</strong> · <em>Esta parte no tiene código inicial — diseña la solución completa.</em></p>
+<p><strong>Contexto:</strong> El programa de monitoreo necesita un reporte en consola que clasifique cada especie según abundancia y estado de amenaza:</p>
+<pre><code>=== REPORTE DE MONITOREO — HERPETOFAUNA CARIBE COLOMBIANO ===
+Sitios: Vía Parque Isla de Salamanca y Ciénaga de Mallorquín
+Total de especies registradas: [N]
+Total de individuos registrados: [N]
+
+--- CLASIFICACIÓN POR ESPECIE ---
+[especie]
+  Registros : [N]
+  Sitio      : [sitio]
+  Longitud   : [X] cm ([grande/pequeno])
+  Amenazada  : [Sí / No]
+  Categoría  : [ver tabla abajo]
+
+=== FIN DEL REPORTE ===</code></pre>
+<p><strong>Criterio de categoría:</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Condición</th>
+<th>Categoría</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Amenazada <strong>Y</strong> n_registros &lt; 10</td>
+<td><code>"URGENTE: especie amenazada y rara"</code></td>
+</tr>
+<tr class="even">
+<td>Amenazada <strong>Y</strong> n_registros ≥ 10</td>
+<td><code>"ALERTA: especie amenazada pero registrada"</code></td>
+</tr>
+<tr class="odd">
+<td>No amenazada <strong>Y</strong> n_registros ≥ 50</td>
+<td><code>"COMÚN: monitoreo rutinario"</code></td>
+</tr>
+<tr class="even">
+<td>No amenazada <strong>Y</strong> n_registros &lt; 50</td>
+<td><code>"MODERADA: ampliar cobertura"</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Requisitos técnicos:</strong> bucle <code>for</code>, condicionales <code>if/else</code> anidados, totales calculados con operaciones sobre el data frame, salida generada con <code>cat()</code> y <code>sprintf()</code>.</p>
+<p><strong>Pregunta de reflexión:</strong> ¿Qué ventajas tiene automatizar este reporte con código en lugar de escribirlo manualmente? Piensa en un escenario donde el dataset creciera de 9 a 900 especies.</p>
+<hr>
+</section>
+<section id="criterios-de-evaluación" class="level2">
+<h2 class="anchored" data-anchor-id="criterios-de-evaluación">Criterios de evaluación</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Criterio</th>
+<th>Puntaje máximo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Parte 1:</strong> Exploración del data frame</td>
+<td>0.5</td>
+</tr>
+<tr class="even">
+<td><strong>Parte 2:</strong> Indexación y modificación</td>
+<td>1.0</td>
+</tr>
+<tr class="odd">
+<td><strong>Parte 3:</strong> Listas</td>
+<td>0.5</td>
+</tr>
+<tr class="even">
+<td><strong>Parte 4:</strong> Condicionales</td>
+<td>1.0</td>
+</tr>
+<tr class="odd">
+<td><strong>Parte 5:</strong> Bucles</td>
+<td>1.5</td>
+</tr>
+<tr class="even">
+<td><strong>Parte 6:</strong> Reporte integrado</td>
+<td>0.5</td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td><strong>5.0</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Criterios transversales (aplican a todo el script):</strong></p>
+<ul>
+<li>El script se ejecuta de principio a fin sin errores.</li>
+<li>Nombres de variables en <code>snake_case</code>.</li>
+<li>Cada sección tiene al menos un comentario que explica el <em>por qué</em>, no solo el <em>qué</em>.</li>
+<li>Las preguntas de reflexión están respondidas como comentarios <code># R:</code>.</li>
+</ul>
+<hr>
+</section>
+<section id="estructura-esperada-del-script" class="level2">
+<h2 class="anchored" data-anchor-id="estructura-esperada-del-script">Estructura esperada del script</h2>
+<pre><code># Cabecera: nombre completo, fecha, descripción del quiz
+# Bloque del dataset (copia completa del bloque proporcionado arriba)
+# Parte 1: exploración del data frame
+# Parte 2: indexación y modificación
+# Parte 3: listas
+# Parte 4: condicionales
+# Parte 5: bucles
+# Parte 6: reporte integrado
+# sessionInfo() al final</code></pre>
+<hr>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Detalles de entrega
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Archivo:</strong> <code>quiz2_apellido_nombre.R</code> (ejemplo: <code>quiz2_fonseca_rodian.R</code>)</li>
+<li><strong>Formato:</strong> El script <code>.R</code> debe ejecutarse completo sin errores (usa <em>Session › Restart R</em> y luego ejecuta todo).</li>
+<li><strong>Plataforma:</strong> SICVI 567 — sección “Quiz Semana 2 — Lógica de programación”</li>
+<li><strong>Fecha límite:</strong> A confirmar por el docente en SICVI 567</li>
+</ul>
+<p><strong>Lista de verificación antes de subir:</strong></p>
+<ul class="task-list">
+<li><label><input type="checkbox">El bloque del dataset está copiado completo y sin modificar al inicio.</label></li>
+<li><label><input type="checkbox">Cada parte está claramente separada con comentarios de sección.</label></li>
+<li><label><input type="checkbox">Todas las preguntas de reflexión tienen respuesta <code># R:</code>.</label></li>
+<li><label><input type="checkbox"><code>sessionInfo()</code> aparece al final del script.</label></li>
+<li><label><input type="checkbox">El nombre del archivo sigue exactamente el formato indicado.</label></li>
+</ul>
+</div>
+</div>
+<hr>
+</section>
+<section id="recursos-de-apoyo" class="level2">
+<h2 class="anchored" data-anchor-id="recursos-de-apoyo">Recursos de apoyo</h2>
+<ul>
+<li>Wickham et al.&nbsp;(2023). <em>R for Data Science</em> (2ª ed.), Cap. 3 — <a href="https://r4ds.hadley.nz/" class="uri">https://r4ds.hadley.nz/</a></li>
+<li>Documentación de R base — ejecuta en consola: <code>?data.frame</code>, <code>?list</code>, <code>?for</code>, <code>?if</code>, <code>?switch</code></li>
+<li>Script de clase semana 2 — disponible en el sitio web del curso (Semanas → Semana 2 — Clase)</li>
+<li>SiB Colombia — <a href="https://sibcolombia.net/" class="uri">https://sibcolombia.net/</a> (para consultar distribución real de las especies del dataset)</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Curso 20953 · Análisis de Datos Biológicos bajo Paquete Estadístico R</p>
+</div>   
+    <div class="nav-footer-center">
+<p>Universidad del Atlántico · Facultad de Ciencias Básicas · Programa de Biología</p>
+</div>
+    <div class="nav-footer-right">
+<p>Período 2026-1</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

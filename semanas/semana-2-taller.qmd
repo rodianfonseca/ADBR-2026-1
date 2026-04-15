@@ -1,0 +1,327 @@
+---
+title: "Quiz Semana 2 — Lógica de programación en R"
+subtitle: "Herpetofauna del Caribe colombiano · Vía Parque Isla de Salamanca y Ciénaga de Mallorquín"
+date: "2026-04-15"
+author: "Curso 20953 · Análisis de Datos Biológicos bajo R"
+toc: true
+toc-depth: 3
+code-fold: false
+code-tools: false
+---
+
+:::{.callout-note icon="false" appearance="simple"}
+**Tipo de evidencia:** Conocimiento · **Entregable:** `quiz2_apellido_nombre.R` · **Plataforma:** SICVI 567 — actividad "Quiz Semana 2"
+:::
+
+## Objetivos del quiz
+
+Al completar este quiz el estudiante será capaz de:
+
+1. Crear y manipular data frames con datos biológicos (indexación, filtrado, modificación de columnas).
+2. Organizar información heterogénea en listas jerárquicas.
+3. Aplicar condicionales (`if/else`, `ifelse()`) para clasificar observaciones biológicas.
+4. Construir bucles `for` y `while` para iterar sobre estructuras de datos.
+5. Usar `next` y `break` para controlar el flujo dentro de un bucle.
+6. Explicar en lenguaje propio la diferencia entre las estructuras de datos de R base.
+
+---
+
+## Contexto biológico
+
+El Sistema de Información sobre Biodiversidad de Colombia (SiB Colombia) consolida registros de presencia de especies provenientes de instituciones académicas, autoridades ambientales y ciudadanos. El departamento del Atlántico cuenta con registros históricos de reptiles, anfibios, aves y flora vascular en ecosistemas como manglares, bosques secos tropicales y humedales costeros.
+
+En este quiz trabajarás con un dataset simulado — pero biológicamente realista — de registros de **herpetofauna** (reptiles y anfibios) del Atlántico, basado en monitoreos comunitarios en la **Vía Parque Isla de Salamanca** y la **Ciénaga de Mallorquín**. El objetivo biológico es construir un sistema básico de clasificación de registros para apoyar el reporte semestral del programa de monitoreo.
+
+---
+
+## Dataset
+
+Copia el siguiente bloque completo al **inicio** de tu script `quiz2_apellido_nombre.R`. Ejecútalo antes de comenzar cualquier ejercicio.
+
+```r
+# ===========================================================
+# DATASET — Quiz Semana 2 — Herpetofauna del Atlántico
+# Fuente: dataset simulado con especies reales del Caribe colombiano
+# Ejecuta este bloque antes de comenzar
+# ===========================================================
+
+set.seed(20953)
+
+herp_df <- data.frame(
+  especie     = c("Iguana iguana", "Boa constrictor", "Caiman crocodilus",
+                  "Trachemys callirostris", "Cnemidophorus lemniscatus",
+                  "Lepidoblepharis sanctaemartae", "Hemidactylus frenatus",
+                  "Anolis auratus", "Kinosternon scorpioides"),
+  orden       = c("Squamata", "Squamata", "Crocodylia",
+                  "Testudines", "Squamata",
+                  "Squamata", "Squamata",
+                  "Squamata", "Testudines"),
+  n_registros = c(45L, 3L, 8L, 12L, 67L, 4L, 89L, 156L, 6L),
+  longitud_cm = c(145.0, 280.0, 195.0, 38.5, 22.0, 5.8, 14.5, 18.2, 20.0),
+  amenazada   = c(FALSE, FALSE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, TRUE),
+  sitio       = c("Salamanca", "Salamanca", "Mallorquin", "Mallorquin",
+                  "Salamanca", "Mallorquin", "Mallorquin", "Salamanca", "Mallorquin"),
+  stringsAsFactors = FALSE
+)
+
+# Convierte columnas a factor con niveles explícitos
+herp_df$sitio <- factor(herp_df$sitio, levels = c("Mallorquin", "Salamanca"))
+herp_df$orden <- factor(herp_df$orden,
+                        levels = c("Squamata", "Crocodylia", "Testudines"))
+```
+
+---
+
+## Parte 1 — Exploración y comprensión del data frame
+
+**Estimado: 15 minutos**
+
+Antes de analizar datos, siempre debemos entender su estructura. Responde usando funciones de R — no "a ojo".
+
+**1.1.** Usa tres funciones distintas para explorar `herp_df`. Explica con un comentario qué información aporta cada una que las otras no dan.
+
+**1.2.** ¿Cuántas filas y columnas tiene el data frame? ¿Cuántos registros en total (suma de `n_registros`) hay en el dataset?
+
+**1.3.** ¿Cuántas especies están clasificadas como amenazadas (`amenazada == TRUE`)? Usa código para obtener ese número, no lo cuentes manualmente.
+
+**1.4.** Crea un subconjunto llamado `herp_salamanca` con solo los registros del sitio "Salamanca". ¿Cuántas especies fueron registradas en ese sitio?
+
+**Preguntas de reflexión** — responde como comentarios `# R:` en tu script:
+
+- ¿Por qué es importante ejecutar `str()` antes de cualquier análisis? ¿Qué problema podría surgir si no verificamos los tipos de cada columna?
+- La columna `sitio` es un factor, pero podría haberse dejado como character. ¿En qué situación de análisis importa esa diferencia?
+
+---
+
+## Parte 2 — Indexación y modificación del data frame
+
+**Estimado: 20 minutos**
+
+**2.1.** Extrae la columna `especie` como un vector de character. Luego extrae solo el nombre de la especie en la fila 3 usando indexación numérica.
+
+**2.2.** Selecciona todas las especies con más de 50 registros (`n_registros > 50`). Muestra solo las columnas `especie`, `n_registros` y `sitio` del subconjunto resultante.
+
+**2.3.** Agrega una nueva columna `categoria_tamano` usando `ifelse()`:
+
+- `"grande"` si `longitud_cm >= 100`
+- `"pequeno"` si `longitud_cm < 100`
+
+Muestra las columnas `especie`, `longitud_cm` y `categoria_tamano`.
+
+**2.4.** Agrega la siguiente especie con `rbind()` y verifica con `tail()`:
+
+| Campo | Valor |
+|-------|-------|
+| especie | `"Mabuya mabouya"` |
+| orden | `"Squamata"` |
+| n_registros | `31L` |
+| longitud_cm | `19.5` |
+| amenazada | `FALSE` |
+| sitio | `"Salamanca"` |
+| categoria_tamano | `"pequeno"` |
+
+**Preguntas de reflexión:**
+
+- ¿Por qué al crear el nuevo registro con `rbind()` debes incluir la columna `categoria_tamano`? ¿Qué error daría R si no la incluyes?
+- Explica con tus palabras la diferencia entre `herp_df[2]` y `herp_df[[2]]`.
+
+---
+
+## Parte 3 — Listas
+
+**Estimado: 15 minutos**
+
+**3.1.** Crea una lista `ficha_salamanca` con los siguientes componentes:
+
+| Componente | Contenido |
+|------------|-----------|
+| `nombre` | `"Vía Parque Isla de Salamanca"` |
+| `departamento` | `"Magdalena / Atlántico"` |
+| `area_ha` | `56200` |
+| `ecosistema` | factor `"manglar"` con niveles `c("manglar", "bosque_seco", "humedal")` |
+| `registros` | el data frame `herp_salamanca` de la Parte 1 |
+
+**3.2.** Accede a los siguientes elementos usando **al menos dos formas distintas** de indexación (`$`, `[[]]`, posición numérica):
+
+- El área en hectáreas
+- El nombre de la primera especie registrada en Salamanca (acceso anidado: lista → data frame → columna → elemento)
+
+**3.3.** Agrega un componente `fecha_monitoreo <- as.Date("2025-10-05")` a la lista. ¿Cuántos componentes tiene ahora?
+
+**Preguntas de reflexión:**
+
+- ¿En qué situación del trabajo de campo sería más conveniente una lista en lugar de un data frame?
+- Si tuvieras datos de 10 sitios de monitoreo, ¿cómo los organizarías en R? Describe la estructura en palabras antes de escribir el código.
+
+---
+
+## Parte 4 — Condicionales
+
+**Estimado: 15 minutos**
+
+**4.1.** Escribe un bloque `if/else if/else` que evalúe el total de registros de *Hemidactylus frenatus* (extrae el valor con código) e imprima el mensaje correspondiente:
+
+- Más de 100 registros: `"Especie común — posible indicador de perturbación antrópica"`
+- Entre 30 y 100 (inclusive): `"Especie con presencia moderada — monitoreo rutinario"`
+- Menos de 30: `"Especie poco registrada — ampliar cobertura de muestreo"`
+
+**4.2.** Usando `ifelse()` (vectorizado), crea un vector `prioridad_conservacion`:
+
+- `"PRIORITARIA"` si la especie está amenazada
+- `"NO_PRIORITARIA"` si no lo está
+
+Asigna los nombres de las especies como nombres del vector.
+
+**4.3.** Escribe una función `clasificar_orden()` que reciba el nombre de un orden y use `switch()` para devolver:
+
+- `"Squamata"` → `"Lagartijas y serpientes — el orden más diverso del dataset"`
+- `"Crocodylia"` → `"Caimanes y cocodrilos — protegidos por CITES Apéndice II"`
+- `"Testudines"` → `"Tortugas — varias especies en peligro crítico en el Caribe"`
+- Cualquier otro → `"Orden no presente en el dataset de monitoreo"`
+
+Prueba la función con los tres órdenes y con un valor inexistente.
+
+**Preguntas de reflexión:**
+
+- ¿Cuál es la diferencia práctica entre `if()` e `ifelse()`? Da un ejemplo de cuándo usar cada uno.
+- ¿Por qué `switch()` puede ser preferible a una cadena larga de `if/else if`?
+
+---
+
+## Parte 5 — Bucles
+
+**Estimado: 25 minutos**
+
+**5.1. Bucle `for` — reporte por especie:**
+
+Itera sobre todas las filas de `herp_df` e imprime con `sprintf()`:
+
+```
+[especie] | N = [n_registros] | [sitio] | Estado: [AMENAZADA / no amenazada]
+```
+
+"AMENAZADA" en mayúsculas solo cuando `amenazada == TRUE`; de lo contrario "no amenazada" en minúsculas.
+
+Pista de formato: `sprintf("%-35s | N = %3d | %-12s | Estado: %s\n", ...)`
+
+**5.2. Bucle `for` con `next` — filtro de registros raros:**
+
+Recorre `herp_df` e imprime solo las especies con `n_registros >= 10`. Usa `next` para saltar las demás. Al finalizar el bucle, imprime cuántas especies cumplieron la condición.
+
+**5.3. Bucle `while` — esfuerzo de muestreo acumulado:**
+
+Simula jornadas de campo donde se registran entre 5 y 20 individuos por jornada (`sample(5:20, 1)`). Acumula hasta alcanzar o superar 200 individuos. Al terminar, imprime cuántas jornadas fueron necesarias y el total acumulado.
+
+Usa `set.seed(20953)` antes del bucle para reproducibilidad.
+
+**5.4. Bucle `for` con `break` — búsqueda del primer cocodrilo:**
+
+Recorre `herp_df` buscando la primera especie del orden `"Crocodylia"`. Al encontrarla, imprime su nombre y número de registros, y sale del bucle con `break`.
+
+**Preguntas de reflexión:**
+
+- En los ejercicios anteriores, ¿en cuál situación usaste `next` y en cuál `break`? Explica la diferencia.
+- Muchas operaciones de bucles `for` pueden reemplazarse con funciones vectorizadas. ¿Por qué entonces es importante aprender bucles?
+
+---
+
+## Parte 6 — Reporte automatizado integrado
+
+**Estimado: 20 minutos** · *Esta parte no tiene código inicial — diseña la solución completa.*
+
+**Contexto:** El programa de monitoreo necesita un reporte en consola que clasifique cada especie según abundancia y estado de amenaza:
+
+```
+=== REPORTE DE MONITOREO — HERPETOFAUNA CARIBE COLOMBIANO ===
+Sitios: Vía Parque Isla de Salamanca y Ciénaga de Mallorquín
+Total de especies registradas: [N]
+Total de individuos registrados: [N]
+
+--- CLASIFICACIÓN POR ESPECIE ---
+[especie]
+  Registros : [N]
+  Sitio      : [sitio]
+  Longitud   : [X] cm ([grande/pequeno])
+  Amenazada  : [Sí / No]
+  Categoría  : [ver tabla abajo]
+
+=== FIN DEL REPORTE ===
+```
+
+**Criterio de categoría:**
+
+| Condición | Categoría |
+|-----------|-----------|
+| Amenazada **Y** n_registros < 10 | `"URGENTE: especie amenazada y rara"` |
+| Amenazada **Y** n_registros ≥ 10 | `"ALERTA: especie amenazada pero registrada"` |
+| No amenazada **Y** n_registros ≥ 50 | `"COMÚN: monitoreo rutinario"` |
+| No amenazada **Y** n_registros < 50 | `"MODERADA: ampliar cobertura"` |
+
+**Requisitos técnicos:** bucle `for`, condicionales `if/else` anidados, totales calculados con operaciones sobre el data frame, salida generada con `cat()` y `sprintf()`.
+
+**Pregunta de reflexión:** ¿Qué ventajas tiene automatizar este reporte con código en lugar de escribirlo manualmente? Piensa en un escenario donde el dataset creciera de 9 a 900 especies.
+
+---
+
+## Criterios de evaluación
+
+| Criterio | Puntaje máximo |
+|----------|---------------|
+| **Parte 1:** Exploración del data frame | 0.5 |
+| **Parte 2:** Indexación y modificación | 1.0 |
+| **Parte 3:** Listas | 0.5 |
+| **Parte 4:** Condicionales | 1.0 |
+| **Parte 5:** Bucles | 1.5 |
+| **Parte 6:** Reporte integrado | 0.5 |
+| **Total** | **5.0** |
+
+**Criterios transversales (aplican a todo el script):**
+
+- El script se ejecuta de principio a fin sin errores.
+- Nombres de variables en `snake_case`.
+- Cada sección tiene al menos un comentario que explica el *por qué*, no solo el *qué*.
+- Las preguntas de reflexión están respondidas como comentarios `# R:`.
+
+---
+
+## Estructura esperada del script
+
+```
+# Cabecera: nombre completo, fecha, descripción del quiz
+# Bloque del dataset (copia completa del bloque proporcionado arriba)
+# Parte 1: exploración del data frame
+# Parte 2: indexación y modificación
+# Parte 3: listas
+# Parte 4: condicionales
+# Parte 5: bucles
+# Parte 6: reporte integrado
+# sessionInfo() al final
+```
+
+---
+
+::: {.callout-important}
+## Detalles de entrega
+
+- **Archivo:** `quiz2_apellido_nombre.R` (ejemplo: `quiz2_fonseca_rodian.R`)
+- **Formato:** El script `.R` debe ejecutarse completo sin errores (usa *Session › Restart R* y luego ejecuta todo).
+- **Plataforma:** SICVI 567 — sección "Quiz Semana 2 — Lógica de programación"
+- **Fecha límite:** A confirmar por el docente en SICVI 567
+
+**Lista de verificación antes de subir:**
+
+- [ ] El bloque del dataset está copiado completo y sin modificar al inicio.
+- [ ] Cada parte está claramente separada con comentarios de sección.
+- [ ] Todas las preguntas de reflexión tienen respuesta `# R:`.
+- [ ] `sessionInfo()` aparece al final del script.
+- [ ] El nombre del archivo sigue exactamente el formato indicado.
+:::
+
+---
+
+## Recursos de apoyo
+
+- Wickham et al. (2023). *R for Data Science* (2ª ed.), Cap. 3 — <https://r4ds.hadley.nz/>
+- Documentación de R base — ejecuta en consola: `?data.frame`, `?list`, `?for`, `?if`, `?switch`
+- Script de clase semana 2 — disponible en el sitio web del curso (Semanas → Semana 2 — Clase)
+- SiB Colombia — <https://sibcolombia.net/> (para consultar distribución real de las especies del dataset)

@@ -59,15 +59,19 @@ Introducción al lenguaje R usando datos climatológicos de estaciones IDEAM del
 
 **Tema:** Estructuras de datos (Data Frames, Listas) y Estructuras de control (bucles, condicionales).
 
-:::: {.callout-tip icon="false" appearance="simple" style="opacity: 0.6;"}
-## Estructuras de datos y control de flujo en R
+::::: {.callout-tip icon="false"}
+## Estructuras de datos y control de flujo en R — Herpetofauna del Caribe
 
-[Material disponible próximamente.]{.text-muted .small}
+Data frames, listas, condicionales y bucles con datos de aves acuáticas de la Ciénaga de Mallorquín. El quiz trabaja registros de herpetofauna del Atlántico (Vía Parque Isla de Salamanca).
 
 ::: {.d-flex .gap-2 .flex-wrap .mt-3}
-[🌐 Ver clase en línea](#){.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"} [🌐 Ver taller en línea](#){.btn .btn-primary .btn-sm .disabled role="button" aria-disabled="true"}
+[🌐 Ver clase en línea](semanas/semana-2.html){.btn .btn-success .btn-sm} [🌐 Ver quiz en línea](semanas/semana-2-taller.html){.btn .btn-primary .btn-sm} [⬇️ Dataset herpetofauna (.csv)](datos/semana-2/herpetofauna_caribe_listo.csv){.btn .btn-outline-secondary .btn-sm}
 :::
-::::
+
+::: {.mt-3 .pt-2 .border-top .small .text-muted}
+**Evaluación:** Quiz de lógica de programación (conocimiento) · Entrega por SICVI 567: nombre del archivo `quiz2_apellido_nombre.R`
+:::
+:::::
 
 ### Semana 3 · 22 de abril de 2026 {#semana-3}
 

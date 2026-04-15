@@ -28,6 +28,11 @@ website:
             text: "Semana 1 — Clase"
           - href: semanas/semana-1-taller.qmd
             text: "Semana 1 — Taller"
+          - text: "---"
+          - href: semanas/semana-2.qmd
+            text: "Semana 2 — Clase"
+          - href: semanas/semana-2-taller.qmd
+            text: "Semana 2 — Quiz"
       # - href: calificaciones.qmd
       #   text: Calificaciones
     # right:

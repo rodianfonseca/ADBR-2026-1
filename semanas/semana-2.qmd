@@ -1,0 +1,551 @@
+---
+title: "Semana 2 — Estructuras de datos y control de flujo en R"
+subtitle: "Data frames, listas, bucles y condicionales con datos de aves acuáticas del Caribe"
+date: "2026-04-15"
+author: "Curso 20953 · Análisis de Datos Biológicos bajo R"
+toc: true
+toc-depth: 3
+code-fold: false
+code-tools: true
+---
+
+:::{.callout-tip  icon="false" appearance="simple"}
+**Unidad 1:** Introducción a la Ciencia de Datos en Biología · **Estrategia:** Clase magistral + Aprendizaje activo · **Duración estimada:** 90 minutos
+:::
+
+## Resultado de aprendizaje
+
+Al finalizar esta sesión, el estudiante será capaz de:
+
+1. Construir matrices y data frames combinando vectores de distintos tipos
+2. Indexar, filtrar y modificar data frames con datos biológicos reales
+3. Organizar información heterogénea en listas jerárquicas
+4. Aplicar condicionales (`if/else`, `ifelse()`) para clasificar observaciones biológicas
+5. Escribir bucles `for` y `while` para automatizar operaciones sobre estructuras de datos
+
+---
+
+## 0. Configuración inicial
+
+```{r}
+#| label: configuracion
+# Esta sesión usa exclusivamente R base — sin paquetes externos.
+# Verificamos la versión de R — necesitamos 4.1+ para el pipe nativo |>
+R.version.string
+
+# Fijamos semilla para reproducibilidad en cualquier operación aleatoria
+set.seed(20953)
+```
+
+---
+
+## 1. Repaso rápido — Vectores
+
+La semana pasada construimos vectores simples. Hoy los usaremos como materia prima para estructuras de datos más complejas.
+
+```{r}
+#| label: vectores-repaso
+# Especies de aves acuáticas registradas en la Ciénaga de Mallorquín
+# (registros GBIF Colombia, filtro por localidad)
+especies <- c("Pelecanus occidentalis", "Egretta thula",
+              "Ardea alba", "Fregata magnificens", "Nycticorax nycticorax")
+
+n_individuos  <- c(47L, 312L, 89L, 23L, 156L)
+confirmado    <- c(TRUE, TRUE, FALSE, TRUE, FALSE)
+
+gremio_trofico <- factor(
+  c("piscivoro", "piscivoro", "piscivoro", "cleptoparasito", "piscivoro"),
+  levels = c("piscivoro", "cleptoparasito", "insectivoro")
+)
+
+# Cada vector tiene un solo tipo de dato
+class(especies)        # character
+class(n_individuos)    # integer
+class(confirmado)      # logical
+class(gremio_trofico)  # factor
+```
+
+> **Pregunta para el grupo:** ¿Qué problema tendríamos si quisiéramos exportar estos datos a una tabla de Excel o compartirlos con un colega? ¿Cómo los organizarían?
+
+---
+
+## 2. Matrices
+
+Una matriz es un arreglo rectangular de elementos del **mismo tipo**, organizado en filas y columnas.
+
+```{r}
+#| label: matrices
+# Conteos de aves por zona y temporada en la Ciénaga de Mallorquín
+# Zonas: sur, centro, norte — Temporadas: seca, lluviosa
+conteos_matriz <- matrix(
+  data  = c(47, 89, 156,    # temporada seca: sur, centro, norte
+            62, 134, 201),  # temporada lluviosa: sur, centro, norte
+  nrow  = 2,
+  ncol  = 3,
+  byrow = TRUE              # llenamos fila por fila (por temporada)
+)
+
+rownames(conteos_matriz) <- c("seca", "lluviosa")
+colnames(conteos_matriz) <- c("zona_sur", "zona_centro", "zona_norte")
+
+conteos_matriz
+```
+
+```{r}
+#| label: indexacion-matrices
+# Indexación en matrices: [fila, columna]
+conteos_matriz[1, ]                           # temporada seca completa
+conteos_matriz[, 3]                           # zona norte completa
+conteos_matriz["lluviosa", "zona_centro"]     # celda específica por nombre
+
+# Operaciones sobre matrices — también son vectorizadas
+rowSums(conteos_matriz)    # total de aves por temporada
+colSums(conteos_matriz)    # total de aves por zona
+```
+
+> **¿En qué zona y temporada se registraron más aves?** ¿Qué factor biológico podría explicar esa diferencia?
+
+::: {.callout-warning}
+## Limitación de las matrices: solo un tipo de dato
+
+Si mezclamos tipos, R fuerza coerción:
+
+```{r}
+#| label: coercion-matriz
+matriz_mixta <- matrix(c(1, 2, "tres", 4), nrow = 2)
+class(matriz_mixta[1, 1])  # "character" — el número fue convertido a texto
+```
+
+Esto es problemático en datos biológicos reales que mezclan nombres de especie (character) con conteos (integer) y coordenadas (numeric). **La solución: data frames.**
+:::
+
+---
+
+## 3. Data frames — la estructura central del análisis biológico
+
+Un data frame es una tabla con filas (observaciones) y columnas (variables). Cada columna es un vector, pero columnas distintas pueden ser de tipos distintos.
+
+### 3.1 Creación
+
+```{r}
+#| label: data-frame-creacion
+# Dataset: aves acuáticas — Ciénaga de Mallorquín, Atlántico
+aves_df <- data.frame(
+  especie      = c("Pelecanus occidentalis", "Egretta thula",
+                   "Ardea alba", "Fregata magnificens", "Nycticorax nycticorax"),
+  n_individuos = c(47L, 312L, 89L, 23L, 156L),
+  zona         = factor(c("norte", "centro", "norte", "norte", "sur"),
+                        levels = c("sur", "centro", "norte")),
+  confirmado   = c(TRUE, TRUE, FALSE, TRUE, FALSE),
+  long_culmen  = c(28.4, 7.2, 12.1, 19.8, 6.3),   # longitud del pico en cm
+  peso_g       = c(3100, 410, 850, 1450, 800),      # peso promedio en gramos
+  stringsAsFactors = FALSE
+)
+```
+
+### 3.2 Exploración
+
+```{r}
+#| label: data-frame-exploracion
+nrow(aves_df)    # número de filas
+ncol(aves_df)    # número de columnas
+dim(aves_df)     # dimensiones
+```
+
+```{r}
+#| label: str-aves
+# str() es el primer comando a ejecutar sobre cualquier dataset
+str(aves_df)
+```
+
+```{r}
+#| label: summary-aves
+summary(aves_df)
+```
+
+```{r}
+#| label: head-tail
+head(aves_df, 3)   # primeras 3 filas
+tail(aves_df, 2)   # últimas 2 filas
+```
+
+### 3.3 Indexación
+
+```{r}
+#| label: indexacion-df
+# Por posición: [fila, columna]
+aves_df[1, ]         # primera fila completa
+aves_df[, 2]         # segunda columna como vector
+aves_df[3, 5]        # fila 3, columna 5
+
+# Por nombre — dos formas equivalentes:
+aves_df$especie              # operador $ — la más legible
+aves_df[["n_individuos"]]    # doble corchete
+
+# Selección de múltiples columnas
+aves_df[, c("especie", "n_individuos", "zona")]
+```
+
+```{r}
+#| label: filtrado-df
+# Filtrado por condición
+aves_df[aves_df$n_individuos > 100, ]
+```
+
+```{r}
+#| label: filtrado-multiple
+# Condición múltiple: & (Y), | (O)
+aves_df[aves_df$n_individuos > 50 & aves_df$confirmado == TRUE, ]
+```
+
+> **¿Cómo seleccionarían las aves que pesan más de 1 kg y están en zona norte?** Escríbanlo antes de ver la solución.
+
+::: {.callout-tip collapse="true"}
+## Solución
+
+```{r}
+#| label: filtro-solucion
+aves_df[aves_df$peso_g > 1000 & aves_df$zona == "norte", ]
+```
+:::
+
+### 3.4 Modificación
+
+```{r}
+#| label: modificacion-df
+# Agregar una nueva columna
+aves_df$indice_pico <- aves_df$long_culmen / (aves_df$peso_g / 1000)
+
+# Modificar un valor concreto
+aves_df$confirmado[aves_df$especie == "Ardea alba"] <- TRUE
+
+# Agregar una fila con rbind()
+nuevo_registro <- data.frame(
+  especie      = "Egretta caerulea",
+  n_individuos = 78L,
+  zona         = factor("sur", levels = c("sur", "centro", "norte")),
+  confirmado   = TRUE,
+  long_culmen  = 6.1,
+  peso_g       = 350,
+  indice_pico  = 6.1 / (350 / 1000)
+)
+aves_df <- rbind(aves_df, nuevo_registro)
+tail(aves_df, 2)
+```
+
+### 3.5 Datos faltantes (NA)
+
+En biología los datos faltantes son la regla, no la excepción.
+
+```{r}
+#| label: datos-faltantes
+monitoreo_df <- data.frame(
+  sitio           = c("Mallorquín", "Totumo", "Luriza", "Palomino", "Salamanca"),
+  riqueza_aves    = c(34L, NA, 28L, 45L, NA),
+  cobertura_veg   = c(0.72, 0.45, NA, 0.89, 0.61),
+  distancia_rio_m = c(150, 2300, 800, 50, 420)
+)
+
+# Detectar NAs
+colSums(is.na(monitoreo_df))   # NAs por columna
+
+# Las funciones estadísticas requieren na.rm = TRUE
+mean(monitoreo_df$riqueza_aves, na.rm = TRUE)
+
+# Filas completas (sin ningún NA)
+monitoreo_df[complete.cases(monitoreo_df), ]
+```
+
+> **¿Por qué es peligroso ignorar los NAs sin investigar su origen?** *(Pista: ¿podría haber un patrón en qué datos faltan?)*
+
+---
+
+## 4. Listas — estructuras flexibles y jerárquicas
+
+Una lista puede contener objetos de **cualquier tipo y tamaño**. Es la estructura más flexible de R.
+
+### 4.1 Creación
+
+```{r}
+#| label: lista-creacion
+# Expediente completo de un sitio de monitoreo de manglar
+sitio_mallorquin <- list(
+  nombre           = "Ciénaga de Mallorquín",
+  departamento     = "Atlántico",
+  coordenadas      = c(lat = 11.044, lon = -74.869),  # WGS84
+  area_ha          = 1027,
+  tipo_ecosistema  = factor("manglar", levels = c("manglar", "bosque_seco", "humedal")),
+  especies_manglar = c("Rhizophora mangle", "Avicennia germinans", "Laguncularia racemosa"),
+  conteos_aves     = aves_df,     # ¡data frame dentro de una lista!
+  fecha_ultimo_monitoreo = as.Date("2025-11-20"),
+  tiene_veda       = TRUE
+)
+
+length(sitio_mallorquin)   # 9 componentes
+names(sitio_mallorquin)    # nombres de cada componente
+```
+
+### 4.2 Indexación
+
+```{r}
+#| label: lista-indexacion
+# Tres formas equivalentes de acceder a un componente:
+sitio_mallorquin[[1]]            # por posición
+sitio_mallorquin[["area_ha"]]    # por nombre con [[]]
+sitio_mallorquin$nombre          # por nombre con $
+
+# Acceso anidado: lista → data frame → columna
+sitio_mallorquin$conteos_aves$especie
+```
+
+```{r}
+#| label: lista-vs-simple
+# Diferencia importante entre [] y [[]]
+class(sitio_mallorquin[1])    # "list" — devuelve una lista de un elemento
+class(sitio_mallorquin[[1]])  # "character" — devuelve el contenido directamente
+```
+
+### 4.3 Lista de sitios
+
+```{r}
+#| label: lista-de-listas
+sitio_totumo <- list(
+  nombre          = "Laguna del Totumo",
+  departamento    = "Atlántico",
+  coordenadas     = c(lat = 10.784, lon = -75.082),
+  area_ha         = 160,
+  tipo_ecosistema = factor("humedal", levels = c("manglar", "bosque_seco", "humedal")),
+  tiene_veda      = FALSE
+)
+
+# Lista que agrupa los sitios del programa de monitoreo
+sitios_atlantico <- list(mallorquin = sitio_mallorquin,
+                         totumo     = sitio_totumo)
+
+sitios_atlantico$totumo$area_ha
+sitios_atlantico[["mallorquin"]]$tipo_ecosistema
+```
+
+> **¿Cuándo usarían un data frame y cuándo una lista?** Piensen en un proyecto de campo real: ¿qué información va a la tabla y qué sería difícil de meter en una tabla?
+
+---
+
+## 5. Condicionales
+
+### 5.1 `if / else`
+
+```{r}
+#| label: if-else
+n_individuos_garceta <- 312   # Egretta thula en el último conteo
+
+if (n_individuos_garceta > 200) {
+  cat("Población abundante: se recomienda estimación por transectos.\n")
+} else if (n_individuos_garceta > 50) {
+  cat("Población media: conteo directo es viable.\n")
+} else {
+  cat("Población baja: se activa protocolo de vigilancia.\n")
+}
+```
+
+### 5.2 `ifelse()` — versión vectorizada
+
+```{r}
+#| label: ifelse-vectorizado
+# Clasifica cada especie según su abundancia
+estado_poblacion <- ifelse(aves_df$n_individuos > 100, "abundante", "escaso")
+names(estado_poblacion) <- aves_df$especie
+estado_poblacion
+```
+
+::: {.callout-warning}
+## Error frecuente: `if()` con un vector
+
+`if()` solo acepta **una sola** condición (`TRUE` o `FALSE`). Si le pasamos un vector, R produce el error *"the condition has length > 1"*. Para vectores, usamos `ifelse()`.
+:::
+
+### 5.3 `switch()` — alternativa a múltiples if/else
+
+```{r}
+#| label: switch
+clasificar_ecosistema <- function(tipo) {
+  switch(tipo,
+    "manglar"     = "Ecosistema costero salino — alta prioridad de conservación",
+    "bosque_seco" = "Ecosistema continental — amenazado en el Caribe colombiano",
+    "humedal"     = "Ecosistema acuático continental — Convenio Ramsar",
+    "Tipo de ecosistema no reconocido"   # caso por defecto
+  )
+}
+
+clasificar_ecosistema("manglar")
+clasificar_ecosistema("coral")   # activará el caso por defecto
+```
+
+---
+
+## 6. Bucles
+
+### 6.1 `for` — iterar sobre un conjunto conocido
+
+```{r}
+#| label: bucle-for
+# Índice morfométrico por especie (peso/culmen²)
+cat("=== ÍNDICE MORFOMÉTRICO POR ESPECIE ===\n")
+for (i in 1:nrow(aves_df)) {
+  imc <- aves_df$peso_g[i] / (aves_df$long_culmen[i]^2)
+  cat(sprintf("%-30s: %.2f\n", aves_df$especie[i], imc))
+}
+```
+
+```{r}
+#| label: bucle-for-acumulador
+# Pre-alocar el vector antes del bucle — mejor práctica de rendimiento
+n_letras <- vector("integer", length = nrow(aves_df))
+for (i in seq_along(aves_df$especie)) {
+  n_letras[i] <- nchar(aves_df$especie[i])
+}
+names(n_letras) <- aves_df$especie
+n_letras
+```
+
+### 6.2 `while` — iterar mientras una condición sea verdadera
+
+```{r}
+#| label: bucle-while
+# ¿Cuántos muestreos para acumular 500 aves?
+set.seed(20953)
+total_aves  <- 0L
+n_muestreos <- 0L
+
+while (total_aves < 500L) {
+  conteo_sesion <- sample(30:80, size = 1)
+  total_aves    <- total_aves + conteo_sesion
+  n_muestreos   <- n_muestreos + 1L
+}
+cat(sprintf("Se necesitaron %d muestreos para acumular %d individuos.\n",
+            n_muestreos, total_aves))
+```
+
+### 6.3 `next` y `break` — control dentro del bucle
+
+```{r}
+#| label: next-break
+# next: saltar registros sin confirmar
+cat("=== REGISTROS CONFIRMADOS ===\n")
+for (i in 1:nrow(aves_df)) {
+  if (!aves_df$confirmado[i]) next
+  cat(sprintf("%s — %d individuos en zona %s\n",
+              aves_df$especie[i], aves_df$n_individuos[i], aves_df$zona[i]))
+}
+```
+
+```{r}
+#| label: break-ejemplo
+# break: salir al encontrar el primer resultado
+cat("\n=== PRIMERA ESPECIE SUPERABUNDANTE ===\n")
+for (i in 1:nrow(aves_df)) {
+  if (aves_df$n_individuos[i] > 200) {
+    cat("Primera especie con > 200 individuos:", aves_df$especie[i], "\n")
+    break
+  }
+}
+```
+
+---
+
+## 7. Caso integrador — Sistema de alerta de poblaciones
+
+Combinamos data frames, condicionales y bucles en un flujo de análisis completo.
+
+```{r}
+#| label: caso-integrador
+cat("=== SISTEMA DE ALERTA DE POBLACIONES ===\n\n")
+
+for (i in 1:nrow(aves_df)) {
+  sp         <- aves_df$especie[i]
+  n          <- aves_df$n_individuos[i]
+  confirmado <- aves_df$confirmado[i]
+
+  if (!confirmado) {
+    cat(sp, "— SIN CONFIRMAR (requiere verificación)\n")
+    next
+  }
+
+  if (n >= 200) {
+    estado <- "VERDE   — Población estable"
+  } else if (n >= 50) {
+    estado <- "AMARILLO — Monitoreo frecuente"
+  } else {
+    estado <- "ROJO    — Alerta de conservación"
+  }
+
+  cat(sprintf("%-30s | N = %3d | %s\n", sp, n, estado))
+}
+```
+
+---
+
+## 8. Ejercicio en clase
+
+**Tiempo:** 10 minutos · Trabajen en parejas
+
+**Contexto:** El equipo de conservación de la Ciénaga de Mallorquín necesita un reporte automatizado de las aves de zona norte.
+
+**a)** Crea un data frame `aves_norte` con solo las aves de zona norte. ¿Cuántas especies hay? ¿Cuántos individuos en total?
+
+**b)** Con un bucle `for`, imprime por especie:
+`"La [especie] tiene un pico de [X] cm, clasificado como [largo/corto]"`
+*(Criterio: largo si `long_culmen > 15`, corto si no)*
+
+**c)** Crea una lista `reporte_norte` con tres componentes: `datos`, `n_spp`, `total_n`. Verifica con `str()`.
+
+::: {.callout-tip collapse="true"}
+## Pistas
+
+```r
+# a) Filtrar zona norte
+aves_norte <- aves_df[aves_df$zona == "norte", ]
+
+# b) Bucle con condicional
+for (i in 1:nrow(aves_norte)) {
+  clase_pico <- ifelse(aves_norte$long_culmen[i] > 15, "largo", "corto")
+  cat(sprintf("La %s tiene un pico de %.1f cm, clasificado como %s\n",
+              aves_norte$especie[i], aves_norte$long_culmen[i], clase_pico))
+}
+
+# c) Lista de resultados
+reporte_norte <- list(
+  datos   = aves_norte,
+  n_spp   = nrow(aves_norte),
+  total_n = sum(aves_norte$n_individuos)
+)
+str(reporte_norte)
+```
+:::
+
+---
+
+## Cierre de sesión
+
+```{r}
+#| label: resumen-estructuras
+cat("=== RESUMEN: ESTRUCTURAS DE DATOS EN R ===\n")
+cat("Vector    : 1 dimensión, 1 tipo de dato\n")
+cat("Matriz    : 2 dimensiones, 1 tipo de dato\n")
+cat("Data frame: 2 dimensiones, columnas de distinto tipo\n")
+cat("Lista     : sin restricción de tipo ni dimensión\n")
+```
+
+```{r}
+#| label: session-info
+sessionInfo()
+```
+
+---
+
+::: {.callout-note}
+## Para la próxima clase (Semana 3)
+
+- **Tema:** Control de versiones con Git y GitHub. Investigación reproducible con Quarto.
+- **Preparación:** Crea una cuenta en [github.com](https://github.com) si aún no tienes una.
+- **Evaluación:** Taller de Git y Quarto — entrega en repositorio de GitHub con documento `.qmd`.
+:::
