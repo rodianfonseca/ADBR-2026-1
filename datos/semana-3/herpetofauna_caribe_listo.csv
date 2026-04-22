@@ -1,0 +1,61 @@
+id_registro,especie,nombre_comun,clase,orden,familia,departamento,municipio,localidad,ecosistema,latitud,longitud,fecha,num_individuos,longitud_svl_mm,peso_g,sexo,estado_uicn,endemica_colombia,metodo_captura,observaciones
+1,Iguana iguana,Iguana verde,Reptilia,Squamata,Iguanidae,Atlántico,Barranquilla,Isla Salamanca,Manglar,10.9843,-74.8312,2023-03-12,3,312,245,M,LC,No,Captura manual,Adulto reproductivo
+2,Iguana iguana,Iguana verde,Reptilia,Squamata,Iguanidae,Atlántico,Barranquilla,Isla Salamanca,Manglar,10.9843,-74.8312,2023-03-12,5,275,198,F,LC,No,Captura manual,Hembras con signos de gravidez
+3,Caiman crocodilus,Babilla,Reptilia,Crocodylia,Alligatoridae,Atlántico,Malambo,Ciénaga del Uvero,Ciénaga,10.8521,-74.7834,2023-04-05,1,1450,3200,M,LC,No,Avistamiento,Individuo adulto en orilla
+4,Boa constrictor,Boa,Reptilia,Squamata,Boidae,Magdalena,Ciénaga,Ciénaga Grande,Manglar,10.9012,-74.2341,2023-02-18,1,1820,4100,F,LC,No,Captura manual,Hembra adulta con cicatriz
+5,Boa constrictor,Boa,Reptilia,Squamata,Boidae,Magdalena,Pueblo Viejo,Tasajera,Bosque seco,10.9234,-74.2567,2023-05-22,1,1240,2350,M,LC,No,Trampa herpetológica,NA
+6,Basiliscus basiliscus,Basilisco,Reptilia,Squamata,Corytophanidae,Atlántico,Baranoa,Pital,Bosque seco,10.7923,-74.9234,2023-03-30,2,187,78,M,LC,No,Captura manual,Machos con cresta desarrollada
+7,Basiliscus basiliscus,Basilisco,Reptilia,Squamata,Corytophanidae,Atlántico,Baranoa,Pital,Bosque seco,10.7923,-74.9234,2023-03-30,4,134,42,F,LC,No,Captura manual,Hembras sin cresta
+8,Anolis auratus,Camaleón dorado,Reptilia,Squamata,Dactyloidae,Atlántico,Soledad,Polideportivo sur,Área urbana,10.9187,-74.7654,2023-06-14,6,72,8,M,LC,No,Captura manual,NA
+9,Anolis auratus,Camaleón dorado,Reptilia,Squamata,Dactyloidae,Atlántico,Barranquilla,Parque Bellavista,Área urbana,10.9521,-74.8143,2023-06-14,9,58,5,F,LC,No,Captura manual,NA
+10,Tupinambis teguixin,Mato,Reptilia,Squamata,Teiidae,Magdalena,Ciénaga,Ciénaga Grande,Bosque seco,10.8932,-74.2789,2023-01-25,2,645,1450,M,LC,No,Trampa herpetológica,Individuos capturados en trampa de caída
+11,Tupinambis teguixin,Mato,Reptilia,Squamata,Teiidae,Magdalena,Fundación,Vereda Palmor,Bosque seco,10.5234,-74.1823,2023-02-08,1,598,1230,F,LC,No,Captura manual,NA
+12,Rhinella marina,Sapo marino,Amphibia,Anura,Bufonidae,Atlántico,Barranquilla,Barrio El Recreo,Área urbana,10.9643,-74.8021,2023-07-03,12,112,234,NA,LC,No,Conteo nocturno,Activos en época de lluvias
+13,Rhinella marina,Sapo marino,Amphibia,Anura,Bufonidae,Atlántico,Galapa,Periurbano Galapa,Área urbana,10.8934,-74.8712,2023-07-10,8,98,187,NA,LC,No,Conteo nocturno,NA
+14,Leptodactylus fragilis,Rana frágil,Amphibia,Anura,Leptodactylidae,Atlántico,Luruaco,Laguna de Luruaco,Humedal,10.6123,-75.1423,2023-08-14,23,42,12,NA,LC,No,Conteo nocturno,Coro nupcial activo
+15,Leptodactylus fragilis,Rana frágil,Amphibia,Anura,Leptodactylidae,Atlántico,Repelón,Embalse El Guájaro,Humedal,10.4987,-74.9312,2023-08-20,17,38,9,NA,LC,No,Conteo nocturno,NA
+16,Leptodactylus colombiensis,Rana de Colombia,Amphibia,Anura,Leptodactylidae,Córdoba,Montería,Sinú bajo,Humedal,8.7612,-75.8923,2023-09-02,31,56,18,NA,LC,Si,Conteo nocturno,Especie endémica del norte de Colombia
+17,Leptodactylus colombiensis,Rana de Colombia,Amphibia,Anura,Leptodactylidae,Córdoba,Lorica,Ciénaga de Lorica,Humedal,9.2134,-75.8156,2023-09-12,14,51,15,NA,LC,Si,Conteo nocturno,NA
+18,Phrynohyas venulosa,Rana lechosa,Amphibia,Anura,Hylidae,Atlántico,Sabanalarga,Pinar del Río,Bosque seco,10.6234,-74.9123,2023-10-05,7,76,34,NA,LC,No,Trampa de pitfall,NA
+19,Phrynohyas venulosa,Rana lechosa,Amphibia,Anura,Hylidae,Magdalena,Aracataca,Finca La Perseverancia,Bosque seco,10.5912,-74.2034,2023-10-18,4,68,27,NA,LC,No,Trampa de pitfall,NA
+20,Chelonoidis carbonarius,Morrocoy,Reptilia,Testudines,Testudinidae,Atlántico,Usiacurí,Corregimiento Cuatro Bocas,Bosque seco,10.7312,-74.9923,2023-03-05,2,287,1870,M,VU,No,Captura manual,Individuos con marcaje previo
+21,Chelonoidis carbonarius,Morrocoy,Reptilia,Testudines,Testudinidae,Atlántico,Juan de Acosta,Vereda La Peña,Bosque seco,10.8134,-75.0312,2023-03-15,1,265,1640,F,VU,No,Captura manual,Hembra con cicatriz en plastrón
+22,Chelonoidis carbonarius,Morrocoy,Reptilia,Testudines,Testudinidae,Magdalena,Pivijay,Hacienda Las Marías,Bosque seco,10.4612,-74.6234,2023-04-20,3,301,2100,M,VU,No,Avistamiento,NA
+23,Kinosternon leucostomum,Tapaculo,Reptilia,Testudines,Kinosternidae,Atlántico,Malambo,Ciénaga del Uvero,Ciénaga,10.8521,-74.7834,2023-04-05,5,102,342,NA,LC,No,Trampa de nasa,Capturadas en nasa para peces
+24,Kinosternon leucostomum,Tapaculo,Reptilia,Testudines,Kinosternidae,Atlántico,Repelón,Embalse El Guájaro,Humedal,10.4987,-74.9312,2023-05-18,8,95,298,NA,LC,No,Trampa de nasa,NA
+25,Trachemys callirostris,Hicotea,Reptilia,Testudines,Emydidae,Atlántico,Repelón,Embalse El Guájaro,Humedal,10.4987,-74.9312,2023-05-18,11,187,780,F,VU,Si,Captura manual,Especie endémica amenazada
+26,Trachemys callirostris,Hicotea,Reptilia,Testudines,Emydidae,Atlántico,Campo de la Cruz,Ciénaga del Totumo,Ciénaga,10.3712,-74.8923,2023-06-10,7,201,920,M,VU,Si,Captura manual,NA
+27,Trachemys callirostris,Hicotea,Reptilia,Testudines,Emydidae,Magdalena,Ciénaga,Ciénaga Grande,Ciénaga,10.9012,-74.2341,2023-06-22,15,175,690,NA,VU,Si,Avistamiento,Grupo en orilla soleada
+28,Corallus ruschenbergerii,Boa de los manglares,Reptilia,Squamata,Boidae,Magdalena,Ciénaga,Isla del Rosario,Manglar,10.8723,-74.3156,2023-02-14,1,1120,1890,F,LC,No,Captura manual,NA
+29,Leptophis ahaetulla,Lora,Reptilia,Squamata,Colubridae,Atlántico,Baranoa,Pital,Bosque seco,10.7923,-74.9234,2023-03-30,1,645,98,M,LC,No,Captura manual,NA
+30,Leptophis ahaetulla,Lora,Reptilia,Squamata,Colubridae,Atlántico,Polo Nuevo,Reserva forestal,Bosque seco,10.7123,-74.9812,2023-04-12,2,598,87,F,LC,No,Trampa herpetológica,NA
+31,Mastigodryas boddaerti,Cazadora rayada,Reptilia,Squamata,Colubridae,Atlántico,Palmar de Varela,Bosque ripario,Bosque seco,10.8012,-74.7523,2023-05-08,1,723,134,M,LC,No,Captura manual,NA
+32,Micrurus dissoleucus,Coral del Caribe,Reptilia,Squamata,Elapidae,Atlántico,Piojó,Área boscosa,Bosque seco,10.7523,-75.0923,2023-06-03,1,432,56,NA,LC,No,Avistamiento,Individuo muerto en vía
+33,Bothrops asper,Mapaná,Reptilia,Squamata,Viperidae,Magdalena,Ciénaga,Finca La Florida,Bosque seco,10.8412,-74.2678,2023-07-15,1,987,743,F,LC,No,Captura manual,Hembra adulta capturada por comunidad
+34,Bothrops asper,Mapaná,Reptilia,Squamata,Viperidae,Córdoba,Montería,Vereda El Contento,Bosque seco,8.6523,-75.9234,2023-08-02,1,854,612,M,LC,No,Captura manual,Liberada tras medición
+35,Lachesis muta,Verrugosa,Reptilia,Squamata,Viperidae,Córdoba,Tierralta,Río Sinú alto,Bosque húmedo,8.1723,-76.0234,2023-09-18,1,1678,2340,NA,LC,No,Avistamiento,Registro fotográfico únicamente
+36,Hemidactylus frenatus,Salamanqueja casera,Reptilia,Squamata,Gekkonidae,Atlántico,Barranquilla,Barrio El Prado,Área urbana,10.9876,-74.8123,2023-01-10,15,72,6,NA,LC,No,Conteo nocturno,Especie introducida
+37,Hemidactylus frenatus,Salamanqueja casera,Reptilia,Squamata,Gekkonidae,Atlántico,Soledad,Centro urbano,Área urbana,10.9187,-74.7654,2023-01-10,22,65,5,NA,LC,No,Conteo nocturno,NA
+38,Gonatodes albogularis,Salamanqueja de garganta blanca,Reptilia,Squamata,Sphaerodactylidae,Atlántico,Barranquilla,Jardín Botánico,Bosque seco,10.9712,-74.8345,2023-02-22,4,45,3,M,LC,No,Captura manual,NA
+39,Gonatodes albogularis,Salamanqueja de garganta blanca,Reptilia,Squamata,Sphaerodactylidae,Atlántico,Barranquilla,Jardín Botánico,Bosque seco,10.9712,-74.8345,2023-02-22,6,42,2,F,LC,No,Captura manual,NA
+40,Cnemidophorus lemniscatus,Lobito corredor,Reptilia,Squamata,Teiidae,Atlántico,Puerto Colombia,Playa de Salgar,Área costera,11.0012,-74.9123,2023-03-20,8,87,14,M,LC,No,Captura manual,NA
+41,Cnemidophorus lemniscatus,Lobito corredor,Reptilia,Squamata,Teiidae,Atlántico,Tubará,Área playera,Área costera,11.0234,-74.9756,2023-03-20,11,79,11,F,LC,No,Captura manual,NA
+42,Gymnophthalmus speciosus,Lagartija,Reptilia,Squamata,Gymnophthalmidae,Atlántico,Luruaco,Laguna de Luruaco,Bosque seco,10.6123,-75.1423,2023-04-18,3,61,4,NA,LC,No,Trampa de pitfall,NA
+43,Amphisbaena fuliginosa,Culebrita ciega,Reptilia,Squamata,Amphisbaenidae,Atlántico,Polonuevo,Área agrícola,Bosque seco,10.7812,-74.8534,2023-05-30,2,234,18,NA,LC,No,Trampa de pitfall,Hallada durante labranza
+44,Pleurodema brachyops,Rana de labio blanco,Amphibia,Anura,Leptodactylidae,Atlántico,Sabanalarga,Laguna temporal,Humedal,10.6234,-74.9123,2023-08-28,41,36,7,NA,LC,No,Conteo nocturno,Abundante tras primeras lluvias
+45,Pleurodema brachyops,Rana de labio blanco,Amphibia,Anura,Leptodactylidae,Atlántico,Repelón,Zona anegada,Humedal,10.4987,-74.9312,2023-09-05,28,33,6,NA,LC,No,Conteo nocturno,NA
+46,Hypsiboas pugnax,Rana toro del Caribe,Amphibia,Anura,Hylidae,Magdalena,Fundación,Estero Bella Vista,Humedal,10.4823,-74.1934,2023-09-22,19,67,29,NA,LC,No,Conteo nocturno,NA
+47,Hypsiboas pugnax,Rana toro del Caribe,Amphibia,Anura,Hylidae,Córdoba,Lorica,Ribera Sinú,Humedal,9.2134,-75.8156,2023-10-08,22,71,32,NA,LC,No,Conteo nocturno,NA
+48,Engystomops pustulosus,Tungara,Amphibia,Anura,Leiuperidae,Atlántico,Barranquilla,Parque La Loma,Área urbana,10.9654,-74.8234,2023-08-15,38,27,3,NA,LC,No,Conteo nocturno,Llamada nupcial muy activa
+49,Engystomops pustulosus,Tungara,Amphibia,Anura,Leiuperidae,Atlántico,Galapa,Charco temporal,Humedal,10.8934,-74.8712,2023-08-22,26,25,3,NA,LC,No,Conteo nocturno,NA
+50,Scinax rostratus,Ranita de pico,Amphibia,Anura,Hylidae,Atlántico,Manatí,Ciénaga La Bahía,Humedal,10.4312,-74.9623,2023-09-10,33,38,8,NA,LC,No,Conteo nocturno,NA
+51,Scinax rostratus,Ranita de pico,Amphibia,Anura,Hylidae,Atlántico,Campo de la Cruz,Bordes de ciénaga,Humedal,10.3712,-74.8923,2023-09-18,18,35,7,NA,LC,No,Conteo nocturno,NA
+52,Thecadactylus rapicauda,Salamanqueja rabuda,Reptilia,Squamata,Phyllodactylidae,Magdalena,Santa Marta,Sierra Nevada baja,Bosque húmedo,11.0234,-74.1823,2023-02-05,3,112,22,NA,LC,No,Captura manual,NA
+53,Thecadactylus rapicauda,Salamanqueja rabuda,Reptilia,Squamata,Phyllodactylidae,Córdoba,Montería,Área rural,Bosque húmedo,8.6523,-75.9234,2023-03-12,1,98,17,NA,LC,No,Captura manual,NA
+54,Mabuya mabouya,Lución del Caribe,Reptilia,Squamata,Scincidae,Atlántico,Barranquilla,Isla Salamanca,Manglar,10.9843,-74.8312,2023-04-08,2,134,34,NA,LC,No,Captura manual,NA
+55,Mabuya mabouya,Lución del Caribe,Reptilia,Squamata,Scincidae,Atlántico,Puerto Colombia,Vía al Mar,Área costera,11.0012,-74.9123,2023-04-15,4,125,28,NA,LC,No,Captura manual,NA
+56,Caiman crocodilus,Babilla,Reptilia,Crocodylia,Alligatoridae,Córdoba,Montería,Río Sinú,Ciénaga,8.7612,-75.8923,2023-05-20,3,1280,2890,NA,LC,No,Avistamiento,Grupo de juveniles
+57,Caiman crocodilus,Babilla,Reptilia,Crocodylia,Alligatoridae,Magdalena,Ciénaga,Ciénaga Grande,Ciénaga,10.9012,-74.2341,2023-06-14,2,1560,3450,M,LC,No,Avistamiento,NA
+58,Iguana iguana,Iguana verde,Reptilia,Squamata,Iguanidae,Córdoba,Montería,Río Sinú,Bosque ripario,8.7612,-75.8923,2023-07-05,8,298,212,NA,LC,No,Avistamiento,Grupo en ramas sobre el río
+59,Anolis tropidogaster,Anolis de collar,Reptilia,Squamata,Dactyloidae,Magdalena,Santa Marta,Sierra Nevada baja,Bosque húmedo,11.0234,-74.1823,2023-03-25,5,58,6,M,LC,No,Captura manual,NA
+60,Anolis tropidogaster,Anolis de collar,Reptilia,Squamata,Dactyloidae,Magdalena,Santa Marta,Sierra Nevada baja,Bosque húmedo,11.0234,-74.1823,2023-03-25,7,51,5,F,LC,No,Captura manual,NA

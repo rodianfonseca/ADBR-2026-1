@@ -8,7 +8,7 @@
 
 <meta name="author" content="Curso 20953 · Análisis de Datos Biológicos bajo R">
 
-<title>Taller Semana 1 — Tipos de datos y vectores en R – Análisis de Datos Biológicos en R</title>
+<title>Taller Semana 3 — Git, GitHub y Quarto – Análisis de Datos Biológicos en R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -105,8 +105,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="../styles.css">
-<meta property="og:title" content="Taller Semana 1 — Tipos de datos y vectores en R – Análisis de Datos Biológicos en R">
-<meta property="og:description" content="Datos climatológicos de municipios del departamento del Atlántico">
+<meta property="og:title" content="Taller Semana 3 — Git, GitHub y Quarto – Análisis de Datos Biológicos en R">
+<meta property="og:description" content="Repositorio reproducible con datos de herpetofauna del Caribe colombiano">
 <meta property="og:site_name" content="Análisis de Datos Biológicos en R">
 </head>
 
@@ -195,23 +195,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#objetivos-del-taller" id="toc-objetivos-del-taller" class="nav-link active" data-scroll-target="#objetivos-del-taller">Objetivos del taller</a></li>
   <li><a href="#contexto-biológico" id="toc-contexto-biológico" class="nav-link" data-scroll-target="#contexto-biológico">Contexto biológico</a></li>
   <li><a href="#dataset" id="toc-dataset" class="nav-link" data-scroll-target="#dataset">Dataset</a></li>
-  <li><a href="#parte-1-tipos-de-datos-y-exploración-inicial-estimado-25-minutos" id="toc-parte-1-tipos-de-datos-y-exploración-inicial-estimado-25-minutos" class="nav-link" data-scroll-target="#parte-1-tipos-de-datos-y-exploración-inicial-estimado-25-minutos">Parte 1: Tipos de datos y exploración inicial (estimado: 25 minutos)</a>
+  <li><a href="#estructura-esperada-del-repositorio" id="toc-estructura-esperada-del-repositorio" class="nav-link" data-scroll-target="#estructura-esperada-del-repositorio">Estructura esperada del repositorio</a></li>
+  <li><a href="#instrucciones-paso-a-paso" id="toc-instrucciones-paso-a-paso" class="nav-link" data-scroll-target="#instrucciones-paso-a-paso">Instrucciones paso a paso</a>
   <ul class="collapse">
-  <li><a href="#verifica-los-tipos-de-datos" id="toc-verifica-los-tipos-de-datos" class="nav-link" data-scroll-target="#verifica-los-tipos-de-datos">1.1 Verifica los tipos de datos</a></li>
-  <li><a href="#estadísticas-de-resumen" id="toc-estadísticas-de-resumen" class="nav-link" data-scroll-target="#estadísticas-de-resumen">1.2 Estadísticas de resumen</a></li>
+  <li><a href="#paso-1-crear-el-repositorio-en-github" id="toc-paso-1-crear-el-repositorio-en-github" class="nav-link" data-scroll-target="#paso-1-crear-el-repositorio-en-github">Paso 1 — Crear el repositorio en GitHub</a></li>
+  <li><a href="#paso-2-clonar-el-repositorio-en-rstudio" id="toc-paso-2-clonar-el-repositorio-en-rstudio" class="nav-link" data-scroll-target="#paso-2-clonar-el-repositorio-en-rstudio">Paso 2 — Clonar el repositorio en RStudio</a></li>
+  <li><a href="#paso-3-preparar-los-datos" id="toc-paso-3-preparar-los-datos" class="nav-link" data-scroll-target="#paso-3-preparar-los-datos">Paso 3 — Preparar los datos</a></li>
+  <li><a href="#paso-4-crear-el-documento-quarto" id="toc-paso-4-crear-el-documento-quarto" class="nav-link" data-scroll-target="#paso-4-crear-el-documento-quarto">Paso 4 — Crear el documento Quarto</a></li>
+  <li><a href="#paso-5-completar-el-documento" id="toc-paso-5-completar-el-documento" class="nav-link" data-scroll-target="#paso-5-completar-el-documento">Paso 5 — Completar el documento</a></li>
+  <li><a href="#paso-6-renderizar" id="toc-paso-6-renderizar" class="nav-link" data-scroll-target="#paso-6-renderizar">Paso 6 — Renderizar</a></li>
+  <li><a href="#paso-7-commit-y-push" id="toc-paso-7-commit-y-push" class="nav-link" data-scroll-target="#paso-7-commit-y-push">Paso 7 — Commit y Push</a></li>
+  <li><a href="#paso-8-entregar-en-sicvi-567" id="toc-paso-8-entregar-en-sicvi-567" class="nav-link" data-scroll-target="#paso-8-entregar-en-sicvi-567">Paso 8 — Entregar en SICVI 567</a></li>
   </ul></li>
-  <li><a href="#parte-2-indexación-y-operaciones-vectorizadas-estimado-30-minutos" id="toc-parte-2-indexación-y-operaciones-vectorizadas-estimado-30-minutos" class="nav-link" data-scroll-target="#parte-2-indexación-y-operaciones-vectorizadas-estimado-30-minutos">Parte 2: Indexación y operaciones vectorizadas (estimado: 30 minutos)</a>
+  <li><a href="#partes-del-documento-quarto" id="toc-partes-del-documento-quarto" class="nav-link" data-scroll-target="#partes-del-documento-quarto">Partes del documento Quarto</a>
   <ul class="collapse">
-  <li><a href="#acceso-por-posición-y-nombre" id="toc-acceso-por-posición-y-nombre" class="nav-link" data-scroll-target="#acceso-por-posición-y-nombre">2.1 Acceso por posición y nombre</a></li>
-  <li><a href="#filtros-lógicos-vectorizados" id="toc-filtros-lógicos-vectorizados" class="nav-link" data-scroll-target="#filtros-lógicos-vectorizados">2.2 Filtros lógicos vectorizados</a></li>
-  <li><a href="#operaciones-vectorizadas" id="toc-operaciones-vectorizadas" class="nav-link" data-scroll-target="#operaciones-vectorizadas">2.3 Operaciones vectorizadas</a></li>
+  <li><a href="#parte-1-yaml" id="toc-parte-1-yaml" class="nav-link" data-scroll-target="#parte-1-yaml">Parte 1 — YAML</a></li>
+  <li><a href="#parte-2-introducción-en-markdown" id="toc-parte-2-introducción-en-markdown" class="nav-link" data-scroll-target="#parte-2-introducción-en-markdown">Parte 2 — Introducción en Markdown</a></li>
+  <li><a href="#parte-3-carga-y-exploración-del-dataset" id="toc-parte-3-carga-y-exploración-del-dataset" class="nav-link" data-scroll-target="#parte-3-carga-y-exploración-del-dataset">Parte 3 — Carga y exploración del dataset</a></li>
+  <li><a href="#parte-4-gráfico-1-registros-por-ecosistema" id="toc-parte-4-gráfico-1-registros-por-ecosistema" class="nav-link" data-scroll-target="#parte-4-gráfico-1-registros-por-ecosistema">Parte 4 — Gráfico 1: Registros por ecosistema</a></li>
+  <li><a href="#parte-5-gráfico-2-variable-morfométrica-por-clase" id="toc-parte-5-gráfico-2-variable-morfométrica-por-clase" class="nav-link" data-scroll-target="#parte-5-gráfico-2-variable-morfométrica-por-clase">Parte 5 — Gráfico 2: Variable morfométrica por clase</a></li>
+  <li><a href="#parte-6-callout-de-cierre" id="toc-parte-6-callout-de-cierre" class="nav-link" data-scroll-target="#parte-6-callout-de-cierre">Parte 6 — Callout de cierre</a></li>
   </ul></li>
-  <li><a href="#parte-3-visualización-con-r-base-estimado-35-minutos" id="toc-parte-3-visualización-con-r-base-estimado-35-minutos" class="nav-link" data-scroll-target="#parte-3-visualización-con-r-base-estimado-35-minutos">Parte 3: Visualización con R base (estimado: 35 minutos)</a>
-  <ul class="collapse">
-  <li><a href="#gráfico-de-barras-precipitación-mensual" id="toc-gráfico-de-barras-precipitación-mensual" class="nav-link" data-scroll-target="#gráfico-de-barras-precipitación-mensual">3.1 Gráfico de barras — precipitación mensual</a></li>
-  <li><a href="#gráfico-de-línea-temperatura-máxima-mensual" id="toc-gráfico-de-línea-temperatura-máxima-mensual" class="nav-link" data-scroll-target="#gráfico-de-línea-temperatura-máxima-mensual">3.2 Gráfico de línea — temperatura máxima mensual</a></li>
-  <li><a href="#climograma-simplificado-desafío" id="toc-climograma-simplificado-desafío" class="nav-link" data-scroll-target="#climograma-simplificado-desafío">3.3 Climograma simplificado <em>(desafío)</em></a></li>
-  </ul></li>
+  <li><a href="#preguntas-de-reflexión" id="toc-preguntas-de-reflexión" class="nav-link" data-scroll-target="#preguntas-de-reflexión">Preguntas de reflexión</a></li>
+  <li><a href="#lista-de-verificación-antes-de-entregar" id="toc-lista-de-verificación-antes-de-entregar" class="nav-link" data-scroll-target="#lista-de-verificación-antes-de-entregar">Lista de verificación antes de entregar</a></li>
+  <li><a href="#errores-frecuentes" id="toc-errores-frecuentes" class="nav-link" data-scroll-target="#errores-frecuentes">Errores frecuentes</a></li>
+  <li><a href="#recursos-de-referencia" id="toc-recursos-de-referencia" class="nav-link" data-scroll-target="#recursos-de-referencia">Recursos de referencia</a></li>
   </ul>
 </nav>
     </div>
@@ -220,8 +228,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Taller Semana 1 — Tipos de datos y vectores en R</h1>
-<p class="subtitle lead">Datos climatológicos de municipios del departamento del Atlántico</p>
+<h1 class="title">Taller Semana 3 — Git, GitHub y Quarto</h1>
+<p class="subtitle lead">Repositorio reproducible con datos de herpetofauna del Caribe colombiano</p>
 </div>
 
 
@@ -238,7 +246,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Fecha de publicación</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">8 de abril de 2026</p>
+      <p class="date">22 de abril de 2026</p>
     </div>
   </div>
   
@@ -256,169 +264,316 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-body-container">
-<p><strong>Tipo de evidencia:</strong> Desempeño · <strong>Entregable:</strong> <code>taller1_apellido_nombre.R</code> · <strong>Plataforma:</strong> SICVI 567 — actividad “Taller 1”</p>
+<p><strong>Tipo de evidencia:</strong> Producto · <strong>Entregable:</strong> Enlace al repositorio público en GitHub · <strong>Plataforma:</strong> SICVI 567 — actividad “Taller 3”</p>
 </div>
 </div>
 </div>
 <section id="objetivos-del-taller" class="level2">
 <h2 class="anchored" data-anchor-id="objetivos-del-taller">Objetivos del taller</h2>
+<p>Al finalizar este taller, el estudiante será capaz de:</p>
 <ol type="1">
-<li>Aplicar los cinco tipos de datos fundamentales de R (<code>numeric</code>, <code>integer</code>, <code>character</code>, <code>logical</code>, <code>factor</code>) en un contexto climático real del Atlántico.</li>
-<li>Construir vectores con datos de temperatura y precipitación, asignarles nombres y acceder a elementos por posición y nombre.</li>
-<li>Usar operaciones vectorizadas para responder preguntas ambientales concretas.</li>
-<li>Producir gráficas exploratorias con R base e interpretarlas en clave biológica.</li>
+<li>Crear un repositorio público en GitHub y clonarlo como proyecto de RStudio.</li>
+<li>Construir un documento Quarto (<code>.qmd</code>) con YAML configurado, texto en Markdown y chunks de R con opciones <code>#|</code>.</li>
+<li>Cargar y explorar un dataset biológico dentro de un documento Quarto.</li>
+<li>Insertar gráficos con pie de figura (<code>#| fig-cap:</code>) y texto narrativo que interprete los resultados.</li>
+<li>Registrar el trabajo con al menos un commit con mensaje descriptivo y subir los cambios a GitHub con push.</li>
 </ol>
 <hr>
 </section>
 <section id="contexto-biológico" class="level2">
 <h2 class="anchored" data-anchor-id="contexto-biológico">Contexto biológico</h2>
-<p>El departamento del Atlántico presenta uno de los regímenes climáticos más particulares de Colombia: una marcada estacionalidad con dos periodos de lluvia (abril–mayo y agosto–noviembre) separados por el llamado “veranillo de San Juan” en julio, consecuencia de la migración de la Zona de Convergencia Intertropical (ZCIT). Esta variabilidad estacional controla directamente la disponibilidad de agua, la floración de plantas nativas y los ciclos reproductivos de aves acuáticas en ciénagas como las del Canal del Dique y la Ciénaga Grande de Santa Marta.</p>
-<p>Comprender ese patrón climático desde datos históricos es el primer paso para conectar el clima con la biología de las especies de la región. En este taller trabajarás con registros de la estación <strong>Repelón</strong> (sur del Atlántico, municipio lacustre sobre el embalse del Guájaro), un ambiente diferente al costero de Barranquilla visto en clase.</p>
+<p>La herpetofauna —reptiles y anfibios— del Caribe colombiano habita una gran diversidad de ecosistemas: manglares, ciénagas, bosques secos tropicales y zonas urbanas. Muchas de estas especies están sujetas a presiones de pérdida de hábitat y tráfico ilegal, y su monitoreo requiere reportes científicos claros, reproducibles y compartibles.</p>
+<p>En este taller crearás un documento Quarto que analiza 60 registros de herpetofauna recolectados en los departamentos de Atlántico y Magdalena durante 2023. El documento final vivirá en un repositorio público de GitHub, lo que permite que cualquier persona —incluido el docente— pueda revisar no solo los resultados, sino el código exacto que los generó. Eso es <strong>ciencia reproducible</strong>.</p>
 <hr>
 </section>
 <section id="dataset" class="level2">
 <h2 class="anchored" data-anchor-id="dataset">Dataset</h2>
-<p>El dataset ya está incluido en el script descargable. Ejecútalo completo para cargar los objetos en tu entorno antes de comenzar las actividades.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>meses <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"ene"</span>, <span class="st">"feb"</span>, <span class="st">"mar"</span>, <span class="st">"abr"</span>, <span class="st">"may"</span>, <span class="st">"jun"</span>,</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>           <span class="st">"jul"</span>, <span class="st">"ago"</span>, <span class="st">"sep"</span>, <span class="st">"oct"</span>, <span class="st">"nov"</span>, <span class="st">"dic"</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Temperatura máxima mensual en Repelón (°C) — IDEAM</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>temp_max_repelón <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">35.2</span>, <span class="fl">35.8</span>, <span class="fl">36.4</span>, <span class="fl">34.7</span>, <span class="fl">33.1</span>, <span class="fl">34.0</span>,</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                      <span class="fl">35.5</span>, <span class="fl">33.8</span>, <span class="fl">32.6</span>, <span class="fl">32.1</span>, <span class="fl">32.9</span>, <span class="fl">34.6</span>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Precipitación mensual promedio en Repelón (mm) — IDEAM</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>precip_repelón <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">4.2</span>, <span class="fl">1.5</span>, <span class="fl">2.8</span>, <span class="fl">45.6</span>, <span class="fl">112.3</span>, <span class="fl">98.7</span>,</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                    <span class="fl">60.4</span>, <span class="fl">125.1</span>, <span class="fl">198.6</span>, <span class="fl">165.3</span>, <span class="fl">72.1</span>, <span class="fl">11.4</span>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(temp_max_repelón) <span class="ot">&lt;-</span> meses</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(precip_repelón)   <span class="ot">&lt;-</span> meses</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<p>Descarga el archivo <code>herpetofauna_caribe_listo.csv</code> desde el <a href="../material.html#semana-3">Material del curso</a> y guárdalo dentro de la carpeta <code>datos/</code> de tu proyecto Git.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>especie</code></td>
+<td>Nombre científico</td>
+</tr>
+<tr class="even">
+<td><code>nombre_comun</code></td>
+<td>Nombre común en español</td>
+</tr>
+<tr class="odd">
+<td><code>clase</code></td>
+<td>Reptilia o Amphibia</td>
+</tr>
+<tr class="even">
+<td><code>orden</code>, <code>familia</code></td>
+<td>Clasificación taxonómica</td>
+</tr>
+<tr class="odd">
+<td><code>departamento</code>, <code>municipio</code>, <code>localidad</code></td>
+<td>Ubicación del registro</td>
+</tr>
+<tr class="even">
+<td><code>ecosistema</code></td>
+<td>Tipo de ecosistema</td>
+</tr>
+<tr class="odd">
+<td><code>longitud_svl_mm</code></td>
+<td>Longitud hocico-cloaca (mm)</td>
+</tr>
+<tr class="even">
+<td><code>peso_g</code></td>
+<td>Peso corporal (g)</td>
+</tr>
+<tr class="odd">
+<td><code>estado_uicn</code></td>
+<td>Categoría de amenaza (LC, NT, VU, EN, CR)</td>
+</tr>
+<tr class="even">
+<td><code>endemica_colombia</code></td>
+<td>¿Es endémica de Colombia?</td>
+</tr>
+<tr class="odd">
+<td><code>sexo</code></td>
+<td>M / F / ND</td>
+</tr>
+<tr class="even">
+<td><code>fecha</code></td>
+<td>Fecha del registro</td>
+</tr>
+</tbody>
+</table>
 <hr>
 </section>
-<section id="parte-1-tipos-de-datos-y-exploración-inicial-estimado-25-minutos" class="level2">
-<h2 class="anchored" data-anchor-id="parte-1-tipos-de-datos-y-exploración-inicial-estimado-25-minutos">Parte 1: Tipos de datos y exploración inicial (estimado: 25 minutos)</h2>
-<p>Trabaja en tu script <code>.R</code> descargable. Esta guía describe qué hacer en cada paso; el script tiene los espacios (<code>___</code>) donde escribir tu código.</p>
-<section id="verifica-los-tipos-de-datos" class="level3">
-<h3 class="anchored" data-anchor-id="verifica-los-tipos-de-datos">1.1 Verifica los tipos de datos</h3>
-<p>Usa <code>class()</code>, <code>is.numeric()</code> e <code>is.character()</code> para explorar los vectores del dataset. Luego crea tres objetos adicionales que ilustren los tipos <code>integer</code>, <code>logical</code> y <code>factor</code>:</p>
-<ul>
-<li>Un entero con el número de años de registro de la estación (usa la letra <code>L</code> al final del número).</li>
-<li>Un lógico que indique si el embalse del Guájaro tiene influencia sobre el microclima local.</li>
-<li>Un factor con tipos de cobertura vegetal observados alrededor de la estación: <code>"herbazal"</code>, <code>"matorral"</code>, <code>"bosque seco"</code>. Define también el nivel <code>"manglar"</code> aunque no aparezca en los datos.</li>
-</ul>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Pista — <code>factor()</code>
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mi_factor <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">"valor1"</span>, <span class="st">"valor2"</span>, <span class="st">"valor1"</span>),</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"valor1"</span>, <span class="st">"valor2"</span>, <span class="st">"valor3"</span>)  <span class="co"># incluye niveles posibles aunque estén vacíos</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<p><strong>Preguntas de reflexión 1.1</strong> — responde en tu script con comentarios <code>#</code>:</p>
+<section id="estructura-esperada-del-repositorio" class="level2">
+<h2 class="anchored" data-anchor-id="estructura-esperada-del-repositorio">Estructura esperada del repositorio</h2>
+<pre><code>taller3-apellido-nombre/
+├── taller3_apellido_nombre.qmd      ← documento Quarto principal
+├── taller3_apellido_nombre.html     ← HTML renderizado (obligatorio)
+├── datos/
+│   └── herpetofauna_caribe_listo.csv
+└── README.md                        ← descripción breve (opcional pero recomendado)</code></pre>
+<p>El nombre del repositorio debe seguir el patrón: <code>taller3-apellido-nombre</code> (minúsculas, sin tildes, guiones entre palabras).</p>
+<hr>
+</section>
+<section id="instrucciones-paso-a-paso" class="level2">
+<h2 class="anchored" data-anchor-id="instrucciones-paso-a-paso">Instrucciones paso a paso</h2>
+<section id="paso-1-crear-el-repositorio-en-github" class="level3">
+<h3 class="anchored" data-anchor-id="paso-1-crear-el-repositorio-en-github">Paso 1 — Crear el repositorio en GitHub</h3>
 <ol type="1">
-<li>¿Por qué es importante declarar el conteo de años como <code>integer</code> y no como <code>numeric</code>? ¿Tiene consecuencias prácticas en R?</li>
-<li>El objeto <code>cobertura</code> tiene el nivel <code>"manglar"</code> aunque no aparece en los datos ingresados. ¿Por qué puede ser útil incluir niveles que aún no tienen observaciones en un estudio de vegetación?</li>
+<li>Ve a <a href="https://github.com">github.com</a> e inicia sesión.</li>
+<li>Clic en el botón verde <strong>New</strong> (esquina superior izquierda).</li>
+<li>Nombre: <code>taller3-tuapellido-tunombre</code> (sin tildes, sin espacios).</li>
+<li>Visibilidad: <strong>Public</strong> (obligatorio para que el docente pueda revisarlo).</li>
+<li>Marca <strong>Add a README file</strong>.</li>
+<li>Clic en <strong>Create repository</strong>.</li>
+</ol>
+</section>
+<section id="paso-2-clonar-el-repositorio-en-rstudio" class="level3">
+<h3 class="anchored" data-anchor-id="paso-2-clonar-el-repositorio-en-rstudio">Paso 2 — Clonar el repositorio en RStudio</h3>
+<ol type="1">
+<li>En tu repositorio de GitHub, clic en <strong>Code</strong> → copia la URL (HTTPS).</li>
+<li>En RStudio: <code>File → New Project → Version Control → Git</code>.</li>
+<li>Pega la URL en “Repository URL” → elige una carpeta local → <strong>Create Project</strong>.</li>
+<li>Verifica que aparece la pestaña <strong>Git</strong> en el panel superior derecho de RStudio.</li>
+</ol>
+</section>
+<section id="paso-3-preparar-los-datos" class="level3">
+<h3 class="anchored" data-anchor-id="paso-3-preparar-los-datos">Paso 3 — Preparar los datos</h3>
+<ol type="1">
+<li>Dentro de la carpeta del proyecto, crea una subcarpeta llamada <code>datos/</code>.</li>
+<li>Copia <code>herpetofauna_caribe_listo.csv</code> dentro de <code>datos/</code>.</li>
+</ol>
+</section>
+<section id="paso-4-crear-el-documento-quarto" class="level3">
+<h3 class="anchored" data-anchor-id="paso-4-crear-el-documento-quarto">Paso 4 — Crear el documento Quarto</h3>
+<ol type="1">
+<li><code>File → New File → Quarto Document</code>.</li>
+<li>Título: “Herpetofauna del Caribe Colombiano — Análisis Exploratorio”.</li>
+<li>Author: tu nombre completo. Format: HTML. Clic en <strong>Create</strong>.</li>
+<li>Guarda como <code>taller3_tuapellido_tunombre.qmd</code> en la <strong>raíz</strong> del proyecto.</li>
+</ol>
+</section>
+<section id="paso-5-completar-el-documento" class="level3">
+<h3 class="anchored" data-anchor-id="paso-5-completar-el-documento">Paso 5 — Completar el documento</h3>
+<p>Sigue las instrucciones de las Partes 1–6 de abajo.</p>
+</section>
+<section id="paso-6-renderizar" class="level3">
+<h3 class="anchored" data-anchor-id="paso-6-renderizar">Paso 6 — Renderizar</h3>
+<p>Clic en el botón <strong>Render</strong> en la barra de herramientas del <code>.qmd</code>. Verifica que el HTML se genera sin errores y se ve bien en el navegador.</p>
+</section>
+<section id="paso-7-commit-y-push" class="level3">
+<h3 class="anchored" data-anchor-id="paso-7-commit-y-push">Paso 7 — Commit y Push</h3>
+<ol type="1">
+<li>En la pestaña <strong>Git</strong> de RStudio, marca todos los archivos (checkbox).</li>
+<li>Clic en <strong>Commit</strong> → escribe un mensaje descriptivo, por ejemplo: <code>"Análisis exploratorio de herpetofauna completo — Taller 3"</code></li>
+<li>Clic en <strong>Commit</strong>, luego en <strong>Push</strong>.</li>
+<li>Verifica en github.com que los archivos aparecen en tu repositorio.</li>
+</ol>
+</section>
+<section id="paso-8-entregar-en-sicvi-567" class="level3">
+<h3 class="anchored" data-anchor-id="paso-8-entregar-en-sicvi-567">Paso 8 — Entregar en SICVI 567</h3>
+<p>Copia la URL de tu repositorio (p.&nbsp;ej. <code>https://github.com/tuusuario/taller3-apellido-nombre</code>) y pégala en el campo de entrega en SICVI 567. <strong>No subas el archivo <code>.qmd</code> como adjunto</strong> — solo el enlace al repositorio.</p>
+<hr>
+</section>
+</section>
+<section id="partes-del-documento-quarto" class="level2">
+<h2 class="anchored" data-anchor-id="partes-del-documento-quarto">Partes del documento Quarto</h2>
+<section id="parte-1-yaml" class="level3">
+<h3 class="anchored" data-anchor-id="parte-1-yaml">Parte 1 — YAML</h3>
+<p>Configura el encabezado de tu <code>.qmd</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Herpetofauna del Caribe Colombiano — Análisis Exploratorio"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">subtitle</span><span class="kw">:</span><span class="at"> </span><span class="st">"Taller Semana 3 · Curso 20953"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">"Tu Nombre Completo"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> </span><span class="st">"2026-04-22"</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc-depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">code-fold</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">theme</span><span class="kw">:</span><span class="at"> cosmo</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Usa el tema que prefieras: <code>cosmo</code>, <code>flatly</code>, <code>lux</code>, <code>minty</code>, <code>sandstone</code>, <code>yeti</code>, entre otros. Presta atención a la <strong>indentación</strong> — usa espacios, nunca tabulaciones.</p>
+</section>
+<section id="parte-2-introducción-en-markdown" class="level3">
+<h3 class="anchored" data-anchor-id="parte-2-introducción-en-markdown">Parte 2 — Introducción en Markdown</h3>
+<p>Escribe una sección <code>## Introducción</code> con:</p>
+<ul>
+<li>Un párrafo describiendo el dataset (de dónde vienen los datos, qué organismos incluye, cuántos registros tiene).</li>
+<li>Una lista con al menos cuatro variables que analizarás.</li>
+<li>Usa <strong>negrita</strong>, <em>cursiva</em> y <code>código inline</code> al menos una vez cada uno.</li>
+</ul>
+</section>
+<section id="parte-3-carga-y-exploración-del-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="parte-3-carga-y-exploración-del-dataset">Parte 3 — Carga y exploración del dataset</h3>
+<p>Crea un chunk con <code>#| label: cargar-datos</code> que:</p>
+<ol type="1">
+<li>Cargue el CSV: <code>read.csv("datos/herpetofauna_caribe_listo.csv")</code></li>
+<li>Muestre las dimensiones: <code>dim()</code></li>
+<li>Muestre los primeros registros: <code>head()</code></li>
+<li>Muestre la estructura: <code>str()</code></li>
+</ol>
+<p>Agrega un párrafo en Markdown describiendo lo que encuentras.</p>
+</section>
+<section id="parte-4-gráfico-1-registros-por-ecosistema" class="level3">
+<h3 class="anchored" data-anchor-id="parte-4-gráfico-1-registros-por-ecosistema">Parte 4 — Gráfico 1: Registros por ecosistema</h3>
+<p>Chunk con:</p>
+<ul>
+<li><code>#| label: grafico-ecosistema</code></li>
+<li><code>#| fig-cap:</code> con una descripción completa (incluye la fuente de los datos)</li>
+</ul>
+<p>El gráfico debe ser un <code>barplot</code> de <code>table(herp$ecosistema)</code> con título y etiquetas en español, y al menos un color distinto al gris.</p>
+<p>Después del chunk: párrafo que interprete el resultado.</p>
+</section>
+<section id="parte-5-gráfico-2-variable-morfométrica-por-clase" class="level3">
+<h3 class="anchored" data-anchor-id="parte-5-gráfico-2-variable-morfométrica-por-clase">Parte 5 — Gráfico 2: Variable morfométrica por clase</h3>
+<p>Segundo chunk con su propio <code>#| label:</code> y <code>#| fig-cap:</code>. Elige una opción:</p>
+<ul>
+<li><code>boxplot()</code> de <code>longitud_svl_mm</code> o <code>peso_g</code> agrupado por <code>clase</code></li>
+<li><code>barplot()</code> de frecuencias por <code>estado_uicn</code></li>
+<li><code>plot()</code> de <code>longitud_svl_mm</code> vs <code>peso_g</code> con colores por <code>clase</code></li>
+</ul>
+<p>Incluye párrafo de interpretación debajo del chunk.</p>
+</section>
+<section id="parte-6-callout-de-cierre" class="level3">
+<h3 class="anchored" data-anchor-id="parte-6-callout-de-cierre">Parte 6 — Callout de cierre</h3>
+<p>Agrega al menos un callout en el documento:</p>
+<ul>
+<li><code>{.callout-note}</code> con una observación metodológica</li>
+<li><code>{.callout-warning}</code> señalando una limitación del análisis</li>
+<li><code>{.callout-tip}</code> con una recomendación para análisis futuros</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="preguntas-de-reflexión" class="level2">
+<h2 class="anchored" data-anchor-id="preguntas-de-reflexión">Preguntas de reflexión</h2>
+<p>Incluye las respuestas en una sección <code>## Reflexiones</code> al final del documento Quarto, en prosa (no como lista de viñetas):</p>
+<ol type="1">
+<li>¿Qué ventaja tiene un documento Quarto frente a un script <code>.R</code> simple para comunicar resultados biológicos?</li>
+<li>Si actualizaras los datos añadiendo registros de 2024, ¿qué pasos tendría que seguir alguien para reproducir tu análisis?</li>
+<li>¿Qué significa que un repositorio sea <strong>público</strong> en GitHub? ¿Qué implicaciones tiene para la ciencia abierta?</li>
 </ol>
 <hr>
 </section>
-<section id="estadísticas-de-resumen" class="level3">
-<h3 class="anchored" data-anchor-id="estadísticas-de-resumen">1.2 Estadísticas de resumen</h3>
-<p>Usa <code>cat()</code> junto con <code>min()</code>, <code>max()</code>, <code>mean()</code>, <code>sum()</code>, <code>range()</code>, <code>which.min()</code> y <code>which.max()</code> para imprimir un resumen de temperatura y precipitación con el formato:</p>
-<pre><code>=== TEMPERATURA MÁXIMA — Repelón (IDEAM) ===
-Mínima mensual : X °C — mes
-Máxima mensual : X °C — mes
-Media anual    : X °C
-Rango          : X °C</code></pre>
-<p><strong>Preguntas de reflexión 1.2</strong> — responde en tu script:</p>
-<ol type="1">
-<li>La temperatura máxima de Repelón en los meses secos supera los 35°C. ¿Qué consecuencias fisiológicas puede tener esto para anfibios o reptiles de la región?</li>
-<li>El total de precipitación anual de Repelón ¿es mayor o menor que el de Barranquilla (922 mm)? ¿A qué factores lo atribuyes?</li>
-</ol>
-<hr>
-</section>
-</section>
-<section id="parte-2-indexación-y-operaciones-vectorizadas-estimado-30-minutos" class="level2">
-<h2 class="anchored" data-anchor-id="parte-2-indexación-y-operaciones-vectorizadas-estimado-30-minutos">Parte 2: Indexación y operaciones vectorizadas (estimado: 30 minutos)</h2>
-<section id="acceso-por-posición-y-nombre" class="level3">
-<h3 class="anchored" data-anchor-id="acceso-por-posición-y-nombre">2.1 Acceso por posición y nombre</h3>
-<p>Extrae los siguientes valores de los vectores (un resultado por línea de código):</p>
-<ul>
-<li>Temperatura de marzo (por posición).</li>
-<li>Precipitación de septiembre (por nombre).</li>
-<li>Temperaturas del segundo semestre (posiciones 7 a 12).</li>
-<li>Precipitaciones de los meses de transición: abril, mayo, agosto y septiembre (por nombre).</li>
-</ul>
-</section>
-<section id="filtros-lógicos-vectorizados" class="level3">
-<h3 class="anchored" data-anchor-id="filtros-lógicos-vectorizados">2.2 Filtros lógicos vectorizados</h3>
-<p>Usa vectores lógicos para responder:</p>
-<ul>
-<li>¿Qué meses tienen temperatura máxima mayor a 34°C?</li>
-<li>¿Cuántos meses tienen precipitación mayor a 80 mm?</li>
-<li>¿Qué meses combinan temperatura mayor a 34°C <strong>y</strong> precipitación menor a 20 mm? (usa el operador <code>&amp;</code>)</li>
-</ul>
-<p><strong>Preguntas de reflexión 2:</strong></p>
-<ol type="1">
-<li>El filtro de “estrés hídrico” combina alta temperatura y baja precipitación. ¿Qué especie vegetal o animal del Atlántico crees que es más vulnerable durante esos meses y por qué?</li>
-<li>¿En qué semestre se concentran las lluvias en Repelón? Compara con Barranquilla (clase). ¿El patrón es el mismo?</li>
-<li>Cambia el umbral de temperatura de <code>&gt; 34</code> a <code>&gt; 35</code>. ¿Cuántos meses quedan? ¿Cómo cambia la interpretación biológica?</li>
-</ol>
-</section>
-<section id="operaciones-vectorizadas" class="level3">
-<h3 class="anchored" data-anchor-id="operaciones-vectorizadas">2.3 Operaciones vectorizadas</h3>
-<p>Calcula y muestra:</p>
-<ul>
-<li>La anomalía de temperatura de cada mes respecto a la media anual (resta la media al vector completo).</li>
-<li>La precipitación acumulada del primer y segundo semestre.</li>
-<li>La precipitación convertida de mm a cm para los primeros 6 meses.</li>
+<section id="lista-de-verificación-antes-de-entregar" class="level2">
+<h2 class="anchored" data-anchor-id="lista-de-verificación-antes-de-entregar">Lista de verificación antes de entregar</h2>
+<ul class="task-list">
+<li><label><input type="checkbox">El repositorio es público en GitHub</label></li>
+<li><label><input type="checkbox">El nombre del repositorio: <code>taller3-apellido-nombre</code></label></li>
+<li><label><input type="checkbox">El archivo <code>.qmd</code> se llama <code>taller3_apellido_nombre.qmd</code></label></li>
+<li><label><input type="checkbox">El <code>.html</code> renderizado está en el repositorio</label></li>
+<li><label><input type="checkbox">El CSV está dentro de <code>datos/</code></label></li>
+<li><label><input type="checkbox">YAML con <code>toc: true</code> y un tema visual configurado</label></li>
+<li><label><input type="checkbox">Dos gráficos, cada uno con <code>#| label:</code> único y <code>#| fig-cap:</code></label></li>
+<li><label><input type="checkbox">Texto narrativo en Markdown entre los chunks</label></li>
+<li><label><input type="checkbox">Preguntas de reflexión respondidas en el documento</label></li>
+<li><label><input type="checkbox">Al menos un callout (<code>note</code>, <code>warning</code> o <code>tip</code>)</label></li>
+<li><label><input type="checkbox">El documento renderiza sin errores de principio a fin</label></li>
+<li><label><input type="checkbox">Al menos un commit con mensaje descriptivo (no “first commit”)</label></li>
+<li><label><input type="checkbox">El enlace al repositorio entregado en SICVI 567</label></li>
 </ul>
 <hr>
 </section>
+<section id="errores-frecuentes" class="level2">
+<h2 class="anchored" data-anchor-id="errores-frecuentes">Errores frecuentes</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 46%">
+<col style="width: 31%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Error</th>
+<th>Causa probable</th>
+<th>Solución</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>“cannot open file” al cargar el CSV</td>
+<td>Ruta incorrecta</td>
+<td>Verifica que el CSV esté en <code>datos/</code> y la ruta sea <code>"datos/herpetofauna_caribe_listo.csv"</code></td>
+</tr>
+<tr class="even">
+<td>“duplicate label” al renderizar</td>
+<td>Dos chunks con el mismo <code>label</code></td>
+<td>Dale un nombre único a cada chunk</td>
+</tr>
+<tr class="odd">
+<td>El HTML no aparece en GitHub</td>
+<td>No hiciste push del <code>.html</code></td>
+<td>Renderiza localmente, verifica que el <code>.html</code> existe, luego commit + push</td>
+</tr>
+<tr class="even">
+<td>El repositorio es privado</td>
+<td>Olvidaste seleccionar “Public”</td>
+<td>GitHub → Settings → General → cambiar a Public</td>
+</tr>
+<tr class="odd">
+<td>Indentación incorrecta en YAML</td>
+<td>Tabulaciones en lugar de espacios</td>
+<td>Usa solo espacios; configura en <code>Tools → Global Options → Code</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
 </section>
-<section id="parte-3-visualización-con-r-base-estimado-35-minutos" class="level2">
-<h2 class="anchored" data-anchor-id="parte-3-visualización-con-r-base-estimado-35-minutos">Parte 3: Visualización con R base (estimado: 35 minutos)</h2>
-<section id="gráfico-de-barras-precipitación-mensual" class="level3">
-<h3 class="anchored" data-anchor-id="gráfico-de-barras-precipitación-mensual">3.1 Gráfico de barras — precipitación mensual</h3>
-<p>Construye un <code>barplot()</code> de la precipitación mensual en Repelón. Colorea en azul oscuro (<code>"#1d4ed8"</code>) los meses que superan la media mensual de la estación y en azul claro (<code>"#bfdbfe"</code>) los que no. Añade una línea punteada en la media y una leyenda.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Pista — umbral dinámico
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Calcula el umbral como <code>umbral &lt;- mean(precip_repelón)</code> y úsalo dentro de <code>ifelse()</code> para los colores y en <code>abline()</code> para la línea.</p>
-</div>
-</div>
-</section>
-<section id="gráfico-de-línea-temperatura-máxima-mensual" class="level3">
-<h3 class="anchored" data-anchor-id="gráfico-de-línea-temperatura-máxima-mensual">3.2 Gráfico de línea — temperatura máxima mensual</h3>
-<p>Construye un <code>plot()</code> de tipo <code>"b"</code> con los 12 valores de temperatura. Añade el eje x con los nombres de los meses (<code>axis()</code>), una línea horizontal en la media anual y una etiqueta con el valor de la media (<code>text()</code>).</p>
-</section>
-<section id="climograma-simplificado-desafío" class="level3">
-<h3 class="anchored" data-anchor-id="climograma-simplificado-desafío">3.3 Climograma simplificado <em>(desafío)</em></h3>
-<p>Superpón precipitación (barras) y temperatura (línea) en un mismo gráfico usando un segundo eje vertical (<code>axis(side = 4, ...)</code>). Para escalar la temperatura al rango de la precipitación usa un factor de escala:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>factor_escala <span class="ot">&lt;-</span> <span class="fu">max</span>(temp_max_repelón) <span class="sc">/</span> <span class="fu">max</span>(precip_repelón)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Modifica el gráfico final para que las barras del primer semestre (ene–jun) sean de un color y las del segundo (jul–dic) de otro. Actualiza la leyenda.</p>
-<p><strong>Preguntas de reflexión 3:</strong></p>
-<ol type="1">
-<li>En el climograma, identifica los periodos con baja precipitación y alta temperatura. ¿Cómo afecta esa combinación a los recursos hídricos para anfibios y plantas del sur del Atlántico?</li>
-<li>Compara la amplitud de variación de temperatura en Repelón (~4°C) con la de Barranquilla (~2°C). ¿Qué diferencia esperas en la diversidad de ectotérmicos entre ambos sitios?</li>
-</ol>
+<section id="recursos-de-referencia" class="level2">
+<h2 class="anchored" data-anchor-id="recursos-de-referencia">Recursos de referencia</h2>
+<ul>
+<li>Documentación oficial de Quarto: <a href="https://quarto.org/docs/get-started/">quarto.org</a></li>
+<li>Guía de Markdown en Quarto: <a href="https://quarto.org/docs/authoring/markdown-basics.html">quarto.org — Markdown Basics</a></li>
+<li>Opciones de chunk: <a href="https://quarto.org/docs/reference/cells/cells-knitr.html">quarto.org — Knitr cells</a></li>
+<li>Temas HTML: <a href="https://quarto.org/docs/output-formats/html-themes.html">quarto.org — HTML Themes</a></li>
+<li>Guía de inicio de GitHub: <a href="https://docs.github.com/es/get-started">docs.github.com/es</a></li>
+</ul>
 <hr>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -430,23 +585,44 @@ Detalles de entrega
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<ul>
-<li><strong>Archivo:</strong> <code>taller1_apellido_nombre.R</code> (ejemplo: <code>taller1_fonseca_rodian.R</code>)</li>
-<li><strong>Formato:</strong> El script <code>.R</code> debe ejecutarse sin errores de principio a fin.</li>
-<li><strong>Plataforma:</strong> SICVI 567 — sección “Taller 1: Tipos de datos y vectores en R”</li>
-<li><strong>Fecha límite:</strong> 14 de abril de 2026 — 11:59 p.m.</li>
-</ul>
-<p><strong>Requisitos mínimos:</strong></p>
-<ol type="1">
-<li>Todos los <code>___</code> del script completados con código funcional.</li>
-<li>Los tres gráficos generados (barplot, lineplot, climograma).</li>
-<li>Respuestas a todas las preguntas de reflexión como comentarios <code>#</code> en el script.</li>
-</ol>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 43%">
+<col style="width: 56%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Campo</th>
+<th>Detalle</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Entregable</strong></td>
+<td>Enlace al repositorio público en GitHub</td>
+</tr>
+<tr class="even">
+<td><strong>Nombre del repo</strong></td>
+<td><code>taller3-apellido-nombre</code></td>
+</tr>
+<tr class="odd">
+<td><strong>Plataforma</strong></td>
+<td>SICVI 567 — sección “Taller 3: Git y Quarto”</td>
+</tr>
+<tr class="even">
+<td><strong>Fecha límite</strong></td>
+<td>A confirmar por el docente en SICVI 567</td>
+</tr>
+<tr class="odd">
+<td><strong>Requisito mínimo</strong></td>
+<td>Repositorio público con <code>.qmd</code>, <code>.html</code> renderizado, datos en carpeta <code>datos/</code>, al menos un commit con mensaje descriptivo</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
