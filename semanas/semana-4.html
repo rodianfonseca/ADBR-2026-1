@@ -1,0 +1,1947 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Curso 20953 · Análisis de Datos Biológicos bajo R">
+
+<title>Semana 4 — Tidyverse: importación y dplyr – Análisis de Datos Biológicos en R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../assets/favicon.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Sin resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+<meta property="og:title" content="Semana 4 — Tidyverse: importación y dplyr – Análisis de Datos Biológicos en R">
+<meta property="og:description" content="readr, readxl y los 5 verbos de dplyr con datos de fauna del Atlántico">
+<meta property="og:site_name" content="Análisis de Datos Biológicos en R">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../assets/logo.png" alt="ADBR" class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Buscar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Navegación de palanca" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Inicio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../cronograma.html"> 
+<span class="menu-text">Cronograma</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../material.html"> 
+<span class="menu-text">Material</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../proyecto.html"> 
+<span class="menu-text">Proyecto</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-semanas" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Semanas</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-semanas">    
+        <li>
+    <a class="dropdown-item" href="../semanas/semana-1.html">
+ <span class="dropdown-text">Semana 1 — Clase</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../semanas/semana-1-taller.html">
+ <span class="dropdown-text">Semana 1 — Taller</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li>
+    <a class="dropdown-item" href="../semanas/semana-2.html">
+ <span class="dropdown-text">Semana 2 — Clase</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../semanas/semana-2-taller.html">
+ <span class="dropdown-text">Semana 2 — Quiz</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li>
+    <a class="dropdown-item" href="../semanas/semana-3.html">
+ <span class="dropdown-text">Semana 3 — Clase</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../semanas/semana-3-taller.html">
+ <span class="dropdown-text">Semana 3 — Taller</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li>
+    <a class="dropdown-item" href="../semanas/semana-4.html">
+ <span class="dropdown-text">Semana 4 — Clase</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../semanas/semana-4-taller.html">
+ <span class="dropdown-text">Semana 4 — Taller</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta página</h2>
+   
+  <ul>
+  <li><a href="#resultado-de-aprendizaje" id="toc-resultado-de-aprendizaje" class="nav-link active" data-scroll-target="#resultado-de-aprendizaje">Resultado de aprendizaje</a></li>
+  <li><a href="#configuración-inicial" id="toc-configuración-inicial" class="nav-link" data-scroll-target="#configuración-inicial">Configuración inicial</a></li>
+  <li><a href="#bloque-1-el-tidyverse-10-minutos" id="toc-bloque-1-el-tidyverse-10-minutos" class="nav-link" data-scroll-target="#bloque-1-el-tidyverse-10-minutos">Bloque 1 — El Tidyverse <em>(≈ 10 minutos)</em></a>
+  <ul class="collapse">
+  <li><a href="#qué-es-el-tidyverse" id="toc-qué-es-el-tidyverse" class="nav-link" data-scroll-target="#qué-es-el-tidyverse">¿Qué es el Tidyverse?</a></li>
+  <li><a href="#tibble-vs-data.frame" id="toc-tibble-vs-data.frame" class="nav-link" data-scroll-target="#tibble-vs-data.frame">Tibble vs data.frame</a></li>
+  <li><a href="#el-operador-pipe" id="toc-el-operador-pipe" class="nav-link" data-scroll-target="#el-operador-pipe">El operador pipe <code>|&gt;</code></a></li>
+  </ul></li>
+  <li><a href="#bloque-2-importación-de-datos-20-minutos" id="toc-bloque-2-importación-de-datos-20-minutos" class="nav-link" data-scroll-target="#bloque-2-importación-de-datos-20-minutos">Bloque 2 — Importación de datos <em>(≈ 20 minutos)</em></a>
+  <ul class="collapse">
+  <li><a href="#read_csv-vs-read.csv" id="toc-read_csv-vs-read.csv" class="nav-link" data-scroll-target="#read_csv-vs-read.csv"><code>read_csv()</code> vs <code>read.csv()</code></a></li>
+  <li><a href="#cargar-el-dataset" id="toc-cargar-el-dataset" class="nav-link" data-scroll-target="#cargar-el-dataset">Cargar el dataset</a></li>
+  <li><a href="#verificar-la-importación" id="toc-verificar-la-importación" class="nav-link" data-scroll-target="#verificar-la-importación">Verificar la importación</a></li>
+  <li><a href="#opciones-principales-de-read_csv" id="toc-opciones-principales-de-read_csv" class="nav-link" data-scroll-target="#opciones-principales-de-read_csv">Opciones principales de <code>read_csv()</code></a></li>
+  </ul></li>
+  <li><a href="#bloque-3-dplyr-los-5-verbos-40-minutos" id="toc-bloque-3-dplyr-los-5-verbos-40-minutos" class="nav-link" data-scroll-target="#bloque-3-dplyr-los-5-verbos-40-minutos">Bloque 3 — dplyr: los 5 verbos <em>(≈ 40 minutos)</em></a>
+  <ul class="collapse">
+  <li><a href="#filter-seleccionar-filas" id="toc-filter-seleccionar-filas" class="nav-link" data-scroll-target="#filter-seleccionar-filas">3.1 <code>filter()</code> — seleccionar filas</a></li>
+  <li><a href="#select-seleccionar-columnas" id="toc-select-seleccionar-columnas" class="nav-link" data-scroll-target="#select-seleccionar-columnas">3.2 <code>select()</code> — seleccionar columnas</a></li>
+  <li><a href="#mutate-crear-o-transformar-columnas" id="toc-mutate-crear-o-transformar-columnas" class="nav-link" data-scroll-target="#mutate-crear-o-transformar-columnas">3.3 <code>mutate()</code> — crear o transformar columnas</a></li>
+  <li><a href="#arrange-ordenar-filas" id="toc-arrange-ordenar-filas" class="nav-link" data-scroll-target="#arrange-ordenar-filas">3.4 <code>arrange()</code> — ordenar filas</a></li>
+  <li><a href="#summarise-group_by-resumir-por-grupo" id="toc-summarise-group_by-resumir-por-grupo" class="nav-link" data-scroll-target="#summarise-group_by-resumir-por-grupo">3.5 <code>summarise()</code> + <code>group_by()</code> — resumir por grupo</a></li>
+  <li><a href="#pipelines-combinando-verbos" id="toc-pipelines-combinando-verbos" class="nav-link" data-scroll-target="#pipelines-combinando-verbos">3.6 Pipelines: combinando verbos</a></li>
+  </ul></li>
+  <li><a href="#bloque-4-ejercicio-abp-en-parejas-20-minutos" id="toc-bloque-4-ejercicio-abp-en-parejas-20-minutos" class="nav-link" data-scroll-target="#bloque-4-ejercicio-abp-en-parejas-20-minutos">Bloque 4 — Ejercicio ABP en parejas <em>(≈ 20 minutos)</em></a></li>
+  <li><a href="#cierre-de-sesión" id="toc-cierre-de-sesión" class="nav-link" data-scroll-target="#cierre-de-sesión">Cierre de sesión</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Semana 4 — Tidyverse: importación y dplyr</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Código</button></div></div>
+<p class="subtitle lead">readr, readxl y los 5 verbos de dplyr con datos de fauna del Atlántico</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor/a</div>
+    <div class="quarto-title-meta-contents">
+             <p>Curso 20953 · Análisis de Datos Biológicos bajo R </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Fecha de publicación</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">29 de abril de 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Unidad 2:</strong> Manejo y Visualización de Datos · <strong>Estrategia:</strong> Clase magistral + Aprendizaje basado en problemas · <strong>Duración:</strong> 90 min</p>
+</div>
+</div>
+</div>
+<section id="resultado-de-aprendizaje" class="level2">
+<h2 class="anchored" data-anchor-id="resultado-de-aprendizaje">Resultado de aprendizaje</h2>
+<p>Al finalizar esta sesión, el estudiante será capaz de:</p>
+<ol type="1">
+<li>Distinguir entre <code>read.csv()</code> (base R) y <code>read_csv()</code> (readr) y elegir cuál usar</li>
+<li>Importar datos con <code>read_csv()</code> especificando tipos de columna y valores NA</li>
+<li>Aplicar los 5 verbos de dplyr para filtrar, seleccionar, transformar, ordenar y resumir datos</li>
+<li>Combinar verbos en pipelines con <code>|&gt;</code> para responder preguntas biológicas</li>
+</ol>
+<hr>
+</section>
+<section id="configuración-inicial" class="level2">
+<h2 class="anchored" data-anchor-id="configuración-inicial">Configuración inicial</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+</section>
+<section id="bloque-1-el-tidyverse-10-minutos" class="level2">
+<h2 class="anchored" data-anchor-id="bloque-1-el-tidyverse-10-minutos">Bloque 1 — El Tidyverse <em>(≈ 10 minutos)</em></h2>
+<section id="qué-es-el-tidyverse" class="level3">
+<h3 class="anchored" data-anchor-id="qué-es-el-tidyverse">¿Qué es el Tidyverse?</h3>
+<p>El Tidyverse es una colección de paquetes de R con una filosofía coherente para el análisis de datos. Todos comparten la misma estructura de entrada/salida (el <strong>tibble</strong>), el mismo estilo de código (verbos + pipe) y documentación consistente.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Paquete</th>
+<th>Función</th>
+<th>Semana</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>readr</code></td>
+<td>Importar CSV y archivos de texto</td>
+<td><strong>Hoy</strong></td>
+</tr>
+<tr class="even">
+<td><code>readxl</code></td>
+<td>Importar archivos Excel</td>
+<td><strong>Hoy</strong></td>
+</tr>
+<tr class="odd">
+<td><code>dplyr</code></td>
+<td>Manipular y transformar datos</td>
+<td><strong>Hoy</strong></td>
+</tr>
+<tr class="even">
+<td><code>tidyr</code></td>
+<td>Ordenar y pivotar datos</td>
+<td>Semana 5</td>
+</tr>
+<tr class="odd">
+<td><code>ggplot2</code></td>
+<td>Visualización de datos</td>
+<td>Semana 6</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="tibble-vs-data.frame" class="level3">
+<h3 class="anchored" data-anchor-id="tibble-vs-data.frame">Tibble vs data.frame</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df_clasico <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">especie =</span> <span class="fu">c</span>(<span class="st">"Ardea alba"</span>, <span class="st">"Egretta thula"</span>, <span class="st">"Fregata magnificens"</span>),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">conteo  =</span> <span class="fu">c</span>(<span class="dv">45</span>L, <span class="dv">120</span>L, <span class="dv">8</span>L),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">fecha   =</span> <span class="fu">as.Date</span>(<span class="fu">c</span>(<span class="st">"2024-01-15"</span>, <span class="st">"2024-01-15"</span>, <span class="st">"2024-01-16"</span>))</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>tbl_moderno <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">especie =</span> <span class="fu">c</span>(<span class="st">"Ardea alba"</span>, <span class="st">"Egretta thula"</span>, <span class="st">"Fregata magnificens"</span>),</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">conteo  =</span> <span class="fu">c</span>(<span class="dv">45</span>L, <span class="dv">120</span>L, <span class="dv">8</span>L),</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">fecha   =</span> <span class="fu">as.Date</span>(<span class="fu">c</span>(<span class="st">"2024-01-15"</span>, <span class="st">"2024-01-15"</span>, <span class="st">"2024-01-16"</span>))</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>df_clasico    <span class="co"># imprime </span><span class="al">TODO</span><span class="co">, sin información de tipos</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              especie conteo      fecha
+1          Ardea alba     45 2024-01-15
+2       Egretta thula    120 2024-01-15
+3 Fregata magnificens      8 2024-01-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>tbl_moderno   <span class="co"># máximo 10 filas, muestra tipos (&lt;chr&gt;, &lt;int&gt;, &lt;date&gt;)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  especie             conteo fecha     
+  &lt;chr&gt;                &lt;int&gt; &lt;date&gt;    
+1 Ardea alba              45 2024-01-15
+2 Egretta thula          120 2024-01-15
+3 Fregata magnificens      8 2024-01-16</code></pre>
+</div>
+</div>
+</section>
+<section id="el-operador-pipe" class="level3">
+<h3 class="anchored" data-anchor-id="el-operador-pipe">El operador pipe <code>|&gt;</code></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sin pipe — se lee de adentro hacia afuera:</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>resultado_sin_pipe <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">sqrt</span>(<span class="fu">log</span>(<span class="dv">100</span>)), <span class="at">digits =</span> <span class="dv">2</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Con pipe — se lee de izquierda a derecha:</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>resultado_con_pipe <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">|&gt;</span> <span class="fu">log</span>() <span class="sc">|&gt;</span> <span class="fu">sqrt</span>() <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>resultado_sin_pipe</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.15</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>resultado_con_pipe   <span class="co"># mismo resultado, código más legible</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.15</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Atajo de teclado del pipe
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Ctrl + Shift + M</strong> en RStudio genera <code>|&gt;</code> automáticamente.</p>
+<p>Verifica en: <code>Tools → Global Options → Code → Use native pipe operator</code></p>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Pregunta:</strong> ¿Qué ventaja tiene leer el código con pipe frente a sin pipe?</p>
+</blockquote>
+<hr>
+</section>
+</section>
+<section id="bloque-2-importación-de-datos-20-minutos" class="level2">
+<h2 class="anchored" data-anchor-id="bloque-2-importación-de-datos-20-minutos">Bloque 2 — Importación de datos <em>(≈ 20 minutos)</em></h2>
+<section id="read_csv-vs-read.csv" class="level3">
+<h3 class="anchored" data-anchor-id="read_csv-vs-read.csv"><code>read_csv()</code> vs <code>read.csv()</code></h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Característica</th>
+<th><code>read.csv()</code> (base R)</th>
+<th><code>read_csv()</code> (readr)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Resultado</td>
+<td><code>data.frame</code></td>
+<td><code>tibble</code></td>
+</tr>
+<tr class="even">
+<td>Mensajes de parsing</td>
+<td>Ninguno</td>
+<td>Informa tipo de cada columna</td>
+</tr>
+<tr class="odd">
+<td>NA personalizados</td>
+<td>Manual</td>
+<td>Argumento <code>na</code></td>
+</tr>
+<tr class="even">
+<td>Velocidad</td>
+<td>Lenta</td>
+<td>Rápida</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Regla práctica:</strong> en el Tidyverse, siempre preferimos <code>read_csv()</code>.</p>
+</section>
+<section id="cargar-el-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="cargar-el-dataset">Cargar el dataset</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fauna <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../datos/semana-4/fauna_atlantico_listo.csv"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 198 Columns: 15
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (11): id_registro, especie, nombre_comun, clase, orden, municipio, loca...
+dbl   (3): n_individuos, longitud, latitud
+date  (1): fecha_obs
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(fauna)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 198
+Columns: 15
+$ id_registro         &lt;chr&gt; "REG001", "REG002", "REG003", "REG004", "REG005", …
+$ fecha_obs           &lt;date&gt; 2023-03-12, 2023-03-15, 2023-03-18, 2023-03-20, 2…
+$ especie             &lt;chr&gt; "Iguana iguana", "Dendrocygna autumnalis", "Coragy…
+$ nombre_comun        &lt;chr&gt; "Iguana verde", "Pijije aliblanco", "Gallinazo neg…
+$ clase               &lt;chr&gt; "Reptilia", "Aves", "Aves", "Aves", "Reptilia", "A…
+$ orden               &lt;chr&gt; "Squamata", "Anseriformes", "Cathartiformes", "Psi…
+$ municipio           &lt;chr&gt; "Barranquilla", "Malambo", "Soledad", "Puerto Colo…
+$ localidad           &lt;chr&gt; "Parque Cultural del Caribe", "Ciénaga del Convent…
+$ ecosistema          &lt;chr&gt; "bosque_seco", "humedal", "urbano", "bosque_seco",…
+$ n_individuos        &lt;dbl&gt; 3, 12, 5, 2, 1, 8, 4, 21, 9, 1, 2, 6, 1, 2, 14, 3,…
+$ longitud            &lt;dbl&gt; -74.7964, -74.7821, -74.7667, -74.9561, -74.9214, …
+$ latitud             &lt;dbl&gt; 10.9878, 10.8654, 10.9169, 10.9945, 10.6354, 10.99…
+$ observador          &lt;chr&gt; "Pérez C.", "Gómez M.", "Pérez C.", "Martínez L.",…
+$ estado_conservacion &lt;chr&gt; "LC", "LC", "LC", "LC", "LC", "LC", "LC", "LC", "L…
+$ fuente              &lt;chr&gt; "SiB Colombia", "SiB Colombia", "SiB Colombia", "S…</code></pre>
+</div>
+</div>
+</section>
+<section id="verificar-la-importación" class="level3">
+<h3 class="anchored" data-anchor-id="verificar-la-importación">Verificar la importación</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ¿Tuvo readr problemas al parsear algún valor?</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">problems</span>(fauna)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 0 × 5
+# ℹ 5 variables: row &lt;int&gt;, col &lt;int&gt;, expected &lt;chr&gt;, actual &lt;chr&gt;, file &lt;chr&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ver la especificación de tipos que infirió readr:</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">spec</span>(fauna)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>cols(
+  id_registro = col_character(),
+  fecha_obs = col_date(format = ""),
+  especie = col_character(),
+  nombre_comun = col_character(),
+  clase = col_character(),
+  orden = col_character(),
+  municipio = col_character(),
+  localidad = col_character(),
+  ecosistema = col_character(),
+  n_individuos = col_double(),
+  longitud = col_double(),
+  latitud = col_double(),
+  observador = col_character(),
+  estado_conservacion = col_character(),
+  fuente = col_character()
+)</code></pre>
+</div>
+</div>
+</section>
+<section id="opciones-principales-de-read_csv" class="level3">
+<h3 class="anchored" data-anchor-id="opciones-principales-de-read_csv">Opciones principales de <code>read_csv()</code></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># col_types — especificar tipos explícitamente</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>fauna_tipos <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"../datos/semana-4/fauna_atlantico_listo.csv"</span>,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> <span class="fu">cols</span>(</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">estado_conservacion =</span> <span class="fu">col_factor</span>(<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"LC"</span>, <span class="st">"NT"</span>, <span class="st">"VU"</span>, <span class="st">"EN"</span>, <span class="st">"CR"</span>)),</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_individuos        =</span> <span class="fu">col_integer</span>()</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(fauna_tipos)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 198
+Columns: 15
+$ id_registro         &lt;chr&gt; "REG001", "REG002", "REG003", "REG004", "REG005", …
+$ fecha_obs           &lt;date&gt; 2023-03-12, 2023-03-15, 2023-03-18, 2023-03-20, 2…
+$ especie             &lt;chr&gt; "Iguana iguana", "Dendrocygna autumnalis", "Coragy…
+$ nombre_comun        &lt;chr&gt; "Iguana verde", "Pijije aliblanco", "Gallinazo neg…
+$ clase               &lt;chr&gt; "Reptilia", "Aves", "Aves", "Aves", "Reptilia", "A…
+$ orden               &lt;chr&gt; "Squamata", "Anseriformes", "Cathartiformes", "Psi…
+$ municipio           &lt;chr&gt; "Barranquilla", "Malambo", "Soledad", "Puerto Colo…
+$ localidad           &lt;chr&gt; "Parque Cultural del Caribe", "Ciénaga del Convent…
+$ ecosistema          &lt;chr&gt; "bosque_seco", "humedal", "urbano", "bosque_seco",…
+$ n_individuos        &lt;int&gt; 3, 12, 5, 2, 1, 8, 4, 21, 9, 1, 2, 6, 1, 2, 14, 3,…
+$ longitud            &lt;dbl&gt; -74.7964, -74.7821, -74.7667, -74.9561, -74.9214, …
+$ latitud             &lt;dbl&gt; 10.9878, 10.8654, 10.9169, 10.9945, 10.6354, 10.99…
+$ observador          &lt;chr&gt; "Pérez C.", "Gómez M.", "Pérez C.", "Martínez L.",…
+$ estado_conservacion &lt;fct&gt; LC, LC, LC, LC, LC, LC, LC, LC, LC, NT, VU, LC, LC…
+$ fuente              &lt;chr&gt; "SiB Colombia", "SiB Colombia", "SiB Colombia", "S…</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># na — definir qué strings se interpretan como NA</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>fauna_na <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"../datos/semana-4/fauna_atlantico_listo.csv"</span>,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">na =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"NA"</span>, <span class="st">"ND"</span>, <span class="st">"Sin dato"</span>, <span class="st">"-999"</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Otros formatos de importación
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Archivos con punto y coma</strong> (Excel en español):</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>fauna_eu <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="st">"archivo.csv"</span>)   <span class="co"># separador ; decimal ,</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Archivos Excel (.xlsx):</strong></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>fauna_excel <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"archivo.xlsx"</span>, <span class="at">sheet =</span> <span class="st">"Hoja1"</span>, <span class="at">na =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"ND"</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Listar hojas de un Excel:</strong></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>readxl<span class="sc">::</span><span class="fu">excel_sheets</span>(<span class="st">"archivo.xlsx"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Pregunta:</strong> ¿Por qué es mejor compartir datos en CSV que en Excel para análisis reproducibles?</p>
+</blockquote>
+<hr>
+</section>
+</section>
+<section id="bloque-3-dplyr-los-5-verbos-40-minutos" class="level2">
+<h2 class="anchored" data-anchor-id="bloque-3-dplyr-los-5-verbos-40-minutos">Bloque 3 — dplyr: los 5 verbos <em>(≈ 40 minutos)</em></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Regla mnemotécnica:</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   filter()    → filas que CUMPLEN una condición</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   select()    → columnas que QUIERO</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate()    → columnas nuevas o TRANSFORMADAS</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   arrange()   → filas en cierto ORDEN</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   summarise() → una TABLA RESUMEN por grupo</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="filter-seleccionar-filas" class="level3">
+<h3 class="anchored" data-anchor-id="filter-seleccionar-filas">3.1 <code>filter()</code> — seleccionar filas</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Registros de Barranquilla:</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>fauna_barranquilla <span class="ot">&lt;-</span> fauna <span class="sc">|&gt;</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(municipio <span class="sc">==</span> <span class="st">"Barranquilla"</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(fauna)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 198</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(fauna_barranquilla)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 24</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Especies amenazadas (VU, EN o CR):</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>fauna_amenazadas <span class="ot">&lt;-</span> fauna <span class="sc">|&gt;</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(estado_conservacion <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"VU"</span>, <span class="st">"EN"</span>, <span class="st">"CR"</span>))</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(fauna_amenazadas)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 16</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Condición múltiple: bosque seco CON más de 5 individuos</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># La coma dentro de filter() equivale a &amp; (Y lógico)</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>fauna_bosque_abundante <span class="ot">&lt;-</span> fauna <span class="sc">|&gt;</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ecosistema <span class="sc">==</span> <span class="st">"bosque_seco"</span>, n_individuos <span class="sc">&gt;</span> <span class="dv">5</span>)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(fauna_bosque_abundante)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Pregunta:</strong> ¿Cuántas especies amenazadas hay en manglares? ¿Cómo escribirían ese filtro?</p>
+</blockquote>
+</section>
+<section id="select-seleccionar-columnas" class="level3">
+<h3 class="anchored" data-anchor-id="select-seleccionar-columnas">3.2 <code>select()</code> — seleccionar columnas</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Por nombre explícito:</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>fauna <span class="sc">|&gt;</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(especie, nombre_comun, clase, ecosistema, n_individuos)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 198 × 5
+   especie                nombre_comun             clase ecosistema n_individuos
+   &lt;chr&gt;                  &lt;chr&gt;                    &lt;chr&gt; &lt;chr&gt;             &lt;dbl&gt;
+ 1 Iguana iguana          Iguana verde             Rept… bosque_se…            3
+ 2 Dendrocygna autumnalis Pijije aliblanco         Aves  humedal              12
+ 3 Coragyps atratus       Gallinazo negro          Aves  urbano                5
+ 4 Amazona amazonica      Loro real                Aves  bosque_se…            2
+ 5 Caiman crocodilus      Babilla                  Rept… humedal               1
+ 6 Brotogeris jugularis   Periquito de gorjiamari… Aves  bosque_se…            8
+ 7 Iguana iguana          Iguana verde             Rept… bosque_se…            4
+ 8 Ardea alba             Garza real               Aves  humedal              21
+ 9 Vanellus chilensis     Pellar común             Aves  humedal               9
+10 Dasypus novemcinctus   Armadillo de nueve band… Mamm… bosque_se…            1
+# ℹ 188 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Helpers de selección:</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>fauna <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">"fecha"</span>))    <span class="co"># columnas que empiezan con "fecha"</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 198 × 1
+   fecha_obs 
+   &lt;date&gt;    
+ 1 2023-03-12
+ 2 2023-03-15
+ 3 2023-03-18
+ 4 2023-03-20
+ 5 2023-03-22
+ 6 2023-03-25
+ 7 2023-04-01
+ 8 2023-04-03
+ 9 2023-04-05
+10 2023-04-08
+# ℹ 188 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>fauna <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="fu">where</span>(is.numeric))       <span class="co"># solo columnas numéricas</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 198 × 3
+   n_individuos longitud latitud
+          &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+ 1            3    -74.8    11.0
+ 2           12    -74.8    10.9
+ 3            5    -74.8    10.9
+ 4            2    -75.0    11.0
+ 5            1    -74.9    10.6
+ 6            8    -74.8    11.0
+ 7            4    -74.9    10.8
+ 8           21    -74.9    10.4
+ 9            9    -74.8    11.0
+10            1    -75.1    10.5
+# ℹ 188 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>fauna <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="fu">where</span>(is.character))     <span class="co"># solo columnas de texto</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 198 × 11
+   id_registro especie   nombre_comun clase orden municipio localidad ecosistema
+   &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;     
+ 1 REG001      Iguana i… Iguana verde Rept… Squa… Barranqu… Parque C… bosque_se…
+ 2 REG002      Dendrocy… Pijije alib… Aves  Anse… Malambo   Ciénaga … humedal   
+ 3 REG003      Coragyps… Gallinazo n… Aves  Cath… Soledad   Área per… urbano    
+ 4 REG004      Amazona … Loro real    Aves  Psit… Puerto C… Playa Sa… bosque_se…
+ 5 REG005      Caiman c… Babilla      Rept… Croc… Sabanala… Ciénaga … humedal   
+ 6 REG006      Brotoger… Periquito d… Aves  Psit… Barranqu… Jardín B… bosque_se…
+ 7 REG007      Iguana i… Iguana verde Rept… Squa… Baranoa   Finca La… bosque_se…
+ 8 REG008      Ardea al… Garza real   Aves  Pele… Campo de… Ciénaga … humedal   
+ 9 REG009      Vanellus… Pellar común Aves  Char… Barranqu… Ciénaga … humedal   
+10 REG010      Dasypus … Armadillo d… Mamm… Cing… Repelón   Ciénaga … bosque_se…
+# ℹ 188 more rows
+# ℹ 3 more variables: observador &lt;chr&gt;, estado_conservacion &lt;chr&gt;, fuente &lt;chr&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Excluir columnas con -:</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>fauna <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="sc">-</span>latitud, <span class="sc">-</span>longitud)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 198 × 13
+   id_registro fecha_obs  especie   nombre_comun clase orden municipio localidad
+   &lt;chr&gt;       &lt;date&gt;     &lt;chr&gt;     &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;    
+ 1 REG001      2023-03-12 Iguana i… Iguana verde Rept… Squa… Barranqu… Parque C…
+ 2 REG002      2023-03-15 Dendrocy… Pijije alib… Aves  Anse… Malambo   Ciénaga …
+ 3 REG003      2023-03-18 Coragyps… Gallinazo n… Aves  Cath… Soledad   Área per…
+ 4 REG004      2023-03-20 Amazona … Loro real    Aves  Psit… Puerto C… Playa Sa…
+ 5 REG005      2023-03-22 Caiman c… Babilla      Rept… Croc… Sabanala… Ciénaga …
+ 6 REG006      2023-03-25 Brotoger… Periquito d… Aves  Psit… Barranqu… Jardín B…
+ 7 REG007      2023-04-01 Iguana i… Iguana verde Rept… Squa… Baranoa   Finca La…
+ 8 REG008      2023-04-03 Ardea al… Garza real   Aves  Pele… Campo de… Ciénaga …
+ 9 REG009      2023-04-05 Vanellus… Pellar común Aves  Char… Barranqu… Ciénaga …
+10 REG010      2023-04-08 Dasypus … Armadillo d… Mamm… Cing… Repelón   Ciénaga …
+# ℹ 188 more rows
+# ℹ 5 more variables: ecosistema &lt;chr&gt;, n_individuos &lt;dbl&gt;, observador &lt;chr&gt;,
+#   estado_conservacion &lt;chr&gt;, fuente &lt;chr&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="mutate-crear-o-transformar-columnas" class="level3">
+<h3 class="anchored" data-anchor-id="mutate-crear-o-transformar-columnas">3.3 <code>mutate()</code> — crear o transformar columnas</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># log1p(x) = log(x + 1) — evita log(0) = -Inf cuando hay ceros</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>fauna <span class="ot">&lt;-</span> fauna <span class="sc">|&gt;</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">log_individuos =</span> <span class="fu">log1p</span>(n_individuos))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># case_when() — equivalente de if-else múltiple dentro de mutate()</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>fauna <span class="ot">&lt;-</span> fauna <span class="sc">|&gt;</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">categoria_abundancia =</span> <span class="fu">case_when</span>(</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>      n_individuos <span class="sc">&lt;=</span> <span class="dv">5</span>  <span class="sc">~</span> <span class="st">"Baja"</span>,</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>      n_individuos <span class="sc">&lt;=</span> <span class="dv">20</span> <span class="sc">~</span> <span class="st">"Media"</span>,</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>      n_individuos <span class="sc">&gt;</span>  <span class="dv">20</span> <span class="sc">~</span> <span class="st">"Alta"</span></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extraer el año de una fecha:</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>fauna <span class="ot">&lt;-</span> fauna <span class="sc">|&gt;</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">anio =</span> <span class="fu">format</span>(fecha_obs, <span class="st">"%Y"</span>))</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>fauna <span class="sc">|&gt;</span></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(especie, n_individuos, log_individuos, categoria_abundancia, anio)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 198 × 5
+   especie                n_individuos log_individuos categoria_abundancia anio 
+   &lt;chr&gt;                         &lt;dbl&gt;          &lt;dbl&gt; &lt;chr&gt;                &lt;chr&gt;
+ 1 Iguana iguana                     3          1.39  Baja                 2023 
+ 2 Dendrocygna autumnalis           12          2.56  Media                2023 
+ 3 Coragyps atratus                  5          1.79  Baja                 2023 
+ 4 Amazona amazonica                 2          1.10  Baja                 2023 
+ 5 Caiman crocodilus                 1          0.693 Baja                 2023 
+ 6 Brotogeris jugularis              8          2.20  Media                2023 
+ 7 Iguana iguana                     4          1.61  Baja                 2023 
+ 8 Ardea alba                       21          3.09  Alta                 2023 
+ 9 Vanellus chilensis                9          2.30  Media                2023 
+10 Dasypus novemcinctus              1          0.693 Baja                 2023 
+# ℹ 188 more rows</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Pregunta:</strong> ¿Por qué usamos <code>log1p()</code> en lugar de <code>log()</code>? ¿Qué ecosistemas tienen más registros en categoría “Alta”?</p>
+</blockquote>
+</section>
+<section id="arrange-ordenar-filas" class="level3">
+<h3 class="anchored" data-anchor-id="arrange-ordenar-filas">3.4 <code>arrange()</code> — ordenar filas</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># De mayor a menor número de individuos:</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>fauna <span class="sc">|&gt;</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n_individuos)) <span class="sc">|&gt;</span></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(especie, municipio, ecosistema, n_individuos)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 198 × 4
+   especie                municipio        ecosistema     n_individuos
+   &lt;chr&gt;                  &lt;chr&gt;            &lt;chr&gt;                 &lt;dbl&gt;
+ 1 Coragyps atratus       Barranquilla     urbano                   34
+ 2 Dendrocygna autumnalis Repelón          humedal                  31
+ 3 Eudocimus albus        Campo de la Cruz humedal                  31
+ 4 Eudocimus albus        Campo de la Cruz humedal                  28
+ 5 Dendrocygna viduata    Sabanalarga      humedal                  27
+ 6 Pelecanus occidentalis Puerto Colombia  marino_costero           27
+ 7 Eudocimus albus        Repelón          humedal                  24
+ 8 Pelecanus occidentalis Puerto Colombia  marino_costero           23
+ 9 Dendrocygna autumnalis Campo de la Cruz humedal                  23
+10 Dendrocygna viduata    Malambo          humedal                  22
+# ℹ 188 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dos criterios: ecosistema (asc) + n_individuos (desc):</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>fauna <span class="sc">|&gt;</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(ecosistema, <span class="fu">desc</span>(n_individuos)) <span class="sc">|&gt;</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(especie, ecosistema, n_individuos) <span class="sc">|&gt;</span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 3
+   especie              ecosistema  n_individuos
+   &lt;chr&gt;                &lt;chr&gt;              &lt;dbl&gt;
+ 1 Brotogeris jugularis bosque_seco            8
+ 2 Ortalis garrula      bosque_seco            8
+ 3 Ortalis garrula      bosque_seco            7
+ 4 Ortalis garrula      bosque_seco            6
+ 5 Iguana iguana        bosque_seco            5
+ 6 Ortalis garrula      bosque_seco            5
+ 7 Amazona amazonica    bosque_seco            5
+ 8 Ortalis garrula      bosque_seco            5
+ 9 Iguana iguana        bosque_seco            4
+10 Amazona ochrocephala bosque_seco            4</code></pre>
+</div>
+</div>
+</section>
+<section id="summarise-group_by-resumir-por-grupo" class="level3">
+<h3 class="anchored" data-anchor-id="summarise-group_by-resumir-por-grupo">3.5 <code>summarise()</code> + <code>group_by()</code> — resumir por grupo</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Siempre van juntos: group_by() → summarise()</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>resumen_ecosistema <span class="ot">&lt;-</span> fauna <span class="sc">|&gt;</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ecosistema) <span class="sc">|&gt;</span></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_registros    =</span> <span class="fu">n</span>(),</span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_especies     =</span> <span class="fu">n_distinct</span>(especie),</span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_indiv    =</span> <span class="fu">sum</span>(n_individuos, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">media_indiv    =</span> <span class="fu">mean</span>(n_individuos, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(total_indiv))</span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a>resumen_ecosistema</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 5
+  ecosistema     n_registros n_especies total_indiv media_indiv
+  &lt;chr&gt;                &lt;int&gt;      &lt;int&gt;       &lt;dbl&gt;       &lt;dbl&gt;
+1 humedal                100         26         795        7.95
+2 marino_costero          11          4         171       15.5 
+3 bosque_seco             58         16         149        2.57
+4 urbano                  18          9         110        6.11
+5 pastizal                11          6          95        8.64</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dos variables de agrupación:</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>fauna <span class="sc">|&gt;</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(clase, estado_conservacion) <span class="sc">|&gt;</span></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n_registros =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 3
+  clase    estado_conservacion n_registros
+  &lt;chr&gt;    &lt;chr&gt;                     &lt;int&gt;
+1 Aves     LC                          145
+2 Aves     VU                            4
+3 Mammalia LC                           11
+4 Mammalia NT                            5
+5 Reptilia DD                            3
+6 Reptilia EN                            5
+7 Reptilia LC                           18
+8 Reptilia VU                            7</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Pregunta:</strong> ¿Cuál es el ecosistema con mayor riqueza de especies? ¿Es el mismo con mayor número de individuos? ¿Qué explicación biológica plantearías?</p>
+</blockquote>
+</section>
+<section id="pipelines-combinando-verbos" class="level3">
+<h3 class="anchored" data-anchor-id="pipelines-combinando-verbos">3.6 Pipelines: combinando verbos</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ¿Cuántos registros y qué riqueza de especies por clase taxonómica?</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>fauna <span class="sc">|&gt;</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(clase) <span class="sc">|&gt;</span></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_registros =</span> <span class="fu">n</span>(),</span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_especies  =</span> <span class="fu">n_distinct</span>(especie),</span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_indiv =</span> <span class="fu">sum</span>(n_individuos, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n_registros))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  clase    n_registros n_especies total_indiv
+  &lt;chr&gt;          &lt;int&gt;      &lt;int&gt;       &lt;dbl&gt;
+1 Aves             149         39        1223
+2 Reptilia          33          7          77
+3 Mammalia          16          4          20</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Proporción de registros por categoría de amenaza:</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>fauna <span class="sc">|&gt;</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(estado_conservacion) <span class="sc">|&gt;</span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">porcentaje =</span> <span class="fu">round</span>(n <span class="sc">/</span> <span class="fu">sum</span>(n) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(porcentaje))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  estado_conservacion     n porcentaje
+  &lt;chr&gt;               &lt;int&gt;      &lt;dbl&gt;
+1 LC                    174       87.9
+2 VU                     11        5.6
+3 EN                      5        2.5
+4 NT                      5        2.5
+5 DD                      3        1.5</code></pre>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="bloque-4-ejercicio-abp-en-parejas-20-minutos" class="level2">
+<h2 class="anchored" data-anchor-id="bloque-4-ejercicio-abp-en-parejas-20-minutos">Bloque 4 — Ejercicio ABP en parejas <em>(≈ 20 minutos)</em></h2>
+<p><strong>Contexto:</strong> El programa de monitoreo necesita identificar las 3 especies más registradas por ecosistema, y saber qué proporción de esos registros prioritarios corresponde a especies amenazadas.</p>
+<p>Trabajen en parejas (15 min), luego presentan su solución.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Una solución posible (revelar al final)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Top 3 especies por ecosistema según número de registros:</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>fauna <span class="sc">|&gt;</span></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ecosistema, especie) <span class="sc">|&gt;</span></span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_registros =</span> <span class="fu">n</span>(),</span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_indiv =</span> <span class="fu">sum</span>(n_individuos, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups     =</span> <span class="st">"drop"</span></span>
+<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ecosistema) <span class="sc">|&gt;</span></span>
+<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(<span class="at">order_by =</span> n_registros, <span class="at">n =</span> <span class="dv">3</span>) <span class="sc">|&gt;</span></span>
+<span id="cb59-11"><a href="#cb59-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(ecosistema, <span class="fu">desc</span>(n_registros))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 19 × 4
+# Groups:   ecosistema [5]
+   ecosistema     especie                   n_registros total_indiv
+   &lt;chr&gt;          &lt;chr&gt;                           &lt;int&gt;       &lt;dbl&gt;
+ 1 bosque_seco    Ara macao                           6          16
+ 2 bosque_seco    Ortalis garrula                     6          35
+ 3 bosque_seco    Cerdocyon thous                     5           7
+ 4 bosque_seco    Dasypus novemcinctus                5           6
+ 5 bosque_seco    Ramphastos sulfuratus               5          12
+ 6 humedal        Caiman crocodilus                   7          17
+ 7 humedal        Eudocimus albus                     6         137
+ 8 humedal        Jacana jacana                       6          48
+ 9 humedal        Porphyrio martinica                 6          29
+10 marino_costero Pelecanus occidentalis              4          83
+11 marino_costero Thalasseus maximus                  4          60
+12 marino_costero Phalacrocorax brasilianus           2          19
+13 pastizal       Crotophaga sulcirostris             3          28
+14 pastizal       Burhinus bistriatus                 2          18
+15 pastizal       Milvago chimachima                  2          13
+16 pastizal       Vanellus chilensis                  2          20
+17 urbano         Mimus gilvus                        4          18
+18 urbano         Coragyps atratus                    3          51
+19 urbano         Turdus ignobilis                    3          12</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="cierre-de-sesión" class="level2">
+<h2 class="anchored" data-anchor-id="cierre-de-sesión">Cierre de sesión</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.5.3 (2026-03-11)
+Platform: x86_64-pc-linux-gnu
+Running under: Pop!_OS 22.04 LTS
+
+Matrix products: default
+BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0 
+LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0  LAPACK version 3.10.0
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+time zone: America/Bogota
+tzcode source: system (glibc)
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] dplyr_1.1.4  readxl_1.4.5 readr_2.1.5 
+
+loaded via a namespace (and not attached):
+ [1] crayon_1.5.3      vctrs_0.7.0       cli_3.6.5         knitr_1.50       
+ [5] rlang_1.1.7       xfun_0.52         generics_0.1.4    jsonlite_2.0.0   
+ [9] bit_4.6.0         glue_1.8.0        htmltools_0.5.8.1 hms_1.1.3        
+[13] rmarkdown_2.29    cellranger_1.1.0  evaluate_1.0.4    tibble_3.3.1     
+[17] tzdb_0.5.0        fastmap_1.2.0     yaml_2.3.10       lifecycle_1.0.5  
+[21] compiler_4.5.3    htmlwidgets_1.6.4 pkgconfig_2.0.3   digest_0.6.37    
+[25] R6_2.6.1          utf8_1.2.6        tidyselect_1.2.1  parallel_4.5.3   
+[29] vroom_1.6.5       pillar_1.11.1     magrittr_2.0.4    withr_3.0.2      
+[33] bit64_4.6.0-1     tools_4.5.3       archive_1.1.12   </code></pre>
+</div>
+</div>
+<hr>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Para la próxima clase (Semana 5)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Tema:</strong> Manipulación con <code>tidyr</code>. Datos ordenados (<em>tidy data</em>): <code>pivot_longer()</code>, <code>pivot_wider()</code>, <code>separate()</code>, <code>unite()</code>.</li>
+<li><strong>Lectura recomendada:</strong> R for Data Science, Cap. 5 — <a href="https://r4ds.hadley.nz/data-tidy" class="uri">https://r4ds.hadley.nz/data-tidy</a></li>
+<li><strong>Taller de esta semana:</strong> <code>taller4_apellido_nombre.R</code> — entregar en SICVI 567</li>
+</ul>
+</div>
+</div>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/rodianfonseca\.github\.io\/ADBR-2026-1\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Ejecutar el código</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb62" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Semana 4 — Tidyverse: importación y dplyr"</span></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "readr, readxl y los 5 verbos de dplyr con datos de fauna del Atlántico"</span></span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2026-04-29"</span></span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Curso 20953 · Análisis de Datos Biológicos bajo R"</span></span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> true</span></span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a><span class="an">toc-depth:</span><span class="co"> 3</span></span>
+<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a><span class="an">code-fold:</span><span class="co"> false</span></span>
+<span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a><span class="an">code-tools:</span><span class="co"> true</span></span>
+<span id="cb62-10"><a href="#cb62-10" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb62-11"><a href="#cb62-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-12"><a href="#cb62-12" aria-hidden="true" tabindex="-1"></a>:::{.callout-tip icon="false" appearance="simple"}</span>
+<span id="cb62-13"><a href="#cb62-13" aria-hidden="true" tabindex="-1"></a>**Unidad 2:** Manejo y Visualización de Datos · **Estrategia:** Clase magistral + Aprendizaje basado en problemas · **Duración:** 90 min</span>
+<span id="cb62-14"><a href="#cb62-14" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb62-15"><a href="#cb62-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-16"><a href="#cb62-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## Resultado de aprendizaje</span></span>
+<span id="cb62-17"><a href="#cb62-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-18"><a href="#cb62-18" aria-hidden="true" tabindex="-1"></a>Al finalizar esta sesión, el estudiante será capaz de:</span>
+<span id="cb62-19"><a href="#cb62-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-20"><a href="#cb62-20" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Distinguir entre <span class="in">`read.csv()`</span> (base R) y <span class="in">`read_csv()`</span> (readr) y elegir cuál usar</span>
+<span id="cb62-21"><a href="#cb62-21" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Importar datos con <span class="in">`read_csv()`</span> especificando tipos de columna y valores NA</span>
+<span id="cb62-22"><a href="#cb62-22" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Aplicar los 5 verbos de dplyr para filtrar, seleccionar, transformar, ordenar y resumir datos</span>
+<span id="cb62-23"><a href="#cb62-23" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Combinar verbos en pipelines con <span class="in">`|&gt;`</span> para responder preguntas biológicas</span>
+<span id="cb62-24"><a href="#cb62-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-25"><a href="#cb62-25" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb62-26"><a href="#cb62-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-27"><a href="#cb62-27" aria-hidden="true" tabindex="-1"></a><span class="fu">## Configuración inicial</span></span>
+<span id="cb62-28"><a href="#cb62-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-31"><a href="#cb62-31" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-32"><a href="#cb62-32" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
+<span id="cb62-33"><a href="#cb62-33" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb62-34"><a href="#cb62-34" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb62-35"><a href="#cb62-35" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb62-36"><a href="#cb62-36" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb62-37"><a href="#cb62-37" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb62-38"><a href="#cb62-38" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-39"><a href="#cb62-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-40"><a href="#cb62-40" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb62-41"><a href="#cb62-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-42"><a href="#cb62-42" aria-hidden="true" tabindex="-1"></a><span class="fu">## Bloque 1 — El Tidyverse *(≈ 10 minutos)*</span></span>
+<span id="cb62-43"><a href="#cb62-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-44"><a href="#cb62-44" aria-hidden="true" tabindex="-1"></a><span class="fu">### ¿Qué es el Tidyverse?</span></span>
+<span id="cb62-45"><a href="#cb62-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-46"><a href="#cb62-46" aria-hidden="true" tabindex="-1"></a>El Tidyverse es una colección de paquetes de R con una filosofía coherente para el análisis de datos. Todos comparten la misma estructura de entrada/salida (el **tibble**), el mismo estilo de código (verbos + pipe) y documentación consistente.</span>
+<span id="cb62-47"><a href="#cb62-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-48"><a href="#cb62-48" aria-hidden="true" tabindex="-1"></a>| Paquete | Función | Semana |</span>
+<span id="cb62-49"><a href="#cb62-49" aria-hidden="true" tabindex="-1"></a>|---------|---------|--------|</span>
+<span id="cb62-50"><a href="#cb62-50" aria-hidden="true" tabindex="-1"></a>| <span class="in">`readr`</span> | Importar CSV y archivos de texto | **Hoy** |</span>
+<span id="cb62-51"><a href="#cb62-51" aria-hidden="true" tabindex="-1"></a>| <span class="in">`readxl`</span> | Importar archivos Excel | **Hoy** |</span>
+<span id="cb62-52"><a href="#cb62-52" aria-hidden="true" tabindex="-1"></a>| <span class="in">`dplyr`</span> | Manipular y transformar datos | **Hoy** |</span>
+<span id="cb62-53"><a href="#cb62-53" aria-hidden="true" tabindex="-1"></a>| <span class="in">`tidyr`</span> | Ordenar y pivotar datos | Semana 5 |</span>
+<span id="cb62-54"><a href="#cb62-54" aria-hidden="true" tabindex="-1"></a>| <span class="in">`ggplot2`</span> | Visualización de datos | Semana 6 |</span>
+<span id="cb62-55"><a href="#cb62-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-56"><a href="#cb62-56" aria-hidden="true" tabindex="-1"></a><span class="fu">### Tibble vs data.frame</span></span>
+<span id="cb62-57"><a href="#cb62-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-60"><a href="#cb62-60" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-61"><a href="#cb62-61" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tibble-vs-df</span></span>
+<span id="cb62-62"><a href="#cb62-62" aria-hidden="true" tabindex="-1"></a>df_clasico <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb62-63"><a href="#cb62-63" aria-hidden="true" tabindex="-1"></a>  <span class="at">especie =</span> <span class="fu">c</span>(<span class="st">"Ardea alba"</span>, <span class="st">"Egretta thula"</span>, <span class="st">"Fregata magnificens"</span>),</span>
+<span id="cb62-64"><a href="#cb62-64" aria-hidden="true" tabindex="-1"></a>  <span class="at">conteo  =</span> <span class="fu">c</span>(<span class="dv">45</span>L, <span class="dv">120</span>L, <span class="dv">8</span>L),</span>
+<span id="cb62-65"><a href="#cb62-65" aria-hidden="true" tabindex="-1"></a>  <span class="at">fecha   =</span> <span class="fu">as.Date</span>(<span class="fu">c</span>(<span class="st">"2024-01-15"</span>, <span class="st">"2024-01-15"</span>, <span class="st">"2024-01-16"</span>))</span>
+<span id="cb62-66"><a href="#cb62-66" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb62-67"><a href="#cb62-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-68"><a href="#cb62-68" aria-hidden="true" tabindex="-1"></a>tbl_moderno <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb62-69"><a href="#cb62-69" aria-hidden="true" tabindex="-1"></a>  <span class="at">especie =</span> <span class="fu">c</span>(<span class="st">"Ardea alba"</span>, <span class="st">"Egretta thula"</span>, <span class="st">"Fregata magnificens"</span>),</span>
+<span id="cb62-70"><a href="#cb62-70" aria-hidden="true" tabindex="-1"></a>  <span class="at">conteo  =</span> <span class="fu">c</span>(<span class="dv">45</span>L, <span class="dv">120</span>L, <span class="dv">8</span>L),</span>
+<span id="cb62-71"><a href="#cb62-71" aria-hidden="true" tabindex="-1"></a>  <span class="at">fecha   =</span> <span class="fu">as.Date</span>(<span class="fu">c</span>(<span class="st">"2024-01-15"</span>, <span class="st">"2024-01-15"</span>, <span class="st">"2024-01-16"</span>))</span>
+<span id="cb62-72"><a href="#cb62-72" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb62-73"><a href="#cb62-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-74"><a href="#cb62-74" aria-hidden="true" tabindex="-1"></a>df_clasico    <span class="co"># imprime </span><span class="al">TODO</span><span class="co">, sin información de tipos</span></span>
+<span id="cb62-75"><a href="#cb62-75" aria-hidden="true" tabindex="-1"></a>tbl_moderno   <span class="co"># máximo 10 filas, muestra tipos (&lt;chr&gt;, &lt;int&gt;, &lt;date&gt;)</span></span>
+<span id="cb62-76"><a href="#cb62-76" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-77"><a href="#cb62-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-78"><a href="#cb62-78" aria-hidden="true" tabindex="-1"></a><span class="fu">### El operador pipe `|&gt;`</span></span>
+<span id="cb62-79"><a href="#cb62-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-82"><a href="#cb62-82" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-83"><a href="#cb62-83" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: pipe-demo</span></span>
+<span id="cb62-84"><a href="#cb62-84" aria-hidden="true" tabindex="-1"></a><span class="co"># Sin pipe — se lee de adentro hacia afuera:</span></span>
+<span id="cb62-85"><a href="#cb62-85" aria-hidden="true" tabindex="-1"></a>resultado_sin_pipe <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">sqrt</span>(<span class="fu">log</span>(<span class="dv">100</span>)), <span class="at">digits =</span> <span class="dv">2</span>)</span>
+<span id="cb62-86"><a href="#cb62-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-87"><a href="#cb62-87" aria-hidden="true" tabindex="-1"></a><span class="co"># Con pipe — se lee de izquierda a derecha:</span></span>
+<span id="cb62-88"><a href="#cb62-88" aria-hidden="true" tabindex="-1"></a>resultado_con_pipe <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">|&gt;</span> <span class="fu">log</span>() <span class="sc">|&gt;</span> <span class="fu">sqrt</span>() <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span>
+<span id="cb62-89"><a href="#cb62-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-90"><a href="#cb62-90" aria-hidden="true" tabindex="-1"></a>resultado_sin_pipe</span>
+<span id="cb62-91"><a href="#cb62-91" aria-hidden="true" tabindex="-1"></a>resultado_con_pipe   <span class="co"># mismo resultado, código más legible</span></span>
+<span id="cb62-92"><a href="#cb62-92" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-93"><a href="#cb62-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-94"><a href="#cb62-94" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb62-95"><a href="#cb62-95" aria-hidden="true" tabindex="-1"></a><span class="fu">## Atajo de teclado del pipe</span></span>
+<span id="cb62-96"><a href="#cb62-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-97"><a href="#cb62-97" aria-hidden="true" tabindex="-1"></a>**Ctrl + Shift + M** en RStudio genera <span class="in">`|&gt;`</span> automáticamente.</span>
+<span id="cb62-98"><a href="#cb62-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-99"><a href="#cb62-99" aria-hidden="true" tabindex="-1"></a>Verifica en: <span class="in">`Tools → Global Options → Code → Use native pipe operator`</span></span>
+<span id="cb62-100"><a href="#cb62-100" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb62-101"><a href="#cb62-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-102"><a href="#cb62-102" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **Pregunta:** ¿Qué ventaja tiene leer el código con pipe frente a sin pipe?</span></span>
+<span id="cb62-103"><a href="#cb62-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-104"><a href="#cb62-104" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb62-105"><a href="#cb62-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-106"><a href="#cb62-106" aria-hidden="true" tabindex="-1"></a><span class="fu">## Bloque 2 — Importación de datos *(≈ 20 minutos)*</span></span>
+<span id="cb62-107"><a href="#cb62-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-108"><a href="#cb62-108" aria-hidden="true" tabindex="-1"></a><span class="fu">### `read_csv()` vs `read.csv()`</span></span>
+<span id="cb62-109"><a href="#cb62-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-110"><a href="#cb62-110" aria-hidden="true" tabindex="-1"></a>| Característica | <span class="in">`read.csv()`</span> (base R) | <span class="in">`read_csv()`</span> (readr) |</span>
+<span id="cb62-111"><a href="#cb62-111" aria-hidden="true" tabindex="-1"></a>|---|---|---|</span>
+<span id="cb62-112"><a href="#cb62-112" aria-hidden="true" tabindex="-1"></a>| Resultado | <span class="in">`data.frame`</span> | <span class="in">`tibble`</span> |</span>
+<span id="cb62-113"><a href="#cb62-113" aria-hidden="true" tabindex="-1"></a>| Mensajes de parsing | Ninguno | Informa tipo de cada columna |</span>
+<span id="cb62-114"><a href="#cb62-114" aria-hidden="true" tabindex="-1"></a>| NA personalizados | Manual | Argumento <span class="in">`na`</span> |</span>
+<span id="cb62-115"><a href="#cb62-115" aria-hidden="true" tabindex="-1"></a>| Velocidad | Lenta | Rápida |</span>
+<span id="cb62-116"><a href="#cb62-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-117"><a href="#cb62-117" aria-hidden="true" tabindex="-1"></a>**Regla práctica:** en el Tidyverse, siempre preferimos <span class="in">`read_csv()`</span>.</span>
+<span id="cb62-118"><a href="#cb62-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-119"><a href="#cb62-119" aria-hidden="true" tabindex="-1"></a><span class="fu">### Cargar el dataset</span></span>
+<span id="cb62-120"><a href="#cb62-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-123"><a href="#cb62-123" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-124"><a href="#cb62-124" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: cargar-datos</span></span>
+<span id="cb62-125"><a href="#cb62-125" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: true</span></span>
+<span id="cb62-126"><a href="#cb62-126" aria-hidden="true" tabindex="-1"></a>fauna <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../datos/semana-4/fauna_atlantico_listo.csv"</span>)</span>
+<span id="cb62-127"><a href="#cb62-127" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-128"><a href="#cb62-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-131"><a href="#cb62-131" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-132"><a href="#cb62-132" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: glimpse-datos</span></span>
+<span id="cb62-133"><a href="#cb62-133" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(fauna)</span>
+<span id="cb62-134"><a href="#cb62-134" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-135"><a href="#cb62-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-136"><a href="#cb62-136" aria-hidden="true" tabindex="-1"></a><span class="fu">### Verificar la importación</span></span>
+<span id="cb62-137"><a href="#cb62-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-140"><a href="#cb62-140" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-141"><a href="#cb62-141" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: verificar-problemas</span></span>
+<span id="cb62-142"><a href="#cb62-142" aria-hidden="true" tabindex="-1"></a><span class="co"># ¿Tuvo readr problemas al parsear algún valor?</span></span>
+<span id="cb62-143"><a href="#cb62-143" aria-hidden="true" tabindex="-1"></a><span class="fu">problems</span>(fauna)</span>
+<span id="cb62-144"><a href="#cb62-144" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-145"><a href="#cb62-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-148"><a href="#cb62-148" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-149"><a href="#cb62-149" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: spec-datos</span></span>
+<span id="cb62-150"><a href="#cb62-150" aria-hidden="true" tabindex="-1"></a><span class="co"># Ver la especificación de tipos que infirió readr:</span></span>
+<span id="cb62-151"><a href="#cb62-151" aria-hidden="true" tabindex="-1"></a><span class="fu">spec</span>(fauna)</span>
+<span id="cb62-152"><a href="#cb62-152" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-153"><a href="#cb62-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-154"><a href="#cb62-154" aria-hidden="true" tabindex="-1"></a><span class="fu">### Opciones principales de `read_csv()`</span></span>
+<span id="cb62-155"><a href="#cb62-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-158"><a href="#cb62-158" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-159"><a href="#cb62-159" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: read-csv-opciones</span></span>
+<span id="cb62-160"><a href="#cb62-160" aria-hidden="true" tabindex="-1"></a><span class="co"># col_types — especificar tipos explícitamente</span></span>
+<span id="cb62-161"><a href="#cb62-161" aria-hidden="true" tabindex="-1"></a>fauna_tipos <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<span id="cb62-162"><a href="#cb62-162" aria-hidden="true" tabindex="-1"></a>  <span class="st">"../datos/semana-4/fauna_atlantico_listo.csv"</span>,</span>
+<span id="cb62-163"><a href="#cb62-163" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> <span class="fu">cols</span>(</span>
+<span id="cb62-164"><a href="#cb62-164" aria-hidden="true" tabindex="-1"></a>    <span class="at">estado_conservacion =</span> <span class="fu">col_factor</span>(<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"LC"</span>, <span class="st">"NT"</span>, <span class="st">"VU"</span>, <span class="st">"EN"</span>, <span class="st">"CR"</span>)),</span>
+<span id="cb62-165"><a href="#cb62-165" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_individuos        =</span> <span class="fu">col_integer</span>()</span>
+<span id="cb62-166"><a href="#cb62-166" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb62-167"><a href="#cb62-167" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb62-168"><a href="#cb62-168" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(fauna_tipos)</span>
+<span id="cb62-169"><a href="#cb62-169" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-170"><a href="#cb62-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-173"><a href="#cb62-173" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-174"><a href="#cb62-174" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: read-csv-na</span></span>
+<span id="cb62-175"><a href="#cb62-175" aria-hidden="true" tabindex="-1"></a><span class="co"># na — definir qué strings se interpretan como NA</span></span>
+<span id="cb62-176"><a href="#cb62-176" aria-hidden="true" tabindex="-1"></a>fauna_na <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<span id="cb62-177"><a href="#cb62-177" aria-hidden="true" tabindex="-1"></a>  <span class="st">"../datos/semana-4/fauna_atlantico_listo.csv"</span>,</span>
+<span id="cb62-178"><a href="#cb62-178" aria-hidden="true" tabindex="-1"></a>  <span class="at">na =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"NA"</span>, <span class="st">"ND"</span>, <span class="st">"Sin dato"</span>, <span class="st">"-999"</span>)</span>
+<span id="cb62-179"><a href="#cb62-179" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb62-180"><a href="#cb62-180" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-181"><a href="#cb62-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-182"><a href="#cb62-182" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb62-183"><a href="#cb62-183" aria-hidden="true" tabindex="-1"></a><span class="fu">## Otros formatos de importación</span></span>
+<span id="cb62-184"><a href="#cb62-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-185"><a href="#cb62-185" aria-hidden="true" tabindex="-1"></a>**Archivos con punto y coma** (Excel en español):</span>
+<span id="cb62-186"><a href="#cb62-186" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb62-187"><a href="#cb62-187" aria-hidden="true" tabindex="-1"></a>fauna_eu <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="st">"archivo.csv"</span>)   <span class="co"># separador ; decimal ,</span></span>
+<span id="cb62-188"><a href="#cb62-188" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-189"><a href="#cb62-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-190"><a href="#cb62-190" aria-hidden="true" tabindex="-1"></a>**Archivos Excel (.xlsx):**</span>
+<span id="cb62-191"><a href="#cb62-191" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb62-192"><a href="#cb62-192" aria-hidden="true" tabindex="-1"></a>fauna_excel <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"archivo.xlsx"</span>, <span class="at">sheet =</span> <span class="st">"Hoja1"</span>, <span class="at">na =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"ND"</span>))</span>
+<span id="cb62-193"><a href="#cb62-193" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-194"><a href="#cb62-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-195"><a href="#cb62-195" aria-hidden="true" tabindex="-1"></a>**Listar hojas de un Excel:**</span>
+<span id="cb62-196"><a href="#cb62-196" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb62-197"><a href="#cb62-197" aria-hidden="true" tabindex="-1"></a>readxl<span class="sc">::</span><span class="fu">excel_sheets</span>(<span class="st">"archivo.xlsx"</span>)</span>
+<span id="cb62-198"><a href="#cb62-198" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-199"><a href="#cb62-199" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb62-200"><a href="#cb62-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-201"><a href="#cb62-201" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **Pregunta:** ¿Por qué es mejor compartir datos en CSV que en Excel para análisis reproducibles?</span></span>
+<span id="cb62-202"><a href="#cb62-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-203"><a href="#cb62-203" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb62-204"><a href="#cb62-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-205"><a href="#cb62-205" aria-hidden="true" tabindex="-1"></a><span class="fu">## Bloque 3 — dplyr: los 5 verbos *(≈ 40 minutos)*</span></span>
+<span id="cb62-206"><a href="#cb62-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-209"><a href="#cb62-209" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-210"><a href="#cb62-210" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: verbos-resumen</span></span>
+<span id="cb62-211"><a href="#cb62-211" aria-hidden="true" tabindex="-1"></a><span class="co"># Regla mnemotécnica:</span></span>
+<span id="cb62-212"><a href="#cb62-212" aria-hidden="true" tabindex="-1"></a><span class="co">#   filter()    → filas que CUMPLEN una condición</span></span>
+<span id="cb62-213"><a href="#cb62-213" aria-hidden="true" tabindex="-1"></a><span class="co">#   select()    → columnas que QUIERO</span></span>
+<span id="cb62-214"><a href="#cb62-214" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate()    → columnas nuevas o TRANSFORMADAS</span></span>
+<span id="cb62-215"><a href="#cb62-215" aria-hidden="true" tabindex="-1"></a><span class="co">#   arrange()   → filas en cierto ORDEN</span></span>
+<span id="cb62-216"><a href="#cb62-216" aria-hidden="true" tabindex="-1"></a><span class="co">#   summarise() → una TABLA RESUMEN por grupo</span></span>
+<span id="cb62-217"><a href="#cb62-217" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-218"><a href="#cb62-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-219"><a href="#cb62-219" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3.1 `filter()` — seleccionar filas</span></span>
+<span id="cb62-220"><a href="#cb62-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-223"><a href="#cb62-223" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-224"><a href="#cb62-224" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: filter-basico</span></span>
+<span id="cb62-225"><a href="#cb62-225" aria-hidden="true" tabindex="-1"></a><span class="co"># Registros de Barranquilla:</span></span>
+<span id="cb62-226"><a href="#cb62-226" aria-hidden="true" tabindex="-1"></a>fauna_barranquilla <span class="ot">&lt;-</span> fauna <span class="sc">|&gt;</span></span>
+<span id="cb62-227"><a href="#cb62-227" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(municipio <span class="sc">==</span> <span class="st">"Barranquilla"</span>)</span>
+<span id="cb62-228"><a href="#cb62-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-229"><a href="#cb62-229" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(fauna)</span>
+<span id="cb62-230"><a href="#cb62-230" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(fauna_barranquilla)</span>
+<span id="cb62-231"><a href="#cb62-231" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-232"><a href="#cb62-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-235"><a href="#cb62-235" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-236"><a href="#cb62-236" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: filter-in</span></span>
+<span id="cb62-237"><a href="#cb62-237" aria-hidden="true" tabindex="-1"></a><span class="co"># Especies amenazadas (VU, EN o CR):</span></span>
+<span id="cb62-238"><a href="#cb62-238" aria-hidden="true" tabindex="-1"></a>fauna_amenazadas <span class="ot">&lt;-</span> fauna <span class="sc">|&gt;</span></span>
+<span id="cb62-239"><a href="#cb62-239" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(estado_conservacion <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"VU"</span>, <span class="st">"EN"</span>, <span class="st">"CR"</span>))</span>
+<span id="cb62-240"><a href="#cb62-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-241"><a href="#cb62-241" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(fauna_amenazadas)</span>
+<span id="cb62-242"><a href="#cb62-242" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-243"><a href="#cb62-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-246"><a href="#cb62-246" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-247"><a href="#cb62-247" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: filter-multiple</span></span>
+<span id="cb62-248"><a href="#cb62-248" aria-hidden="true" tabindex="-1"></a><span class="co"># Condición múltiple: bosque seco CON más de 5 individuos</span></span>
+<span id="cb62-249"><a href="#cb62-249" aria-hidden="true" tabindex="-1"></a><span class="co"># La coma dentro de filter() equivale a &amp; (Y lógico)</span></span>
+<span id="cb62-250"><a href="#cb62-250" aria-hidden="true" tabindex="-1"></a>fauna_bosque_abundante <span class="ot">&lt;-</span> fauna <span class="sc">|&gt;</span></span>
+<span id="cb62-251"><a href="#cb62-251" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ecosistema <span class="sc">==</span> <span class="st">"bosque_seco"</span>, n_individuos <span class="sc">&gt;</span> <span class="dv">5</span>)</span>
+<span id="cb62-252"><a href="#cb62-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-253"><a href="#cb62-253" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(fauna_bosque_abundante)</span>
+<span id="cb62-254"><a href="#cb62-254" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-255"><a href="#cb62-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-256"><a href="#cb62-256" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **Pregunta:** ¿Cuántas especies amenazadas hay en manglares? ¿Cómo escribirían ese filtro?</span></span>
+<span id="cb62-257"><a href="#cb62-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-258"><a href="#cb62-258" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3.2 `select()` — seleccionar columnas</span></span>
+<span id="cb62-259"><a href="#cb62-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-262"><a href="#cb62-262" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-263"><a href="#cb62-263" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: select-nombres</span></span>
+<span id="cb62-264"><a href="#cb62-264" aria-hidden="true" tabindex="-1"></a><span class="co"># Por nombre explícito:</span></span>
+<span id="cb62-265"><a href="#cb62-265" aria-hidden="true" tabindex="-1"></a>fauna <span class="sc">|&gt;</span></span>
+<span id="cb62-266"><a href="#cb62-266" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(especie, nombre_comun, clase, ecosistema, n_individuos)</span>
+<span id="cb62-267"><a href="#cb62-267" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-268"><a href="#cb62-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-271"><a href="#cb62-271" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-272"><a href="#cb62-272" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: select-helpers</span></span>
+<span id="cb62-273"><a href="#cb62-273" aria-hidden="true" tabindex="-1"></a><span class="co"># Helpers de selección:</span></span>
+<span id="cb62-274"><a href="#cb62-274" aria-hidden="true" tabindex="-1"></a>fauna <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">"fecha"</span>))    <span class="co"># columnas que empiezan con "fecha"</span></span>
+<span id="cb62-275"><a href="#cb62-275" aria-hidden="true" tabindex="-1"></a>fauna <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="fu">where</span>(is.numeric))       <span class="co"># solo columnas numéricas</span></span>
+<span id="cb62-276"><a href="#cb62-276" aria-hidden="true" tabindex="-1"></a>fauna <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="fu">where</span>(is.character))     <span class="co"># solo columnas de texto</span></span>
+<span id="cb62-277"><a href="#cb62-277" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-278"><a href="#cb62-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-281"><a href="#cb62-281" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-282"><a href="#cb62-282" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: select-excluir</span></span>
+<span id="cb62-283"><a href="#cb62-283" aria-hidden="true" tabindex="-1"></a><span class="co"># Excluir columnas con -:</span></span>
+<span id="cb62-284"><a href="#cb62-284" aria-hidden="true" tabindex="-1"></a>fauna <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="sc">-</span>latitud, <span class="sc">-</span>longitud)</span>
+<span id="cb62-285"><a href="#cb62-285" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-286"><a href="#cb62-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-287"><a href="#cb62-287" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3.3 `mutate()` — crear o transformar columnas</span></span>
+<span id="cb62-288"><a href="#cb62-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-291"><a href="#cb62-291" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-292"><a href="#cb62-292" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: mutate-log</span></span>
+<span id="cb62-293"><a href="#cb62-293" aria-hidden="true" tabindex="-1"></a><span class="co"># log1p(x) = log(x + 1) — evita log(0) = -Inf cuando hay ceros</span></span>
+<span id="cb62-294"><a href="#cb62-294" aria-hidden="true" tabindex="-1"></a>fauna <span class="ot">&lt;-</span> fauna <span class="sc">|&gt;</span></span>
+<span id="cb62-295"><a href="#cb62-295" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">log_individuos =</span> <span class="fu">log1p</span>(n_individuos))</span>
+<span id="cb62-296"><a href="#cb62-296" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-297"><a href="#cb62-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-300"><a href="#cb62-300" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-301"><a href="#cb62-301" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: mutate-casewhen</span></span>
+<span id="cb62-302"><a href="#cb62-302" aria-hidden="true" tabindex="-1"></a><span class="co"># case_when() — equivalente de if-else múltiple dentro de mutate()</span></span>
+<span id="cb62-303"><a href="#cb62-303" aria-hidden="true" tabindex="-1"></a>fauna <span class="ot">&lt;-</span> fauna <span class="sc">|&gt;</span></span>
+<span id="cb62-304"><a href="#cb62-304" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb62-305"><a href="#cb62-305" aria-hidden="true" tabindex="-1"></a>    <span class="at">categoria_abundancia =</span> <span class="fu">case_when</span>(</span>
+<span id="cb62-306"><a href="#cb62-306" aria-hidden="true" tabindex="-1"></a>      n_individuos <span class="sc">&lt;=</span> <span class="dv">5</span>  <span class="sc">~</span> <span class="st">"Baja"</span>,</span>
+<span id="cb62-307"><a href="#cb62-307" aria-hidden="true" tabindex="-1"></a>      n_individuos <span class="sc">&lt;=</span> <span class="dv">20</span> <span class="sc">~</span> <span class="st">"Media"</span>,</span>
+<span id="cb62-308"><a href="#cb62-308" aria-hidden="true" tabindex="-1"></a>      n_individuos <span class="sc">&gt;</span>  <span class="dv">20</span> <span class="sc">~</span> <span class="st">"Alta"</span></span>
+<span id="cb62-309"><a href="#cb62-309" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb62-310"><a href="#cb62-310" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb62-311"><a href="#cb62-311" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-312"><a href="#cb62-312" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-315"><a href="#cb62-315" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-316"><a href="#cb62-316" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: mutate-anio</span></span>
+<span id="cb62-317"><a href="#cb62-317" aria-hidden="true" tabindex="-1"></a><span class="co"># Extraer el año de una fecha:</span></span>
+<span id="cb62-318"><a href="#cb62-318" aria-hidden="true" tabindex="-1"></a>fauna <span class="ot">&lt;-</span> fauna <span class="sc">|&gt;</span></span>
+<span id="cb62-319"><a href="#cb62-319" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">anio =</span> <span class="fu">format</span>(fecha_obs, <span class="st">"%Y"</span>))</span>
+<span id="cb62-320"><a href="#cb62-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-321"><a href="#cb62-321" aria-hidden="true" tabindex="-1"></a>fauna <span class="sc">|&gt;</span></span>
+<span id="cb62-322"><a href="#cb62-322" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(especie, n_individuos, log_individuos, categoria_abundancia, anio)</span>
+<span id="cb62-323"><a href="#cb62-323" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-324"><a href="#cb62-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-325"><a href="#cb62-325" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **Pregunta:** ¿Por qué usamos </span><span class="in">`log1p()`</span><span class="at"> en lugar de </span><span class="in">`log()`</span><span class="at">? ¿Qué ecosistemas tienen más registros en categoría "Alta"?</span></span>
+<span id="cb62-326"><a href="#cb62-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-327"><a href="#cb62-327" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3.4 `arrange()` — ordenar filas</span></span>
+<span id="cb62-328"><a href="#cb62-328" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-331"><a href="#cb62-331" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-332"><a href="#cb62-332" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: arrange-desc</span></span>
+<span id="cb62-333"><a href="#cb62-333" aria-hidden="true" tabindex="-1"></a><span class="co"># De mayor a menor número de individuos:</span></span>
+<span id="cb62-334"><a href="#cb62-334" aria-hidden="true" tabindex="-1"></a>fauna <span class="sc">|&gt;</span></span>
+<span id="cb62-335"><a href="#cb62-335" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n_individuos)) <span class="sc">|&gt;</span></span>
+<span id="cb62-336"><a href="#cb62-336" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(especie, municipio, ecosistema, n_individuos)</span>
+<span id="cb62-337"><a href="#cb62-337" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-338"><a href="#cb62-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-341"><a href="#cb62-341" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-342"><a href="#cb62-342" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: arrange-multiple</span></span>
+<span id="cb62-343"><a href="#cb62-343" aria-hidden="true" tabindex="-1"></a><span class="co"># Dos criterios: ecosistema (asc) + n_individuos (desc):</span></span>
+<span id="cb62-344"><a href="#cb62-344" aria-hidden="true" tabindex="-1"></a>fauna <span class="sc">|&gt;</span></span>
+<span id="cb62-345"><a href="#cb62-345" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(ecosistema, <span class="fu">desc</span>(n_individuos)) <span class="sc">|&gt;</span></span>
+<span id="cb62-346"><a href="#cb62-346" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(especie, ecosistema, n_individuos) <span class="sc">|&gt;</span></span>
+<span id="cb62-347"><a href="#cb62-347" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span>
+<span id="cb62-348"><a href="#cb62-348" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-349"><a href="#cb62-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-350"><a href="#cb62-350" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3.5 `summarise()` + `group_by()` — resumir por grupo</span></span>
+<span id="cb62-351"><a href="#cb62-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-354"><a href="#cb62-354" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-355"><a href="#cb62-355" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: summarise-ecosistema</span></span>
+<span id="cb62-356"><a href="#cb62-356" aria-hidden="true" tabindex="-1"></a><span class="co"># Siempre van juntos: group_by() → summarise()</span></span>
+<span id="cb62-357"><a href="#cb62-357" aria-hidden="true" tabindex="-1"></a>resumen_ecosistema <span class="ot">&lt;-</span> fauna <span class="sc">|&gt;</span></span>
+<span id="cb62-358"><a href="#cb62-358" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ecosistema) <span class="sc">|&gt;</span></span>
+<span id="cb62-359"><a href="#cb62-359" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb62-360"><a href="#cb62-360" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_registros    =</span> <span class="fu">n</span>(),</span>
+<span id="cb62-361"><a href="#cb62-361" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_especies     =</span> <span class="fu">n_distinct</span>(especie),</span>
+<span id="cb62-362"><a href="#cb62-362" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_indiv    =</span> <span class="fu">sum</span>(n_individuos, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb62-363"><a href="#cb62-363" aria-hidden="true" tabindex="-1"></a>    <span class="at">media_indiv    =</span> <span class="fu">mean</span>(n_individuos, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb62-364"><a href="#cb62-364" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb62-365"><a href="#cb62-365" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(total_indiv))</span>
+<span id="cb62-366"><a href="#cb62-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-367"><a href="#cb62-367" aria-hidden="true" tabindex="-1"></a>resumen_ecosistema</span>
+<span id="cb62-368"><a href="#cb62-368" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-369"><a href="#cb62-369" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-372"><a href="#cb62-372" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-373"><a href="#cb62-373" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: summarise-dos-grupos</span></span>
+<span id="cb62-374"><a href="#cb62-374" aria-hidden="true" tabindex="-1"></a><span class="co"># Dos variables de agrupación:</span></span>
+<span id="cb62-375"><a href="#cb62-375" aria-hidden="true" tabindex="-1"></a>fauna <span class="sc">|&gt;</span></span>
+<span id="cb62-376"><a href="#cb62-376" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(clase, estado_conservacion) <span class="sc">|&gt;</span></span>
+<span id="cb62-377"><a href="#cb62-377" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n_registros =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb62-378"><a href="#cb62-378" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-379"><a href="#cb62-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-380"><a href="#cb62-380" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **Pregunta:** ¿Cuál es el ecosistema con mayor riqueza de especies? ¿Es el mismo con mayor número de individuos? ¿Qué explicación biológica plantearías?</span></span>
+<span id="cb62-381"><a href="#cb62-381" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-382"><a href="#cb62-382" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3.6 Pipelines: combinando verbos</span></span>
+<span id="cb62-383"><a href="#cb62-383" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-386"><a href="#cb62-386" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-387"><a href="#cb62-387" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: pipeline-top-clase</span></span>
+<span id="cb62-388"><a href="#cb62-388" aria-hidden="true" tabindex="-1"></a><span class="co"># ¿Cuántos registros y qué riqueza de especies por clase taxonómica?</span></span>
+<span id="cb62-389"><a href="#cb62-389" aria-hidden="true" tabindex="-1"></a>fauna <span class="sc">|&gt;</span></span>
+<span id="cb62-390"><a href="#cb62-390" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(clase) <span class="sc">|&gt;</span></span>
+<span id="cb62-391"><a href="#cb62-391" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb62-392"><a href="#cb62-392" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_registros =</span> <span class="fu">n</span>(),</span>
+<span id="cb62-393"><a href="#cb62-393" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_especies  =</span> <span class="fu">n_distinct</span>(especie),</span>
+<span id="cb62-394"><a href="#cb62-394" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_indiv =</span> <span class="fu">sum</span>(n_individuos, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb62-395"><a href="#cb62-395" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb62-396"><a href="#cb62-396" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n_registros))</span>
+<span id="cb62-397"><a href="#cb62-397" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-398"><a href="#cb62-398" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-401"><a href="#cb62-401" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-402"><a href="#cb62-402" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: pipeline-amenaza</span></span>
+<span id="cb62-403"><a href="#cb62-403" aria-hidden="true" tabindex="-1"></a><span class="co"># Proporción de registros por categoría de amenaza:</span></span>
+<span id="cb62-404"><a href="#cb62-404" aria-hidden="true" tabindex="-1"></a>fauna <span class="sc">|&gt;</span></span>
+<span id="cb62-405"><a href="#cb62-405" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(estado_conservacion) <span class="sc">|&gt;</span></span>
+<span id="cb62-406"><a href="#cb62-406" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb62-407"><a href="#cb62-407" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">porcentaje =</span> <span class="fu">round</span>(n <span class="sc">/</span> <span class="fu">sum</span>(n) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb62-408"><a href="#cb62-408" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(porcentaje))</span>
+<span id="cb62-409"><a href="#cb62-409" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-410"><a href="#cb62-410" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-411"><a href="#cb62-411" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb62-412"><a href="#cb62-412" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-413"><a href="#cb62-413" aria-hidden="true" tabindex="-1"></a><span class="fu">## Bloque 4 — Ejercicio ABP en parejas *(≈ 20 minutos)*</span></span>
+<span id="cb62-414"><a href="#cb62-414" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-415"><a href="#cb62-415" aria-hidden="true" tabindex="-1"></a>**Contexto:** El programa de monitoreo necesita identificar las 3 especies más registradas por ecosistema, y saber qué proporción de esos registros prioritarios corresponde a especies amenazadas.</span>
+<span id="cb62-416"><a href="#cb62-416" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-417"><a href="#cb62-417" aria-hidden="true" tabindex="-1"></a>Trabajen en parejas (15 min), luego presentan su solución.</span>
+<span id="cb62-418"><a href="#cb62-418" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-419"><a href="#cb62-419" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb62-420"><a href="#cb62-420" aria-hidden="true" tabindex="-1"></a><span class="fu">## Una solución posible (revelar al final)</span></span>
+<span id="cb62-421"><a href="#cb62-421" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-424"><a href="#cb62-424" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-425"><a href="#cb62-425" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: solucion-abp</span></span>
+<span id="cb62-426"><a href="#cb62-426" aria-hidden="true" tabindex="-1"></a><span class="co"># Top 3 especies por ecosistema según número de registros:</span></span>
+<span id="cb62-427"><a href="#cb62-427" aria-hidden="true" tabindex="-1"></a>fauna <span class="sc">|&gt;</span></span>
+<span id="cb62-428"><a href="#cb62-428" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ecosistema, especie) <span class="sc">|&gt;</span></span>
+<span id="cb62-429"><a href="#cb62-429" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb62-430"><a href="#cb62-430" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_registros =</span> <span class="fu">n</span>(),</span>
+<span id="cb62-431"><a href="#cb62-431" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_indiv =</span> <span class="fu">sum</span>(n_individuos, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb62-432"><a href="#cb62-432" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups     =</span> <span class="st">"drop"</span></span>
+<span id="cb62-433"><a href="#cb62-433" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb62-434"><a href="#cb62-434" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ecosistema) <span class="sc">|&gt;</span></span>
+<span id="cb62-435"><a href="#cb62-435" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(<span class="at">order_by =</span> n_registros, <span class="at">n =</span> <span class="dv">3</span>) <span class="sc">|&gt;</span></span>
+<span id="cb62-436"><a href="#cb62-436" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(ecosistema, <span class="fu">desc</span>(n_registros))</span>
+<span id="cb62-437"><a href="#cb62-437" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-438"><a href="#cb62-438" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb62-439"><a href="#cb62-439" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-440"><a href="#cb62-440" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb62-441"><a href="#cb62-441" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-442"><a href="#cb62-442" aria-hidden="true" tabindex="-1"></a><span class="fu">## Cierre de sesión</span></span>
+<span id="cb62-443"><a href="#cb62-443" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-446"><a href="#cb62-446" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-447"><a href="#cb62-447" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: session-info</span></span>
+<span id="cb62-448"><a href="#cb62-448" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb62-449"><a href="#cb62-449" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span>
+<span id="cb62-450"><a href="#cb62-450" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-451"><a href="#cb62-451" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-452"><a href="#cb62-452" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb62-453"><a href="#cb62-453" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-454"><a href="#cb62-454" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb62-455"><a href="#cb62-455" aria-hidden="true" tabindex="-1"></a><span class="fu">## Para la próxima clase (Semana 5)</span></span>
+<span id="cb62-456"><a href="#cb62-456" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-457"><a href="#cb62-457" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Tema:** Manipulación con <span class="in">`tidyr`</span>. Datos ordenados (*tidy data*): <span class="in">`pivot_longer()`</span>, <span class="in">`pivot_wider()`</span>, <span class="in">`separate()`</span>, <span class="in">`unite()`</span>.</span>
+<span id="cb62-458"><a href="#cb62-458" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Lectura recomendada:** R for Data Science, Cap. 5 — <span class="ot">&lt;https://r4ds.hadley.nz/data-tidy&gt;</span></span>
+<span id="cb62-459"><a href="#cb62-459" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Taller de esta semana:** <span class="in">`taller4_apellido_nombre.R`</span> — entregar en SICVI 567</span>
+<span id="cb62-460"><a href="#cb62-460" aria-hidden="true" tabindex="-1"></a>:::</span>
+</code><button title="Copiar al portapapeles" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Curso 20953 · Análisis de Datos Biológicos bajo Paquete Estadístico R</p>
+</div>   
+    <div class="nav-footer-center">
+<p>Universidad del Atlántico · Facultad de Ciencias Básicas · Programa de Biología</p>
+</div>
+    <div class="nav-footer-right">
+<p>Período 2026-1</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

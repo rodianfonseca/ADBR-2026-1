@@ -1,0 +1,201 @@
+id_registro,fecha_obs,especie,nombre_comun,clase,orden,municipio,localidad,ecosistema,n_individuos,longitud,latitud,observador,estado_conservacion,fuente
+REG001,2023-03-12,Iguana iguana,Iguana verde,Reptilia,Squamata,Barranquilla,Parque Cultural del Caribe,bosque_seco,3,-74.7964,10.9878,Pérez C.,LC,SiB Colombia
+REG002,15/03/2023,Dendrocygna autumnalis,Pijije aliblanco,Aves,Anseriformes,Malambo,Ciénaga del Convento,humedal,12,-74.7821,10.8654,Gómez M.,LC,SiB Colombia
+REG003,2023-03-18,Coragyps atratus,Gallinazo negro,Aves,Cathartiformes,Soledad,Área periurbana Soledad,urbano,5,-74.7667,10.9169,Pérez C.,LC,SiB Colombia
+REG004,20/03/2023,Amazona amazonica,Loro real,Aves,Psittaciformes,Puerto Colombia,Playa Salgar,bosque_seco,2,-74.9561,10.9945,Martínez L.,LC,SiB Colombia
+REG005,2023-03-22,Caiman crocodilus,Babilla,Reptilia,Crocodilia,Sabanalarga,Ciénaga de Sabanalarga,humedal,1,-74.9214,10.6354,Ramírez J.,LC,SiB Colombia
+REG006,25/03/2023,Brotogeris jugularis,Periquito de gorjiamarillo,Aves,Psittaciformes,Barranquilla,Jardín Botánico de Barranquilla,bosque_seco,8,-74.8142,10.9921,Gómez M.,LC,SiB Colombia
+REG007,2023-04-01,Iguana iguana,Iguana verde,Reptilia,Squamata,Baranoa,Finca La Esperanza,bosque_seco,4,-74.9207,10.8012,Torres A.,LC,SiB Colombia
+REG008,03/04/2023,Ardea alba,Garza real,Aves,Pelecaniformes,Campo de la Cruz,Ciénaga Grande de Santa Marta,humedal,21,-74.8869,10.3654,Barrios R.,LC,SiB Colombia
+REG009,2023-04-05,Vanellus chilensis,Pellar común,Aves,Charadriiformes,Barranquilla,Ciénaga de Mallorquín,humedal,9,-74.8365,11.0241,Pérez C.,LC,SiB Colombia
+REG010,08/04/2023,Dasypus novemcinctus,Armadillo de nueve bandas,Mammalia,Cingulata,Repelón,Ciénaga de Luruaco,bosque_seco,1,-75.1236,10.5012,Martínez L.,NT,SiB Colombia
+REG011,2023-04-10,,Tortuga icotea,Reptilia,Testudines,Manatí,Ciénaga de Manatí,humedal,3,-74.9645,10.4369,Ramírez J.,VU,SiB Colombia
+REG012,12/04/2023,Trachemys callirostris,Tortuga icotea,Reptilia,Testudines,Manatí,Ciénaga de Manatí,humedal,2,-74.9645,10.4369,Ramírez J.,VU,SiB Colombia
+REG013,2023-04-15,Tyrannus melancholicus,Sirirí común,Aves,Passeriformes,Soledad,Humedal Ciénaga La Bahía,humedal,6,-74.7701,10.9054,Torres A.,LC,SiB Colombia
+REG014,17/04/2023,Buteo platypterus,Gavilán aliancho,Aves,Accipitriformes,Barranquilla,Parque Metropolitano Las Flores,bosque_seco,1,-74.8025,11.0148,Gómez M.,LC,SiB Colombia
+REG015,2023-04-20,Didelphis marsupialis,Chucha común,Mammalia,Didelphimorphia,Puerto Colombia,Bosque de Salamanca,bosque_seco,2,-74.9389,10.9712,Barrios R.,LC,SiB Colombia
+REG016,22/04/2023,Egretta thula,Garceta nívea,Aves,Pelecaniformes,Barranquilla,Ciénaga de Mallorquín,humedal,14,-74.8365,11.0241,Pérez C.,LC,SiB Colombia
+REG017,2023-04-25,Melanerpes rubricapillus,Carpintero habado,Aves,Piciformes,Luruaco,Bosque de Luriza,bosque_seco,3,-75.1412,10.5638,Martínez L.,LC,SiB Colombia
+REG018,27/04/2023,Coragyps atratus,Gallinazo negro,Aves,Cathartiformes,Barranquilla,Vertedero municipal,urbano,34,-74.8312,10.9654,Torres A.,LC,SiB Colombia
+REG019,2023-04-29,Burhinus bistriatus,Alcaraván,Aves,Charadriiformes,Sabanalarga,Pastizales de Sabanalarga,pastizal,7,-74.9214,10.6354,Ramírez J.,LC,SiB Colombia
+REG020,01/05/2023,Iguana iguana,Iguana verde,Reptilia,Squamata,Campo de la Cruz,Ribera del Canal del Dique,bosque_seco,5,-74.8891,10.3712,Barrios R.,LC,SiB Colombia
+REG021,2023-05-03,Phalacrocorax brasilianus,Cormorán neotropical,Aves,Suliformes,Sabanalarga,Ciénaga de Luruaco,humedal,18,-75.1198,10.5124,Pérez C.,LC,SiB Colombia
+REG022,05/05/2023,Amazona ochrocephala,Lora real,Aves,Psittaciformes,Baranoa,Fragmento de bosque km 14,bosque_seco,4,-74.9207,10.8012,Gómez M.,LC,SiB Colombia
+REG023,2023-05-08,Nycticorax nycticorax,Garza bruja,Aves,Pelecaniformes,Campo de la Cruz,Ciénaga Grande de Santa Marta,humedal,11,-74.8869,10.3654,Martínez L.,LC,SiB Colombia
+REG024,10/05/2023,Caiman crocodilus,Babilla,Reptilia,Crocodilia,Repelón,Embalse El Guájaro,humedal,2,-75.1021,10.4987,Torres A.,LC,SiB Colombia
+REG025,2023-05-12,Crotophaga ani,Garrapatero común,Aves,Cuculiformes,Barranquilla,Ciénaga de Mallorquín,humedal,15,-74.8365,11.0241,Barrios R.,LC,SiB Colombia
+REG026,14/05/2023,Turdus ignobilis,Mirla ollera,Aves,Passeriformes,Soledad,Barrio El Bosque,urbano,3,-74.7621,10.9201,Pérez C.,LC,SiB Colombia
+REG027,2023-05-17,Megaceryle torquata,Martín pescador grande,Aves,Coraciiformes,Malambo,Ciénaga del Convento,humedal,2,-74.7821,10.8654,Ramírez J.,LC,SiB Colombia
+REG028,19/05/2023,Dasypus novemcinctus,Armadillo de nueve bandas,Mammalia,Cingulata,Luruaco,Bosque de Luriza,bosque_seco,1,-75.1412,10.5638,Gómez M.,NT,SiB Colombia
+REG029,2023-05-22,Milvago chimachima,Pigua,Aves,Falconiformes,Manatí,Arroceras de Manatí,pastizal,6,-74.9512,10.4412,Torres A.,LC,SiB Colombia
+REG030,24/05/2023,Porphyrio martinica,Calamón americano,Aves,Gruiformes,Sabanalarga,Ciénaga de Sabanalarga,humedal,4,-74.9214,10.6354,Barrios R.,LC,SiB Colombia
+REG031,2023-05-26,Iguana iguana,Iguana verde,Reptilia,Squamata,Puerto Colombia,Jardines de Pradomar,urbano,2,-74.9561,10.9801,Martínez L.,LC,SiB Colombia
+REG032,28/05/2023,Jacana jacana,Jacana suramericana,Aves,Charadriiformes,Campo de la Cruz,Ciénaga Grande de Santa Marta,humedal,8,-74.8869,10.3654,Pérez C.,LC,SiB Colombia
+REG033,2023-06-01,Amazona amazonica,Loro real,Aves,Psittaciformes,Barranquilla,Bosque de La Loma,bosque_seco,3,-74.8142,10.9701,Ramírez J.,LC,SiB Colombia
+REG034,03/06/2023,Herpailurus yagouaroundi,Yaguarundí,Mammalia,Carnivora,Repelón,Ciénaga de Luruaco margen sur,bosque_seco,1,-75.1236,10.5012,Gómez M.,LC,SiB Colombia
+REG035,2023-06-05,Dendrocygna viduata,Pisingo,Aves,Anseriformes,Sabanalarga,Embalse El Guájaro margen norte,humedal,27,-74.9214,10.6201,Torres A.,LC,SiB Colombia
+REG036,07/06/2023,Vanellus chilensis,Pellar común,Aves,Charadriiformes,Barranquilla,Aeropuerto Ernesto Cortissoz,pastizal,12,-74.7806,10.8894,Barrios R.,LC,SiB Colombia
+REG037,2023-06-10,Trogon violaceus,Trogón violáceo,Aves,Trogoniformes,Luruaco,Bosque de Luriza,bosque_seco,1,-75.1412,10.5638,Pérez C.,LC,SiB Colombia
+REG038,12/06/2023,Coragyps atratus,Gallinazo negro,Aves,Cathartiformes,Puerto Colombia,Playa Puerto Colombia,marino_costero,9,-74.9617,10.9998,Martínez L.,LC,SiB Colombia
+REG039,2023-06-14,,Boa constrictor,Reptilia,Squamata,Baranoa,Finca Las Palmas,bosque_seco,1,-74.9101,10.8112,Ramírez J.,LC,SiB Colombia
+REG040,16/06/2023,Mycteria americana,Gabán peonía,Aves,Ciconiiformes,Manatí,Arroceras de Manatí borde sur,humedal,3,-74.9512,10.4521,Gómez M.,VU,SiB Colombia
+REG041,2023-06-19,Podilymbus podiceps,Zampullín piquigrueso,Aves,Podicipediformes,Sabanalarga,Ciénaga de Sabanalarga,humedal,5,-74.9214,10.6354,Torres A.,LC,SiB Colombia
+REG042,21/06/2023,Cerdocyon thous,Zorro perro,Mammalia,Carnivora,Repelón,Ciénaga de Luruaco norte,bosque_seco,2,-75.1021,10.5201,Barrios R.,LC,SiB Colombia
+REG043,2023-06-24,Megaceryle torquata,Martín pescador grande,Aves,Coraciiformes,Campo de la Cruz,Canal del Dique,humedal,1,-74.8891,10.3801,Pérez C.,LC,SiB Colombia
+REG044,26/06/2023,Ara macao,Guacamaya roja,Aves,Psittaciformes,Luruaco,Bosque de Luriza,bosque_seco,2,-75.1412,10.5638,Martínez L.,LC,SiB Colombia
+REG045,2023-06-28,Crocodylus acutus,Cocodrilo americano,Reptilia,Crocodilia,Manatí,Desembocadura Ciénaga de Manatí,humedal,1,-74.9645,10.4101,Ramírez J.,VU,SiB Colombia
+REG046,30/06/2023,Anhinga anhinga,Pato aguja,Aves,Suliformes,Campo de la Cruz,Ciénaga Grande de Santa Marta,humedal,4,-74.8869,10.3654,Gómez M.,LC,SiB Colombia
+REG047,2023-07-02,Iguana iguana,Iguana verde,Reptilia,Squamata,Barranquilla,Parque Estadio Romelio Martínez,urbano,1,-74.7911,10.9648,Torres A.,LC,SiB Colombia
+REG048,04/07/2023,Hydropsalis cayennensis,Gallineta colicortada,Aves,Caprimulgiformes,Soledad,Área de expansión Soledad,pastizal,2,-74.7612,10.9102,Barrios R.,LC,SiB Colombia
+REG049,2023-07-07,Eunectes murinus,Anaconda verde,Reptilia,Squamata,Manatí,Ciénaga de Manatí interior,humedal,1,-74.9645,10.4369,Pérez C.,DD,SiB Colombia
+REG050,09/07/2023,Thalasseus maximus,Charrán real,Aves,Charadriiformes,Puerto Colombia,Playa de Pradomar,marino_costero,16,-74.9561,10.9945,Martínez L.,LC,SiB Colombia
+REG051,2023-07-11,Pelecanus occidentalis,Pelícano pardo,Aves,Pelecaniformes,Puerto Colombia,Muelle de Puerto Colombia,marino_costero,23,-74.9617,10.9998,Ramírez J.,LC,SiB Colombia
+REG052,13/07/2023,Boa constrictor,Boa constrictor,Reptilia,Squamata,Luruaco,Bosque de Luriza,bosque_seco,1,-75.1412,10.5638,Gómez M.,LC,SiB Colombia
+REG053,2023-07-15,Mimus gilvus,Sinsonte tropical,Aves,Passeriformes,Barranquilla,Barrio Alto Prado,urbano,4,-74.8057,10.9962,Torres A.,LC,SiB Colombia
+REG054,17/07/2023,Crotophaga sulcirostris,Garrapatero piquiestriado,Aves,Cuculiformes,Sabanalarga,Pastizales de Sabanalarga norte,pastizal,9,-74.9312,10.6412,Barrios R.,LC,SiB Colombia
+REG055,2023-07-19,Dendrocygna autumnalis,Pijije aliblanco,Aves,Anseriformes,Repelón,Embalse El Guájaro,humedal,31,-75.1021,10.4987,Pérez C.,LC,SiB Colombia
+REG056,21/07/2023,Caiman crocodilus,Babilla,Reptilia,Crocodilia,Campo de la Cruz,Ciénaga Grande de Santa Marta,humedal,3,-74.8869,10.3654,Martínez L.,LC,SiB Colombia
+REG057,2023-07-24,Herpailurus yagouaroundi,Yaguarundí,Mammalia,Carnivora,Luruaco,Bosque de Luriza borde,bosque_seco,1,-75.1412,10.5638,Ramírez J.,LC,SiB Colombia
+REG058,26/07/2023,Amazonetta brasiliensis,Pato brasilero,Aves,Anseriformes,Manatí,Laguna interior Manatí,humedal,7,-74.9512,10.4501,Gómez M.,LC,SiB Colombia
+REG059,2023-07-28,Ortalis garrula,Guacharaca del Caribe,Aves,Galliformes,Baranoa,Finca La Esperanza,bosque_seco,5,-74.9207,10.8012,Torres A.,LC,IUCN
+REG060,30/07/2023,Tigrisoma lineatum,Garza tigre listada,Aves,Pelecaniformes,Campo de la Cruz,Ciénaga Grande de Santa Marta borde,humedal,2,-74.8869,10.3654,Barrios R.,LC,SiB Colombia
+REG061,2023-08-01,Ara macao,Guacamaya roja,Aves,Psittaciformes,Repelón,Bosque relicto Repelón,bosque_seco,4,-75.1021,10.5201,Pérez C.,LC,SiB Colombia
+REG062,02/08/2023,Podocnemis lewyana,Tortuga de río magdalena,Reptilia,Testudines,Manatí,Río Magdalena margen,humedal,2,-74.9645,10.4001,Martínez L.,EN,SiB Colombia
+REG063,2023-08-05,Didelphis marsupialis,Chucha común,Mammalia,Didelphimorphia,Barranquilla,Barrio La Pradera,urbano,1,-74.8201,10.9501,Ramírez J.,LC,SiB Colombia
+REG064,07/08/2023,Jacana jacana,Jacana suramericana,Aves,Charadriiformes,Sabanalarga,Ciénaga de Sabanalarga sur,humedal,6,-74.9312,10.6201,Gómez M.,LC,SiB Colombia
+REG065,2023-08-09,Porphyrio martinica,Calamón americano,Aves,Gruiformes,Repelón,Embalse El Guájaro este,humedal,3,-75.0901,10.5001,Torres A.,LC,SiB Colombia
+REG066,11/08/2023,Nyctibius griseus,Bienparao,Aves,Nyctibiiformes,Luruaco,Bosque de Luriza nocturno,bosque_seco,1,-75.1412,10.5638,Barrios R.,LC,SiB Colombia
+REG067,2023-08-13,Trachemys callirostris,Tortuga icotea,Reptilia,Testudines,Campo de la Cruz,Ciénaga Grande margen sur,humedal,4,-74.8869,10.3654,Pérez C.,VU,SiB Colombia
+REG068,15/08/2023,Ardea cocoi,Garza morena,Aves,Pelecaniformes,Campo de la Cruz,Ciénaga Grande de Santa Marta,humedal,7,-74.8869,10.3654,Martínez L.,LC,SiB Colombia
+REG069,2023-08-17,Cerdocyon thous,Zorro perro,Mammalia,Carnivora,Sabanalarga,Ciénaga de Sabanalarga borde,bosque_seco,1,-74.9214,10.6401,Ramírez J.,LC,SiB Colombia
+REG070,19/08/2023,Burhinus bistriatus,Alcaraván,Aves,Charadriiformes,Soledad,Lotes sin construir Soledad,pastizal,11,-74.7512,10.9201,Gómez M.,LC,SiB Colombia
+REG071,2023-08-21,Melanerpes rubricapillus,Carpintero habado,Aves,Piciformes,Barranquilla,Parque Cultural del Caribe,bosque_seco,2,-74.7964,10.9878,Torres A.,LC,SiB Colombia
+REG072,23/08/2023,Ortalis garrula,Guacharaca del Caribe,Aves,Galliformes,Repelón,Bosque relicto Repelón,bosque_seco,8,-75.1021,10.5201,Barrios R.,LC,IUCN
+REG073,2023-08-25,Anhinga anhinga,Pato aguja,Aves,Suliformes,Repelón,Embalse El Guájaro,humedal,5,-75.1021,10.4987,Pérez C.,LC,SiB Colombia
+REG074,27/08/2023,Mycteria americana,Gabán peonía,Aves,Ciconiiformes,Campo de la Cruz,Arroceras del sur,humedal,2,-74.8801,10.3712,Martínez L.,VU,SiB Colombia
+REG075,2023-08-29,Phalacrocorax brasilianus,Cormorán neotropical,Aves,Suliformes,Puerto Colombia,Puerto Colombia frente de playa,marino_costero,11,-74.9617,10.9998,Ramírez J.,LC,SiB Colombia
+REG076,31/08/2023,Iguana iguana,Iguana verde,Reptilia,Squamata,Repelón,Ribera Embalse El Guájaro,humedal,6,-75.1021,10.4987,Gómez M.,LC,SiB Colombia
+REG077,2023-09-02,Milvago chimachima,Pigua,Aves,Falconiformes,Soledad,Bordes urbanos Soledad,urbano,4,-74.7621,10.9201,Torres A.,LC,SiB Colombia
+REG078,04/09/2023,Ara macao,Guacamaya roja,Aves,Psittaciformes,Luruaco,Bosque de Luriza zona A,bosque_seco,3,-75.1412,10.5638,Barrios R.,LC,SiB Colombia
+REG079,2023-09-07,Crocodylus acutus,Cocodrilo americano,Reptilia,Crocodilia,Campo de la Cruz,Ciénaga Grande sector Tasajera,humedal,1,-74.8901,10.3601,Pérez C.,VU,SiB Colombia
+REG080,09/09/2023,Eudocimus albus,Corocora blanca,Aves,Pelecaniformes,Campo de la Cruz,Ciénaga Grande,humedal,19,-74.8869,10.3654,Martínez L.,LC,SiB Colombia
+REG081,2023-09-11,Vanellus chilensis,Pellar común,Aves,Charadriiformes,Malambo,Pastizales Malambo,pastizal,8,-74.7701,10.8601,Ramírez J.,LC,SiB Colombia
+REG082,13/09/2023,Amazona amazonica,Loro real,Aves,Psittaciformes,Puerto Colombia,Barrio Pradomar,bosque_seco,2,-74.9501,10.9812,Gómez M.,LC,SiB Colombia
+REG083,2023-09-15,Tigrisoma lineatum,Garza tigre listada,Aves,Pelecaniformes,Repelón,Embalse El Guájaro zona boscosa,humedal,1,-75.1021,10.4987,Torres A.,LC,SiB Colombia
+REG084,17/09/2023,Dasypus novemcinctus,Armadillo de nueve bandas,Mammalia,Cingulata,Baranoa,Fragmento bosque km 14,bosque_seco,1,-74.9207,10.8012,Barrios R.,NT,SiB Colombia
+REG085,2023-09-19,Podilymbus podiceps,Zampullín piquigrueso,Aves,Podicipediformes,Campo de la Cruz,Ciénaga Grande de Santa Marta,humedal,3,-74.8869,10.3654,Pérez C.,LC,SiB Colombia
+REG086,21/09/2023,Crotophaga ani,Garrapatero común,Aves,Cuculiformes,Malambo,Ciénaga del Convento borde,humedal,13,-74.7821,10.8654,Martínez L.,LC,SiB Colombia
+REG087,2023-09-23,Egretta thula,Garceta nívea,Aves,Pelecaniformes,Repelón,Embalse El Guájaro sector norte,humedal,10,-75.1021,10.4987,Ramírez J.,LC,SiB Colombia
+REG088,25/09/2023,Podocnemis lewyana,Tortuga de río magdalena,Reptilia,Testudines,Campo de la Cruz,Río Magdalena afluente,humedal,1,-74.8801,10.3601,Gómez M.,EN,SiB Colombia
+REG089,2023-09-27,Herpailurus yagouaroundi,Yaguarundí,Mammalia,Carnivora,Repelón,Bosque relicto Repelón borde,bosque_seco,1,-75.1021,10.5201,Torres A.,LC,SiB Colombia
+REG090,29/09/2023,Nycticorax nycticorax,Garza bruja,Aves,Pelecaniformes,Barranquilla,Ciénaga de Mallorquín,humedal,8,-74.8365,11.0241,Barrios R.,LC,SiB Colombia
+REG091,2023-10-01,Mimus gilvus,Sinsonte tropical,Aves,Passeriformes,Puerto Colombia,Área residencial Puerto Colombia,urbano,5,-74.9512,10.9901,Pérez C.,LC,SiB Colombia
+REG092,03/10/2023,Ramphastos sulfuratus,Tucán piquiverde,Aves,Piciformes,Repelón,Bosque relicto Repelón zona alta,bosque_seco,2,-75.1021,10.5301,Martínez L.,LC,SiB Colombia
+REG093,2023-10-05,Dendrocygna viduata,Pisingo,Aves,Anseriformes,Malambo,Ciénaga del Convento,humedal,22,-74.7821,10.8654,Ramírez J.,LC,SiB Colombia
+REG094,07/10/2023,Brotogeris jugularis,Periquito de gorjiamarillo,Aves,Psittaciformes,Soledad,Parque lineal Soledad,urbano,6,-74.7601,10.9201,Gómez M.,LC,SiB Colombia
+REG095,2023-10-09,Heliornis fulica,Pato cantil,Aves,Gruiformes,Manatí,Ciénaga de Manatí interior norte,humedal,2,-74.9601,10.4401,Torres A.,LC,SiB Colombia
+REG096,11/10/2023,Eunectes murinus,Anaconda verde,Reptilia,Squamata,Campo de la Cruz,Ciénaga Grande sector interior,humedal,1,-74.8869,10.3654,Barrios R.,DD,SiB Colombia
+REG097,2023-10-13,Ortalis garrula,Guacharaca del Caribe,Aves,Galliformes,Luruaco,Bosque de Luriza zona norte,bosque_seco,6,-75.1412,10.5638,Pérez C.,LC,IUCN
+REG098,15/10/2023,Jacana jacana,Jacana suramericana,Aves,Charadriiformes,Campo de la Cruz,Ciénaga Grande de Santa Marta norte,humedal,10,-74.8869,10.3654,Martínez L.,LC,SiB Colombia
+REG099,2023-10-17,Pelecanus occidentalis,Pelícano pardo,Aves,Pelecaniformes,Puerto Colombia,Bahía Puerto Colombia,marino_costero,18,-74.9617,10.9998,Ramírez J.,LC,SiB Colombia
+REG100,19/10/2023,Ramphastos sulfuratus,Tucán piquiverde,Aves,Piciformes,Repelón,Bosque relicto Repelón zona media,bosque_seco,1,-75.1021,10.5301,Gómez M.,LC,SiB Colombia
+REG101,2023-10-21,Thalasseus maximus,Charrán real,Aves,Charadriiformes,Puerto Colombia,Ensenada Pradomar,marino_costero,9,-74.9561,10.9945,Torres A.,LC,SiB Colombia
+REG102,23/10/2023,Podocnemis lewyana,Tortuga de río magdalena,Reptilia,Testudines,Manatí,Playa de nidificación río Magdalena,humedal,3,-74.9645,10.4001,Barrios R.,EN,SiB Colombia
+REG103,2023-10-25,Ardea alba,Garza real,Aves,Pelecaniformes,Repelón,Embalse El Guájaro zona sur,humedal,14,-75.1021,10.4987,Pérez C.,LC,SiB Colombia
+REG104,27/10/2023,Cerdocyon thous,Zorro perro,Mammalia,Carnivora,Luruaco,Bosque de Luriza extremo norte,bosque_seco,2,-75.1412,10.5638,Martínez L.,LC,SiB Colombia
+REG105,2023-10-29,Amazona ochrocephala,Lora real,Aves,Psittaciformes,Barranquilla,Parque Cultural del Caribe,bosque_seco,3,-74.7964,10.9878,Ramírez J.,LC,SiB Colombia
+REG106,31/10/2023,Caiman crocodilus,Babilla,Reptilia,Crocodilia,Luruaco,Ciénaga de Luruaco zona profunda,humedal,4,-75.1198,10.5124,Gómez M.,LC,SiB Colombia
+REG107,2023-11-02,Anhinga anhinga,Pato aguja,Aves,Suliformes,Manatí,Ciénaga de Manatí zona abierta,humedal,3,-74.9512,10.4412,Torres A.,LC,SiB Colombia
+REG108,04/11/2023,Eudocimus albus,Corocora blanca,Aves,Pelecaniformes,Repelón,Embalse El Guájaro manglar,humedal,24,-75.1021,10.4987,Barrios R.,LC,SiB Colombia
+REG109,2023-11-06,Iguana iguana,Iguana verde,Reptilia,Squamata,Luruaco,Ribera de la Ciénaga de Luruaco,humedal,3,-75.1198,10.5124,Pérez C.,LC,SiB Colombia
+REG110,08/11/2023,Dendrocygna autumnalis,Pijije aliblanco,Aves,Anseriformes,Sabanalarga,Ciénaga de Sabanalarga norte,humedal,16,-74.9312,10.6412,Martínez L.,LC,SiB Colombia
+REG111,2023-11-10,Nyctibius griseus,Bienparao,Aves,Nyctibiiformes,Baranoa,Fragmento bosque km 18,bosque_seco,2,-74.9101,10.8201,Ramírez J.,LC,SiB Colombia
+REG112,12/11/2023,Amazona amazonica,Loro real,Aves,Psittaciformes,Luruaco,Bosque de Luriza sector B,bosque_seco,5,-75.1412,10.5638,Gómez M.,LC,SiB Colombia
+REG113,2023-11-14,Porphyrio martinica,Calamón americano,Aves,Gruiformes,Manatí,Ciénaga de Manatí sur,humedal,7,-74.9645,10.4369,Torres A.,LC,SiB Colombia
+REG114,16/11/2023,Mycteria americana,Gabán peonía,Aves,Ciconiiformes,Repelón,Embalse El Guájaro zona arrocera,humedal,5,-75.0901,10.5001,Barrios R.,VU,SiB Colombia
+REG115,2023-11-18,Milvago chimachima,Pigua,Aves,Falconiformes,Baranoa,Pastizales de Baranoa,pastizal,7,-74.9101,10.8012,Pérez C.,LC,SiB Colombia
+REG116,20/11/2023,Ramphastos sulfuratus,Tucán piquiverde,Aves,Piciformes,Luruaco,Bosque de Luriza sector C,bosque_seco,3,-75.1412,10.5638,Martínez L.,LC,SiB Colombia
+REG117,2023-11-22,Crotophaga sulcirostris,Garrapatero piquiestriado,Aves,Cuculiformes,Soledad,Bordes de cultivos Soledad,pastizal,11,-74.7621,10.9102,Ramírez J.,LC,SiB Colombia
+REG118,24/11/2023,Crocodylus acutus,Cocodrilo americano,Reptilia,Crocodilia,Manatí,Brazo del Magdalena Manatí,humedal,1,-74.9645,10.4101,Gómez M.,VU,SiB Colombia
+REG119,2023-11-26,Tyrannus melancholicus,Sirirí común,Aves,Passeriformes,Barranquilla,Ciénaga de Mallorquín norte,humedal,5,-74.8401,11.0301,Torres A.,LC,SiB Colombia
+REG120,28/11/2023,Heliornis fulica,Pato cantil,Aves,Gruiformes,Repelón,Embalse El Guájaro zona de espadañas,humedal,1,-75.1021,10.4987,Barrios R.,LC,SiB Colombia
+REG121,2023-11-30,Ara macao,Guacamaya roja,Aves,Psittaciformes,Repelón,Bosque relicto norte,bosque_seco,2,-75.1021,10.5401,Pérez C.,LC,SiB Colombia
+REG122,02/12/2023,Turdus ignobilis,Mirla ollera,Aves,Passeriformes,Barranquilla,Barrio El Country,urbano,4,-74.8101,10.9801,Martínez L.,LC,SiB Colombia
+REG123,2023-12-04,Podilymbus podiceps,Zampullín piquigrueso,Aves,Podicipediformes,Repelón,Embalse El Guájaro sector sur,humedal,6,-75.1021,10.4987,Ramírez J.,LC,SiB Colombia
+REG124,06/12/2023,Egretta thula,Garceta nívea,Aves,Pelecaniformes,Barranquilla,Ciénaga de Mallorquín sur,humedal,17,-74.8365,11.0241,Gómez M.,LC,SiB Colombia
+REG125,2023-12-08,Ortalis garrula,Guacharaca del Caribe,Aves,Galliformes,Baranoa,Finca Las Palmas,bosque_seco,4,-74.9101,10.8112,Torres A.,LC,IUCN
+REG126,10/12/2023,Eudocimus albus,Corocora blanca,Aves,Pelecaniformes,Manatí,Ciénaga de Manatí sector manglar,humedal,15,-74.9512,10.4412,Barrios R.,LC,SiB Colombia
+REG127,2023-12-12,Phalacrocorax brasilianus,Cormorán neotropical,Aves,Suliformes,Puerto Colombia,Playa de Salgar,marino_costero,8,-74.9561,10.9945,Pérez C.,LC,SiB Colombia
+REG128,14/12/2023,Caiman crocodilus,Babilla,Reptilia,Crocodilia,Sabanalarga,Ciénaga de Sabanalarga sector este,humedal,2,-74.9312,10.6354,Martínez L.,LC,SiB Colombia
+REG129,2023-12-16,Herpailurus yagouaroundi,Yaguarundí,Mammalia,Carnivora,Baranoa,Bosque seco Baranoa,bosque_seco,1,-74.9207,10.8012,Ramírez J.,LC,SiB Colombia
+REG130,18/12/2023,Trogon violaceus,Trogón violáceo,Aves,Trogoniformes,Repelón,Bosque relicto Repelón sector húmedo,bosque_seco,1,-75.1021,10.5301,Gómez M.,LC,SiB Colombia
+REG131,2023-12-20,Jacana jacana,Jacana suramericana,Aves,Charadriiformes,Malambo,Ciénaga del Convento sur,humedal,9,-74.7821,10.8654,Torres A.,LC,SiB Colombia
+REG132,22/12/2023,Pelecanus occidentalis,Pelícano pardo,Aves,Pelecaniformes,Puerto Colombia,Costas de Puerto Colombia,marino_costero,27,-74.9617,10.9998,Barrios R.,LC,SiB Colombia
+REG133,2023-12-24,Dendrocygna viduata,Pisingo,Aves,Anseriformes,Repelón,Embalse El Guájaro sector oriental,humedal,19,-75.0901,10.5001,Pérez C.,LC,SiB Colombia
+REG134,26/12/2023,Mimus gilvus,Sinsonte tropical,Aves,Passeriformes,Puerto Colombia,Zona hotelera Puerto Colombia,urbano,6,-74.9512,10.9901,Martínez L.,LC,SiB Colombia
+REG135,2023-12-28,Nycticorax nycticorax,Garza bruja,Aves,Pelecaniformes,Malambo,Ciénaga del Convento norte,humedal,7,-74.7821,10.8654,Ramírez J.,LC,SiB Colombia
+REG136,30/12/2023,Dasypus novemcinctus,Armadillo de nueve bandas,Mammalia,Cingulata,Sabanalarga,Bosque seco Sabanalarga,bosque_seco,2,-74.9214,10.6601,Gómez M.,NT,SiB Colombia
+REG137,2024-01-05,Ardea cocoi,Garza morena,Aves,Pelecaniformes,Repelón,Embalse El Guájaro zona norte,humedal,4,-75.1021,10.4987,Torres A.,LC,SiB Colombia
+REG138,07/01/2024,Trachemys callirostris,Tortuga icotea,Reptilia,Testudines,Repelón,Ciénaga de Luruaco,humedal,3,-75.1198,10.5124,Barrios R.,VU,SiB Colombia
+REG139,2024-01-10,Porphyrio martinica,Calamón americano,Aves,Gruiformes,Sabanalarga,Ciénaga de Sabanalarga,humedal,5,-74.9214,10.6354,Pérez C.,LC,SiB Colombia
+REG140,12/01/2024,Crotophaga ani,Garrapatero común,Aves,Cuculiformes,Barranquilla,Ciénaga de Mallorquín interior,humedal,18,-74.8365,11.0241,Martínez L.,LC,SiB Colombia
+REG141,2024-01-15,Buteo platypterus,Gavilán aliancho,Aves,Accipitriformes,Luruaco,Bosque de Luriza zona alta,bosque_seco,2,-75.1412,10.5638,Ramírez J.,LC,SiB Colombia
+REG142,17/01/2024,Podocnemis lewyana,Tortuga de río magdalena,Reptilia,Testudines,Campo de la Cruz,Brazo río Magdalena,humedal,1,-74.8801,10.3601,Gómez M.,EN,SiB Colombia
+REG143,2024-01-19,Eudocimus albus,Corocora blanca,Aves,Pelecaniformes,Campo de la Cruz,Ciénaga Grande de Santa Marta,humedal,31,-74.8869,10.3654,Torres A.,LC,SiB Colombia
+REG144,21/01/2024,Thalasseus maximus,Charrán real,Aves,Charadriiformes,Puerto Colombia,Playa de Puerto Colombia,marino_costero,14,-74.9617,10.9998,Barrios R.,LC,SiB Colombia
+REG145,2024-01-24,Megaceryle torquata,Martín pescador grande,Aves,Coraciiformes,Repelón,Río Magdalena afluente,humedal,2,-75.1021,10.5001,Pérez C.,LC,SiB Colombia
+REG146,26/01/2024,Amazonetta brasiliensis,Pato brasilero,Aves,Anseriformes,Campo de la Cruz,Ciénaga Grande zona sur,humedal,5,-74.8869,10.3654,Martínez L.,LC,SiB Colombia
+REG147,2024-01-28,Ramphastos sulfuratus,Tucán piquiverde,Aves,Piciformes,Luruaco,Bosque de Luriza sector D,bosque_seco,4,-75.1412,10.5638,Ramírez J.,LC,SiB Colombia
+REG148,30/01/2024,Nyctibius griseus,Bienparao,Aves,Nyctibiiformes,Repelón,Bosque relicto nocturno,bosque_seco,1,-75.1021,10.5301,Gómez M.,LC,SiB Colombia
+REG149,2024-02-01,Melanerpes rubricapillus,Carpintero habado,Aves,Piciformes,Repelón,Bosque relicto Repelón,bosque_seco,3,-75.1021,10.5301,Torres A.,LC,SiB Colombia
+REG150,03/02/2024,Ardea alba,Garza real,Aves,Pelecaniformes,Sabanalarga,Ciénaga de Sabanalarga interior,humedal,9,-74.9312,10.6354,Barrios R.,LC,SiB Colombia
+REG151,2024-02-05,Coragyps atratus,Gallinazo negro,Aves,Cathartiformes,Baranoa,Municipio de Baranoa casco urbano,urbano,12,-74.9207,10.8012,Pérez C.,LC,SiB Colombia
+REG152,07/02/2024,Iguana iguana,Iguana verde,Reptilia,Squamata,Malambo,Ribera del río Magdalena Malambo,humedal,4,-74.7821,10.8654,Martínez L.,LC,SiB Colombia
+REG153,2024-02-09,Ara macao,Guacamaya roja,Aves,Psittaciformes,Luruaco,Bosque de Luriza sector sur,bosque_seco,3,-75.1412,10.5638,Ramírez J.,LC,SiB Colombia
+REG154,11/02/2024,Caiman crocodilus,Babilla,Reptilia,Crocodilia,Manatí,Ciénaga de Manatí zona de juncales,humedal,3,-74.9645,10.4369,Gómez M.,LC,SiB Colombia
+REG155,2024-02-13,Turdus ignobilis,Mirla ollera,Aves,Passeriformes,Barranquilla,Barrio Las Delicias,urbano,5,-74.8201,10.9601,Torres A.,LC,SiB Colombia
+REG156,15/02/2024,Dendrocygna autumnalis,Pijije aliblanco,Aves,Anseriformes,Campo de la Cruz,Ciénaga Grande interior,humedal,23,-74.8869,10.3654,Barrios R.,LC,SiB Colombia
+REG157,2024-02-17,Cerdocyon thous,Zorro perro,Mammalia,Carnivora,Repelón,Bosque relicto Repelón borde norte,bosque_seco,1,-75.1021,10.5301,Pérez C.,LC,SiB Colombia
+REG158,19/02/2024,Heliornis fulica,Pato cantil,Aves,Gruiformes,Sabanalarga,Ciénaga de Sabanalarga zona de lotos,humedal,2,-74.9214,10.6354,Martínez L.,LC,SiB Colombia
+REG159,2024-02-21,Egretta thula,Garceta nívea,Aves,Pelecaniformes,Repelón,Embalse El Guájaro,humedal,13,-75.1021,10.4987,Ramírez J.,LC,SiB Colombia
+REG160,23/02/2024,Brotogeris jugularis,Periquito de gorjiamarillo,Aves,Psittaciformes,Barranquilla,Barrio Olaya,urbano,7,-74.8301,10.9701,Gómez M.,LC,SiB Colombia
+REG161,2024-02-25,Eunectes murinus,Anaconda verde,Reptilia,Squamata,Repelón,Embalse El Guájaro zona profunda,humedal,1,-75.1021,10.4987,Torres A.,DD,SiB Colombia
+REG162,27/02/2024,Phalacrocorax brasilianus,Cormorán neotropical,Aves,Suliformes,Barranquilla,Ciénaga de Mallorquín,humedal,16,-74.8365,11.0241,Barrios R.,LC,SiB Colombia
+REG163,2024-02-29,Nycticorax nycticorax,Garza bruja,Aves,Pelecaniformes,Campo de la Cruz,Ciénaga Grande de Santa Marta,humedal,11,-74.8869,10.3654,Pérez C.,LC,SiB Colombia
+REG164,02/03/2024,Thalasseus maximus,Charrán real,Aves,Charadriiformes,Puerto Colombia,Playa de Salgar norte,marino_costero,21,-74.9561,10.9945,Martínez L.,LC,SiB Colombia
+REG165,2024-03-05,Ortalis garrula,Guacharaca del Caribe,Aves,Galliformes,Repelón,Bosque relicto zona oeste,bosque_seco,7,-75.1021,10.5201,Ramírez J.,LC,IUCN
+REG166,07/03/2024,Mycteria americana,Gabán peonía,Aves,Ciconiiformes,Manatí,Lagunas arroceras Manatí,humedal,6,-74.9512,10.4501,Gómez M.,VU,SiB Colombia
+REG167,2024-03-09,Buteo platypterus,Gavilán aliancho,Aves,Accipitriformes,Repelón,Bosque relicto migración,bosque_seco,4,-75.1021,10.5301,Torres A.,LC,SiB Colombia
+REG168,11/03/2024,Jacana jacana,Jacana suramericana,Aves,Charadriiformes,Repelón,Embalse El Guájaro sector de pantanos,humedal,8,-75.1021,10.4987,Barrios R.,LC,SiB Colombia
+REG169,2024-03-13,Boa constrictor,Boa constrictor,Reptilia,Squamata,Repelón,Bosque relicto Repelón,bosque_seco,1,-75.1021,10.5201,Pérez C.,LC,SiB Colombia
+REG170,15/03/2024,Ardea cocoi,Garza morena,Aves,Pelecaniformes,Sabanalarga,Embalse El Guájaro,humedal,5,-74.9312,10.6354,Martínez L.,LC,SiB Colombia
+REG171,2024-03-17,Pelecanus occidentalis,Pelícano pardo,Aves,Pelecaniformes,Puerto Colombia,Playa Mendoza,marino_costero,15,-74.9617,10.9998,Ramírez J.,LC,SiB Colombia
+REG172,19/03/2024,Tigrisoma lineatum,Garza tigre listada,Aves,Pelecaniformes,Manatí,Ciénaga de Manatí zona interna,humedal,2,-74.9512,10.4412,Gómez M.,LC,SiB Colombia
+REG173,2024-03-21,Melanerpes rubricapillus,Carpintero habado,Aves,Piciformes,Baranoa,Bosque seco Baranoa zona A,bosque_seco,2,-74.9101,10.8112,Torres A.,LC,SiB Colombia
+REG174,23/03/2024,Mimus gilvus,Sinsonte tropical,Aves,Passeriformes,Malambo,Barrio Nuevo Malambo,urbano,3,-74.7701,10.8601,Barrios R.,LC,SiB Colombia
+REG175,2024-03-25,Crotophaga ani,Garrapatero común,Aves,Cuculiformes,Sabanalarga,Bordes de cultivo Sabanalarga,pastizal,14,-74.9214,10.6354,Pérez C.,LC,SiB Colombia
+REG176,27/03/2024,Podilymbus podiceps,Zampullín piquigrueso,Aves,Podicipediformes,Sabanalarga,Ciénaga de Sabanalarga zona abierta,humedal,4,-74.9312,10.6354,Martínez L.,LC,SiB Colombia
+REG177,2024-03-29,Amazona ochrocephala,Lora real,Aves,Psittaciformes,Repelón,Bosque relicto Repelón zona B,bosque_seco,2,-75.1021,10.5301,Ramírez J.,LC,SiB Colombia
+REG178,31/03/2024,Vanellus chilensis,Pellar común,Aves,Charadriiformes,Barranquilla,Prado Boulevard,urbano,5,-74.8057,10.9962,Gómez M.,LC,SiB Colombia
+REG179,2024-04-02,Eudocimus albus,Corocora blanca,Aves,Pelecaniformes,Repelón,Embalse El Guájaro zona manglar,humedal,20,-75.1021,10.4987,Torres A.,LC,SiB Colombia
+REG180,04/04/2024,Porphyrio martinica,Calamón americano,Aves,Gruiformes,Campo de la Cruz,Ciénaga Grande sector litoral,humedal,6,-74.8869,10.3654,Barrios R.,LC,SiB Colombia
+REG181,2024-04-06,Caiman crocodilus,Babilla,Reptilia,Crocodilia,Repelón,Embalse El Guájaro borde este,humedal,2,-75.1021,10.4987,Pérez C.,LC,SiB Colombia
+REG182,08/04/2024,Anhinga anhinga,Pato aguja,Aves,Suliformes,Sabanalarga,Ciénaga de Sabanalarga zona de pesca,humedal,4,-74.9214,10.6354,Martínez L.,LC,SiB Colombia
+REG183,2024-04-10,Tyrannus melancholicus,Sirirí común,Aves,Passeriformes,Barranquilla,Parque Suri Salcedo,urbano,3,-74.8112,10.9712,Ramírez J.,LC,SiB Colombia
+REG184,12/04/2024,Crotophaga sulcirostris,Garrapatero piquiestriado,Aves,Cuculiformes,Malambo,Zona ganadera Malambo,pastizal,8,-74.7701,10.8601,Gómez M.,LC,SiB Colombia
+REG185,2024-04-14,Ardea alba,Garza real,Aves,Pelecaniformes,Campo de la Cruz,Ciénaga Grande de Santa Marta norte,humedal,11,-74.8869,10.3654,Torres A.,LC,SiB Colombia
+REG186,16/04/2024,Dasypus novemcinctus,Armadillo de nueve bandas,Mammalia,Cingulata,Repelón,Bosque relicto Repelón,bosque_seco,1,-75.1021,10.5201,Barrios R.,NT,SiB Colombia
+REG187,2024-04-18,Ramphastos sulfuratus,Tucán piquiverde,Aves,Piciformes,Repelón,Bosque relicto Repelón sector E,bosque_seco,2,-75.1021,10.5301,Pérez C.,LC,SiB Colombia
+REG188,20/04/2024,Trachemys callirostris,Tortuga icotea,Reptilia,Testudines,Sabanalarga,Ciénaga de Sabanalarga,humedal,5,-74.9214,10.6354,Martínez L.,VU,SiB Colombia
+REG189,2024-04-22,Heliornis fulica,Pato cantil,Aves,Gruiformes,Manatí,Ciénaga de Manatí sector de vegetación densa,humedal,2,-74.9645,10.4369,Ramírez J.,LC,SiB Colombia
+REG190,24/04/2024,Boa constrictor,Boa constrictor,Reptilia,Squamata,Luruaco,Bosque de Luriza sector seco,bosque_seco,1,-75.1412,10.5638,Gómez M.,LC,SiB Colombia
+REG191,2024-04-26,Ara macao,Guacamaya roja,Aves,Psittaciformes,Repelón,Bosque relicto Repelón este,bosque_seco,2,-75.1021,10.5301,Torres A.,LC,SiB Colombia
+REG192,28/04/2024,Nycticorax nycticorax,Garza bruja,Aves,Pelecaniformes,Repelón,Embalse El Guájaro sur,humedal,9,-75.1021,10.4987,Barrios R.,LC,SiB Colombia
+REG193,2024-04-30,Ortalis garrula,Guacharaca del Caribe,Aves,Galliformes,Luruaco,Bosque de Luriza zona de borde,bosque_seco,5,-75.1412,10.5638,Pérez C.,LC,IUCN
+REG194,02/05/2024,Tigrisoma lineatum,Garza tigre listada,Aves,Pelecaniformes,Repelón,Embalse El Guájaro zona boscosa sur,humedal,3,-75.1021,10.4987,Martínez L.,LC,SiB Colombia
+REG195,2024-05-04,Cerdocyon thous,Zorro perro,Mammalia,Carnivora,Luruaco,Bosque de Luriza zona D,bosque_seco,1,-75.1412,10.5638,Ramírez J.,LC,SiB Colombia
+REG196,06/05/2024,Jacana jacana,Jacana suramericana,Aves,Charadriiformes,Manambo,Ciénaga del Convento norte,humedal,7,-74.7821,10.8654,Gómez M.,LC,SiB Colombia
+REG197,2024-05-08,Dendrocygna autumnalis,Pijije aliblanco,Aves,Anseriformes,Repelón,Embalse El Guájaro zona sur,humedal,19,-75.1021,10.4987,Torres A.,LC,SiB Colombia
+REG198,10/05/2024,Podocnemis lewyana,Tortuga de río magdalena,Reptilia,Testudines,Campo de la Cruz,Río Magdalena zona de playa,humedal,2,-74.8801,10.3601,Barrios R.,EN,SiB Colombia
+REG199,2024-05-12,Eudocimus albus,Corocora blanca,Aves,Pelecaniformes,Campo de la Cruz,Ciénaga Grande de Santa Marta este,humedal,28,-74.8869,10.3654,Pérez C.,LC,SiB Colombia
+REG200,14/05/2024,Porphyrio martinica,Calamón americano,Aves,Gruiformes,Malambo,Ciénaga del Convento zona de totoras,humedal,4,-74.7821,10.8654,Martínez L.,LC,SiB Colombia

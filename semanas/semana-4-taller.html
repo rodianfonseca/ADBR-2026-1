@@ -8,7 +8,7 @@
 
 <meta name="author" content="Curso 20953 · Análisis de Datos Biológicos bajo R">
 
-<title>Quiz Semana 2 — Lógica de programación en R – Análisis de Datos Biológicos en R</title>
+<title>Taller Semana 4 — Importación y dplyr – Análisis de Datos Biológicos en R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -105,8 +105,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="../styles.css">
-<meta property="og:title" content="Quiz Semana 2 — Lógica de programación en R – Análisis de Datos Biológicos en R">
-<meta property="og:description" content="Herpetofauna del Caribe colombiano · Vía Parque Isla de Salamanca y Ciénaga de Mallorquín">
+<meta property="og:title" content="Taller Semana 4 — Importación y dplyr – Análisis de Datos Biológicos en R">
+<meta property="og:description" content="Limpieza y manipulación de datos de fauna silvestre del Atlántico">
 <meta property="og:site_name" content="Análisis de Datos Biológicos en R">
 </head>
 
@@ -201,18 +201,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">En esta página</h2>
    
   <ul>
-  <li><a href="#objetivos-del-quiz" id="toc-objetivos-del-quiz" class="nav-link active" data-scroll-target="#objetivos-del-quiz">Objetivos del quiz</a></li>
+  <li><a href="#objetivos-del-taller" id="toc-objetivos-del-taller" class="nav-link active" data-scroll-target="#objetivos-del-taller">Objetivos del taller</a></li>
   <li><a href="#contexto-biológico" id="toc-contexto-biológico" class="nav-link" data-scroll-target="#contexto-biológico">Contexto biológico</a></li>
   <li><a href="#dataset" id="toc-dataset" class="nav-link" data-scroll-target="#dataset">Dataset</a></li>
-  <li><a href="#parte-1-exploración-y-comprensión-del-data-frame" id="toc-parte-1-exploración-y-comprensión-del-data-frame" class="nav-link" data-scroll-target="#parte-1-exploración-y-comprensión-del-data-frame">Parte 1 — Exploración y comprensión del data frame</a></li>
-  <li><a href="#parte-2-indexación-y-modificación-del-data-frame" id="toc-parte-2-indexación-y-modificación-del-data-frame" class="nav-link" data-scroll-target="#parte-2-indexación-y-modificación-del-data-frame">Parte 2 — Indexación y modificación del data frame</a></li>
-  <li><a href="#parte-3-listas" id="toc-parte-3-listas" class="nav-link" data-scroll-target="#parte-3-listas">Parte 3 — Listas</a></li>
-  <li><a href="#parte-4-condicionales" id="toc-parte-4-condicionales" class="nav-link" data-scroll-target="#parte-4-condicionales">Parte 4 — Condicionales</a></li>
-  <li><a href="#parte-5-bucles" id="toc-parte-5-bucles" class="nav-link" data-scroll-target="#parte-5-bucles">Parte 5 — Bucles</a></li>
-  <li><a href="#parte-6-reporte-automatizado-integrado" id="toc-parte-6-reporte-automatizado-integrado" class="nav-link" data-scroll-target="#parte-6-reporte-automatizado-integrado">Parte 6 — Reporte automatizado integrado</a></li>
-  <li><a href="#criterios-de-evaluación" id="toc-criterios-de-evaluación" class="nav-link" data-scroll-target="#criterios-de-evaluación">Criterios de evaluación</a></li>
-  <li><a href="#estructura-esperada-del-script" id="toc-estructura-esperada-del-script" class="nav-link" data-scroll-target="#estructura-esperada-del-script">Estructura esperada del script</a></li>
-  <li><a href="#recursos-de-apoyo" id="toc-recursos-de-apoyo" class="nav-link" data-scroll-target="#recursos-de-apoyo">Recursos de apoyo</a></li>
+  <li><a href="#estructura-del-script" id="toc-estructura-del-script" class="nav-link" data-scroll-target="#estructura-del-script">Estructura del script</a></li>
+  <li><a href="#parte-1-importación-y-verificación" id="toc-parte-1-importación-y-verificación" class="nav-link" data-scroll-target="#parte-1-importación-y-verificación">Parte 1 — Importación y verificación</a></li>
+  <li><a href="#parte-2-filter-y-select" id="toc-parte-2-filter-y-select" class="nav-link" data-scroll-target="#parte-2-filter-y-select">Parte 2 — <code>filter()</code> y <code>select()</code></a></li>
+  <li><a href="#parte-3-mutate" id="toc-parte-3-mutate" class="nav-link" data-scroll-target="#parte-3-mutate">Parte 3 — <code>mutate()</code></a></li>
+  <li><a href="#parte-4-arrange" id="toc-parte-4-arrange" class="nav-link" data-scroll-target="#parte-4-arrange">Parte 4 — <code>arrange()</code></a></li>
+  <li><a href="#parte-5-summarise-group_by" id="toc-parte-5-summarise-group_by" class="nav-link" data-scroll-target="#parte-5-summarise-group_by">Parte 5 — <code>summarise()</code> + <code>group_by()</code></a></li>
+  <li><a href="#errores-frecuentes" id="toc-errores-frecuentes" class="nav-link" data-scroll-target="#errores-frecuentes">Errores frecuentes</a></li>
+  <li><a href="#recursos-de-referencia" id="toc-recursos-de-referencia" class="nav-link" data-scroll-target="#recursos-de-referencia">Recursos de referencia</a></li>
   </ul>
 </nav>
     </div>
@@ -221,8 +220,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Quiz Semana 2 — Lógica de programación en R</h1>
-<p class="subtitle lead">Herpetofauna del Caribe colombiano · Vía Parque Isla de Salamanca y Ciénaga de Mallorquín</p>
+<h1 class="title">Taller Semana 4 — Importación y dplyr</h1>
+<p class="subtitle lead">Limpieza y manipulación de datos de fauna silvestre del Atlántico</p>
 </div>
 
 
@@ -239,7 +238,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Fecha de publicación</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">15 de abril de 2026</p>
+      <p class="date">29 de abril de 2026</p>
     </div>
   </div>
   
@@ -257,351 +256,306 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-body-container">
-<p><strong>Tipo de evidencia:</strong> Conocimiento · <strong>Entregable:</strong> <code>quiz2_apellido_nombre.R</code> · <strong>Plataforma:</strong> SICVI 567 — actividad “Quiz Semana 2”</p>
+<p><strong>Tipo de evidencia:</strong> Desempeño · <strong>Entregable:</strong> <code>taller4_apellido_nombre.R</code> · <strong>Plataforma:</strong> SICVI 567 — actividad “Taller 4”</p>
 </div>
 </div>
 </div>
-<section id="objetivos-del-quiz" class="level2">
-<h2 class="anchored" data-anchor-id="objetivos-del-quiz">Objetivos del quiz</h2>
-<p>Al completar este quiz el estudiante será capaz de:</p>
+<section id="objetivos-del-taller" class="level2">
+<h2 class="anchored" data-anchor-id="objetivos-del-taller">Objetivos del taller</h2>
 <ol type="1">
-<li>Crear y manipular data frames con datos biológicos (indexación, filtrado, modificación de columnas).</li>
-<li>Organizar información heterogénea en listas jerárquicas.</li>
-<li>Aplicar condicionales (<code>if/else</code>, <code>ifelse()</code>) para clasificar observaciones biológicas.</li>
-<li>Construir bucles <code>for</code> y <code>while</code> para iterar sobre estructuras de datos.</li>
-<li>Usar <code>next</code> y <code>break</code> para controlar el flujo dentro de un bucle.</li>
-<li>Explicar en lenguaje propio la diferencia entre las estructuras de datos de R base.</li>
+<li>Importar un CSV con <code>read_csv()</code>, especificando tipos de columna y valores NA explícitos.</li>
+<li>Verificar la calidad de la importación con <code>problems()</code>, <code>spec()</code> y <code>glimpse()</code>.</li>
+<li>Aplicar los cinco verbos de dplyr — <code>filter()</code>, <code>select()</code>, <code>mutate()</code>, <code>arrange()</code> y <code>summarise()</code> — para responder preguntas biológicas.</li>
+<li>Construir pipelines con <code>|&gt;</code> que sean legibles y reproducibles.</li>
+<li>Usar helpers de selección (<code>starts_with()</code>, <code>where(is.numeric)</code>) y funciones de resumen (<code>n()</code>, <code>n_distinct()</code>) dentro de un pipeline.</li>
 </ol>
 <hr>
 </section>
 <section id="contexto-biológico" class="level2">
 <h2 class="anchored" data-anchor-id="contexto-biológico">Contexto biológico</h2>
-<p>El Sistema de Información sobre Biodiversidad de Colombia (SiB Colombia) consolida registros de presencia de especies provenientes de instituciones académicas, autoridades ambientales y ciudadanos. El departamento del Atlántico cuenta con registros históricos de reptiles, anfibios, aves y flora vascular en ecosistemas como manglares, bosques secos tropicales y humedales costeros.</p>
-<p>En este quiz trabajarás con un dataset simulado — pero biológicamente realista — de registros de <strong>herpetofauna</strong> (reptiles y anfibios) del Atlántico, basado en monitoreos comunitarios en la <strong>Vía Parque Isla de Salamanca</strong> y la <strong>Ciénaga de Mallorquín</strong>. El objetivo biológico es construir un sistema básico de clasificación de registros para apoyar el reporte semestral del programa de monitoreo.</p>
+<p>El Caribe colombiano alberga una diversidad excepcional de fauna silvestre en ecosistemas como manglares, ciénagas, bosques secos y zonas costeras. Los departamentos de Atlántico, Magdalena, Bolívar y Córdoba concentran rutas migratorias y áreas de reproducción de aves, reptiles y mamíferos.</p>
+<p>Sin embargo, la transformación de hábitats por actividad agroindustrial, urbanización y expansión ganadera ha puesto bajo presión a numerosas poblaciones. Los registros de monitoreo en puntos de conteo son una herramienta fundamental para evaluar tendencias y priorizar acciones de conservación.</p>
+<p>En este taller trabajarás con un dataset de <strong>registros de fauna silvestre del departamento del Atlántico</strong> (2023–2024): 200 registros de 46 especies (aves, reptiles y mamíferos) en 11 municipios. Tu tarea es limpiar, filtrar y resumir los datos para responder preguntas de conservación reales.</p>
 <hr>
 </section>
 <section id="dataset" class="level2">
 <h2 class="anchored" data-anchor-id="dataset">Dataset</h2>
-<p>Copia el siguiente bloque completo al <strong>inicio</strong> de tu script <code>quiz2_apellido_nombre.R</code>. Ejecútalo antes de comenzar cualquier ejercicio.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ===========================================================</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># DATASET — Quiz Semana 2 — Herpetofauna del Atlántico</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Fuente: dataset simulado con especies reales del Caribe colombiano</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Ejecuta este bloque antes de comenzar</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ===========================================================</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20953</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>herp_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">especie     =</span> <span class="fu">c</span>(<span class="st">"Iguana iguana"</span>, <span class="st">"Boa constrictor"</span>, <span class="st">"Caiman crocodilus"</span>,</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Trachemys callirostris"</span>, <span class="st">"Cnemidophorus lemniscatus"</span>,</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Lepidoblepharis sanctaemartae"</span>, <span class="st">"Hemidactylus frenatus"</span>,</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Anolis auratus"</span>, <span class="st">"Kinosternon scorpioides"</span>),</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">orden       =</span> <span class="fu">c</span>(<span class="st">"Squamata"</span>, <span class="st">"Squamata"</span>, <span class="st">"Crocodylia"</span>,</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Testudines"</span>, <span class="st">"Squamata"</span>,</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Squamata"</span>, <span class="st">"Squamata"</span>,</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Squamata"</span>, <span class="st">"Testudines"</span>),</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_registros =</span> <span class="fu">c</span>(<span class="dv">45</span>L, <span class="dv">3</span>L, <span class="dv">8</span>L, <span class="dv">12</span>L, <span class="dv">67</span>L, <span class="dv">4</span>L, <span class="dv">89</span>L, <span class="dv">156</span>L, <span class="dv">6</span>L),</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">longitud_cm =</span> <span class="fu">c</span>(<span class="fl">145.0</span>, <span class="fl">280.0</span>, <span class="fl">195.0</span>, <span class="fl">38.5</span>, <span class="fl">22.0</span>, <span class="fl">5.8</span>, <span class="fl">14.5</span>, <span class="fl">18.2</span>, <span class="fl">20.0</span>),</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">amenazada   =</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>),</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">sitio       =</span> <span class="fu">c</span>(<span class="st">"Salamanca"</span>, <span class="st">"Salamanca"</span>, <span class="st">"Mallorquin"</span>, <span class="st">"Mallorquin"</span>,</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Salamanca"</span>, <span class="st">"Mallorquin"</span>, <span class="st">"Mallorquin"</span>, <span class="st">"Salamanca"</span>, <span class="st">"Mallorquin"</span>),</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Convierte columnas a factor con niveles explícitos</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>herp_df<span class="sc">$</span>sitio <span class="ot">&lt;-</span> <span class="fu">factor</span>(herp_df<span class="sc">$</span>sitio, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Mallorquin"</span>, <span class="st">"Salamanca"</span>))</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>herp_df<span class="sc">$</span>orden <span class="ot">&lt;-</span> <span class="fu">factor</span>(herp_df<span class="sc">$</span>orden,</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>                        <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Squamata"</span>, <span class="st">"Crocodylia"</span>, <span class="st">"Testudines"</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<hr>
-</section>
-<section id="parte-1-exploración-y-comprensión-del-data-frame" class="level2">
-<h2 class="anchored" data-anchor-id="parte-1-exploración-y-comprensión-del-data-frame">Parte 1 — Exploración y comprensión del data frame</h2>
-<p><strong>Estimado: 15 minutos</strong></p>
-<p>Antes de analizar datos, siempre debemos entender su estructura. Responde usando funciones de R — no “a ojo”.</p>
-<p><strong>1.1.</strong> Usa tres funciones distintas para explorar <code>herp_df</code>. Explica con un comentario qué información aporta cada una que las otras no dan.</p>
-<p><strong>1.2.</strong> ¿Cuántas filas y columnas tiene el data frame? ¿Cuántos registros en total (suma de <code>n_registros</code>) hay en el dataset?</p>
-<p><strong>1.3.</strong> ¿Cuántas especies están clasificadas como amenazadas (<code>amenazada == TRUE</code>)? Usa código para obtener ese número, no lo cuentes manualmente.</p>
-<p><strong>1.4.</strong> Crea un subconjunto llamado <code>herp_salamanca</code> con solo los registros del sitio “Salamanca”. ¿Cuántas especies fueron registradas en ese sitio?</p>
-<p><strong>Preguntas de reflexión</strong> — responde como comentarios <code># R:</code> en tu script:</p>
-<ul>
-<li>¿Por qué es importante ejecutar <code>str()</code> antes de cualquier análisis? ¿Qué problema podría surgir si no verificamos los tipos de cada columna?</li>
-<li>La columna <code>sitio</code> es un factor, pero podría haberse dejado como character. ¿En qué situación de análisis importa esa diferencia?</li>
-</ul>
-<hr>
-</section>
-<section id="parte-2-indexación-y-modificación-del-data-frame" class="level2">
-<h2 class="anchored" data-anchor-id="parte-2-indexación-y-modificación-del-data-frame">Parte 2 — Indexación y modificación del data frame</h2>
-<p><strong>Estimado: 20 minutos</strong></p>
-<p><strong>2.1.</strong> Extrae la columna <code>especie</code> como un vector de character. Luego extrae solo el nombre de la especie en la fila 3 usando indexación numérica.</p>
-<p><strong>2.2.</strong> Selecciona todas las especies con más de 50 registros (<code>n_registros &gt; 50</code>). Muestra solo las columnas <code>especie</code>, <code>n_registros</code> y <code>sitio</code> del subconjunto resultante.</p>
-<p><strong>2.3.</strong> Agrega una nueva columna <code>categoria_tamano</code> usando <code>ifelse()</code>:</p>
-<ul>
-<li><code>"grande"</code> si <code>longitud_cm &gt;= 100</code></li>
-<li><code>"pequeno"</code> si <code>longitud_cm &lt; 100</code></li>
-</ul>
-<p>Muestra las columnas <code>especie</code>, <code>longitud_cm</code> y <code>categoria_tamano</code>.</p>
-<p><strong>2.4.</strong> Agrega la siguiente especie con <code>rbind()</code> y verifica con <code>tail()</code>:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Campo</th>
-<th>Valor</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>especie</td>
-<td><code>"Mabuya mabouya"</code></td>
-</tr>
-<tr class="even">
-<td>orden</td>
-<td><code>"Squamata"</code></td>
-</tr>
-<tr class="odd">
-<td>n_registros</td>
-<td><code>31L</code></td>
-</tr>
-<tr class="even">
-<td>longitud_cm</td>
-<td><code>19.5</code></td>
-</tr>
-<tr class="odd">
-<td>amenazada</td>
-<td><code>FALSE</code></td>
-</tr>
-<tr class="even">
-<td>sitio</td>
-<td><code>"Salamanca"</code></td>
-</tr>
-<tr class="odd">
-<td>categoria_tamano</td>
-<td><code>"pequeno"</code></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Preguntas de reflexión:</strong></p>
-<ul>
-<li>¿Por qué al crear el nuevo registro con <code>rbind()</code> debes incluir la columna <code>categoria_tamano</code>? ¿Qué error daría R si no la incluyes?</li>
-<li>Explica con tus palabras la diferencia entre <code>herp_df[2]</code> y <code>herp_df[[2]]</code>.</li>
-</ul>
-<hr>
-</section>
-<section id="parte-3-listas" class="level2">
-<h2 class="anchored" data-anchor-id="parte-3-listas">Parte 3 — Listas</h2>
-<p><strong>Estimado: 15 minutos</strong></p>
-<p><strong>3.1.</strong> Crea una lista <code>ficha_salamanca</code> con los siguientes componentes:</p>
+<p>Descarga <code>fauna_atlantico_original.csv</code> desde el <a href="../material.html#semana-4">Material del curso</a> y guárdalo en tu carpeta de trabajo.</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 52%">
-<col style="width: 47%">
+<col style="width: 27%">
+<col style="width: 37%">
+<col style="width: 35%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>Componente</th>
-<th>Contenido</th>
+<th>Variable</th>
+<th>Tipo esperado</th>
+<th>Descripción</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>nombre</code></td>
-<td><code>"Vía Parque Isla de Salamanca"</code></td>
+<td><code>id_registro</code></td>
+<td>integer</td>
+<td>Identificador único</td>
 </tr>
 <tr class="even">
-<td><code>departamento</code></td>
-<td><code>"Magdalena / Atlántico"</code></td>
+<td><code>especie</code></td>
+<td>character</td>
+<td>Nombre científico</td>
 </tr>
 <tr class="odd">
-<td><code>area_ha</code></td>
-<td><code>56200</code></td>
+<td><code>nombre_comun</code></td>
+<td>character</td>
+<td>Nombre común en español</td>
+</tr>
+<tr class="even">
+<td><code>clase</code>, <code>orden</code>, <code>familia</code></td>
+<td>character</td>
+<td>Clasificación taxonómica</td>
+</tr>
+<tr class="odd">
+<td><code>departamento</code>, <code>municipio</code>, <code>sitio</code></td>
+<td>character</td>
+<td>Ubicación</td>
 </tr>
 <tr class="even">
 <td><code>ecosistema</code></td>
-<td>factor <code>"manglar"</code> con niveles <code>c("manglar", "bosque_seco", "humedal")</code></td>
+<td>character</td>
+<td>Manglar, Bosque seco, Ciénaga, Pastizal, Marino-costero, Área urbana</td>
 </tr>
 <tr class="odd">
-<td><code>registros</code></td>
-<td>el data frame <code>herp_salamanca</code> de la Parte 1</td>
+<td><code>latitud</code>, <code>longitud</code></td>
+<td>double</td>
+<td>Coordenadas WGS84</td>
+</tr>
+<tr class="even">
+<td><code>fecha_registro</code></td>
+<td>date / character</td>
+<td>Fecha del evento</td>
+</tr>
+<tr class="odd">
+<td><code>num_individuos</code></td>
+<td>integer</td>
+<td>Número de individuos</td>
+</tr>
+<tr class="even">
+<td><code>metodo_registro</code></td>
+<td>character</td>
+<td>Método de campo</td>
+</tr>
+<tr class="odd">
+<td><code>estado_uicn</code></td>
+<td>factor</td>
+<td>LC, NT, VU, EN, CR</td>
+</tr>
+<tr class="even">
+<td><code>endemica_colombia</code></td>
+<td>character</td>
+<td>Sí / No</td>
 </tr>
 </tbody>
 </table>
-<p><strong>3.2.</strong> Accede a los siguientes elementos usando <strong>al menos dos formas distintas</strong> de indexación (<code>$</code>, <code>[[]]</code>, posición numérica):</p>
-<ul>
-<li>El área en hectáreas</li>
-<li>El nombre de la primera especie registrada en Salamanca (acceso anidado: lista → data frame → columna → elemento)</li>
-</ul>
-<p><strong>3.3.</strong> Agrega un componente <code>fecha_monitoreo &lt;- as.Date("2025-10-05")</code> a la lista. ¿Cuántos componentes tiene ahora?</p>
-<p><strong>Preguntas de reflexión:</strong></p>
-<ul>
-<li>¿En qué situación del trabajo de campo sería más conveniente una lista en lugar de un data frame?</li>
-<li>Si tuvieras datos de 10 sitios de monitoreo, ¿cómo los organizarías en R? Describe la estructura en palabras antes de escribir el código.</li>
-</ul>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Imperfecciones intencionales del dataset
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Este dataset tiene cuatro “problemas” realistas que debes detectar y resolver durante el taller:</p>
+<ol type="1">
+<li><strong>Fechas en dos formatos:</strong> algunos registros usan <code>YYYY-MM-DD</code> y otros <code>DD/MM/YYYY</code></li>
+<li><strong>Registros sin especie:</strong> dos filas tienen <code>especie = NA</code></li>
+<li><strong>Error tipográfico en municipio:</strong> un registro dice <code>"Manambo"</code> en lugar de <code>"Malambo"</code></li>
+<li><strong>Inconsistencia lógica:</strong> las filas con <code>especie = NA</code> tienen <code>estado_uicn</code> completado</li>
+</ol>
+<p>Parte de la evaluación es que identifiques y documentes estos problemas en tu script.</p>
+</div>
+</div>
 <hr>
 </section>
-<section id="parte-4-condicionales" class="level2">
-<h2 class="anchored" data-anchor-id="parte-4-condicionales">Parte 4 — Condicionales</h2>
+<section id="estructura-del-script" class="level2">
+<h2 class="anchored" data-anchor-id="estructura-del-script">Estructura del script</h2>
+<pre><code># Cabecera: nombre completo, fecha, descripción del taller
+# library(readr); library(dplyr)
+# Parte 1: Importación y verificación
+# Parte 2: filter() y select()
+# Parte 3: mutate()
+# Parte 4: arrange()
+# Parte 5: summarise() + group_by()
+# sessionInfo() al final</code></pre>
+<p>El script debe ejecutarse <strong>completo sin errores</strong> desde una sesión limpia de R (Session → Restart R → Run All).</p>
+<hr>
+</section>
+<section id="parte-1-importación-y-verificación" class="level2">
+<h2 class="anchored" data-anchor-id="parte-1-importación-y-verificación">Parte 1 — Importación y verificación</h2>
 <p><strong>Estimado: 15 minutos</strong></p>
-<p><strong>4.1.</strong> Escribe un bloque <code>if/else if/else</code> que evalúe el total de registros de <em>Hemidactylus frenatus</em> (extrae el valor con código) e imprima el mensaje correspondiente:</p>
-<ul>
-<li>Más de 100 registros: <code>"Especie común — posible indicador de perturbación antrópica"</code></li>
-<li>Entre 30 y 100 (inclusive): <code>"Especie con presencia moderada — monitoreo rutinario"</code></li>
-<li>Menos de 30: <code>"Especie poco registrada — ampliar cobertura de muestreo"</code></li>
-</ul>
-<p><strong>4.2.</strong> Usando <code>ifelse()</code> (vectorizado), crea un vector <code>prioridad_conservacion</code>:</p>
-<ul>
-<li><code>"PRIORITARIA"</code> si la especie está amenazada</li>
-<li><code>"NO_PRIORITARIA"</code> si no lo está</li>
-</ul>
-<p>Asigna los nombres de las especies como nombres del vector.</p>
-<p><strong>4.3.</strong> Escribe una función <code>clasificar_orden()</code> que reciba el nombre de un orden y use <code>switch()</code> para devolver:</p>
-<ul>
-<li><code>"Squamata"</code> → <code>"Lagartijas y serpientes — el orden más diverso del dataset"</code></li>
-<li><code>"Crocodylia"</code> → <code>"Caimanes y cocodrilos — protegidos por CITES Apéndice II"</code></li>
-<li><code>"Testudines"</code> → <code>"Tortugas — varias especies en peligro crítico en el Caribe"</code></li>
-<li>Cualquier otro → <code>"Orden no presente en el dataset de monitoreo"</code></li>
-</ul>
-<p>Prueba la función con los tres órdenes y con un valor inexistente.</p>
-<p><strong>Preguntas de reflexión:</strong></p>
-<ul>
-<li>¿Cuál es la diferencia práctica entre <code>if()</code> e <code>ifelse()</code>? Da un ejemplo de cuándo usar cada uno.</li>
-<li>¿Por qué <code>switch()</code> puede ser preferible a una cadena larga de <code>if/else if</code>?</li>
-</ul>
+<p>Carga el dataset usando <code>read_csv()</code> con las siguientes condiciones:</p>
+<ol type="1">
+<li>Los valores <code>"ND"</code>, <code>""</code> y <code>"NA"</code> deben interpretarse como <code>NA</code>.</li>
+<li>La columna <code>estado_uicn</code> debe ser factor con niveles en orden de amenaza: <code>LC</code>, <code>NT</code>, <code>VU</code>, <code>EN</code>, <code>CR</code>.</li>
+<li>La columna <code>num_individuos</code> debe ser entero.</li>
+<li>Guarda el resultado en un objeto llamado <code>fauna</code>.</li>
+</ol>
+<p>Luego verifica la importación:</p>
+<ol start="5" type="1">
+<li><code>glimpse()</code> — revisa estructura completa</li>
+<li><code>problems()</code> — ¿tuvo readr algún problema de parsing?</li>
+<li><code>spec()</code> — ¿qué tipos infirió readr para cada columna?</li>
+</ol>
+<p><strong>Preguntas de reflexión</strong> — responde como comentarios <code># R:</code> en el script:</p>
+<ol type="1">
+<li>¿Qué diferencia hay en la impresión en consola entre un <code>data.frame</code> y un tibble? Menciona al menos dos diferencias concretas.</li>
+<li>¿Para qué sirve el argumento <code>na</code> en <code>read_csv()</code>? ¿Qué pasaría si no lo especificas y el dataset tiene celdas con el texto <code>"ND"</code>?</li>
+</ol>
 <hr>
 </section>
-<section id="parte-5-bucles" class="level2">
-<h2 class="anchored" data-anchor-id="parte-5-bucles">Parte 5 — Bucles</h2>
-<p><strong>Estimado: 25 minutos</strong></p>
-<p><strong>5.1. Bucle <code>for</code> — reporte por especie:</strong></p>
-<p>Itera sobre todas las filas de <code>herp_df</code> e imprime con <code>sprintf()</code>:</p>
-<pre><code>[especie] | N = [n_registros] | [sitio] | Estado: [AMENAZADA / no amenazada]</code></pre>
-<p>“AMENAZADA” en mayúsculas solo cuando <code>amenazada == TRUE</code>; de lo contrario “no amenazada” en minúsculas.</p>
-<p>Pista de formato: <code>sprintf("%-35s | N = %3d | %-12s | Estado: %s\n", ...)</code></p>
-<p><strong>5.2. Bucle <code>for</code> con <code>next</code> — filtro de registros raros:</strong></p>
-<p>Recorre <code>herp_df</code> e imprime solo las especies con <code>n_registros &gt;= 10</code>. Usa <code>next</code> para saltar las demás. Al finalizar el bucle, imprime cuántas especies cumplieron la condición.</p>
-<p><strong>5.3. Bucle <code>while</code> — esfuerzo de muestreo acumulado:</strong></p>
-<p>Simula jornadas de campo donde se registran entre 5 y 20 individuos por jornada (<code>sample(5:20, 1)</code>). Acumula hasta alcanzar o superar 200 individuos. Al terminar, imprime cuántas jornadas fueron necesarias y el total acumulado.</p>
-<p>Usa <code>set.seed(20953)</code> antes del bucle para reproducibilidad.</p>
-<p><strong>5.4. Bucle <code>for</code> con <code>break</code> — búsqueda del primer cocodrilo:</strong></p>
-<p>Recorre <code>herp_df</code> buscando la primera especie del orden <code>"Crocodylia"</code>. Al encontrarla, imprime su nombre y número de registros, y sale del bucle con <code>break</code>.</p>
+<section id="parte-2-filter-y-select" class="level2">
+<h2 class="anchored" data-anchor-id="parte-2-filter-y-select">Parte 2 — <code>filter()</code> y <code>select()</code></h2>
+<p><strong>Estimado: 20 minutos</strong></p>
+<p>Construye los siguientes subconjuntos. Guarda cada resultado con el nombre indicado:</p>
+<p><strong>2.1 <code>fauna_atlantico</code></strong> — solo registros del departamento del Atlántico. Verifica cuántas filas tiene con <code>nrow()</code>.</p>
+<p><strong>2.2 <code>fauna_amenazadas</code></strong> — solo registros de especies en VU, EN o CR. Usa <code>%in%</code>.</p>
+<p><strong>2.3 <code>fauna_manglar_amenazada</code></strong> — registros en ecosistema Manglar con estado UICN NT, VU, EN o CR. Combina dos condiciones en un solo <code>filter()</code>.</p>
+<p><strong>2.4 <code>fauna_cols</code></strong> — a partir de <code>fauna</code>, selecciona: <code>especie</code>, <code>nombre_comun</code>, <code>familia</code>, <code>departamento</code>, <code>sitio</code>, <code>ecosistema</code>, <code>num_individuos</code>, <code>estado_uicn</code>.</p>
+<p><strong>2.5 <code>fauna_nums</code></strong> — a partir de <code>fauna</code>, selecciona únicamente las columnas numéricas con <code>where(is.numeric)</code>. ¿Cuántas columnas numéricas hay?</p>
 <p><strong>Preguntas de reflexión:</strong></p>
-<ul>
-<li>En los ejercicios anteriores, ¿en cuál situación usaste <code>next</code> y en cuál <code>break</code>? Explica la diferencia.</li>
-<li>Muchas operaciones de bucles <code>for</code> pueden reemplazarse con funciones vectorizadas. ¿Por qué entonces es importante aprender bucles?</li>
-</ul>
+<ol start="3" type="1">
+<li>¿Qué operador usarías si necesitas filtrar registros donde <code>estado_uicn</code> sea LC <strong>o</strong> NT, pero no los demás? ¿Cómo quedaría el código?</li>
+<li>¿Cuál es la diferencia entre <code>-columna</code> y <code>!columna</code> dentro de <code>select()</code>?</li>
+</ol>
 <hr>
 </section>
-<section id="parte-6-reporte-automatizado-integrado" class="level2">
-<h2 class="anchored" data-anchor-id="parte-6-reporte-automatizado-integrado">Parte 6 — Reporte automatizado integrado</h2>
-<p><strong>Estimado: 20 minutos</strong> · <em>Esta parte no tiene código inicial — diseña la solución completa.</em></p>
-<p><strong>Contexto:</strong> El programa de monitoreo necesita un reporte en consola que clasifique cada especie según abundancia y estado de amenaza:</p>
-<pre><code>=== REPORTE DE MONITOREO — HERPETOFAUNA CARIBE COLOMBIANO ===
-Sitios: Vía Parque Isla de Salamanca y Ciénaga de Mallorquín
-Total de especies registradas: [N]
-Total de individuos registrados: [N]
-
---- CLASIFICACIÓN POR ESPECIE ---
-[especie]
-  Registros : [N]
-  Sitio      : [sitio]
-  Longitud   : [X] cm ([grande/pequeno])
-  Amenazada  : [Sí / No]
-  Categoría  : [ver tabla abajo]
-
-=== FIN DEL REPORTE ===</code></pre>
-<p><strong>Criterio de categoría:</strong></p>
+<section id="parte-3-mutate" class="level2">
+<h2 class="anchored" data-anchor-id="parte-3-mutate">Parte 3 — <code>mutate()</code></h2>
+<p><strong>Estimado: 15 minutos</strong></p>
+<p>Partiendo del objeto <code>fauna</code>, añade las siguientes columnas con <code>mutate()</code>. Puedes encadenar todos los <code>mutate()</code> en un solo pipeline:</p>
+<p><strong>3.1 <code>log_individuos</code></strong> — logaritmo natural de <code>num_individuos + 1</code> con <code>log1p()</code>. Explica en un comentario por qué se suma 1 antes del logaritmo.</p>
+<p><strong>3.2 <code>categoria_abundancia</code></strong> — variable de texto creada con <code>case_when()</code>: - <code>"Baja"</code> si <code>num_individuos ≤ 10</code> - <code>"Media"</code> si <code>num_individuos</code> entre 11 y 50 (inclusive) - <code>"Alta"</code> si <code>num_individuos &gt; 50</code> - <code>NA_character_</code> si <code>num_individuos</code> es <code>NA</code></p>
+<p><strong>3.3 <code>anio</code></strong> — año extraído de <code>fecha_registro</code> con <code>format(fecha_registro, "%Y")</code>.</p>
+<p><strong>3.4 <code>es_amenazada</code></strong> — variable lógica (<code>TRUE</code> / <code>FALSE</code>): <code>TRUE</code> si <code>estado_uicn</code> pertenece a VU, EN o CR.</p>
+<p>Después de los <code>mutate()</code>, usa <code>select()</code> para mostrar: <code>especie</code>, <code>num_individuos</code>, <code>log_individuos</code>, <code>categoria_abundancia</code>, <code>anio</code>, <code>es_amenazada</code>.</p>
+<p><strong>Pregunta de reflexión:</strong></p>
+<ol start="5" type="1">
+<li>¿Por qué <code>case_when()</code> es preferible a <code>ifelse()</code> anidados dentro de <code>mutate()</code>? Menciona una razón práctica y una de legibilidad.</li>
+</ol>
+<hr>
+</section>
+<section id="parte-4-arrange" class="level2">
+<h2 class="anchored" data-anchor-id="parte-4-arrange">Parte 4 — <code>arrange()</code></h2>
+<p><strong>Estimado: 10 minutos</strong></p>
+<p><strong>4.1</strong> Ordena <code>fauna</code> por <code>num_individuos</code> de mayor a menor. Muestra las primeras 8 filas con <code>head(8)</code>, seleccionando: <code>especie</code>, <code>sitio</code>, <code>ecosistema</code>, <code>departamento</code>, <code>num_individuos</code>.</p>
+<p><strong>4.2</strong> Ordena por <code>departamento</code> (ascendente) y dentro de cada departamento por <code>num_individuos</code> (descendente). Muestra las primeras 10 filas.</p>
+<p><strong>4.3</strong> Identifica la especie con <strong>menor</strong> número de individuos registrada en el ecosistema Ciénaga. Construye un pipeline con <code>filter()</code> + <code>arrange()</code> + <code>head(1)</code>.</p>
+<p><strong>Pregunta de reflexión:</strong></p>
+<ol start="6" type="1">
+<li>Si dos filas tienen el mismo valor en la columna de ordenamiento, ¿en qué orden quedan? ¿Cómo harías el ordenamiento completamente determinístico?</li>
+</ol>
+<hr>
+</section>
+<section id="parte-5-summarise-group_by" class="level2">
+<h2 class="anchored" data-anchor-id="parte-5-summarise-group_by">Parte 5 — <code>summarise()</code> + <code>group_by()</code></h2>
+<p><strong>Estimado: 20 minutos</strong></p>
+<p><strong>5.1 <code>resumen_ecosistema</code></strong> — por ecosistema, calcula: - <code>n_registros</code>: número de filas (<code>n()</code>) - <code>n_especies</code>: número de especies únicas (<code>n_distinct(especie)</code>) - <code>individuos_total</code>: suma de <code>num_individuos</code> (<code>na.rm = TRUE</code>) - <code>individuos_media</code>: promedio de <code>num_individuos</code> (<code>na.rm = TRUE</code>)</p>
+<p>Ordena por <code>individuos_total</code> de mayor a menor.</p>
+<p><strong>5.2 <code>tabla_amenaza</code></strong> — número de registros por <code>departamento</code> y <code>estado_uicn</code>. Usa <code>.groups = "drop"</code>.</p>
+<p><strong>5.3 <code>riqueza_sitios</code></strong> — número de especies únicas por sitio de muestreo. Ordena de mayor a menor riqueza y muestra los 10 primeros sitios.</p>
+<p><strong>5.4 Pipeline integrador</strong> — ¿cuáles son los tres ecosistemas con mayor <strong>proporción</strong> de registros de especies amenazadas (VU + EN + CR) respecto al total de registros de ese ecosistema?</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Pistas para el pipeline integrador
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fauna <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">es_amenazada =</span> estado_uicn <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"VU"</span>, <span class="st">"EN"</span>, <span class="st">"CR"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ecosistema) <span class="sc">|&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">total       =</span> <span class="fu">n</span>(),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">amenazadas  =</span> <span class="fu">sum</span>(es_amenazada, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups     =</span> <span class="st">"drop"</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">proporcion =</span> <span class="fu">round</span>(amenazadas <span class="sc">/</span> total <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(proporcion)) <span class="sc">|&gt;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">3</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p><strong>Preguntas de reflexión:</strong></p>
+<ol start="7" type="1">
+<li>¿Qué hace <code>.groups = "drop"</code> al final de <code>summarise()</code>? ¿Qué pasaría si no lo incluyes con dos variables en <code>group_by()</code>?</li>
+<li>¿Por qué es importante usar <code>na.rm = TRUE</code> dentro de <code>sum()</code> y <code>mean()</code> en este dataset?</li>
+<li>A partir de <code>resumen_ecosistema</code>: ¿qué ecosistema tiene mayor riqueza de especies pero menor abundancia media? ¿Qué hipótesis biológica plantearías?</li>
+</ol>
+<hr>
+</section>
+<section id="errores-frecuentes" class="level2">
+<h2 class="anchored" data-anchor-id="errores-frecuentes">Errores frecuentes</h2>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
+<col style="width: 21%">
+<col style="width: 46%">
+<col style="width: 31%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>Condición</th>
-<th>Categoría</th>
+<th>Error</th>
+<th>Causa probable</th>
+<th>Solución</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Amenazada <strong>Y</strong> n_registros &lt; 10</td>
-<td><code>"URGENTE: especie amenazada y rara"</code></td>
+<td><code>could not find function "read_csv"</code></td>
+<td><code>readr</code> no está cargado</td>
+<td><code>library(readr)</code> al inicio</td>
 </tr>
 <tr class="even">
-<td>Amenazada <strong>Y</strong> n_registros ≥ 10</td>
-<td><code>"ALERTA: especie amenazada pero registrada"</code></td>
+<td><code>could not find function "filter"</code></td>
+<td><code>dplyr</code> no cargado o conflicto con <code>stats::filter()</code></td>
+<td><code>library(dplyr)</code> o usa <code>dplyr::filter()</code></td>
 </tr>
 <tr class="odd">
-<td>No amenazada <strong>Y</strong> n_registros ≥ 50</td>
-<td><code>"COMÚN: monitoreo rutinario"</code></td>
+<td><code>cannot open file</code> al leer el CSV</td>
+<td>Ruta incorrecta</td>
+<td>Verifica con <code>file.exists("ruta/al/archivo.csv")</code></td>
 </tr>
 <tr class="even">
-<td>No amenazada <strong>Y</strong> n_registros &lt; 50</td>
-<td><code>"MODERADA: ampliar cobertura"</code></td>
+<td>NA inesperados en <code>estado_uicn</code></td>
+<td>Los <code>"ND"</code> no se declararon como NA</td>
+<td>Agrega <code>na = c("", "NA", "ND")</code> en <code>read_csv()</code></td>
+</tr>
+<tr class="odd">
+<td><code>summarise()</code> devuelve tibble agrupado</td>
+<td>Se olvidó <code>.groups = "drop"</code></td>
+<td>Agrégalo dentro de <code>summarise()</code></td>
+</tr>
+<tr class="even">
+<td>El pipe <code>\|&gt;</code> no funciona</td>
+<td>R anterior a 4.1</td>
+<td>Verifica con <code>R.version$major</code> — necesitas R ≥ 4.1</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Requisitos técnicos:</strong> bucle <code>for</code>, condicionales <code>if/else</code> anidados, totales calculados con operaciones sobre el data frame, salida generada con <code>cat()</code> y <code>sprintf()</code>.</p>
-<p><strong>Pregunta de reflexión:</strong> ¿Qué ventajas tiene automatizar este reporte con código en lugar de escribirlo manualmente? Piensa en un escenario donde el dataset creciera de 9 a 900 especies.</p>
 <hr>
 </section>
-<section id="criterios-de-evaluación" class="level2">
-<h2 class="anchored" data-anchor-id="criterios-de-evaluación">Criterios de evaluación</h2>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Criterio</th>
-<th>Puntaje máximo</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Parte 1:</strong> Exploración del data frame</td>
-<td>0.5</td>
-</tr>
-<tr class="even">
-<td><strong>Parte 2:</strong> Indexación y modificación</td>
-<td>1.0</td>
-</tr>
-<tr class="odd">
-<td><strong>Parte 3:</strong> Listas</td>
-<td>0.5</td>
-</tr>
-<tr class="even">
-<td><strong>Parte 4:</strong> Condicionales</td>
-<td>1.0</td>
-</tr>
-<tr class="odd">
-<td><strong>Parte 5:</strong> Bucles</td>
-<td>1.5</td>
-</tr>
-<tr class="even">
-<td><strong>Parte 6:</strong> Reporte integrado</td>
-<td>0.5</td>
-</tr>
-<tr class="odd">
-<td><strong>Total</strong></td>
-<td><strong>5.0</strong></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Criterios transversales (aplican a todo el script):</strong></p>
+<section id="recursos-de-referencia" class="level2">
+<h2 class="anchored" data-anchor-id="recursos-de-referencia">Recursos de referencia</h2>
 <ul>
-<li>El script se ejecuta de principio a fin sin errores.</li>
-<li>Nombres de variables en <code>snake_case</code>.</li>
-<li>Cada sección tiene al menos un comentario que explica el <em>por qué</em>, no solo el <em>qué</em>.</li>
-<li>Las preguntas de reflexión están respondidas como comentarios <code># R:</code>.</li>
+<li>R for Data Science — Cap. 3 (Data transformation): <a href="https://r4ds.hadley.nz/data-transform" class="uri">https://r4ds.hadley.nz/data-transform</a></li>
+<li>R for Data Science — Cap. 8 (Data import): <a href="https://r4ds.hadley.nz/data-import" class="uri">https://r4ds.hadley.nz/data-import</a></li>
+<li>Documentación de dplyr: <a href="https://dplyr.tidyverse.org/" class="uri">https://dplyr.tidyverse.org/</a></li>
+<li>Documentación de readr: <a href="https://readr.tidyverse.org/" class="uri">https://readr.tidyverse.org/</a></li>
+<li>Cheatsheet de dplyr: <a href="https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf" class="uri">https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf</a></li>
 </ul>
-<hr>
-</section>
-<section id="estructura-esperada-del-script" class="level2">
-<h2 class="anchored" data-anchor-id="estructura-esperada-del-script">Estructura esperada del script</h2>
-<pre><code># Cabecera: nombre completo, fecha, descripción del quiz
-# Bloque del dataset (copia completa del bloque proporcionado arriba)
-# Parte 1: exploración del data frame
-# Parte 2: indexación y modificación
-# Parte 3: listas
-# Parte 4: condicionales
-# Parte 5: bucles
-# Parte 6: reporte integrado
-# sessionInfo() al final</code></pre>
 <hr>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -613,32 +567,39 @@ Detalles de entrega
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<ul>
-<li><strong>Archivo:</strong> <code>quiz2_apellido_nombre.R</code> (ejemplo: <code>quiz2_fonseca_rodian.R</code>)</li>
-<li><strong>Formato:</strong> El script <code>.R</code> debe ejecutarse completo sin errores (usa <em>Session › Restart R</em> y luego ejecuta todo).</li>
-<li><strong>Plataforma:</strong> SICVI 567 — sección “Quiz Semana 2 — Lógica de programación”</li>
-<li><strong>Fecha límite:</strong> A confirmar por el docente en SICVI 567</li>
-</ul>
-<p><strong>Lista de verificación antes de subir:</strong></p>
-<ul class="task-list">
-<li><label><input type="checkbox">El bloque del dataset está copiado completo y sin modificar al inicio.</label></li>
-<li><label><input type="checkbox">Cada parte está claramente separada con comentarios de sección.</label></li>
-<li><label><input type="checkbox">Todas las preguntas de reflexión tienen respuesta <code># R:</code>.</label></li>
-<li><label><input type="checkbox"><code>sessionInfo()</code> aparece al final del script.</label></li>
-<li><label><input type="checkbox">El nombre del archivo sigue exactamente el formato indicado.</label></li>
-</ul>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 43%">
+<col style="width: 56%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Campo</th>
+<th>Detalle</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Archivo</strong></td>
+<td><code>taller4_apellido_nombre.R</code> (ej.: <code>taller4_garcia_sofia.R</code>)</td>
+</tr>
+<tr class="even">
+<td><strong>Plataforma</strong></td>
+<td>SICVI 567 — sección “Taller 4: Manipulación de datos con dplyr”</td>
+</tr>
+<tr class="odd">
+<td><strong>Fecha límite</strong></td>
+<td>A confirmar por el docente en SICVI 567</td>
+</tr>
+<tr class="even">
+<td><strong>Requisitos mínimos</strong></td>
+<td>Script que corre sin errores, todas las partes completadas, respuestas <code># R:</code> a todas las preguntas de reflexión, nombres de objetos exactamente como se indica</td>
+</tr>
+</tbody>
+</table>
+<p>El script se evaluará ejecutándolo completo en una sesión limpia. La ruta al CSV debe ser <strong>relativa</strong> (no <code>/home/usuario/...</code> ni <code>C:/Users/...</code>).</p>
 </div>
 </div>
-<hr>
-</section>
-<section id="recursos-de-apoyo" class="level2">
-<h2 class="anchored" data-anchor-id="recursos-de-apoyo">Recursos de apoyo</h2>
-<ul>
-<li>Wickham et al.&nbsp;(2023). <em>R for Data Science</em> (2ª ed.), Cap. 3 — <a href="https://r4ds.hadley.nz/" class="uri">https://r4ds.hadley.nz/</a></li>
-<li>Documentación de R base — ejecuta en consola: <code>?data.frame</code>, <code>?list</code>, <code>?for</code>, <code>?if</code>, <code>?switch</code></li>
-<li>Script de clase semana 2 — disponible en el sitio web del curso (Semanas → Semana 2 — Clase)</li>
-<li>SiB Colombia — <a href="https://sibcolombia.net/" class="uri">https://sibcolombia.net/</a> (para consultar distribución real de las especies del dataset)</li>
-</ul>
 
 
 </section>
