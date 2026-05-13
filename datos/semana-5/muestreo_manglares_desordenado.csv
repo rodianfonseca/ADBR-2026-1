@@ -1,0 +1,21 @@
+ID,Grupo_Especie,Estado UICN,Conteo.Mar2024,Conteo.Jun2024,Conteo.Sep2024,Conteo.Dic2024,Latitud_Longitud,Metodo Muestreo
+M01,Aves_Fregata magnificens,LC,8,12,NA,6,-74.9617|10.9998,Conteo en punto
+M02,Aves_Pelecanus occidentalis,LC,23,31,28,NA,-74.9561|10.9945,Conteo en punto
+M03,Aves_Ardea alba,LC,15,NA,19,13,-75.0124|10.8876,Transecto
+M04,Reptiles_Iguana iguana,LC,4,6,7,5,-75.0124|10.8876,Transecto
+M05,Aves_Egretta thula,LC,11,14,NA,9,-74.9617|10.9998,Conteo en punto
+M06,Aves_Nycticorax nycticorax,LC,9,7,10,8,-75.1412|10.5638,Transecto
+M07,Mamiferos_Cerdocyon thous,LC,2,NA,3,2,-75.1412|10.5638,Camara trampa
+M08,Reptiles_Crocodylus acutus,VU,1,1,NA,1,-75.0124|10.8876,Avistamiento
+M09,Aves_Fregata magnificens,LC,6,10,9,NA,-75.1412|10.5638,Conteo en punto
+M10,Aves_Cochlearius cochlearius,LC,3,5,4,4,-74.9617|10.9998,Transecto
+M11,Aves_Ardea alba,LC,12,NA,15,11,-75.1412|10.5638,Transecto
+M12,Mamiferos_Dasypus novemcinctus,NT,1,2,2,NA,-75.0124|10.8876,Camara trampa
+M13,Aves_Pelecanus occidentalis,LC,19,24,22,17,-74.9561|10.9945,Conteo en punto
+M14,Reptiles_Iguana iguana,LC,5,7,8,6,-74.9617|10.9998,Transecto
+M15,Aves_Egretta thula,LC,8,11,NA,7,-75.0124|10.8876,Conteo en punto
+M16,Aves_Nycticorax nycticorax,LC,7,6,8,6,-74.9561|10.9945,Transecto
+M17,Aves_Cochlearius cochlearius,LC,2,4,3,3,-75.1412|10.5638,Transecto
+M18,Reptiles_Crocodylus acutus,VU,NA,1,1,1,-74.9617|10.9998,Avistamiento
+M19,Mamiferos_Cerdocyon thous,LC,1,NA,2,1,-74.9561|10.9945,Camara trampa
+M20,Aves_Fregata magnificens,LC,10,14,12,NA,-75.0124|10.8876,Conteo en punto

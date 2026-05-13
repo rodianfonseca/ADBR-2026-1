@@ -182,6 +182,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="./semanas/semana-4-taller.html">
  <span class="dropdown-text">Semana 4 — Taller</span></a>
   </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li>
+    <a class="dropdown-item" href="./semanas/semana-5.html">
+ <span class="dropdown-text">Semana 5 — Clase</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./semanas/semana-5-taller.html">
+ <span class="dropdown-text">Semana 5 — Taller</span></a>
+  </li>  
     </ul>
   </li>
 </ul>
@@ -420,19 +429,22 @@ Tidyverse: importación con readr y manipulación con dplyr — Fauna del Atlán
 </section>
 <section id="semana-5" class="level3">
 <h3 class="anchored" data-anchor-id="semana-5">Semana 5 · 6 de mayo de 2026</h3>
-<div class="callout callout-style-simple callout-note no-icon callout-titled" style="opacity: 0.6;">
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Datos ordenados con tidyr
+Datos ordenados con tidyr — Fauna acuática del Atlántico
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><span class="text-muted small">Material disponible próximamente.</span></p>
+<p>Principios de tidy data (Wickham 2014), el operador <code>pivot_longer()</code> y <code>pivot_wider()</code> para convertir entre formatos ancho y largo, <code>separate()</code> y <code>unite()</code> para dividir o combinar columnas, y <code>drop_na()</code> / <code>replace_na()</code> / <code>fill()</code> para manejar valores ausentes. El taller trabaja con datos de monitoreo de fauna en manglares del Caribe colombiano con problemas reales de limpieza.</p>
 <div class="d-flex gap-2 flex-wrap mt-3">
-<p><a href="#" class="btn btn-success btn-sm disabled" role="button" aria-disabled="true">🌐 Ver clase en línea</a> <a href="#" class="btn btn-primary btn-sm disabled" role="button" aria-disabled="true">🌐 Ver taller en línea</a></p>
+<p><a href="semanas/semana-5.html" class="btn btn-success btn-sm">🌐 Ver clase en línea</a> <a href="semanas/semana-5-taller.html" class="btn btn-primary btn-sm">🌐 Ver guía del taller</a> <a href="datos/semana-5/muestreo_manglares_desordenado.csv" class="btn btn-outline-secondary btn-sm">⬇️ Dataset manglares (.csv)</a></p>
+</div>
+<div class="mt-3 pt-2 border-top small text-muted">
+<p><strong>Evaluación:</strong> Taller de datos ordenados (producto) · Entrega por SICVI 567: <code>taller-semana5-[apellido].R</code> + <code>[apellido]_datos_limpios.csv</code></p>
 </div>
 </div>
 </div>
@@ -1288,158 +1300,162 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a><span class="fu">### Semana 5 · 6 de mayo de 2026 {#semana-5}</span></span>
 <span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a>:::: {.callout-note icon="false" appearance="simple" style="opacity: 0.6;"}</span>
-<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a><span class="fu">## Datos ordenados con tidyr</span></span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a>::::: {.callout-tip icon="false"}</span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a><span class="fu">## Datos ordenados con tidyr — Fauna acuática del Atlántico</span></span>
 <span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Material disponible próximamente.</span><span class="co">]</span>{.text-muted .small}</span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a>Principios de tidy data (Wickham 2014), el operador <span class="in">`pivot_longer()`</span> y <span class="in">`pivot_wider()`</span> para convertir entre formatos ancho y largo, <span class="in">`separate()`</span> y <span class="in">`unite()`</span> para dividir o combinar columnas, y <span class="in">`drop_na()`</span> / <span class="in">`replace_na()`</span> / <span class="in">`fill()`</span> para manejar valores ausentes. El taller trabaja con datos de monitoreo de fauna en manglares del Caribe colombiano con problemas reales de limpieza.</span>
 <span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a>::: {.d-flex .gap-2 .flex-wrap .mt-3}</span>
-<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">🌐 Ver clase en línea</span><span class="co">](#)</span>{.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"} <span class="co">[</span><span class="ot">🌐 Ver taller en línea</span><span class="co">](#)</span>{.btn .btn-primary .btn-sm .disabled role="button" aria-disabled="true"}</span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">🌐 Ver clase en línea</span><span class="co">](semanas/semana-5.html)</span>{.btn .btn-success .btn-sm} <span class="co">[</span><span class="ot">🌐 Ver guía del taller</span><span class="co">](semanas/semana-5-taller.html)</span>{.btn .btn-primary .btn-sm} <span class="co">[</span><span class="ot">⬇️ Dataset manglares (.csv)</span><span class="co">](datos/semana-5/muestreo_manglares_desordenado.csv)</span>{.btn .btn-outline-secondary .btn-sm}</span>
 <span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a><span class="fu">### Semana 6 · 13 de mayo de 2026 {#semana-6}</span></span>
-<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a>:::: {.callout-note icon="false" appearance="simple" style="opacity: 0.6;"}</span>
-<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a><span class="fu">## Gramática de gráficos con ggplot2</span></span>
-<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Material disponible próximamente.</span><span class="co">]</span>{.text-muted .small}</span>
-<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a>::: {.d-flex .gap-2 .flex-wrap .mt-3}</span>
-<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">🌐 Ver clase en línea</span><span class="co">](#)</span>{.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"} <span class="co">[</span><span class="ot">🌐 Ver taller en línea</span><span class="co">](#)</span>{.btn .btn-primary .btn-sm .disabled role="button" aria-disabled="true"}</span>
-<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a><span class="fu">### Semana 7 · 20 de mayo de 2026 — ⭐ Proyecto: EDA {#semana-7}</span></span>
-<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a>:::: {.callout-warning icon="false" appearance="simple" style="opacity: 0.6;"}</span>
-<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a><span class="fu">## Visualización avanzada + Proyecto: Análisis Exploratorio de Datos</span></span>
-<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Material disponible próximamente.</span><span class="co">]</span>{.text-muted .small}</span>
-<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a>::: {.d-flex .gap-2 .flex-wrap .mt-3}</span>
-<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">🌐 Ver clase en línea</span><span class="co">](#)</span>{.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"} <span class="co">[</span><span class="ot">🌐 Ver taller en línea</span><span class="co">](#)</span>{.btn .btn-primary .btn-sm .disabled role="button" aria-disabled="true"}</span>
-<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a><span class="fu">## Unidad 3 — Análisis Estadístico y Modelado</span></span>
+<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a>::: {.mt-3 .pt-2 .border-top .small .text-muted}</span>
+<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a>**Evaluación:** Taller de datos ordenados (producto) · Entrega por SICVI 567: <span class="in">`taller-semana5-[apellido].R`</span> + <span class="in">`[apellido]_datos_limpios.csv`</span></span>
+<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a>:::::</span>
+<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a><span class="fu">### Semana 6 · 13 de mayo de 2026 {#semana-6}</span></span>
+<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a>:::: {.callout-note icon="false" appearance="simple" style="opacity: 0.6;"}</span>
+<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a><span class="fu">## Gramática de gráficos con ggplot2</span></span>
+<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Material disponible próximamente.</span><span class="co">]</span>{.text-muted .small}</span>
+<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a>::: {.d-flex .gap-2 .flex-wrap .mt-3}</span>
+<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">🌐 Ver clase en línea</span><span class="co">](#)</span>{.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"} <span class="co">[</span><span class="ot">🌐 Ver taller en línea</span><span class="co">](#)</span>{.btn .btn-primary .btn-sm .disabled role="button" aria-disabled="true"}</span>
+<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a><span class="fu">### Semana 7 · 20 de mayo de 2026 — ⭐ Proyecto: EDA {#semana-7}</span></span>
+<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>:::: {.callout-warning icon="false" appearance="simple" style="opacity: 0.6;"}</span>
+<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a><span class="fu">## Visualización avanzada + Proyecto: Análisis Exploratorio de Datos</span></span>
+<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Material disponible próximamente.</span><span class="co">]</span>{.text-muted .small}</span>
+<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a>::: {.d-flex .gap-2 .flex-wrap .mt-3}</span>
+<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">🌐 Ver clase en línea</span><span class="co">](#)</span>{.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"} <span class="co">[</span><span class="ot">🌐 Ver taller en línea</span><span class="co">](#)</span>{.btn .btn-primary .btn-sm .disabled role="button" aria-disabled="true"}</span>
+<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a>::::</span>
 <span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a><span class="fu">### Semana 8 · 27 de mayo de 2026 {#semana-8}</span></span>
+<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
 <span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a>:::: {.callout-caution icon="false" appearance="simple" style="opacity: 0.6;"}</span>
-<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a><span class="fu">## Inferencia estadística en R: Pruebas T, ANOVA, Chi-cuadrado</span></span>
-<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Material disponible a partir de mayo 2026.</span><span class="co">]</span>{.text-muted .small}</span>
-<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a>::: {.d-flex .gap-2 .flex-wrap .mt-3}</span>
-<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">🌐 Ver clase en línea</span><span class="co">](#)</span>{.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"} <span class="co">[</span><span class="ot">🌐 Ver taller en línea</span><span class="co">](#)</span>{.btn .btn-primary .btn-sm .disabled role="button" aria-disabled="true"}</span>
-<span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a><span class="fu">### Semana 9 · 3 de junio de 2026 {#semana-9}</span></span>
-<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a>:::: {.callout-caution icon="false" appearance="simple" style="opacity: 0.6;"}</span>
-<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a><span class="fu">## Modelos lineales y regresión simple</span></span>
-<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Material disponible a partir de mayo 2026.</span><span class="co">]</span>{.text-muted .small}</span>
-<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a>::: {.d-flex .gap-2 .flex-wrap .mt-3}</span>
-<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">🌐 Ver clase en línea</span><span class="co">](#)</span>{.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"} <span class="co">[</span><span class="ot">🌐 Ver taller en línea</span><span class="co">](#)</span>{.btn .btn-primary .btn-sm .disabled role="button" aria-disabled="true"}</span>
-<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a><span class="fu">### Semana 10 · 10 de junio de 2026 {#semana-10}</span></span>
-<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a>:::: {.callout-caution icon="false" appearance="simple" style="opacity: 0.6;"}</span>
-<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a><span class="fu">## Regresión múltiple y selección de modelos</span></span>
-<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Material disponible a partir de mayo 2026.</span><span class="co">]</span>{.text-muted .small}</span>
-<span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a>::: {.d-flex .gap-2 .flex-wrap .mt-3}</span>
-<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">🌐 Ver clase en línea</span><span class="co">](#)</span>{.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"} <span class="co">[</span><span class="ot">🌐 Ver taller en línea</span><span class="co">](#)</span>{.btn .btn-primary .btn-sm .disabled role="button" aria-disabled="true"}</span>
-<span id="cb1-187"><a href="#cb1-187" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-188"><a href="#cb1-188" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb1-189"><a href="#cb1-189" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-190"><a href="#cb1-190" aria-hidden="true" tabindex="-1"></a><span class="fu">### Semana 11 · 17 de junio de 2026 {#semana-11}</span></span>
-<span id="cb1-191"><a href="#cb1-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-192"><a href="#cb1-192" aria-hidden="true" tabindex="-1"></a>:::: {.callout-caution icon="false" appearance="simple" style="opacity: 0.6;"}</span>
-<span id="cb1-193"><a href="#cb1-193" aria-hidden="true" tabindex="-1"></a><span class="fu">## Análisis Multivariado: PCA y NMDS para datos ecológicos</span></span>
-<span id="cb1-194"><a href="#cb1-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-195"><a href="#cb1-195" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Material disponible a partir de junio 2026.</span><span class="co">]</span>{.text-muted .small}</span>
-<span id="cb1-196"><a href="#cb1-196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-197"><a href="#cb1-197" aria-hidden="true" tabindex="-1"></a>::: {.d-flex .gap-2 .flex-wrap .mt-3}</span>
-<span id="cb1-198"><a href="#cb1-198" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">🌐 Ver clase en línea</span><span class="co">](#)</span>{.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"} <span class="co">[</span><span class="ot">🌐 Ver taller en línea</span><span class="co">](#)</span>{.btn .btn-primary .btn-sm .disabled role="button" aria-disabled="true"}</span>
-<span id="cb1-199"><a href="#cb1-199" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-200"><a href="#cb1-200" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb1-201"><a href="#cb1-201" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-202"><a href="#cb1-202" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb1-203"><a href="#cb1-203" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-204"><a href="#cb1-204" aria-hidden="true" tabindex="-1"></a><span class="fu">## Unidad 4 — Análisis de Datos Biológicos Avanzado</span></span>
+<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a><span class="fu">## Unidad 3 — Análisis Estadístico y Modelado</span></span>
+<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a><span class="fu">### Semana 8 · 27 de mayo de 2026 {#semana-8}</span></span>
+<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a>:::: {.callout-caution icon="false" appearance="simple" style="opacity: 0.6;"}</span>
+<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a><span class="fu">## Inferencia estadística en R: Pruebas T, ANOVA, Chi-cuadrado</span></span>
+<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Material disponible a partir de mayo 2026.</span><span class="co">]</span>{.text-muted .small}</span>
+<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a>::: {.d-flex .gap-2 .flex-wrap .mt-3}</span>
+<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">🌐 Ver clase en línea</span><span class="co">](#)</span>{.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"} <span class="co">[</span><span class="ot">🌐 Ver taller en línea</span><span class="co">](#)</span>{.btn .btn-primary .btn-sm .disabled role="button" aria-disabled="true"}</span>
+<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a><span class="fu">### Semana 9 · 3 de junio de 2026 {#semana-9}</span></span>
+<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a>:::: {.callout-caution icon="false" appearance="simple" style="opacity: 0.6;"}</span>
+<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a><span class="fu">## Modelos lineales y regresión simple</span></span>
+<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Material disponible a partir de mayo 2026.</span><span class="co">]</span>{.text-muted .small}</span>
+<span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a>::: {.d-flex .gap-2 .flex-wrap .mt-3}</span>
+<span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">🌐 Ver clase en línea</span><span class="co">](#)</span>{.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"} <span class="co">[</span><span class="ot">🌐 Ver taller en línea</span><span class="co">](#)</span>{.btn .btn-primary .btn-sm .disabled role="button" aria-disabled="true"}</span>
+<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a><span class="fu">### Semana 10 · 10 de junio de 2026 {#semana-10}</span></span>
+<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a>:::: {.callout-caution icon="false" appearance="simple" style="opacity: 0.6;"}</span>
+<span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a><span class="fu">## Regresión múltiple y selección de modelos</span></span>
+<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-187"><a href="#cb1-187" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Material disponible a partir de mayo 2026.</span><span class="co">]</span>{.text-muted .small}</span>
+<span id="cb1-188"><a href="#cb1-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-189"><a href="#cb1-189" aria-hidden="true" tabindex="-1"></a>::: {.d-flex .gap-2 .flex-wrap .mt-3}</span>
+<span id="cb1-190"><a href="#cb1-190" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">🌐 Ver clase en línea</span><span class="co">](#)</span>{.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"} <span class="co">[</span><span class="ot">🌐 Ver taller en línea</span><span class="co">](#)</span>{.btn .btn-primary .btn-sm .disabled role="button" aria-disabled="true"}</span>
+<span id="cb1-191"><a href="#cb1-191" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-192"><a href="#cb1-192" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb1-193"><a href="#cb1-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-194"><a href="#cb1-194" aria-hidden="true" tabindex="-1"></a><span class="fu">### Semana 11 · 17 de junio de 2026 {#semana-11}</span></span>
+<span id="cb1-195"><a href="#cb1-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-196"><a href="#cb1-196" aria-hidden="true" tabindex="-1"></a>:::: {.callout-caution icon="false" appearance="simple" style="opacity: 0.6;"}</span>
+<span id="cb1-197"><a href="#cb1-197" aria-hidden="true" tabindex="-1"></a><span class="fu">## Análisis Multivariado: PCA y NMDS para datos ecológicos</span></span>
+<span id="cb1-198"><a href="#cb1-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-199"><a href="#cb1-199" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Material disponible a partir de junio 2026.</span><span class="co">]</span>{.text-muted .small}</span>
+<span id="cb1-200"><a href="#cb1-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-201"><a href="#cb1-201" aria-hidden="true" tabindex="-1"></a>::: {.d-flex .gap-2 .flex-wrap .mt-3}</span>
+<span id="cb1-202"><a href="#cb1-202" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">🌐 Ver clase en línea</span><span class="co">](#)</span>{.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"} <span class="co">[</span><span class="ot">🌐 Ver taller en línea</span><span class="co">](#)</span>{.btn .btn-primary .btn-sm .disabled role="button" aria-disabled="true"}</span>
+<span id="cb1-203"><a href="#cb1-203" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-204"><a href="#cb1-204" aria-hidden="true" tabindex="-1"></a>::::</span>
 <span id="cb1-205"><a href="#cb1-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-206"><a href="#cb1-206" aria-hidden="true" tabindex="-1"></a><span class="fu">### Semana 12 · 24 de junio de 2026 {#semana-12}</span></span>
+<span id="cb1-206"><a href="#cb1-206" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
 <span id="cb1-207"><a href="#cb1-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-208"><a href="#cb1-208" aria-hidden="true" tabindex="-1"></a>:::: {.callout-important icon="false" appearance="simple" style="opacity: 0.6;"}</span>
-<span id="cb1-209"><a href="#cb1-209" aria-hidden="true" tabindex="-1"></a><span class="fu">## Modelos Lineales Generalizados: GLM Poisson</span></span>
-<span id="cb1-210"><a href="#cb1-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-211"><a href="#cb1-211" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Material disponible a partir de junio 2026.</span><span class="co">]</span>{.text-muted .small}</span>
-<span id="cb1-212"><a href="#cb1-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-213"><a href="#cb1-213" aria-hidden="true" tabindex="-1"></a>::: {.d-flex .gap-2 .flex-wrap .mt-3}</span>
-<span id="cb1-214"><a href="#cb1-214" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">🌐 Ver clase en línea</span><span class="co">](#)</span>{.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"} <span class="co">[</span><span class="ot">🌐 Ver taller en línea</span><span class="co">](#)</span>{.btn .btn-primary .btn-sm .disabled role="button" aria-disabled="true"}</span>
-<span id="cb1-215"><a href="#cb1-215" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-216"><a href="#cb1-216" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb1-217"><a href="#cb1-217" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-218"><a href="#cb1-218" aria-hidden="true" tabindex="-1"></a><span class="fu">### Semana 13 · 1 de julio de 2026 {#semana-13}</span></span>
-<span id="cb1-219"><a href="#cb1-219" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-220"><a href="#cb1-220" aria-hidden="true" tabindex="-1"></a>:::: {.callout-important icon="false" appearance="simple" style="opacity: 0.6;"}</span>
-<span id="cb1-221"><a href="#cb1-221" aria-hidden="true" tabindex="-1"></a><span class="fu">## Modelos Lineales Generalizados: GLM Binomial</span></span>
-<span id="cb1-222"><a href="#cb1-222" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-223"><a href="#cb1-223" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Material disponible a partir de junio 2026.</span><span class="co">]</span>{.text-muted .small}</span>
-<span id="cb1-224"><a href="#cb1-224" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-225"><a href="#cb1-225" aria-hidden="true" tabindex="-1"></a>::: {.d-flex .gap-2 .flex-wrap .mt-3}</span>
-<span id="cb1-226"><a href="#cb1-226" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">🌐 Ver clase en línea</span><span class="co">](#)</span>{.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"} <span class="co">[</span><span class="ot">🌐 Ver taller en línea</span><span class="co">](#)</span>{.btn .btn-primary .btn-sm .disabled role="button" aria-disabled="true"}</span>
-<span id="cb1-227"><a href="#cb1-227" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-228"><a href="#cb1-228" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb1-229"><a href="#cb1-229" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-230"><a href="#cb1-230" aria-hidden="true" tabindex="-1"></a><span class="fu">### Semana 14 · 8 de julio de 2026 {#semana-14}</span></span>
-<span id="cb1-231"><a href="#cb1-231" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-232"><a href="#cb1-232" aria-hidden="true" tabindex="-1"></a>:::: {.callout-important icon="false" appearance="simple" style="opacity: 0.6;"}</span>
-<span id="cb1-233"><a href="#cb1-233" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introducción a Modelos Mixtos (LMM/GLMM)</span></span>
-<span id="cb1-234"><a href="#cb1-234" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-235"><a href="#cb1-235" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Material disponible a partir de julio 2026.</span><span class="co">]</span>{.text-muted .small}</span>
-<span id="cb1-236"><a href="#cb1-236" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-237"><a href="#cb1-237" aria-hidden="true" tabindex="-1"></a>::: {.d-flex .gap-2 .flex-wrap .mt-3}</span>
-<span id="cb1-238"><a href="#cb1-238" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">🌐 Ver clase en línea</span><span class="co">](#)</span>{.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"} <span class="co">[</span><span class="ot">🌐 Ver taller en línea</span><span class="co">](#)</span>{.btn .btn-primary .btn-sm .disabled role="button" aria-disabled="true"}</span>
-<span id="cb1-239"><a href="#cb1-239" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-240"><a href="#cb1-240" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb1-241"><a href="#cb1-241" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-242"><a href="#cb1-242" aria-hidden="true" tabindex="-1"></a><span class="fu">### Semana 15 · 15 de julio de 2026 — 🎯 Proyecto Final {#semana-15}</span></span>
-<span id="cb1-243"><a href="#cb1-243" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-244"><a href="#cb1-244" aria-hidden="true" tabindex="-1"></a>:::: {.callout-important icon="false" appearance="simple" style="opacity: 0.6;"}</span>
-<span id="cb1-245"><a href="#cb1-245" aria-hidden="true" tabindex="-1"></a><span class="fu">## Casos de estudio y sustentación de proyectos finales</span></span>
-<span id="cb1-246"><a href="#cb1-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-247"><a href="#cb1-247" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Material disponible a partir de julio 2026.</span><span class="co">]</span>{.text-muted .small}</span>
-<span id="cb1-248"><a href="#cb1-248" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-249"><a href="#cb1-249" aria-hidden="true" tabindex="-1"></a>::: {.d-flex .gap-2 .flex-wrap .mt-3}</span>
-<span id="cb1-250"><a href="#cb1-250" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">🌐 Ver clase en línea</span><span class="co">](#)</span>{.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"}</span>
-<span id="cb1-251"><a href="#cb1-251" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-252"><a href="#cb1-252" aria-hidden="true" tabindex="-1"></a>::::</span>
-<span id="cb1-253"><a href="#cb1-253" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-254"><a href="#cb1-254" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb1-255"><a href="#cb1-255" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-256"><a href="#cb1-256" aria-hidden="true" tabindex="-1"></a><span class="fu">## Bibliografía y recursos de consulta</span></span>
+<span id="cb1-208"><a href="#cb1-208" aria-hidden="true" tabindex="-1"></a><span class="fu">## Unidad 4 — Análisis de Datos Biológicos Avanzado</span></span>
+<span id="cb1-209"><a href="#cb1-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-210"><a href="#cb1-210" aria-hidden="true" tabindex="-1"></a><span class="fu">### Semana 12 · 24 de junio de 2026 {#semana-12}</span></span>
+<span id="cb1-211"><a href="#cb1-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-212"><a href="#cb1-212" aria-hidden="true" tabindex="-1"></a>:::: {.callout-important icon="false" appearance="simple" style="opacity: 0.6;"}</span>
+<span id="cb1-213"><a href="#cb1-213" aria-hidden="true" tabindex="-1"></a><span class="fu">## Modelos Lineales Generalizados: GLM Poisson</span></span>
+<span id="cb1-214"><a href="#cb1-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-215"><a href="#cb1-215" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Material disponible a partir de junio 2026.</span><span class="co">]</span>{.text-muted .small}</span>
+<span id="cb1-216"><a href="#cb1-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-217"><a href="#cb1-217" aria-hidden="true" tabindex="-1"></a>::: {.d-flex .gap-2 .flex-wrap .mt-3}</span>
+<span id="cb1-218"><a href="#cb1-218" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">🌐 Ver clase en línea</span><span class="co">](#)</span>{.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"} <span class="co">[</span><span class="ot">🌐 Ver taller en línea</span><span class="co">](#)</span>{.btn .btn-primary .btn-sm .disabled role="button" aria-disabled="true"}</span>
+<span id="cb1-219"><a href="#cb1-219" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-220"><a href="#cb1-220" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb1-221"><a href="#cb1-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-222"><a href="#cb1-222" aria-hidden="true" tabindex="-1"></a><span class="fu">### Semana 13 · 1 de julio de 2026 {#semana-13}</span></span>
+<span id="cb1-223"><a href="#cb1-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-224"><a href="#cb1-224" aria-hidden="true" tabindex="-1"></a>:::: {.callout-important icon="false" appearance="simple" style="opacity: 0.6;"}</span>
+<span id="cb1-225"><a href="#cb1-225" aria-hidden="true" tabindex="-1"></a><span class="fu">## Modelos Lineales Generalizados: GLM Binomial</span></span>
+<span id="cb1-226"><a href="#cb1-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-227"><a href="#cb1-227" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Material disponible a partir de junio 2026.</span><span class="co">]</span>{.text-muted .small}</span>
+<span id="cb1-228"><a href="#cb1-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-229"><a href="#cb1-229" aria-hidden="true" tabindex="-1"></a>::: {.d-flex .gap-2 .flex-wrap .mt-3}</span>
+<span id="cb1-230"><a href="#cb1-230" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">🌐 Ver clase en línea</span><span class="co">](#)</span>{.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"} <span class="co">[</span><span class="ot">🌐 Ver taller en línea</span><span class="co">](#)</span>{.btn .btn-primary .btn-sm .disabled role="button" aria-disabled="true"}</span>
+<span id="cb1-231"><a href="#cb1-231" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-232"><a href="#cb1-232" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb1-233"><a href="#cb1-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-234"><a href="#cb1-234" aria-hidden="true" tabindex="-1"></a><span class="fu">### Semana 14 · 8 de julio de 2026 {#semana-14}</span></span>
+<span id="cb1-235"><a href="#cb1-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-236"><a href="#cb1-236" aria-hidden="true" tabindex="-1"></a>:::: {.callout-important icon="false" appearance="simple" style="opacity: 0.6;"}</span>
+<span id="cb1-237"><a href="#cb1-237" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introducción a Modelos Mixtos (LMM/GLMM)</span></span>
+<span id="cb1-238"><a href="#cb1-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-239"><a href="#cb1-239" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Material disponible a partir de julio 2026.</span><span class="co">]</span>{.text-muted .small}</span>
+<span id="cb1-240"><a href="#cb1-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-241"><a href="#cb1-241" aria-hidden="true" tabindex="-1"></a>::: {.d-flex .gap-2 .flex-wrap .mt-3}</span>
+<span id="cb1-242"><a href="#cb1-242" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">🌐 Ver clase en línea</span><span class="co">](#)</span>{.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"} <span class="co">[</span><span class="ot">🌐 Ver taller en línea</span><span class="co">](#)</span>{.btn .btn-primary .btn-sm .disabled role="button" aria-disabled="true"}</span>
+<span id="cb1-243"><a href="#cb1-243" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-244"><a href="#cb1-244" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb1-245"><a href="#cb1-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-246"><a href="#cb1-246" aria-hidden="true" tabindex="-1"></a><span class="fu">### Semana 15 · 15 de julio de 2026 — 🎯 Proyecto Final {#semana-15}</span></span>
+<span id="cb1-247"><a href="#cb1-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-248"><a href="#cb1-248" aria-hidden="true" tabindex="-1"></a>:::: {.callout-important icon="false" appearance="simple" style="opacity: 0.6;"}</span>
+<span id="cb1-249"><a href="#cb1-249" aria-hidden="true" tabindex="-1"></a><span class="fu">## Casos de estudio y sustentación de proyectos finales</span></span>
+<span id="cb1-250"><a href="#cb1-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-251"><a href="#cb1-251" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Material disponible a partir de julio 2026.</span><span class="co">]</span>{.text-muted .small}</span>
+<span id="cb1-252"><a href="#cb1-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-253"><a href="#cb1-253" aria-hidden="true" tabindex="-1"></a>::: {.d-flex .gap-2 .flex-wrap .mt-3}</span>
+<span id="cb1-254"><a href="#cb1-254" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">🌐 Ver clase en línea</span><span class="co">](#)</span>{.btn .btn-success .btn-sm .disabled role="button" aria-disabled="true"}</span>
+<span id="cb1-255"><a href="#cb1-255" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-256"><a href="#cb1-256" aria-hidden="true" tabindex="-1"></a>::::</span>
 <span id="cb1-257"><a href="#cb1-257" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-258"><a href="#cb1-258" aria-hidden="true" tabindex="-1"></a>| Recurso | Tipo | Enlace |</span>
-<span id="cb1-259"><a href="#cb1-259" aria-hidden="true" tabindex="-1"></a>|----|----|----|</span>
-<span id="cb1-260"><a href="#cb1-260" aria-hidden="true" tabindex="-1"></a>| R for Data Science (2ª ed.) | Libro principal | <span class="co">[</span><span class="ot">r4ds.hadley.nz</span><span class="co">](https://r4ds.hadley.nz/)</span> |</span>
-<span id="cb1-261"><a href="#cb1-261" aria-hidden="true" tabindex="-1"></a>| ggplot2: Elegant Graphics | Visualización | <span class="co">[</span><span class="ot">ggplot2-book.org</span><span class="co">](https://ggplot2-book.org/)</span> |</span>
-<span id="cb1-262"><a href="#cb1-262" aria-hidden="true" tabindex="-1"></a>| R Graphics Cookbook | Recetas gráficas | <span class="co">[</span><span class="ot">r-graphics.org</span><span class="co">](https://r-graphics.org/)</span> |</span>
-<span id="cb1-263"><a href="#cb1-263" aria-hidden="true" tabindex="-1"></a>| Modern Statistics for Modern Biology | Estadística biológica | <span class="co">[</span><span class="ot">huber.embl.de/msmb</span><span class="co">](https://www.huber.embl.de/msmb/)</span> |</span>
-<span id="cb1-264"><a href="#cb1-264" aria-hidden="true" tabindex="-1"></a>| Documentación Quarto | Reportes reproducibles | <span class="co">[</span><span class="ot">quarto.org</span><span class="co">](https://quarto.org/)</span> |</span>
-<span id="cb1-265"><a href="#cb1-265" aria-hidden="true" tabindex="-1"></a>| GBIF Colombia | Datos de biodiversidad | <span class="co">[</span><span class="ot">gbif.org</span><span class="co">](https://www.gbif.org/)</span> |</span>
-<span id="cb1-266"><a href="#cb1-266" aria-hidden="true" tabindex="-1"></a>| SiB Colombia | Biodiversidad nacional | <span class="co">[</span><span class="ot">biodiversidad.co</span><span class="co">](https://biodiversidad.co/)</span> |</span>
-<span id="cb1-267"><a href="#cb1-267" aria-hidden="true" tabindex="-1"></a>| Paquetes de R (CRAN) | Referencia de funciones | <span class="co">[</span><span class="ot">rdocumentation.org</span><span class="co">](https://www.rdocumentation.org/)</span> |</span></code><button title="Copiar al portapapeles" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb1-258"><a href="#cb1-258" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb1-259"><a href="#cb1-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-260"><a href="#cb1-260" aria-hidden="true" tabindex="-1"></a><span class="fu">## Bibliografía y recursos de consulta</span></span>
+<span id="cb1-261"><a href="#cb1-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-262"><a href="#cb1-262" aria-hidden="true" tabindex="-1"></a>| Recurso | Tipo | Enlace |</span>
+<span id="cb1-263"><a href="#cb1-263" aria-hidden="true" tabindex="-1"></a>|----|----|----|</span>
+<span id="cb1-264"><a href="#cb1-264" aria-hidden="true" tabindex="-1"></a>| R for Data Science (2ª ed.) | Libro principal | <span class="co">[</span><span class="ot">r4ds.hadley.nz</span><span class="co">](https://r4ds.hadley.nz/)</span> |</span>
+<span id="cb1-265"><a href="#cb1-265" aria-hidden="true" tabindex="-1"></a>| ggplot2: Elegant Graphics | Visualización | <span class="co">[</span><span class="ot">ggplot2-book.org</span><span class="co">](https://ggplot2-book.org/)</span> |</span>
+<span id="cb1-266"><a href="#cb1-266" aria-hidden="true" tabindex="-1"></a>| R Graphics Cookbook | Recetas gráficas | <span class="co">[</span><span class="ot">r-graphics.org</span><span class="co">](https://r-graphics.org/)</span> |</span>
+<span id="cb1-267"><a href="#cb1-267" aria-hidden="true" tabindex="-1"></a>| Modern Statistics for Modern Biology | Estadística biológica | <span class="co">[</span><span class="ot">huber.embl.de/msmb</span><span class="co">](https://www.huber.embl.de/msmb/)</span> |</span>
+<span id="cb1-268"><a href="#cb1-268" aria-hidden="true" tabindex="-1"></a>| Documentación Quarto | Reportes reproducibles | <span class="co">[</span><span class="ot">quarto.org</span><span class="co">](https://quarto.org/)</span> |</span>
+<span id="cb1-269"><a href="#cb1-269" aria-hidden="true" tabindex="-1"></a>| GBIF Colombia | Datos de biodiversidad | <span class="co">[</span><span class="ot">gbif.org</span><span class="co">](https://www.gbif.org/)</span> |</span>
+<span id="cb1-270"><a href="#cb1-270" aria-hidden="true" tabindex="-1"></a>| SiB Colombia | Biodiversidad nacional | <span class="co">[</span><span class="ot">biodiversidad.co</span><span class="co">](https://biodiversidad.co/)</span> |</span>
+<span id="cb1-271"><a href="#cb1-271" aria-hidden="true" tabindex="-1"></a>| Paquetes de R (CRAN) | Referencia de funciones | <span class="co">[</span><span class="ot">rdocumentation.org</span><span class="co">](https://www.rdocumentation.org/)</span> |</span></code><button title="Copiar al portapapeles" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

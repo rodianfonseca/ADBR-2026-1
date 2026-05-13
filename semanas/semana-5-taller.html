@@ -8,7 +8,7 @@
 
 <meta name="author" content="Curso 20953 · Análisis de Datos Biológicos bajo R">
 
-<title>Taller Semana 1 — Tipos de datos y vectores en R – Análisis de Datos Biológicos en R</title>
+<title>Taller Semana 5 — Datos ordenados con tidyr – Análisis de Datos Biológicos en R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -105,8 +105,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="../styles.css">
-<meta property="og:title" content="Taller Semana 1 — Tipos de datos y vectores en R – Análisis de Datos Biológicos en R">
-<meta property="og:description" content="Datos climatológicos de municipios del departamento del Atlántico">
+<meta property="og:title" content="Taller Semana 5 — Datos ordenados con tidyr – Análisis de Datos Biológicos en R">
+<meta property="og:description" content="Transformación de datos de monitoreo de manglares del Caribe colombiano">
 <meta property="og:site_name" content="Análisis de Datos Biológicos en R">
 </head>
 
@@ -212,24 +212,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#objetivos-del-taller" id="toc-objetivos-del-taller" class="nav-link active" data-scroll-target="#objetivos-del-taller">Objetivos del taller</a></li>
   <li><a href="#contexto-biológico" id="toc-contexto-biológico" class="nav-link" data-scroll-target="#contexto-biológico">Contexto biológico</a></li>
-  <li><a href="#dataset" id="toc-dataset" class="nav-link" data-scroll-target="#dataset">Dataset</a></li>
-  <li><a href="#parte-1-tipos-de-datos-y-exploración-inicial-estimado-25-minutos" id="toc-parte-1-tipos-de-datos-y-exploración-inicial-estimado-25-minutos" class="nav-link" data-scroll-target="#parte-1-tipos-de-datos-y-exploración-inicial-estimado-25-minutos">Parte 1: Tipos de datos y exploración inicial (estimado: 25 minutos)</a>
+  <li><a href="#dataset" id="toc-dataset" class="nav-link" data-scroll-target="#dataset">Dataset</a>
   <ul class="collapse">
-  <li><a href="#verifica-los-tipos-de-datos" id="toc-verifica-los-tipos-de-datos" class="nav-link" data-scroll-target="#verifica-los-tipos-de-datos">1.1 Verifica los tipos de datos</a></li>
-  <li><a href="#estadísticas-de-resumen" id="toc-estadísticas-de-resumen" class="nav-link" data-scroll-target="#estadísticas-de-resumen">1.2 Estadísticas de resumen</a></li>
+  <li><a href="#descripción-del-dataset-original-desordenado" id="toc-descripción-del-dataset-original-desordenado" class="nav-link" data-scroll-target="#descripción-del-dataset-original-desordenado">Descripción del dataset original (desordenado)</a></li>
+  <li><a href="#bloque-de-carga" id="toc-bloque-de-carga" class="nav-link" data-scroll-target="#bloque-de-carga">Bloque de carga</a></li>
   </ul></li>
-  <li><a href="#parte-2-indexación-y-operaciones-vectorizadas-estimado-30-minutos" id="toc-parte-2-indexación-y-operaciones-vectorizadas-estimado-30-minutos" class="nav-link" data-scroll-target="#parte-2-indexación-y-operaciones-vectorizadas-estimado-30-minutos">Parte 2: Indexación y operaciones vectorizadas (estimado: 30 minutos)</a>
+  <li><a href="#estructura-del-script-a-entregar" id="toc-estructura-del-script-a-entregar" class="nav-link" data-scroll-target="#estructura-del-script-a-entregar">Estructura del script a entregar</a></li>
+  <li><a href="#parte-1-diagnóstico-del-dataset" id="toc-parte-1-diagnóstico-del-dataset" class="nav-link" data-scroll-target="#parte-1-diagnóstico-del-dataset">Parte 1 — Diagnóstico del dataset</a></li>
+  <li><a href="#parte-2-renombrar-columnas" id="toc-parte-2-renombrar-columnas" class="nav-link" data-scroll-target="#parte-2-renombrar-columnas">Parte 2 — Renombrar columnas</a></li>
+  <li><a href="#parte-3-pivotar-de-formato-ancho-a-largo" id="toc-parte-3-pivotar-de-formato-ancho-a-largo" class="nav-link" data-scroll-target="#parte-3-pivotar-de-formato-ancho-a-largo">Parte 3 — Pivotar de formato ancho a largo</a></li>
+  <li><a href="#parte-4-separar-columnas-mixtas" id="toc-parte-4-separar-columnas-mixtas" class="nav-link" data-scroll-target="#parte-4-separar-columnas-mixtas">Parte 4 — Separar columnas mixtas</a>
   <ul class="collapse">
-  <li><a href="#acceso-por-posición-y-nombre" id="toc-acceso-por-posición-y-nombre" class="nav-link" data-scroll-target="#acceso-por-posición-y-nombre">2.1 Acceso por posición y nombre</a></li>
-  <li><a href="#filtros-lógicos-vectorizados" id="toc-filtros-lógicos-vectorizados" class="nav-link" data-scroll-target="#filtros-lógicos-vectorizados">2.2 Filtros lógicos vectorizados</a></li>
-  <li><a href="#operaciones-vectorizadas" id="toc-operaciones-vectorizadas" class="nav-link" data-scroll-target="#operaciones-vectorizadas">2.3 Operaciones vectorizadas</a></li>
+  <li><a href="#parte-4a-separar-grupo_especie" id="toc-parte-4a-separar-grupo_especie" class="nav-link" data-scroll-target="#parte-4a-separar-grupo_especie">Parte 4a — Separar <code>grupo_especie</code></a></li>
+  <li><a href="#parte-4b-separar-latitud_longitud" id="toc-parte-4b-separar-latitud_longitud" class="nav-link" data-scroll-target="#parte-4b-separar-latitud_longitud">Parte 4b — Separar <code>latitud_longitud</code></a></li>
   </ul></li>
-  <li><a href="#parte-3-visualización-con-r-base-estimado-35-minutos" id="toc-parte-3-visualización-con-r-base-estimado-35-minutos" class="nav-link" data-scroll-target="#parte-3-visualización-con-r-base-estimado-35-minutos">Parte 3: Visualización con R base (estimado: 35 minutos)</a>
+  <li><a href="#parte-5-manejo-de-valores-na" id="toc-parte-5-manejo-de-valores-na" class="nav-link" data-scroll-target="#parte-5-manejo-de-valores-na">Parte 5 — Manejo de valores NA</a></li>
+  <li><a href="#parte-6-verificar-tipos-de-datos-y-exportar" id="toc-parte-6-verificar-tipos-de-datos-y-exportar" class="nav-link" data-scroll-target="#parte-6-verificar-tipos-de-datos-y-exportar">Parte 6 — Verificar tipos de datos y exportar</a>
   <ul class="collapse">
-  <li><a href="#gráfico-de-barras-precipitación-mensual" id="toc-gráfico-de-barras-precipitación-mensual" class="nav-link" data-scroll-target="#gráfico-de-barras-precipitación-mensual">3.1 Gráfico de barras — precipitación mensual</a></li>
-  <li><a href="#gráfico-de-línea-temperatura-máxima-mensual" id="toc-gráfico-de-línea-temperatura-máxima-mensual" class="nav-link" data-scroll-target="#gráfico-de-línea-temperatura-máxima-mensual">3.2 Gráfico de línea — temperatura máxima mensual</a></li>
-  <li><a href="#climograma-simplificado-desafío" id="toc-climograma-simplificado-desafío" class="nav-link" data-scroll-target="#climograma-simplificado-desafío">3.3 Climograma simplificado <em>(desafío)</em></a></li>
+  <li><a href="#lista-de-verificación-antes-de-entregar" id="toc-lista-de-verificación-antes-de-entregar" class="nav-link" data-scroll-target="#lista-de-verificación-antes-de-entregar">Lista de verificación antes de entregar</a></li>
   </ul></li>
+  <li><a href="#estructura-esperada-del-dataset-limpio" id="toc-estructura-esperada-del-dataset-limpio" class="nav-link" data-scroll-target="#estructura-esperada-del-dataset-limpio">Estructura esperada del dataset limpio</a></li>
+  <li><a href="#errores-frecuentes" id="toc-errores-frecuentes" class="nav-link" data-scroll-target="#errores-frecuentes">Errores frecuentes</a></li>
+  <li><a href="#recursos-de-referencia" id="toc-recursos-de-referencia" class="nav-link" data-scroll-target="#recursos-de-referencia">Recursos de referencia</a></li>
   </ul>
 </nav>
     </div>
@@ -238,8 +242,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Taller Semana 1 — Tipos de datos y vectores en R</h1>
-<p class="subtitle lead">Datos climatológicos de municipios del departamento del Atlántico</p>
+<h1 class="title">Taller Semana 5 — Datos ordenados con tidyr</h1>
+<p class="subtitle lead">Transformación de datos de monitoreo de manglares del Caribe colombiano</p>
 </div>
 
 
@@ -256,7 +260,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Fecha de publicación</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">8 de abril de 2026</p>
+      <p class="date">6 de mayo de 2026</p>
     </div>
   </div>
   
@@ -274,169 +278,364 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-body-container">
-<p><strong>Tipo de evidencia:</strong> Desempeño · <strong>Entregable:</strong> <code>taller1_apellido_nombre.R</code> · <strong>Plataforma:</strong> SICVI 567 — actividad “Taller 1”</p>
+<p><strong>Tipo de evidencia:</strong> Producto · <strong>Entregables:</strong> <code>taller-semana5-[apellido].R</code> + <code>[apellido]_datos_limpios.csv</code> · <strong>Plataforma:</strong> SICVI 567 — “Taller Semana 5: Datos ordenados”</p>
 </div>
 </div>
 </div>
 <section id="objetivos-del-taller" class="level2">
 <h2 class="anchored" data-anchor-id="objetivos-del-taller">Objetivos del taller</h2>
 <ol type="1">
-<li>Aplicar los cinco tipos de datos fundamentales de R (<code>numeric</code>, <code>integer</code>, <code>character</code>, <code>logical</code>, <code>factor</code>) en un contexto climático real del Atlántico.</li>
-<li>Construir vectores con datos de temperatura y precipitación, asignarles nombres y acceder a elementos por posición y nombre.</li>
-<li>Usar operaciones vectorizadas para responder preguntas ambientales concretas.</li>
-<li>Producir gráficas exploratorias con R base e interpretarlas en clave biológica.</li>
+<li>Identificar las violaciones a los principios de tidy data en un dataset de monitoreo biológico real.</li>
+<li>Aplicar <code>pivot_longer()</code> para convertir formato ancho a largo con separación automática de variables compuestas.</li>
+<li>Usar <code>separate()</code> o <code>separate_wider_delim()</code> para dividir columnas con múltiples variables.</li>
+<li>Tomar una decisión justificada sobre el manejo de valores NA con <code>drop_na()</code>, <code>replace_na()</code> o <code>fill()</code>.</li>
+<li>Corregir tipos de datos y nombres de columna para cumplir el estándar snake_case.</li>
+<li>Exportar el dataset limpio con <code>write_csv()</code> y verificar que el script es reproducible.</li>
 </ol>
 <hr>
 </section>
 <section id="contexto-biológico" class="level2">
 <h2 class="anchored" data-anchor-id="contexto-biológico">Contexto biológico</h2>
-<p>El departamento del Atlántico presenta uno de los regímenes climáticos más particulares de Colombia: una marcada estacionalidad con dos periodos de lluvia (abril–mayo y agosto–noviembre) separados por el llamado “veranillo de San Juan” en julio, consecuencia de la migración de la Zona de Convergencia Intertropical (ZCIT). Esta variabilidad estacional controla directamente la disponibilidad de agua, la floración de plantas nativas y los ciclos reproductivos de aves acuáticas en ciénagas como las del Canal del Dique y la Ciénaga Grande de Santa Marta.</p>
-<p>Comprender ese patrón climático desde datos históricos es el primer paso para conectar el clima con la biología de las especies de la región. En este taller trabajarás con registros de la estación <strong>Repelón</strong> (sur del Atlántico, municipio lacustre sobre el embalse del Guájaro), un ambiente diferente al costero de Barranquilla visto en clase.</p>
+<p>Los ecosistemas de manglar del Caribe colombiano constituyen una de las franjas costeras más biodiversas del país. Presentes en la desembocadura del río Magdalena, en el Parque Isla Salamanca y en franjas costeras de los departamentos de Atlántico y Bolívar, los manglares ofrecen refugio, alimento y sitios de reproducción para aves acuáticas, reptiles y mamíferos.</p>
+<p>Los programas de monitoreo de fauna en manglares suelen registrar conteos de individuos por especie en visitas trimestrales. Sin embargo, la forma en que estos datos se ingresan en campo —a menudo en hojas de cálculo pensadas para facilitar la digitación, no el análisis— resulta en datasets que no cumplen los principios de tidy data.</p>
+<p>En este taller trabajarás con un dataset simulado de un programa de monitoreo en cuatro sitios de manglar del Caribe colombiano, registrado durante cuatro trimestres de 2024. Tu tarea es transformar ese dataset desordenado en un dataset tidy, limpio y listo para análisis estadístico.</p>
 <hr>
 </section>
 <section id="dataset" class="level2">
 <h2 class="anchored" data-anchor-id="dataset">Dataset</h2>
-<p>El dataset ya está incluido en el script descargable. Ejecútalo completo para cargar los objetos en tu entorno antes de comenzar las actividades.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>meses <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"ene"</span>, <span class="st">"feb"</span>, <span class="st">"mar"</span>, <span class="st">"abr"</span>, <span class="st">"may"</span>, <span class="st">"jun"</span>,</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>           <span class="st">"jul"</span>, <span class="st">"ago"</span>, <span class="st">"sep"</span>, <span class="st">"oct"</span>, <span class="st">"nov"</span>, <span class="st">"dic"</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Temperatura máxima mensual en Repelón (°C) — IDEAM</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>temp_max_repelón <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">35.2</span>, <span class="fl">35.8</span>, <span class="fl">36.4</span>, <span class="fl">34.7</span>, <span class="fl">33.1</span>, <span class="fl">34.0</span>,</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                      <span class="fl">35.5</span>, <span class="fl">33.8</span>, <span class="fl">32.6</span>, <span class="fl">32.1</span>, <span class="fl">32.9</span>, <span class="fl">34.6</span>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Precipitación mensual promedio en Repelón (mm) — IDEAM</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>precip_repelón <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">4.2</span>, <span class="fl">1.5</span>, <span class="fl">2.8</span>, <span class="fl">45.6</span>, <span class="fl">112.3</span>, <span class="fl">98.7</span>,</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                    <span class="fl">60.4</span>, <span class="fl">125.1</span>, <span class="fl">198.6</span>, <span class="fl">165.3</span>, <span class="fl">72.1</span>, <span class="fl">11.4</span>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(temp_max_repelón) <span class="ot">&lt;-</span> meses</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(precip_repelón)   <span class="ot">&lt;-</span> meses</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<p>Descarga <code>muestreo_manglares_desordenado.csv</code> desde el <a href="../material.html#semana-5">Material del curso</a> y guárdalo en tu carpeta de trabajo.</p>
+<section id="descripción-del-dataset-original-desordenado" class="level3">
+<h3 class="anchored" data-anchor-id="descripción-del-dataset-original-desordenado">Descripción del dataset original (desordenado)</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 38%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Columna original</th>
+<th>Problema de tidy data</th>
+<th>Solución esperada</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>ID</code></td>
+<td>Nombre no descriptivo, mayúscula</td>
+<td>Renombrar a <code>id_registro</code></td>
+</tr>
+<tr class="even">
+<td><code>Grupo_Especie</code></td>
+<td>Dos variables en una celda (grupo + especie)</td>
+<td>Separar en <code>grupo</code> y <code>especie</code></td>
+</tr>
+<tr class="odd">
+<td><code>Estado UICN</code></td>
+<td>Nombre con espacio</td>
+<td>Renombrar a <code>estado_uicn</code></td>
+</tr>
+<tr class="even">
+<td><code>Conteo.Mar2024</code></td>
+<td>Variable (mes) escondida en el nombre de columna</td>
+<td>Pivotar: columnas <code>mes</code> + <code>n_individuos</code></td>
+</tr>
+<tr class="odd">
+<td><code>Conteo.Jun2024</code></td>
+<td>Ídem</td>
+<td>Ídem</td>
+</tr>
+<tr class="even">
+<td><code>Conteo.Sep2024</code></td>
+<td>Ídem</td>
+<td>Ídem</td>
+</tr>
+<tr class="odd">
+<td><code>Conteo.Dic2024</code></td>
+<td>Ídem</td>
+<td>Ídem</td>
+</tr>
+<tr class="even">
+<td><code>Latitud_Longitud</code></td>
+<td>Dos variables en una celda separadas por <code>\|</code></td>
+<td>Separar en <code>latitud</code> y <code>longitud</code></td>
+</tr>
+<tr class="odd">
+<td><code>Metodo Muestreo</code></td>
+<td>Nombre con espacio</td>
+<td>Renombrar a <code>metodo_muestreo</code></td>
+</tr>
+</tbody>
+</table>
+<p>El dataset tiene además NAs en algunas columnas de conteo que deben tratarse explícitamente.</p>
+</section>
+<section id="bloque-de-carga" class="level3">
+<h3 class="anchored" data-anchor-id="bloque-de-carga">Bloque de carga</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>manglares <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"muestreo_manglares_desordenado.csv"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(manglares)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <hr>
 </section>
-<section id="parte-1-tipos-de-datos-y-exploración-inicial-estimado-25-minutos" class="level2">
-<h2 class="anchored" data-anchor-id="parte-1-tipos-de-datos-y-exploración-inicial-estimado-25-minutos">Parte 1: Tipos de datos y exploración inicial (estimado: 25 minutos)</h2>
-<p>Trabaja en tu script <code>.R</code> descargable. Esta guía describe qué hacer en cada paso; el script tiene los espacios (<code>___</code>) donde escribir tu código.</p>
-<section id="verifica-los-tipos-de-datos" class="level3">
-<h3 class="anchored" data-anchor-id="verifica-los-tipos-de-datos">1.1 Verifica los tipos de datos</h3>
-<p>Usa <code>class()</code>, <code>is.numeric()</code> e <code>is.character()</code> para explorar los vectores del dataset. Luego crea tres objetos adicionales que ilustren los tipos <code>integer</code>, <code>logical</code> y <code>factor</code>:</p>
+</section>
+<section id="estructura-del-script-a-entregar" class="level2">
+<h2 class="anchored" data-anchor-id="estructura-del-script-a-entregar">Estructura del script a entregar</h2>
+<pre><code># Cabecera: nombre completo, fecha, descripción del taller
+# library(readr); library(dplyr); library(tidyr)
+# Parte 1: Diagnóstico del dataset
+# Parte 2: Renombrar columnas
+# Parte 3: Pivotar de formato ancho a largo
+# Parte 4: Separar columnas mixtas (Grupo_Especie y Latitud_Longitud)
+# Parte 5: Manejo de valores NA
+# Parte 6: Verificar tipos de datos y exportar
+# sessionInfo() al final</code></pre>
+<p>El script debe ejecutarse <strong>completo sin errores</strong> desde una sesión limpia de R (Session → Restart R → Run All).</p>
+<hr>
+</section>
+<section id="parte-1-diagnóstico-del-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="parte-1-diagnóstico-del-dataset">Parte 1 — Diagnóstico del dataset</h2>
+<p><strong>Estimado: 10 minutos</strong></p>
+<p>Usa <code>glimpse()</code>, <code>summary()</code>, <code>names()</code> y <code>anyNA()</code> para responder las siguientes preguntas como comentarios <code># R:</code> en tu script:</p>
+<ol type="1">
+<li>¿Cuántas filas y columnas tiene el dataset original?</li>
+<li>¿Qué columnas tienen nombres que no cumplen el estándar snake_case? Lista todas.</li>
+<li>¿Qué variables están escondidas en los nombres de columna? ¿Cuáles son esas variables?</li>
+<li>¿Qué columna contiene múltiples variables en una sola celda? ¿Qué separador las divide?</li>
+<li>¿Cuántos NA hay en total? ¿En qué columnas se concentran?</li>
+<li>¿Alguna columna tiene un tipo de dato incorrecto?</li>
+</ol>
+<p><strong>Preguntas de reflexión:</strong></p>
+<ol type="1">
+<li>¿Por qué un programa de monitoreo podría diseñar sus planillas de campo con este formato ancho en lugar del formato tidy?</li>
+<li>¿Qué dificultades encontraría alguien que intentara graficar la tendencia temporal de una especie sin transformar el dataset?</li>
+</ol>
+<hr>
+</section>
+<section id="parte-2-renombrar-columnas" class="level2">
+<h2 class="anchored" data-anchor-id="parte-2-renombrar-columnas">Parte 2 — Renombrar columnas</h2>
+<p><strong>Estimado: 5 minutos</strong></p>
+<p>Antes de pivotar, renombra todas las columnas problemáticas usando <code>rename()</code> para cumplir el estándar snake_case:</p>
 <ul>
-<li>Un entero con el número de años de registro de la estación (usa la letra <code>L</code> al final del número).</li>
-<li>Un lógico que indique si el embalse del Guájaro tiene influencia sobre el microclima local.</li>
-<li>Un factor con tipos de cobertura vegetal observados alrededor de la estación: <code>"herbazal"</code>, <code>"matorral"</code>, <code>"bosque seco"</code>. Define también el nivel <code>"manglar"</code> aunque no aparezca en los datos.</li>
+<li><code>ID</code> → <code>id_registro</code></li>
+<li><code>Grupo_Especie</code> → <code>grupo_especie</code> (el contenido mixto se resuelve en la Parte 4)</li>
+<li><code>Estado UICN</code> → <code>estado_uicn</code></li>
+<li><code>Latitud_Longitud</code> → <code>latitud_longitud</code> (el contenido mixto se resuelve en la Parte 4)</li>
+<li><code>Metodo Muestreo</code> → <code>metodo_muestreo</code></li>
 </ul>
+<p>Las columnas <code>Conteo.*</code> se limpiarán durante el pivot en la Parte 3 con <code>names_prefix</code>.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Pista — <code>factor()</code>
+Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mi_factor <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">"valor1"</span>, <span class="st">"valor2"</span>, <span class="st">"valor1"</span>),</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"valor1"</span>, <span class="st">"valor2"</span>, <span class="st">"valor3"</span>)  <span class="co"># incluye niveles posibles aunque estén vacíos</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Puedes encadenar varios <code>rename()</code> en un solo pipeline, o usar <code>rename_with(tolower)</code> como primer paso para convertir todo a minúsculas.</p>
 </div>
 </div>
-<p><strong>Preguntas de reflexión 1.1</strong> — responde en tu script con comentarios <code>#</code>:</p>
-<ol type="1">
-<li>¿Por qué es importante declarar el conteo de años como <code>integer</code> y no como <code>numeric</code>? ¿Tiene consecuencias prácticas en R?</li>
-<li>El objeto <code>cobertura</code> tiene el nivel <code>"manglar"</code> aunque no aparece en los datos ingresados. ¿Por qué puede ser útil incluir niveles que aún no tienen observaciones en un estudio de vegetación?</li>
+<p><strong>Pregunta de reflexión:</strong></p>
+<ol start="3" type="1">
+<li>¿Por qué es importante estandarizar los nombres de columna ANTES del pivot? ¿Qué pasaría si los nombres de columna tuvieran inconsistencias (mayúsculas/minúsculas mezcladas) al usar <code>starts_with()</code> en <code>pivot_longer()</code>?</li>
 </ol>
 <hr>
 </section>
-<section id="estadísticas-de-resumen" class="level3">
-<h3 class="anchored" data-anchor-id="estadísticas-de-resumen">1.2 Estadísticas de resumen</h3>
-<p>Usa <code>cat()</code> junto con <code>min()</code>, <code>max()</code>, <code>mean()</code>, <code>sum()</code>, <code>range()</code>, <code>which.min()</code> y <code>which.max()</code> para imprimir un resumen de temperatura y precipitación con el formato:</p>
-<pre><code>=== TEMPERATURA MÁXIMA — Repelón (IDEAM) ===
-Mínima mensual : X °C — mes
-Máxima mensual : X °C — mes
-Media anual    : X °C
-Rango          : X °C</code></pre>
-<p><strong>Preguntas de reflexión 1.2</strong> — responde en tu script:</p>
-<ol type="1">
-<li>La temperatura máxima de Repelón en los meses secos supera los 35°C. ¿Qué consecuencias fisiológicas puede tener esto para anfibios o reptiles de la región?</li>
-<li>El total de precipitación anual de Repelón ¿es mayor o menor que el de Barranquilla (922 mm)? ¿A qué factores lo atribuyes?</li>
-</ol>
-<hr>
-</section>
-</section>
-<section id="parte-2-indexación-y-operaciones-vectorizadas-estimado-30-minutos" class="level2">
-<h2 class="anchored" data-anchor-id="parte-2-indexación-y-operaciones-vectorizadas-estimado-30-minutos">Parte 2: Indexación y operaciones vectorizadas (estimado: 30 minutos)</h2>
-<section id="acceso-por-posición-y-nombre" class="level3">
-<h3 class="anchored" data-anchor-id="acceso-por-posición-y-nombre">2.1 Acceso por posición y nombre</h3>
-<p>Extrae los siguientes valores de los vectores (un resultado por línea de código):</p>
-<ul>
-<li>Temperatura de marzo (por posición).</li>
-<li>Precipitación de septiembre (por nombre).</li>
-<li>Temperaturas del segundo semestre (posiciones 7 a 12).</li>
-<li>Precipitaciones de los meses de transición: abril, mayo, agosto y septiembre (por nombre).</li>
-</ul>
-</section>
-<section id="filtros-lógicos-vectorizados" class="level3">
-<h3 class="anchored" data-anchor-id="filtros-lógicos-vectorizados">2.2 Filtros lógicos vectorizados</h3>
-<p>Usa vectores lógicos para responder:</p>
-<ul>
-<li>¿Qué meses tienen temperatura máxima mayor a 34°C?</li>
-<li>¿Cuántos meses tienen precipitación mayor a 80 mm?</li>
-<li>¿Qué meses combinan temperatura mayor a 34°C <strong>y</strong> precipitación menor a 20 mm? (usa el operador <code>&amp;</code>)</li>
-</ul>
-<p><strong>Preguntas de reflexión 2:</strong></p>
-<ol type="1">
-<li>El filtro de “estrés hídrico” combina alta temperatura y baja precipitación. ¿Qué especie vegetal o animal del Atlántico crees que es más vulnerable durante esos meses y por qué?</li>
-<li>¿En qué semestre se concentran las lluvias en Repelón? Compara con Barranquilla (clase). ¿El patrón es el mismo?</li>
-<li>Cambia el umbral de temperatura de <code>&gt; 34</code> a <code>&gt; 35</code>. ¿Cuántos meses quedan? ¿Cómo cambia la interpretación biológica?</li>
-</ol>
-</section>
-<section id="operaciones-vectorizadas" class="level3">
-<h3 class="anchored" data-anchor-id="operaciones-vectorizadas">2.3 Operaciones vectorizadas</h3>
-<p>Calcula y muestra:</p>
-<ul>
-<li>La anomalía de temperatura de cada mes respecto a la media anual (resta la media al vector completo).</li>
-<li>La precipitación acumulada del primer y segundo semestre.</li>
-<li>La precipitación convertida de mm a cm para los primeros 6 meses.</li>
-</ul>
-<hr>
-</section>
-</section>
-<section id="parte-3-visualización-con-r-base-estimado-35-minutos" class="level2">
-<h2 class="anchored" data-anchor-id="parte-3-visualización-con-r-base-estimado-35-minutos">Parte 3: Visualización con R base (estimado: 35 minutos)</h2>
-<section id="gráfico-de-barras-precipitación-mensual" class="level3">
-<h3 class="anchored" data-anchor-id="gráfico-de-barras-precipitación-mensual">3.1 Gráfico de barras — precipitación mensual</h3>
-<p>Construye un <code>barplot()</code> de la precipitación mensual en Repelón. Colorea en azul oscuro (<code>"#1d4ed8"</code>) los meses que superan la media mensual de la estación y en azul claro (<code>"#bfdbfe"</code>) los que no. Añade una línea punteada en la media y una leyenda.</p>
+<section id="parte-3-pivotar-de-formato-ancho-a-largo" class="level2">
+<h2 class="anchored" data-anchor-id="parte-3-pivotar-de-formato-ancho-a-largo">Parte 3 — Pivotar de formato ancho a largo</h2>
+<p><strong>Estimado: 15 minutos</strong></p>
+<p>Las cuatro columnas de conteo (<code>Conteo.Mar2024</code>, <code>Conteo.Jun2024</code>, <code>Conteo.Sep2024</code>, <code>Conteo.Dic2024</code>) violan el primer principio de tidy data: la variable “mes de muestreo” está codificada en los nombres de columna.</p>
+<p>Usa <code>pivot_longer()</code> para convertir estas cuatro columnas en dos columnas nuevas: - <code>mes</code>: contendrá los valores <code>Mar2024</code>, <code>Jun2024</code>, <code>Sep2024</code>, <code>Dic2024</code> - <code>n_individuos</code>: contendrá los conteos</p>
+<p>Después del pivot, el dataset debe tener <strong>80 filas</strong> (20 sitio-especie × 4 meses).</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Pista — umbral dinámico
+Sintaxis mínima
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Calcula el umbral como <code>umbral &lt;- mean(precip_repelón)</code> y úsalo dentro de <code>ifelse()</code> para los colores y en <code>abline()</code> para la línea.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>datos <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols         =</span> ___,           <span class="co"># seleccionar las cuatro columnas de conteo</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to     =</span> <span class="st">"mes"</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_prefix =</span> <span class="st">"___"</span>,         <span class="co"># eliminar el prefijo común del nombre</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to    =</span> <span class="st">"n_individuos"</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-</section>
-<section id="gráfico-de-línea-temperatura-máxima-mensual" class="level3">
-<h3 class="anchored" data-anchor-id="gráfico-de-línea-temperatura-máxima-mensual">3.2 Gráfico de línea — temperatura máxima mensual</h3>
-<p>Construye un <code>plot()</code> de tipo <code>"b"</code> con los 12 valores de temperatura. Añade el eje x con los nombres de los meses (<code>axis()</code>), una línea horizontal en la media anual y una etiqueta con el valor de la media (<code>text()</code>).</p>
-</section>
-<section id="climograma-simplificado-desafío" class="level3">
-<h3 class="anchored" data-anchor-id="climograma-simplificado-desafío">3.3 Climograma simplificado <em>(desafío)</em></h3>
-<p>Superpón precipitación (barras) y temperatura (línea) en un mismo gráfico usando un segundo eje vertical (<code>axis(side = 4, ...)</code>). Para escalar la temperatura al rango de la precipitación usa un factor de escala:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>factor_escala <span class="ot">&lt;-</span> <span class="fu">max</span>(temp_max_repelón) <span class="sc">/</span> <span class="fu">max</span>(precip_repelón)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Modifica el gráfico final para que las barras del primer semestre (ene–jun) sean de un color y las del segundo (jul–dic) de otro. Actualiza la leyenda.</p>
-<p><strong>Preguntas de reflexión 3:</strong></p>
-<ol type="1">
-<li>En el climograma, identifica los periodos con baja precipitación y alta temperatura. ¿Cómo afecta esa combinación a los recursos hídricos para anfibios y plantas del sur del Atlántico?</li>
-<li>Compara la amplitud de variación de temperatura en Repelón (~4°C) con la de Barranquilla (~2°C). ¿Qué diferencia esperas en la diversidad de ectotérmicos entre ambos sitios?</li>
+<p><strong>Preguntas de reflexión:</strong></p>
+<ol start="4" type="1">
+<li>Después del pivot, ¿la columna <code>mes</code> tiene el tipo correcto para ordenar cronológicamente? ¿Qué tipo tiene y qué tipo necesitarías?</li>
+<li>¿Cuántos NAs hay ahora en <code>n_individuos</code>? ¿Es el mismo número que antes del pivot?</li>
 </ol>
+<hr>
+</section>
+<section id="parte-4-separar-columnas-mixtas" class="level2">
+<h2 class="anchored" data-anchor-id="parte-4-separar-columnas-mixtas">Parte 4 — Separar columnas mixtas</h2>
+<p><strong>Estimado: 15 minutos</strong></p>
+<section id="parte-4a-separar-grupo_especie" class="level3">
+<h3 class="anchored" data-anchor-id="parte-4a-separar-grupo_especie">Parte 4a — Separar <code>grupo_especie</code></h3>
+<p>La columna <code>grupo_especie</code> contiene dos variables separadas por guion bajo: el grupo taxonómico (<code>Aves</code>, <code>Reptiles</code>, <code>Mamiferos</code>) y el nombre científico de la especie.</p>
+<p>Usa <code>separate()</code> o <code>separate_wider_delim()</code> para dividirla en: - <code>grupo</code>: grupo taxonómico - <code>especie</code>: nombre científico (género y epíteto)</p>
+</section>
+<section id="parte-4b-separar-latitud_longitud" class="level3">
+<h3 class="anchored" data-anchor-id="parte-4b-separar-latitud_longitud">Parte 4b — Separar <code>latitud_longitud</code></h3>
+<p>La columna <code>latitud_longitud</code> contiene las coordenadas separadas por <code>|</code>.</p>
+<p>Usa <code>separate()</code> para dividirla en <code>latitud</code> y <code>longitud</code>, luego convierte ambas al tipo numérico con <code>as.numeric()</code>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Separador especial <code>|</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>El carácter <code>|</code> es un operador especial en expresiones regulares y debe escaparse:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">separate</span>(<span class="at">col =</span> latitud_longitud, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"latitud"</span>, <span class="st">"longitud"</span>), <span class="at">sep =</span> <span class="st">"</span><span class="sc">\\</span><span class="st">|"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p><strong>Preguntas de reflexión:</strong></p>
+<ol start="6" type="1">
+<li>¿Por qué es importante que <code>latitud</code> y <code>longitud</code> sean columnas numéricas separadas? ¿Qué análisis o visualizaciones se habilitarían?</li>
+<li>Si el observador hubiera registrado las coordenadas como <code>"10.9998 S, 74.9617 O"</code>, ¿qué pasos adicionales necesitarías?</li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="parte-5-manejo-de-valores-na" class="level2">
+<h2 class="anchored" data-anchor-id="parte-5-manejo-de-valores-na">Parte 5 — Manejo de valores NA</h2>
+<p><strong>Estimado: 10 minutos</strong></p>
+<p>Verifica cuántos NA quedan en el dataset y en qué columnas con <code>summarise(across(everything(), ~ sum(is.na(.x))))</code>.</p>
+<p>Toma <strong>una</strong> de las siguientes decisiones y justifícala con un comentario biológico:</p>
+<p><strong>Opción A — Eliminar con <code>drop_na(n_individuos)</code></strong> <em>Justificación válida:</em> el sitio no fue monitoreado ese trimestre y no hay base para imputar un valor.</p>
+<p><strong>Opción B — Imputar con <code>replace_na(list(n_individuos = 0))</code></strong> <em>Justificación válida:</em> la especie fue buscada activamente ese trimestre y no se encontraron individuos.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Criterio de evaluación
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ambas opciones son correctas si están justificadas. Lo que <strong>no</strong> es aceptable es dejar el NA sin tratar y sin documentar.</p>
+</div>
+</div>
+<p><strong>Pregunta de reflexión:</strong></p>
+<ol start="8" type="1">
+<li>Para la especie <em>Crocodylus acutus</em> (categoría VU), ¿cuál de las dos opciones te parece más adecuada? ¿Cambiaría tu respuesta si el NA corresponde a la temporada de máximas lluvias de junio?</li>
+</ol>
+<hr>
+</section>
+<section id="parte-6-verificar-tipos-de-datos-y-exportar" class="level2">
+<h2 class="anchored" data-anchor-id="parte-6-verificar-tipos-de-datos-y-exportar">Parte 6 — Verificar tipos de datos y exportar</h2>
+<p><strong>Estimado: 10 minutos</strong></p>
+<p>Usa <code>glimpse()</code> sobre el dataset limpio y verifica que:</p>
+<ul>
+<li><code>latitud</code> y <code>longitud</code> son tipo <code>&lt;dbl&gt;</code></li>
+<li><code>estado_uicn</code> es tipo <code>&lt;fct&gt;</code> con niveles: <code>LC</code>, <code>NT</code>, <code>VU</code>, <code>EN</code>, <code>CR</code></li>
+<li><code>grupo</code> es tipo <code>&lt;fct&gt;</code> con niveles: <code>Aves</code>, <code>Mamiferos</code>, <code>Reptiles</code></li>
+<li><code>n_individuos</code> es tipo <code>&lt;dbl&gt;</code> o <code>&lt;int&gt;</code></li>
+</ul>
+<p>Corrige los tipos que no sean correctos con <code>mutate()</code> + <code>factor(..., levels = c(...))</code>.</p>
+<p>Una vez verificado, exporta el dataset limpio:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(dataset_limpio, <span class="st">"[apellido]_datos_limpios.csv"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="lista-de-verificación-antes-de-entregar" class="level3">
+<h3 class="anchored" data-anchor-id="lista-de-verificación-antes-de-entregar">Lista de verificación antes de entregar</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">El script corre sin errores al presionar “Source” en RStudio</label></li>
+<li><label><input type="checkbox">El script usa rutas relativas para leer y guardar archivos</label></li>
+<li><label><input type="checkbox">El CSV tiene columnas con nombres en snake_case sin tildes ni espacios</label></li>
+<li><label><input type="checkbox">No hay filas duplicadas (<code>nrow(distinct(dataset_limpio))</code> == <code>nrow(dataset_limpio)</code>)</label></li>
+<li><label><input type="checkbox">No hay NA sin tratar en <code>n_individuos</code></label></li>
+<li><label><input type="checkbox"><code>latitud</code> y <code>longitud</code> son numéricas</label></li>
+<li><label><input type="checkbox">El dataset tiene exactamente estas columnas: <code>id_registro</code>, <code>grupo</code>, <code>especie</code>, <code>estado_uicn</code>, <code>mes</code>, <code>n_individuos</code>, <code>latitud</code>, <code>longitud</code>, <code>metodo_muestreo</code></label></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="estructura-esperada-del-dataset-limpio" class="level2">
+<h2 class="anchored" data-anchor-id="estructura-esperada-del-dataset-limpio">Estructura esperada del dataset limpio</h2>
+<p>Al terminar, <code>glimpse()</code> debe mostrar algo así:</p>
+<pre><code>Rows: 60–80 (según si eliminaste NAs o los imputaste)
+Columns: 9
+$ id_registro     &lt;chr&gt;  "M01", "M01", "M01", ...
+$ grupo           &lt;fct&gt;  Aves, Aves, Aves, ...
+$ especie         &lt;chr&gt;  "Fregata magnificens", ...
+$ estado_uicn     &lt;fct&gt;  LC, LC, LC, ...
+$ mes             &lt;chr&gt;  "Mar2024", "Jun2024", ...
+$ n_individuos    &lt;dbl&gt;  8, 12, 6, ...
+$ latitud         &lt;dbl&gt;  10.9998, 10.9998, ...
+$ longitud        &lt;dbl&gt;  -74.9617, -74.9617, ...
+$ metodo_muestreo &lt;chr&gt;  "Conteo en punto", ...</code></pre>
+<hr>
+</section>
+<section id="errores-frecuentes" class="level2">
+<h2 class="anchored" data-anchor-id="errores-frecuentes">Errores frecuentes</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 46%">
+<col style="width: 31%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Error</th>
+<th>Causa probable</th>
+<th>Solución</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>could not find function "pivot_longer"</code></td>
+<td><code>tidyr</code> no está cargado</td>
+<td><code>library(tidyr)</code> al inicio</td>
+</tr>
+<tr class="even">
+<td><code>could not find function "rename"</code></td>
+<td><code>dplyr</code> no cargado</td>
+<td><code>library(dplyr)</code></td>
+</tr>
+<tr class="odd">
+<td>Columnas de conteo no detectadas por <code>starts_with()</code></td>
+<td>Nombre con mayúscula (<code>Conteo</code>)</td>
+<td>Renombrar con <code>rename_with(tolower)</code> primero</td>
+</tr>
+<tr class="even">
+<td><code>separate()</code> corta en lugar incorrecto</td>
+<td>Múltiples ocurrencias del separador</td>
+<td>Usa <code>separate_wider_delim()</code> con <code>too_many = "merge"</code></td>
+</tr>
+<tr class="odd">
+<td><code>latitud</code> queda como <code>&lt;chr&gt;</code> después de separar</td>
+<td><code>as.numeric()</code> no aplicado</td>
+<td><code>mutate(latitud = as.numeric(latitud))</code></td>
+</tr>
+<tr class="even">
+<td>El CSV no se puede leer con <code>read_csv()</code></td>
+<td>Columna exportada con tipo incorrecto</td>
+<td>Verifica tipos antes de exportar con <code>glimpse()</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="recursos-de-referencia" class="level2">
+<h2 class="anchored" data-anchor-id="recursos-de-referencia">Recursos de referencia</h2>
+<ul>
+<li>R for Data Science — Cap. 5 (Data tidying): <a href="https://r4ds.hadley.nz/data-tidy" class="uri">https://r4ds.hadley.nz/data-tidy</a></li>
+<li>Documentación de tidyr: <a href="https://tidyr.tidyverse.org/" class="uri">https://tidyr.tidyverse.org/</a></li>
+<li>Cheatsheet de tidyr: <a href="https://github.com/rstudio/cheatsheets/blob/main/tidyr.pdf" class="uri">https://github.com/rstudio/cheatsheets/blob/main/tidyr.pdf</a></li>
+</ul>
 <hr>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -448,23 +647,41 @@ Detalles de entrega
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<ul>
-<li><strong>Archivo:</strong> <code>taller1_apellido_nombre.R</code> (ejemplo: <code>taller1_fonseca_rodian.R</code>)</li>
-<li><strong>Formato:</strong> El script <code>.R</code> debe ejecutarse sin errores de principio a fin.</li>
-<li><strong>Plataforma:</strong> SICVI 567 — sección “Taller 1: Tipos de datos y vectores en R”</li>
-<li><strong>Fecha límite:</strong> 14 de abril de 2026 — 11:59 p.m.</li>
-</ul>
-<p><strong>Requisitos mínimos:</strong></p>
-<ol type="1">
-<li>Todos los <code>___</code> del script completados con código funcional.</li>
-<li>Los tres gráficos generados (barplot, lineplot, climograma).</li>
-<li>Respuestas a todas las preguntas de reflexión como comentarios <code>#</code> en el script.</li>
-</ol>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 43%">
+<col style="width: 56%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Campo</th>
+<th>Detalle</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Archivos</strong></td>
+<td><code>taller-semana5-[apellido].R</code> y <code>[apellido]_datos_limpios.csv</code></td>
+</tr>
+<tr class="even">
+<td><strong>Plataforma</strong></td>
+<td>SICVI 567 — “Taller Semana 5: Datos ordenados”</td>
+</tr>
+<tr class="odd">
+<td><strong>Fecha límite</strong></td>
+<td>A confirmar por el docente en SICVI 567</td>
+</tr>
+<tr class="even">
+<td><strong>Requisitos mínimos</strong></td>
+<td>Ambos archivos presentes · script sin errores · CSV con 9 columnas correctas · decisión sobre NAs justificada · respuestas <code># R:</code> a todas las preguntas de reflexión</td>
+</tr>
+</tbody>
+</table>
+<p>No se aceptan entregas parciales (solo CSV sin script, o solo script sin CSV).</p>
 </div>
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
